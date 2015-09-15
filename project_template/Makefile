@@ -1,4 +1,4 @@
-NAME=adapter
+NAME=the_name
 ALIBVR=alibvr
 CC=avr-gcc
 CXX=avr-gcc
