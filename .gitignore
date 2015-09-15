@@ -1,0 +1,37 @@
+# Created by https://www.gitignore.io/api/kdevelop4,c++
+
+### KDevelop4 ###
+*.kdev4
+.kdev4/
+
+
+### C++ ###
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
