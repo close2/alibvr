@@ -1,4 +1,4 @@
-# name of your main code file
+# name of your main code file without the .c / .cpp suffix
 NAME = the_name
 # location of alibvr
 ALIBVR = alibvr
@@ -58,18 +58,20 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 # get the calibration byte
 #avrdude -pm48 -D -c usbasp -U cal:r:cal.tmp:r
 
-.PHONY: debug release all clean clobber flash flashEep flashFast flashFuse8Mhz startSim
+.PHONY: release debug .all clean clobber flash flashEep flashFast flashFuse8Mhz startSim
 
-debug : CFLAGS = $(CFLAGS_DEBUG)
-debug : CXXFLAGS = $(CXXFLAGS_DEBUG)
-debug : all
 
 release : CFLAGS = $(CFLAGS_RELEASE)
 release : CXXFLAGS = $(CXXFLAGS_RELEASE)
-release : all
+release : .all
+
+debug : CFLAGS = $(CFLAGS_DEBUG)
+debug : CXXFLAGS = $(CXXFLAGS_DEBUG)
+debug : .all
 
 
-all : $(NAME).hex $(NAME).eep $(NAME).obj
+.all : $(NAME).hex $(NAME).eep $(NAME).obj
+
 
 %.obj : %.o
 	$(CC) $(CFLAGS) $< -o $@
