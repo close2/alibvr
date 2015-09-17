@@ -4,6 +4,7 @@
 #  error F_CPU not defined
 #endif
 
+#include "macros.h"
 #include "buffer.h"
 #include "irqs.h"
 #include "tasks.h"
@@ -45,17 +46,19 @@ namespace _pulse_uart {
 }
 
 
-template <uint16_t zeroBitDuration,
+template <typename TxPin,
+          uint16_t zeroBitDuration,
           uint8_t _tx_buffer_size,
           class Task = _pulse_uart::DoNothing, // Task to run after having sent a character,
           uint16_t oneBitDuration = zeroBitDuration * 1.5,
-          uint16_t syncBitDuration = zeroBitDuration * 2>
+          uint16_t syncBitDuration = zeroBitDuration * 2,
+          uint8_t inverseOutput = 0>
           // uint8_t use_irqs = 0>  remove for now. maybe implement later
 class PulseUartTx {
 private:
   
   // should really find a better way
-  typedef PulseUartTx<zeroBitDuration, _tx_buffer_size, Task, oneBitDuration, syncBitDuration> _PulseUartTx;
+  typedef PulseUartTx<TxPin, zeroBitDuration, _tx_buffer_size, Task, oneBitDuration, syncBitDuration> _PulseUartTx;
   
   // making the high duration half the shortest duration (zero_duration)
   // should hopefully work.
@@ -65,6 +68,9 @@ private:
   static const uint16_t _zero_low_duration = zeroBitDuration - _high_duration;
   static const uint16_t _one_low_duration = oneBitDuration - _high_duration;
   static const uint16_t _sync_low_duration = syncBitDuration - _high_duration;
+  
+  static const uint8_t _low_output = inverseOutput ? 1 : 0;
+  static const uint8_t _high_output = inverseOutput ? 0 : 1;
   
   // prepare for IRQ implementation.  Currently tx_buffer_size is always _tx_buffer_size
   static const uint8_t tx_buffer_size = _tx_buffer_size;
@@ -128,7 +134,7 @@ private:
     uint16_t ret;
     if ((current_bit_counter & 1) == 0) {
       // send low (different durations depending on value)
-      set_pin(0); // TODO
+      SET_BIT(TxPin, PORT, _low_output);
       
       if (current_bit_counter == 0) ret = _sync_low_duration;
       else {
@@ -138,7 +144,7 @@ private:
       }
     } else {
       // send high (always the same duration)
-      set_pin(1); // TODO
+      SET_BIT(TxPin, PORT, _high_output);
       if (current_bit_counter == last_high_counter) ret = 0;
       else ret = _high_duration;
     }
@@ -184,6 +190,7 @@ public:
 };
 
 
+/*
 template <uint16_t zeroBitDuration,
           uint8_t _rx_buffer_size,
           class IrqTask = _pulse_uart::DoNothing, // Task to run in irq after having received a character
@@ -379,6 +386,7 @@ namespace _pulse_uart {
     Rx::init();
   }
 }
+*/
 
-#define REGISTER_UART "internal/register_uart.h"
-#pragma pop_macro("BAUD_TOL")
+// FIXME (add register_pulse_uart.h)
+//#define REGISTER_UART "internal/register_uart.h"

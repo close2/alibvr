@@ -73,7 +73,8 @@ IRQ_TASK(NEW_IRQ_TASK) {
 
 namespace _clock {
   template <uint32_t Factor, uint32_t Prescale = _clock::Prescale, typename M = uint16_t, typename T>
-  static inline T time_to_units(const M& n) {
+  constexpr static inline T time_to_units(const M& n) {
+    /*
     const uint32_t cpu = F_CPU / Factor;
     if (cpu > 0) {
       if (cpu > Prescale) {
@@ -85,10 +86,19 @@ namespace _clock {
       static_assert(cpu > 0, "This division would cost, remove this assert if you are sure you want to do this");
       return n * (F_CPU / Prescale) / Factor;
     }
+    */
+    const uint32_t cpu = F_CPU / Factor;
+    // FIXME find the real reason for this assert.  I am pretty sure the condition is wrong; also delete ↑ commented code
+    // static_assert(cpu > 0, "This division would cost, remove this assert if you are sure you want to do this";
+    return (cpu > 0) 
+      ? ((cpu > Prescale)
+        ? n * (cpu / Prescale)
+        : n / (Prescale / cpu))
+      : n * (F_CPU / Prescale) / Factor;
   }
   
   template <uint32_t Factor, uint32_t Prescale = _clock::Prescale, typename T = uint16_t, typename M>
-  static inline T units_to_time(const M& units) {
+  constexpr static inline T units_to_time(const M& units) {
     const uint32_t cpu = F_CPU / Factor;
     if (cpu > 0) {
       if (cpu > Prescale) {
@@ -101,26 +111,27 @@ namespace _clock {
       static_assert(cpu > 0, "This division would cost, remove this assert if you are sure you want to do this");
       return units / (cpu / Prescale);
     }
+    return 0;
   }
 }
 
 template <_clock_select::ClockSelect Prescale = _clock::Prescale, typename M = uint16_t, typename T = M>
-static inline T ms_to_units(const M& n) {
+constexpr static inline T ms_to_units(const M& n) {
   return _clock::time_to_units<1000, (uint32_t) Prescale, M, T>(n);
 }
 
 template <_clock_select::ClockSelect Prescale = _clock::Prescale, typename M = uint16_t, typename T = M>
-static inline T us_to_units(const M& n) {
+constexpr static inline T us_to_units(const M& n) {
   return _clock::time_to_units<1000000, (uint32_t) Prescale, M, T>(n);
 }
 
 template <_clock_select::ClockSelect Prescale = _clock::Prescale, typename T = uint16_t, typename M = T>
-static inline M units_to_us(const T& units) {
+constexpr static inline M units_to_us(const T& units) {
   return _clock::units_to_time<1000000, (uint32_t) Prescale, T, M>(units);
 }
 
 template <_clock_select::ClockSelect Prescale = _clock::Prescale, typename T = uint16_t, typename M = T>
-static inline M units_to_ms(const T& units) {
+constexpr static inline M units_to_ms(const T& units) {
   return _clock::units_to_time<1000, (uint32_t) Prescale, T, M>(units);
 }
 
