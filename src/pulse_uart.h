@@ -50,7 +50,7 @@ template <typename TxPin,
           uint16_t zeroBitDuration,
           uint8_t _tx_buffer_size,
           class Task = _pulse_uart::DoNothing, // Task to run after having sent a character,
-          uint16_t oneBitDuration = zeroBitDuration * 1.5,
+          uint16_t oneBitDuration = (zeroBitDuration * 3) / 2,
           uint16_t syncBitDuration = zeroBitDuration * 2,
           uint8_t inverseOutput = 0>
           // uint8_t use_irqs = 0>  remove for now. maybe implement later
@@ -127,7 +127,7 @@ private:
     const uint8_t current_bit_counter = tx_bit_counter & bit_counter_mask;
     const uint8_t last_high_counter = 0b10001; // see comment above
     
-    const uint8_t tx_byte = get_tx_byte();
+    uint8_t& tx_byte = get_tx_byte();
     
     // we will send the sync byte before every byte transmitted
     // this means, that we have to count to 9 (see comment above)

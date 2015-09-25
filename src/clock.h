@@ -87,13 +87,12 @@ namespace _clock {
       return n * (F_CPU / Prescale) / Factor;
     }
     */
-    const uint32_t cpu = F_CPU / Factor;
     // FIXME find the real reason for this assert.  I am pretty sure the condition is wrong; also delete ↑ commented code
     // static_assert(cpu > 0, "This division would cost, remove this assert if you are sure you want to do this";
-    return (cpu > 0) 
-      ? ((cpu > Prescale)
-        ? n * (cpu / Prescale)
-        : n / (Prescale / cpu))
+    return ((F_CPU / Factor) > 0) 
+      ? (((F_CPU / Factor) > Prescale)
+        ? n * ((F_CPU / Factor) / Prescale)
+        : n / (Prescale / (F_CPU / Prescale)))
       : n * (F_CPU / Prescale) / Factor;
   }
   

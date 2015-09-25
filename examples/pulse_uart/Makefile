@@ -1,9 +1,18 @@
+# consider calling make with -B (long form: --always-make) →
+# make -B release
+#  or
+# make -B debug
+
+
 # name of your main code file without the .c / .cpp suffix
 NAME = tx
 # location of alibvr
 ALIBVR = alibvr
 # type of atmega chip
 ATMEGA = atmega328
+
+# name of your simavr config file without the .c suffix
+SIMAVR_CONF = simavr_conf
 
 
 CC  = avr-gcc
@@ -12,9 +21,10 @@ OBJDUMP = avr-objdump
 OBJ2HEX = avr-objcopy 
 
 
-INC = -I $(ALIBVR)
+INC = -I $(ALIBVR) -I ../../simavr
 
-CFLAGS_COMMON  = $(INC)
+CFLAGS_COMMON  = -std=gnu99
+CFLAGS_COMMON += $(INC)
 CFLAGS_COMMON += -gdwarf-2
 CFLAGS_COMMON += -Wall -Wno-unused-function
 CFLAGS_COMMON += -mcall-prologues -mmcu=$(ATMEGA)
@@ -70,26 +80,26 @@ debug : CXXFLAGS = $(CXXFLAGS_DEBUG)
 debug : .all
 
 
-.all : $(NAME).hex $(NAME).eep $(NAME).obj
+.all : $(NAME).hex $(NAME).eep $(NAME).obj $(SIMAVR_CONF).o
 
 
-%.obj : %.o
-	$(CC) $(CFLAGS) $< -o $@
+$(NAME).obj : $(NAME).o $(SIMAVR_CONF).o
+	$(CC) $(CFLAGS) $^ -o $@
 
-%.elf : %.o
-	$(CC) $(CFLAGS) $< -o $@
+$(NAME).elf : $(NAME).o $(SIMAVR_CONF).o
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.hex : %.obj
-	$(OBJ2HEX) -R .eeprom -O ihex $< $@
+	$(OBJ2HEX) -R .eeprom -O ihex $^ $@
 
 %.eep : %.obj
-	$(OBJ2HEX) $(HEX_EEPROM_FLAGS) -O ihex $< $@
+	$(OBJ2HEX) $(HEX_EEPROM_FLAGS) -O ihex $^ $@
 
 %.s : %.obj
-	$(OBJDUMP) -S --disassemble $< > $@
+	$(OBJDUMP) -S --disassemble $^ > $@
 
 clean :
-	rm -f $(NAME).o $(NAME).obj $(NAME).s *.sch~ gschem.log *.S~ *.hex *.map *.eep compile.flags
+	rm -f $(NAME).o $(SIMAVR_CONF).o $(NAME).obj $(NAME).s *.sch~ gschem.log *.S~ *.hex *.map *.eep compile.flags
 
 clobber : clean
 	rm -f $(NAME).hex $(NAME).ps $(NAME).eep
