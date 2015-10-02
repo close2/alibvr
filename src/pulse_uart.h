@@ -96,6 +96,9 @@ private:
   }
   
   /*
+   * every byte expects the line to have been high for at least the common
+   * high duration
+   *
    *  ↓ bit counter when entering _tx_bit_now 
    * 00000 startBit  high → low
    * 00001 startBit  low  → high
@@ -108,6 +111,7 @@ private:
    * 0110x bit 6     high → low → high
    * 0111x bit 7     high → low → high
    * 1000x bit 8     high → low → high
+   * 10010 ensure high duration
    * 
    */
   
@@ -125,14 +129,16 @@ private:
     // prepare for combined bit_counter with status bits
     const uint8_t bit_counter_mask = 0b11111;
     const uint8_t current_bit_counter = tx_bit_counter & bit_counter_mask;
-    const uint8_t last_high_counter = 0b10001; // see comment above
+    const uint8_t end_counter = 0b10010; // see comment above
     
     uint8_t& tx_byte = get_tx_byte();
     
     // we will send the sync byte before every byte transmitted
     // this means, that we have to count to 9 (see comment above)
     uint16_t ret;
-    if ((current_bit_counter & 1) == 0) {
+    if (current_bit_counter == end_counter) {
+      ret = 0; // we don't go low after last bit
+    } else if ((current_bit_counter & 1) == 0) {
       // send low (different durations depending on value)
       SET_BIT(TxPin, PORT, _low_output);
       
@@ -145,12 +151,11 @@ private:
     } else {
       // send high (always the same duration)
       SET_BIT(TxPin, PORT, _high_output);
-      if (current_bit_counter == last_high_counter) ret = 0;
-      else ret = _high_duration;
+      ret = _high_duration;
     }
     
     tx_bit_counter = tx_bit_counter & ~bit_counter_mask;
-    if (current_bit_counter != last_high_counter) {
+    if (current_bit_counter != end_counter) {
       tx_bit_counter += current_bit_counter + 1;
     }
     
@@ -163,7 +168,7 @@ private:
     
     while ((callIn = _tx_bit_now()) != 0) {
       const uint16_t nextClock = previousClock + callIn;
-      while (clock_reached<uint16_t>(previousClock, nextClock)) {
+      while (!clock_reached<uint16_t>(previousClock, nextClock)) {
         // busy wait
       }
       previousClock = nextClock;  // good enough;  correct way: get_clock...

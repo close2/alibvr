@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/atomic.h>
 
 #include "bytes.h"
 #include "irqs.h"
@@ -144,40 +145,47 @@ uint8_t get_clock<uint8_t>() {
   return TCNT0;
 }
 
+// TODO replace this with inline assembler
 template<>
 uint16_t get_clock<uint16_t>() {
-  bits16_t c;
-  uint8_t tcnt = TCNT0;
-  c.uint16 = _clock::clock.avr.lo.avr.lo.uint16 << 8 | tcnt;
-  tcnt = TCNT0;
-  if (c.avr.lo > tcnt) {
-    c.uint16 = _clock::clock.avr.lo.avr.lo.uint16 << 8 | tcnt;
+  ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+    const uint8_t tcnt = TCNT0;
+    // use tcnt to make it harder for the compiler to optimize this
+    // incorrectly
+    if (TIFR0 & _BV(TOV0) && tcnt != 0xFF) {
+      // irq pending
+      return _clock::clock.avr.lo.avr.lo.uint16 << 8 | 0xFF;
+    } else return _clock::clock.avr.lo.avr.lo.uint16 << 8 | tcnt;
   }
-  return c.uint16;
+  return 0;
 }
 
 template<>
 uint32_t get_clock<uint32_t>() {
-  bits32_t c;
-  uint8_t tcnt = TCNT0;
-  c.uint32 = _clock::clock.avr.lo.uint32 << 8 | tcnt;
-  tcnt = TCNT0;
-  if (c.avr.lo.avr.lo > tcnt) {
-    c.uint32 = _clock::clock.avr.lo.uint32 << 8 | tcnt;
+  ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+    const uint8_t tcnt = TCNT0;
+    // use tcnt to make it harder for the compiler to optimize this
+    // incorrectly
+    if (TIFR0 & _BV(TOV0) && tcnt != 0xFF) {
+      // irq pending
+      return _clock::clock.avr.lo.uint32 << 8 | 0xFF;
+    } else return _clock::clock.avr.lo.uint32 << 8 | tcnt;
   }
-  return c.uint32;
+  return 0;
 }
 
 template<>
 uint64_t get_clock<uint64_t>() {
-  bits64_t c;
-  uint8_t tcnt = TCNT0;
-  c.uint64 = _clock::clock.uint64 << 8 | tcnt;
-  tcnt = TCNT0;
-  if (c.avr.lo.avr.lo.avr.lo > tcnt) {
-    c.uint64 = _clock::clock.uint64 << 8 | c.avr.lo.avr.lo.avr.lo;
+  ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+    const uint8_t tcnt = TCNT0;
+    // use tcnt to make it harder for the compiler to optimize this
+    // incorrectly
+    if (TIFR0 & _BV(TOV0) && tcnt != 0xFF) {
+      // irq pending
+      return _clock::clock.uint64 << 8 | 0xFF;
+    } else return _clock::clock.uint64 << 8 | tcnt;
   }
-  return c.uint64;
+  return 0;
 }
 
 __attribute__((constructor))
@@ -192,16 +200,18 @@ static void init_timer0() {
 };
 
 template<typename T>
-static inline bool clock_reached(const T& clock, const T& previous_clock, const T& target_clock) {
+static inline uint8_t clock_reached(const T& clock, const T& previous_clock, const T& target_clock) {
+  uint8_t ret; // this variable makes debugging easier
   if (target_clock <= clock) {
-    return previous_clock <= target_clock || clock < previous_clock;
+    ret = previous_clock <= target_clock || clock < previous_clock;
   } else {
-    return previous_clock <= target_clock && previous_clock > clock;
+    ret = previous_clock <= target_clock && previous_clock > clock;
   }
+  return ret;
 }
 
 template<typename T>
-static inline bool clock_reached(const T& previous_clock, const T& target_clock) {
+static inline uint8_t clock_reached(const T& previous_clock, const T& target_clock) {
   return clock_reached(get_clock<T>(), previous_clock, target_clock);
 }
 

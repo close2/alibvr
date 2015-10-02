@@ -121,11 +121,11 @@ public:
     return 0;
   }
   
-  bool is_empty() {
+  uint8_t is_empty() {
     return 1;
   }
   
-  bool is_full() {
+  uint8_t is_full() {
     return 1;
   }
   
@@ -146,7 +146,7 @@ private:
     return buffer;
   }
 public:
-  static inline bool push(uint8_t c, uint8_t marked = 0) {
+  static inline uint8_t push(uint8_t c, uint8_t marked = 0) {
     return get_buffer().push(c, marked);
   }
 

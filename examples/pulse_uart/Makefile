@@ -7,7 +7,7 @@
 # name of your main code file without the .c / .cpp suffix
 NAME = tx
 # location of alibvr
-ALIBVR = alibvr
+ALIBVR = ../../src
 # type of atmega chip
 ATMEGA = atmega328
 

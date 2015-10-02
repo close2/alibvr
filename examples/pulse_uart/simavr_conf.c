@@ -25,7 +25,7 @@ AVR_MCU(1000000UL, "atmega328");
 const struct avr_mmcu_vcd_trace_t _mytrace[1]  _MMCU_ = {
   //{ AVR_MCU_VCD_SYMBOL("D4"),        .mask = 0b001000, .what = (void*)&PORTC, },  
   //{ AVR_MCU_VCD_SYMBOL("D5"),        .mask = 0b000100, .what = (void*)&PORTC, },  
-  { AVR_MCU_VCD_SYMBOL("D6"),        .mask = 0b000010, .what = (void*)&PORTC, },  
+  { AVR_MCU_VCD_SYMBOL("D6"),        .mask = 0b01000000, .what = (void*)&PORTD, },
   //{ AVR_MCU_VCD_SYMBOL("D7"),        .mask = 0b000001, .what = (void*)&PORTC, },  
   //{ AVR_MCU_VCD_SYMBOL("Enable"),    .mask = 0b100000, .what = (void*)&PORTC, },  
   //{ AVR_MCU_VCD_SYMBOL("RegSelect"), .mask = 0b010000, .what = (void*)&PORTC, }, 
