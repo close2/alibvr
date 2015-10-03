@@ -51,7 +51,7 @@ template <typename TxPin,
           uint8_t _tx_buffer_size,
           class Task = _pulse_uart::DoNothing, // Task to run after having sent a character,
           uint16_t oneBitDuration = (zeroBitDuration * 3) / 2,
-          uint16_t syncBitDuration = zeroBitDuration * 2,
+          uint16_t syncBitDuration = zeroBitDuration * 3,
           uint8_t inverseOutput = 0>
           // uint8_t use_irqs = 0>  remove for now. maybe implement later
 class PulseUartTx {

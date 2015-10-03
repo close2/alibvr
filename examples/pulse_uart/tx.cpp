@@ -8,7 +8,7 @@ typedef PulseUartTx<PIN_DIP_12, ms_to_units<>(10), 2> PTx;
 
 __attribute__ ((OS_main)) int main(void) {
   
-  SET_BIT(PIN_DIP_12, DDR, 1);
+  PTx::init();
   PTx tx;
   auto h = PgmDataPtr<>::ptr(PSTR("hello world!"));
   tx << h;
