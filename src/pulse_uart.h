@@ -168,10 +168,19 @@ private:
     
     while ((callIn = _tx_bit_now()) != 0) {
       const uint16_t nextClock = previousClock + callIn;
-      while (!clock_reached<uint16_t>(previousClock, nextClock)) {
-        // busy wait
-      }
-      previousClock = nextClock;  // good enough;  correct way: get_clock...
+
+      while (!clock_reached<uint16_t>(previousClock, nextClock)); // busy wait
+
+      // the duration of one bit is the low duration together with
+      // the high duration.
+      // So we _should_ set the previousClock to the nextClock when
+      // being in the middle of transfering one bit.
+      // Between different bits we _should_ call get_clock, but
+      // in this function we don't really know if we are in the middle
+      // of transmitting a bit, or in between 2 different bits, so we
+      // will use the cheaper version: nextClock
+      previousClock = nextClock;
+
     }
     // byte has been transmitted
   }
@@ -182,6 +191,10 @@ private:
   }
   
 public:
+  static void init() {
+    SET_BIT(TxPin, DDR, 1);
+  }
+
   template <typename T>
   static void tx(const T& t) {
     Adapter::apply<_PulseUartTx::_tx>(t);
