@@ -1,5 +1,8 @@
 #pragma once
 
+// TODO MALTA NOTES
+// pass function to Task Class as template arg, instead of TASK macro
+
 // USAGE
 //
 // create tasks:

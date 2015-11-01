@@ -7,6 +7,20 @@
 #include "macros.h"
 #include "type_traits.h"
 
+// TODO MALTA NOTES:
+// verify / check why
+// do {
+//   <in1>::init
+//          adc_8bit
+//   <in2>::init
+//          adc_8bit
+//   <in3>::init
+//          adc_8bit
+//          turn_off
+// }
+// doesn't work
+// ⇒ 1st result is copy of 3rd
+
 namespace _adc {
   enum Mode {
     SingleConversion     = 0xFF,

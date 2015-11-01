@@ -14,6 +14,7 @@ namespace _buttons {
   enum State {
     Released = 0,
     Pressed = 1,
+    // TODO MALTA NOTES: 300 should either be a global constant or a template argument
     LongReleased = (300 / ms_per_round) * 2,   // 300ms and bit0 is used as indicator for Released / Pressed
     LongPressed = (300 / ms_per_round) * 2 + 1 // 300ms and bit0 is used as indicator for Released / Pressed
   };

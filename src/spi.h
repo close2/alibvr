@@ -51,6 +51,7 @@ namespace _spi {
   
 
   // TODO combine uart and spi DoNothing and move outside
+  // TODO MALTA NOTES  into Transmission?
   class DoNothing {
   public:
     template <typename T>

@@ -26,6 +26,14 @@
  * single bit.
  * The Coils also represent a Boolean data type which can be read and written to by the master.
  * The Holding Registers represent a 16 bit word that can be read and written to.
+ *
+ * +-------+----------------+-------------+
+ * |       |      read      |     r/w     |
+ * +-------+----------------+-------------+
+ * | 1bit  | discrete input | coil        |
+ * | 16bit | input reg      | holding reg |
+ * +-------+----------------+-------------+
+ *
  */
 
 namespace _modbus {
@@ -327,6 +335,10 @@ public:
   }
 };
 
+
+// TODO MALTA NOTES
+// instead of Macro create template class.
+// pass function to template
 
 #define MODBUS_DATA(name, type, addr) \
 class name { \

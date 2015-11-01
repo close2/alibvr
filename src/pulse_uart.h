@@ -32,6 +32,9 @@
  * tasks.
  * 
  * Reception OTOH is probably always IRQ based.
+ *
+ *
+ * Greatly inspired by http://www.romanblack.com/RF/cheapRFmodules.htm
  **/
 
 

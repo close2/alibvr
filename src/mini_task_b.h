@@ -13,6 +13,7 @@
 // }
 // and then register it either as mini-task A or B:
 // MINI_TASK_A(xzy, 1);
+// TODO MALTA NOTE  ↑ ENUM
 // (true or false → start right away / don't automatically start mini-task)
 //
 // you might start / stop mini-tasks:
@@ -21,7 +22,7 @@
 //
 // see tasks for more information about return value.
 // note that the return value (the time difference) must be 8bit for mini-task!
-// you can not wait for more than 16ms! (would be higher than 8bit)
+// you can not wait for more than 16ms! (would be higher than 8bit when using 8MHz)
 
 // n might be either A or B
 #define _MINI_TASK(name, n, enabled) \

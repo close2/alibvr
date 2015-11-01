@@ -2,6 +2,8 @@
 
 #include <avr/interrupt.h>
 
+// TODO MALTA NOTES: move following 3 files into internal
+//                   public version will be includes
 #include "../type_traits.h"
 #include "../macros.h"
 #include "../clock_select.h"
