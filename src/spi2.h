@@ -14,7 +14,9 @@
 
 #include "type_traits.h"
 
-
+// FIXME we will change datadirection changes to be blocking until
+// buffer is empty.
+// Non blocking behaviour can only be done by using the IRQ handler.
 namespace _spi {
   
   enum class Mode {

@@ -56,7 +56,8 @@ namespace _irqs {
   struct State {
     static const uint8_t state = B;
   };
-
+  
+  // FIXME move this to internal, so that register_irqs can include it.
   template <typename Handled, typename I, template <typename ...> class List, typename T, typename ...Tasks>
   static void execIrqTasks();
   

@@ -73,6 +73,10 @@ IRQ_TASK(NEW_IRQ_TASK) {
 #undef NEW_IRQ_TASK
 
 namespace _clock {
+  constexpr static uint32_t _cpu(uint32_t factor) {
+    return F_CPU / factor;
+  }
+  
   template <uint32_t Factor, uint32_t Prescale = _clock::Prescale, typename M = uint16_t, typename T>
   constexpr static inline T time_to_units(const M& n) {
     /*
@@ -88,17 +92,17 @@ namespace _clock {
       return n * (F_CPU / Prescale) / Factor;
     }
     */
-    // FIXME find the real reason for this assert.  I am pretty sure the condition is wrong; also delete ↑ commented code
-    // static_assert(cpu > 0, "This division would cost, remove this assert if you are sure you want to do this";
-    return ((F_CPU / Factor) > 0) 
-      ? (((F_CPU / Factor) > Prescale)
-        ? n * ((F_CPU / Factor) / Prescale)
-        : n / (Prescale / (F_CPU / Prescale)))
+    static_assert(_cpu(Factor) > 0, "This division would cost, remove this assert if you are sure you want to do this");
+    return (_cpu(Factor) > 0) 
+      ? ((_cpu(Factor) > Prescale)
+        ? n * (_cpu(Factor) / Prescale)
+        : n / (Prescale / _cpu(Factor)))
       : n * (F_CPU / Prescale) / Factor;
   }
   
   template <uint32_t Factor, uint32_t Prescale = _clock::Prescale, typename T = uint16_t, typename M>
   constexpr static inline T units_to_time(const M& units) {
+    /*
     const uint32_t cpu = F_CPU / Factor;
     if (cpu > 0) {
       if (cpu > Prescale) {
@@ -111,7 +115,13 @@ namespace _clock {
       static_assert(cpu > 0, "This division would cost, remove this assert if you are sure you want to do this");
       return units / (cpu / Prescale);
     }
-    return 0;
+    */
+    static_assert(_cpu(Factor) > 0, "This division would cost, remove this assert if you are sure you want to do this");
+    return (_cpu(Factor) > 0) 
+      ? ((_cpu(Factor) > Prescale)
+        ? units / (_cpu(Factor) / Prescale)
+        : (((uint32_t) units) * Prescale) / _cpu(Factor))
+      : units / (_cpu(Factor) / Prescale);
   }
 }
 
