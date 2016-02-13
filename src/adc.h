@@ -4,7 +4,7 @@
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 
-#include "macros.h"
+#include "ports.h"
 #include "type_traits.h"
 
 // TODO MALTA NOTES:
@@ -42,17 +42,17 @@ namespace _adc {
   
   namespace Input {
     struct Temperature {
-      static const enum _macros::Port port = _macros::Port::B;
+      static const enum _ports::Port port = _ports::Port::B;
       static const uint8_t bit = 8;
     };
   
     struct V1_1 {
-      static const enum _macros::Port port = _macros::Port::B;
+      static const enum _ports::Port port = _ports::Port::B;
       static const uint8_t bit = 14;
     };
     
     struct Gnd {
-      static const enum _macros::Port port = _macros::Port::B;
+      static const enum _ports::Port port = _ports::Port::B;
       static const uint8_t bit = 15;
     };
   }
@@ -92,18 +92,18 @@ public:
 
     PRR &= ~(_BV(PRADC)); // disable Power Reduction ADC
 
-    static_assert(Input::_port == _macros::Port::C && (Input::_bit == 0 ||
-                                                       Input::_bit == 1 ||
-                                                       Input::_bit == 2 ||
-                                                       Input::_bit == 3 ||
-                                                       Input::_bit == 4 ||
-                                                       Input::_bit == 5 ||
-                                                       Input::_bit == 8 ||  // Temperature
-                                                       Input::_bit == 14 || // V1_1
-                                                       Input::_bit == 15),  // Gnd
+    static_assert(Input::port == _ports::Port::C && (Input::bit == 0 ||
+                                                       Input::bit == 1 ||
+                                                       Input::bit == 2 ||
+                                                       Input::bit == 3 ||
+                                                       Input::bit == 4 ||
+                                                       Input::bit == 5 ||
+                                                       Input::bit == 8 ||  // Temperature
+                                                       Input::bit == 14 || // V1_1
+                                                       Input::bit == 15),  // Gnd
                   "Only ADC0-ADC5, _adc::Input::Temperature, _adc::Input::V1_1 and _adc::Input::Gnd are acceptable inputs");
 
-    uint8_t source = Input::_bit << MUX0;
+    uint8_t source = Input::bit << MUX0;
     ADMUX = ((uint8_t) Ref) << REFS0 // set ref
             | source;    // set source
     if (Mode != _adc::Mode::SingleConversion) {

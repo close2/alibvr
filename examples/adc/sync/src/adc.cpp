@@ -2,7 +2,7 @@
 
 #include <util/delay.h>
 
-#include "macros.h"
+#include "ports.h"
 #include "adc.h"
 
 // First define the Adc.
@@ -18,7 +18,7 @@ typedef PIN_D6 Led;
 
 __attribute__ ((OS_main)) int main(void) {
   // put Led pin into output mode.
-  set_bit<Led::ddr>(1);
+  set_bit<Led::DDRx>();
   
   for (;;) {
     Adc4::init();
@@ -26,8 +26,8 @@ __attribute__ ((OS_main)) int main(void) {
     Adc5::init();
     auto adc5 = Adc5::adc_8bit();
     
-    set_bit<Led::port>(adc4 < adc5);
-    _delay_ms(300);
+    set_bit<Led::PORTx>(adc4 < adc5);
+    _delay_ms(30);
   }
   return 0;
 }
