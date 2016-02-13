@@ -22,7 +22,7 @@
 // ⇒ 1st result is copy of 3rd
 
 namespace _adc {
-  enum Mode {
+  enum class Mode {
     SingleConversion     = 0xFF,
     FreeRunning          = 0b000,
     TriggerAnalogComp    = 0b001,
@@ -34,7 +34,7 @@ namespace _adc {
     TriggerTimer1Capture = 0b111
   };
   
-  enum Ref {
+  enum class Ref {
     ARef = 0b00,
     AVcc = 0b01,
     V1_1 = 0b11
@@ -92,20 +92,24 @@ public:
 
     PRR &= ~(_BV(PRADC)); // disable Power Reduction ADC
 
-    static_assert(Input::port == _macros::Port::C && (Input::bit == 0 ||
-                                                      Input::bit == 1 ||
-                                                      Input::bit == 2 ||
-                                                      Input::bit == 3 ||
-                                                      Input::bit == 4 ||
-                                                      Input::bit == 5 ||
-                                                      Input::bit == 8 ||  // Temperature
-                                                      Input::bit == 14 || // V1_1
-                                                      Input::bit == 15),  // Gnd
+    static_assert(Input::_port == _macros::Port::C && (Input::_bit == 0 ||
+                                                       Input::_bit == 1 ||
+                                                       Input::_bit == 2 ||
+                                                       Input::_bit == 3 ||
+                                                       Input::_bit == 4 ||
+                                                       Input::_bit == 5 ||
+                                                       Input::_bit == 8 ||  // Temperature
+                                                       Input::_bit == 14 || // V1_1
+                                                       Input::_bit == 15),  // Gnd
                   "Only ADC0-ADC5, _adc::Input::Temperature, _adc::Input::V1_1 and _adc::Input::Gnd are acceptable inputs");
 
-    uint8_t source = Input::bit << MUX0;
-    ADMUX = Ref << REFS0 // set ref
+    uint8_t source = Input::_bit << MUX0;
+    ADMUX = ((uint8_t) Ref) << REFS0 // set ref
             | source;    // set source
+    if (Mode != _adc::Mode::SingleConversion) {
+      ADCSRB |= (uint8_t) Mode << ADTS0;
+      ADCSRA |= _BV(ADATE);
+    }
     if (adc_and_discard_first) {
       ADCSRA |= _BV(ADSC);
     }

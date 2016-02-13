@@ -1,5 +1,7 @@
 #pragma once
+
 #include <avr/sfr_defs.h>
+#include <avr/io.h>
 
 
 // SET_BIT(pin, reg, value)
@@ -26,11 +28,82 @@
 
 // PIN layout is compatible to arduino / arduino lite
 namespace _macros {
-  enum Port {
+  enum class Port {
     B,
     C,
     D
   };
+  
+  enum class IOReg {
+    Ddr,
+    Port,
+    Pin
+  };
+  
+  template <enum Port p, uint8_t b, enum IOReg io>
+  struct Io {
+    static const enum Port port = p;
+    static const uint8_t bit = b;
+    static const enum IOReg io_reg = io;
+  };
+  
+  struct _set_bit {
+    template <class R>
+    uint8_t operator()(R& reg, uint8_t bit, uint8_t value) {
+      if (value) reg |= _BV(bit);
+      else reg &= ~_BV(bit);
+      return 0;
+    }
+  };
+  struct _get_bit {
+    template <class R>
+    uint8_t operator()(R& reg, uint8_t bit, uint8_t value) {
+      return reg & _BV(bit);
+    }
+  };
+  
+  template <class Io, class F>
+  uint8_t _set_or_get(uint8_t val) {
+    F f = F();
+    static_assert(Io::io_reg == IOReg::Ddr ||
+                  Io::io_reg == IOReg::Pin ||
+                  Io::io_reg == IOReg::Port,
+                  "IO Register is unknown.  Only Ddr, Pin and Port are supported.");
+    switch(Io::io_reg) {
+      case IOReg::Ddr:
+        switch(Io::port) {
+          case Port::B:
+            return f(DDRB, Io::bit, val);
+          case Port::C:
+            return f(DDRC, Io::bit, val);
+          case Port::D:
+            return f(DDRD, Io::bit, val);
+        }
+        break;
+      case IOReg::Port:
+        switch(Io::port) {
+          case Port::B:
+            return f(PORTB, Io::bit, val);
+          case Port::C:
+            return f(PORTC, Io::bit, val);
+          case Port::D:
+            return f(PORTD, Io::bit, val);
+        }
+        break;
+      case IOReg::Pin:
+        switch(Io::port) {
+          case Port::B:
+            return f(PINB, Io::bit, val);
+          case Port::C:
+            return f(PINC, Io::bit, val);
+          case Port::D:
+            return f(PIND, Io::bit, val);
+        }
+        break;
+    }
+    return 0;  // should never happen
+  }
+
 }
 
 //                                      +-\/-+
@@ -50,10 +123,14 @@ namespace _macros {
 // CLKO  ICP1  PCINT0       (D 8) PB0 14|    |15  PB1 (D 9)  PWM  PCINT1       OC1A
 //                                      +----+
 
-template <_macros::Port p, uint8_t b>
-struct PIN{
-  static const enum _macros::Port port = p;
-  static const uint8_t bit = b;
+
+template <enum _macros::Port p, uint8_t b>
+struct PIN {
+  static const enum _macros::Port _port = p;
+  static const uint8_t _bit = b;
+  typedef _macros::Io<p, b, _macros::IOReg::Ddr> ddr;
+  typedef _macros::Io<p, b, _macros::IOReg::Port> port;
+  typedef _macros::Io<p, b, _macros::IOReg::Pin> pin;
 };
 
 typedef struct PIN<_macros::Port::B, -1> PIN_UNUSED;
@@ -154,6 +231,7 @@ typedef PIN_DIP_24 PIN_ADC1;
 typedef PIN_DIP_25 PIN_ADC2;
 typedef PIN_DIP_26 PIN_ADC3;
 typedef PIN_DIP_27 PIN_ADC4;
+typedef PIN_DIP_28 PIN_ADC5;
 
 typedef PIN_DIP_12 PIN_AIN0; // Analog comparator negative input
 typedef PIN_DIP_13 PIN_AIN1; // Analog comparator positive input
@@ -189,45 +267,35 @@ typedef PIN_DIP_11 PIN_D5;
 typedef PIN_DIP_12 PIN_D6;
 typedef PIN_DIP_13 PIN_D7;
 
-namespace _macros {
-  template <class P>
-  inline P& port(P& pb, P& pc, P& pd, enum Port port) {
-    if (port == B) {
-      return pb;
-    }
-    if (port == C) {
-      return pc;
-    }
-    return pd;
-  }
+template <class Io>
+void set_bit(uint8_t val) {
+  _macros::_set_or_get<Io, _macros::_set_bit>(val);
 }
-#define _SET_BIT(pin, reg, value) do { if ((value)) _macros::port<>(reg##B, reg##C, reg##D, pin::port) |= _BV(pin::bit); else _macros::port<>(reg##B, reg##C, reg##D, pin::port) &= ~_BV(pin::bit); } while(0)
-#define SET_BIT(pin, reg, value) _SET_BIT(pin, reg, value)
 
-#define _GET_BIT(pin, reg) (_macros::port<>(reg##B, reg##C, reg##D, pin::port) & _BV(pin::bit))
-#define GET_BIT(pin, reg) _GET_BIT(pin, reg)
+template <class Io>
+uint8_t get_bit() {
+  return _macros::_set_or_get<Io, _macros::_get_bit>(0);
+}
 
 namespace _macros {
-  enum Read_Write {
+  enum class _Read_Write {
     Read,
     Write
   };
-  
-  // TODO keep order of pins consistent.  (I sometimes start with pin0 and sometimes with pin7)
   
   // V .. value
   // P .. port variables (in write mode Dest, in read mode Src)
   // Bn .. bit in value (in write mode Src, in read mode Dest)
   // Dn .. port and bit in Px (depending on enum) (in write mode Dest, in read mode Src)
-  template <class D0, uint8_t B0,
-            class D1, uint8_t B1,
-            class D2, uint8_t B2,
-            class D3, uint8_t B3,
-            class D4, uint8_t B4,
-            class D5, uint8_t B5,
+  template <class D7, uint8_t B7,
             class D6, uint8_t B6,
-            class D7, uint8_t B7,
-            enum Read_Write RW, typename V, typename P>
+            class D5, uint8_t B5,
+            class D4, uint8_t B4,
+            class D3, uint8_t B3,
+            class D2, uint8_t B2,
+            class D1, uint8_t B1,
+            class D0, uint8_t B0,
+            enum _Read_Write RW, typename V, typename P>
   inline static uint8_t _set_or_get_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
       uint8_t vB __attribute__ ((unused)) = 0;
       uint8_t vC __attribute__ ((unused)) = 0;
@@ -236,14 +304,14 @@ namespace _macros {
       uint8_t maskC = 0;
       uint8_t maskD = 0;
       
-      const uint8_t d0isB = D0::port == _macros::B; const uint8_t d0isC = D0::port == _macros::C;
-      const uint8_t d1isB = D1::port == _macros::B; const uint8_t d1isC = D1::port == _macros::C;
-      const uint8_t d2isB = D2::port == _macros::B; const uint8_t d2isC = D2::port == _macros::C;
-      const uint8_t d3isB = D3::port == _macros::B; const uint8_t d3isC = D3::port == _macros::C;
-      const uint8_t d4isB = D4::port == _macros::B; const uint8_t d4isC = D4::port == _macros::C;
-      const uint8_t d5isB = D5::port == _macros::B; const uint8_t d5isC = D5::port == _macros::C;
-      const uint8_t d6isB = D6::port == _macros::B; const uint8_t d6isC = D6::port == _macros::C;
-      const uint8_t d7isB = D7::port == _macros::B; const uint8_t d7isC = D7::port == _macros::C;
+      const uint8_t d0isB = D0::_port == _macros::Port::B; const uint8_t d0isC = D0::_port == _macros::Port::C;
+      const uint8_t d1isB = D1::_port == _macros::Port::B; const uint8_t d1isC = D1::_port == _macros::Port::C;
+      const uint8_t d2isB = D2::_port == _macros::Port::B; const uint8_t d2isC = D2::_port == _macros::Port::C;
+      const uint8_t d3isB = D3::_port == _macros::Port::B; const uint8_t d3isC = D3::_port == _macros::Port::C;
+      const uint8_t d4isB = D4::_port == _macros::Port::B; const uint8_t d4isC = D4::_port == _macros::Port::C;
+      const uint8_t d5isB = D5::_port == _macros::Port::B; const uint8_t d5isC = D5::_port == _macros::Port::C;
+      const uint8_t d6isB = D6::_port == _macros::Port::B; const uint8_t d6isC = D6::_port == _macros::Port::C;
+      const uint8_t d7isB = D7::_port == _macros::Port::B; const uint8_t d7isC = D7::_port == _macros::Port::C;
 
       uint8_t& v0 = d0isB ? vB : (d0isC ? vC : vD);
       uint8_t& v1 = d1isB ? vB : (d1isC ? vC : vD);
@@ -265,122 +333,177 @@ namespace _macros {
 
       // avoid warning: left shift count >= width of type
       // even if not used.  (if compiled without optimization)
-      if (D0::bit < 8 && B0 < 8) {
-        const uint8_t shift0 = (D0::bit >= 8) ? 0 : D0::bit;
+      if (D0::_bit < 8 && B0 < 8) {
+        const uint8_t shift0 = (D0::_bit >= 8) ? 0 : D0::_bit;
         mask0 |= 1 << shift0;
-        if (RW == _macros::Write) v0 |= val & _BV(B0);
+        if (RW == _macros::_Read_Write::Write) v0 |= val & _BV(B0);
       }
-      if (D1::bit < 8 && B1 < 8) {
-        const uint8_t shift1 = (D1::bit >= 8) ? 0 : D1::bit;
+      if (D1::_bit < 8 && B1 < 8) {
+        const uint8_t shift1 = (D1::_bit >= 8) ? 0 : D1::_bit;
         mask1 |= 1 << shift1;
-        if (RW == _macros::Write) v1 |= val & _BV(B1);
+        if (RW == _macros::_Read_Write::Write) v1 |= val & _BV(B1);
       }
-      if (D2::bit < 8 && B2 < 8) {
-        const uint8_t shift2 = (D2::bit >= 8) ? 0 : D2::bit;
+      if (D2::_bit < 8 && B2 < 8) {
+        const uint8_t shift2 = (D2::_bit >= 8) ? 0 : D2::_bit;
         mask2 |= 1 << shift2;
-        if (RW == _macros::Write) v2 |= val & _BV(B2);
+        if (RW == _macros::_Read_Write::Write) v2 |= val & _BV(B2);
       }
-      if (D3::bit < 8 && B3 < 8) {
-        const uint8_t shift3 = (D3::bit >= 8) ? 0 : D3::bit;
+      if (D3::_bit < 8 && B3 < 8) {
+        const uint8_t shift3 = (D3::_bit >= 8) ? 0 : D3::_bit;
         mask3 |= 1 << shift3;
-        if (RW == _macros::Write) v3 |= val & _BV(B3);
+        if (RW == _macros::_Read_Write::Write) v3 |= val & _BV(B3);
       }
-      if (D4::bit < 8 && B4 < 8) {
-        const uint8_t shift4 = (D4::bit >= 8) ? 0 : D4::bit;
+      if (D4::_bit < 8 && B4 < 8) {
+        const uint8_t shift4 = (D4::_bit >= 8) ? 0 : D4::_bit;
         mask4 |= 1 << shift4;
-        if (RW == _macros::Write) v4 |= val & _BV(B4);
+        if (RW == _macros::_Read_Write::Write) v4 |= val & _BV(B4);
       }
-      if (D5::bit < 8 && B5 < 8) {
-        const uint8_t shift5 = (D5::bit >= 8) ? 0 : D5::bit;
+      if (D5::_bit < 8 && B5 < 8) {
+        const uint8_t shift5 = (D5::_bit >= 8) ? 0 : D5::_bit;
         mask5 |= 1 << shift5;
-        if (RW == _macros::Write) v5 |= val & _BV(B5);
+        if (RW == _macros::_Read_Write::Write) v5 |= val & _BV(B5);
       }
-      if (D6::bit < 8 && B6 < 8) {
-        const uint8_t shift6 = (D6::bit >= 8) ? 0 : D6::bit;
+      if (D6::_bit < 8 && B6 < 8) {
+        const uint8_t shift6 = (D6::_bit >= 8) ? 0 : D6::_bit;
         mask6 |= 1 << shift6;
-        if (RW == _macros::Write) v6 |= val & _BV(B6);
+        if (RW == _macros::_Read_Write::Write) v6 |= val & _BV(B6);
       }
-      if (D7::bit < 8 && B7 < 8) {
-        const uint8_t shift7 = (D7::bit >= 8) ? 0 : D7::bit;
+      if (D7::_bit < 8 && B7 < 8) {
+        const uint8_t shift7 = (D7::_bit >= 8) ? 0 : D7::_bit;
         mask7 |= 1 << shift7;
-        if (RW == _macros::Write) v7 |= val & _BV(B7);
+        if (RW == _macros::_Read_Write::Write) v7 |= val & _BV(B7);
       }
   
       if (maskB != 0) {
-        if (RW == _macros::Write) portB = (portB & ~maskB) | vB;
+        if (RW == _macros::_Read_Write::Write) portB = (portB & ~maskB) | vB;
         else vB = portB;
       }
       if (maskC != 0) {
-        if (RW == _macros::Write) portC = (portC & ~maskC) | vC;
+        if (RW == _macros::_Read_Write::Write) portC = (portC & ~maskC) | vC;
         else vC = portC;
       }
       if (maskD != 0) {
-        if (RW == _macros::Write) portD = (portD & ~maskD) | vD;
+        if (RW == _macros::_Read_Write::Write) portD = (portD & ~maskD) | vD;
         else vD = portD;
       }
       
       uint8_t ret = 0;
-      if (RW == _macros::Read) {
-        ret |= (v0 & _BV(D0::bit)) ? _BV(B0) : 0;
-        ret |= (v1 & _BV(D1::bit)) ? _BV(B1) : 0;
-        ret |= (v2 & _BV(D2::bit)) ? _BV(B2) : 0;
-        ret |= (v3 & _BV(D3::bit)) ? _BV(B3) : 0;
-        ret |= (v4 & _BV(D4::bit)) ? _BV(B4) : 0;
-        ret |= (v5 & _BV(D5::bit)) ? _BV(B5) : 0;
-        ret |= (v6 & _BV(D6::bit)) ? _BV(B6) : 0;
-        ret |= (v7 & _BV(D7::bit)) ? _BV(B7) : 0;
+      if (RW == _macros::_Read_Write::Read) {
+        ret |= (v0 & _BV(D0::_bit)) ? _BV(B0) : 0;
+        ret |= (v1 & _BV(D1::_bit)) ? _BV(B1) : 0;
+        ret |= (v2 & _BV(D2::_bit)) ? _BV(B2) : 0;
+        ret |= (v3 & _BV(D3::_bit)) ? _BV(B3) : 0;
+        ret |= (v4 & _BV(D4::_bit)) ? _BV(B4) : 0;
+        ret |= (v5 & _BV(D5::_bit)) ? _BV(B5) : 0;
+        ret |= (v6 & _BV(D6::_bit)) ? _BV(B6) : 0;
+        ret |= (v7 & _BV(D7::_bit)) ? _BV(B7) : 0;
       }
       return ret;
   }
+  
+  template <enum IOReg Reg,
+            class D7, uint8_t B7,
+            class D6, uint8_t B6,
+            class D5, uint8_t B5,
+            class D4, uint8_t B4,
+            class D3, uint8_t B3,
+            class D2, uint8_t B2,
+            class D1, uint8_t B1,
+            class D0, uint8_t B0,
+            enum _Read_Write RW, typename V, typename P>
+  inline static uint8_t _set_or_get_8_bits(const V& val) {
+    static_assert(Reg == IOReg::Ddr ||
+                  Reg == IOReg::Pin ||
+                  Reg == IOReg::Port,
+                  "IO Register is unknown.  Only Ddr, Pin and Port are supported.");
+    switch (Reg) {
+      case IOReg::Ddr:
+        return _set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, RW>(DDRB, DDRC, DDRD, val);
+      case IOReg::Port:
+        return _set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, RW>(PORTB, PORTC, PORTD, val);
+      case IOReg::Pin:
+        return _set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, RW>(PINB, PINC, PIND, val);
+    }
+    return 0; // should never happen
+  }
 }
 
-template <class D0, uint8_t B0,
-          class D1, uint8_t B1,
-          class D2, uint8_t B2,
-          class D3, uint8_t B3,
-          class D4, uint8_t B4,
-          class D5, uint8_t B5,
+template <class D7, uint8_t B7,
           class D6, uint8_t B6,
-          class D7, uint8_t B7,
+          class D5, uint8_t B5,
+          class D4, uint8_t B4,
+          class D3, uint8_t B3,
+          class D2, uint8_t B2,
+          class D1, uint8_t B1,
+          class D0, uint8_t B0,
           typename V, typename P>
 inline static void set_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
-  _macros::_set_or_get_8_bits<D0, B0, D1, B1, D2, B2, D3, B3, D4, B4, D5, B5, D6, B6, D7, B7, _macros::Write>(portB, portC, portD, val);
+  _macros::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _macros::_Read_Write::Write>(portB, portC, portD, val);
 }
 
-template <class D0, uint8_t B0,
-          class D1, uint8_t B1,
-          class D2, uint8_t B2,
-          class D3, uint8_t B3,
-          class D4, uint8_t B4,
-          class D5, uint8_t B5,
+template <class D7, uint8_t B7,
           class D6, uint8_t B6,
-          class D7, uint8_t B7,
+          class D5, uint8_t B5,
+          class D4, uint8_t B4,
+          class D3, uint8_t B3,
+          class D2, uint8_t B2,
+          class D1, uint8_t B1,
+          class D0, uint8_t B0,
           typename V, typename P>
 inline static uint8_t get_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
-  return _macros::_set_or_get_8_bits<D0, B0, D1, B1, D2, B2, D3, B3, D4, B4, D5, B5, D6, B6, D7, B7, _macros::Read>(portB, portC, portD, val);
+  return _macros::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _macros::_Read_Write::Read>(portB, portC, portD, val);
 }
 
-// TODO passing a val for read operation doesn't make much sense
-#define _GET_OR_SET8(reg_b, reg_c, reg_d, val, direction, dest_pin7, bit_pos7, dest_pin6, bit_pos6, dest_pin5, bit_pos5, dest_pin4, bit_pos4, dest_pin3, bit_pos3, dest_pin2, bit_pos2, dest_pin1, bit_pos1, dest_pin0, bit_pos0) \
-  _macros::_set_or_get_8_bits<dest_pin0, bit_pos0, \
-                              dest_pin1, bit_pos1, \
-                              dest_pin2, bit_pos2, \
-                              dest_pin3, bit_pos3, \
-                              dest_pin4, bit_pos4, \
-                              dest_pin5, bit_pos5, \
-                              dest_pin6, bit_pos6, \
-                              dest_pin7, bit_pos7, \
-                              direction \
-                              >(reg_b, reg_c, reg_d, val)
+template <enum _macros::IOReg IOReg,
+          class D7, uint8_t B7,
+          class D6, uint8_t B6,
+          class D5, uint8_t B5,
+          class D4, uint8_t B4,
+          class D3, uint8_t B3,
+          class D2, uint8_t B2,
+          class D1, uint8_t B1,
+          class D0, uint8_t B0,
+          typename V, typename P>
+inline static void set_8_bits(const V& val) {
+  _macros::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _macros::_Read_Write::Write>(val);
+}
 
-#define SET8(reg, val, dest_pin7, bit_pos7, dest_pin6, bit_pos6, dest_pin5, bit_pos5, dest_pin4, bit_pos4, dest_pin3, bit_pos3, dest_pin2, bit_pos2, dest_pin1, bit_pos1, dest_pin0, bit_pos0) \
-        _GET_OR_SET8(reg##B, reg##C, reg##D, val, _macros::Write, dest_pin7, bit_pos7, dest_pin6, bit_pos6, dest_pin5, bit_pos5, dest_pin4, bit_pos4, dest_pin3, bit_pos3, dest_pin2, bit_pos2, dest_pin1, bit_pos1, dest_pin0, bit_pos0)
- 
-#define GET8(reg, val, dest_pin7, bit_pos7, dest_pin6, bit_pos6, dest_pin5, bit_pos5, dest_pin4, bit_pos4, dest_pin3, bit_pos3, dest_pin2, bit_pos2, dest_pin1, bit_pos1, dest_pin0, bit_pos0) \
-        _GET_OR_SET8(reg##B, reg##C, reg##D, val, _macros::Read, dest_pin7, bit_pos7, dest_pin6, bit_pos6, dest_pin5, bit_pos5, dest_pin4, bit_pos4, dest_pin3, bit_pos3, dest_pin2, bit_pos2, dest_pin1, bit_pos1, dest_pin0, bit_pos0)
+template <enum _macros::IOReg IOReg,
+          class D7, uint8_t B7,
+          class D6, uint8_t B6,
+          class D5, uint8_t B5,
+          class D4, uint8_t B4,
+          class D3, uint8_t B3,
+          class D2, uint8_t B2,
+          class D1, uint8_t B1,
+          class D0, uint8_t B0,
+          typename V, typename P>
+inline static void get_8_bits(const V& val) {
+  _macros::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _macros::_Read_Write::Read>(val);
+}
 
-        
-#define GET8_BYTE(reg, val, dest_pin7, dest_pin6, dest_pin5, dest_pin4, dest_pin3, dest_pin2, dest_pin1, dest_pin0) GET8(reg, val, dest_pin7, 7, dest_pin6, 6, dest_pin5, 5, dest_pin4, 4, dest_pin3, 3, dest_pin2, 2, dest_pin1, 1, dest_pin0, 0)
 
-#define SET8_BYTE(reg, val, dest_pin7, dest_pin6, dest_pin5, dest_pin4, dest_pin3, dest_pin2, dest_pin1, dest_pin0) SET8(reg, val, dest_pin7, 7, dest_pin6, 6, dest_pin5, 5, dest_pin4, 4, dest_pin3, 3, dest_pin2, 2, dest_pin1, 1, dest_pin0, 0)
-#define SET4_NIBBLE(reg, val, offset, dest_pin3, dest_pin2, dest_pin1, dest_pin0) SET8(reg, val, dest_pin0, -1, dest_pin0, -1, dest_pin0, -1, dest_pin0, -1, dest_pin3, 3 + offset, dest_pin2, 2 + offset, dest_pin1, 1 + offset, dest_pin0, 0 + offset)
+template <enum _macros::IOReg IOReg,
+          class D7,
+          class D6,
+          class D5,
+          class D4,
+          class D3,
+          class D2,
+          class D1,
+          class D0,
+          typename V, typename P>
+inline static void set_8_byte(const V& val) {
+  set_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(val);
+}
+
+template <enum _macros::IOReg IoReg,
+          uint8_t offset,
+          class D3,
+          class D2,
+          class D1,
+          class D0,
+          typename V, typename P>
+inline static void set_4_nibble(V& val) {
+  set_8_byte<IoReg, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, D3, 3 + offset, D2, 2 + offset, D1, 1 + offset, D0, 0 + offset>(val);
+}
