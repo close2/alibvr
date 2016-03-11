@@ -4,8 +4,17 @@
 #include "internal/adapter.h"
 #include "internal/task_list.h"
 
-// handling reading or writing multiple values is a pain
-// we simply don't support it, and return IllegalDataAddress
+/* BALI Notes
+ * - explain template argument list; add some example implementations in other
+ *   languages (sh, dart, C, python)
+ * - Explain ConnectionCtrl template argument (::reset(), ::tx_start())
+ * - improve doc: Modubs is a task, which enables itself as soon as a complete
+ *   message is available.
+ * - In _exec1ModbusData return values seem inversed (1 instead of 0 and ↔)
+ */
+
+// Handling reading or writing multiple values is complicated.
+// We simply don't support it, and return IllegalDataAddress
 // modbusData functions should for instance only be mapped onto even addresses
 // in which case this would be the correct response
 // (Note however, that this code always returns IllegalDataAddress if more
@@ -139,6 +148,8 @@ private:
   
   static inline void _error() {
     ConnectionCtrl::reset();
+    reset(); // yes reset() is called twice, because ConnectionCtrl will
+    // probably also call reset(), but compiler should optimize this.
   }
   
   static void _exception(_modbus::Exception ex) {
@@ -330,7 +341,8 @@ public:
     }
     _send_reply();
     
-    // we wan't to be called right away if we are enabled.
+    // we wan't to be called right away if we are enabled. (which we are, when a
+    // complete message has been received)
     return 0;
   }
 };

@@ -16,6 +16,11 @@
 #include "transmission.h"
 #include "type_traits.h"
 
+/* BALI notes
+ * «We have a function which returns...»  which one?
+ * - make the 2 in high_duration = zeroBitDuration / 2  a template arg
+ * - add <<a <<b for ascii and binary? maybe allow Adapter to be a template arg
+ */
 
 /**
  * Transmission will usually be synchronous.  Pulse Uart has been implemented
@@ -166,11 +171,11 @@ private:
   }
   
   static void _tx_now() {
-    uint16_t callIn;
+    uint16_t current_duration;
     uint16_t previousClock = get_clock<uint16_t>();
     
-    while ((callIn = _tx_bit_now()) != 0) {
-      const uint16_t nextClock = previousClock + callIn;
+    while ((current_duration = _tx_bit_now()) != 0) {
+      const uint16_t nextClock = previousClock + current_duration;
 
       while (!clock_reached<uint16_t>(previousClock, nextClock)); // busy wait
 

@@ -8,6 +8,26 @@
 
 #define REGISTER_IRQS "internal/register_irqs.h"
 
+/* BALI notes
+ * - add has_registered_tasks similar to execIrqTasks
+ * - change IRQ_TASK macro to Functor? class:
+ * tempalte<typename F>
+ * struct Task {
+ *   F f;
+ *   IrqTask(F f) { this.f = f };
+ *   template <typename I>
+ *   void handle(I) {f(I);}
+ * }
+ * or similar.
+ * 
+ * explain Handled template argument of execIrqTasks:
+ * whenever an IRQ is received all Irq-tasks are considered (see execIrqTasks).
+ * If at least one Taks is registered for this IRQ (T::I::irq) Handled changes
+ * to State<1>.
+ * Otherwise the specialisation for no Task left will call the resetVector.
+ * (I.e. reset the avr)
+ */
+
 namespace _irqs {
   enum Irq {
     //IRQ_RESET = 0x000,
@@ -68,8 +88,8 @@ namespace _irqs {
       return;
     }
     if (!Handled::state) {
-#define resetVector ((void (*)(void))0x00)
-      resetVector();
+      // call the resetVector
+      ((void (*)(void))0x00)();
       for (;;) {}
     }
   }

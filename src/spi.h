@@ -14,6 +14,16 @@
 
 #include "type_traits.h"
 
+/* BALI notes
+ * - rename rx() to rx_hw_buffer? (at least in SpiSync)
+ * - if we make changing DDR blocking, can we merge slave and master?
+ * - changing DDR should probably allow to clear buffers.
+ * - change using spiMaster.ddr(_spi::DataDirection::Write) ?
+ * - default would be ReadWrite if rx_buffer is big enough setting ddr would not
+ *   be necessary → add spi::clear_rx_buffer(n) and simply clear before
+ *   receiving.
+ * - spiMaster.endFrame() ?
+ */
 
 namespace _spi {
   
@@ -190,17 +200,6 @@ public:
   template <typename T>
   static void tx(const T& t) {
     Adapter::apply<_Spi::_tx>(t);
-  }
-  
-  inline _Spi& operator>>(uint8_t& c) {
-    tx_rx(c);
-    return *this;
-  }
-
-  template <typename T>
-  inline _Spi& operator<<(const T& t) {
-    tx_rx(t);
-    return *this;
   }
 };
 

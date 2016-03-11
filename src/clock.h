@@ -9,6 +9,15 @@
 #include "irqs.h"
 #include "internal/clock_prescale.h"
 
+/* BALI notes
+ * replase get_clock with asm:
+ * start_%=:
+ * lds %[ch1], %[r]
+ * lds %[cl], %[tcnt]
+ * lds %[ch2] %[r]
+ * sub %[ch2], %[ch1]
+ * brne start_%=
+ */
 namespace _clock {
   static volatile bits64_t clock;
 };
@@ -16,7 +25,8 @@ namespace _clock {
 #define NEW_IRQ_TASK ClockIrqTask
 IRQ_TASK(NEW_IRQ_TASK) {
   uint8_t tmp;
-  // the following code is a faster version of _clock::clock.uint64++;
+  // for the common case the following code is a faster version of
+  // _clock::clock.uint64++;
   asm volatile(
     "lds %[r], %[clock0]\n\t"
     "subi %[r], 0xFF\n\t"
@@ -209,13 +219,26 @@ static void init_timer0() {
   sei();
 };
 
+/*
+ * There are 3 cases when we have reched the clock:
+ * (1) --p--t--c-- (i.e. prev smaller than target, target smaller than clock)
+ * current clock is higher than target.  As prev is smaller than target, we
+ * passed the target.
+ * 
+ * (2) -t-c-----p-
+ * Same analysis as prev. case.  Except that we have wrapped.
+ * 
+ * (3) -c-----p-t-
+ * In this case only clock has wrapped.
+ * 
+ */
 template<typename T>
 static inline uint8_t clock_reached(const T& clock, const T& previous_clock, const T& target_clock) {
   uint8_t ret; // this variable makes debugging easier
   if (target_clock <= clock) {
-    ret = previous_clock <= target_clock || clock < previous_clock;
+    ret = previous_clock <= target_clock || clock < previous_clock; // (1) & (2)
   } else {
-    ret = previous_clock <= target_clock && previous_clock > clock;
+    ret = previous_clock <= target_clock && previous_clock > clock; // (3)
   }
   return ret;
 }

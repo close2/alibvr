@@ -21,6 +21,24 @@
 // doesn't work
 // ⇒ 1st result is copy of 3rd
 
+/* BALI notes:
+ * make aliuas tempalte, which doesn't have an input-Pin and extend init with
+ * template argument which by default takes Input pin of class
+ * also add select_input<>() function
+ * 
+ * add comments for modes
+ * 
+ * reorder template arguments: Input, Ref Mode (Mode will usually be
+ * Single Conversion)
+ * 
+ * improve name: adc_and_discard_first to adc_and_start_adc ?
+ * 
+ * move prepare* to adc_8bit / 10bit and add argument (sleep)
+ * disable irq afterwards if it wasn't enabled.
+ * 
+ * impl get_adc_10bit_result in assembler
+ */
+
 namespace _adc {
   enum class Mode {
     SingleConversion     = 0xFF,
@@ -42,17 +60,17 @@ namespace _adc {
   
   namespace Input {
     struct Temperature {
-      static const enum _ports::Port port = _ports::Port::B;
+      static const enum _ports::Port port = _ports::Port::C;
       static const uint8_t bit = 8;
     };
   
     struct V1_1 {
-      static const enum _ports::Port port = _ports::Port::B;
+      static const enum _ports::Port port = _ports::Port::C;
       static const uint8_t bit = 14;
     };
     
     struct Gnd {
-      static const enum _ports::Port port = _ports::Port::B;
+      static const enum _ports::Port port = _ports::Port::C;
       static const uint8_t bit = 15;
     };
   }
@@ -87,20 +105,17 @@ private:
 public:
   // the first adc is not guaranteed to have a meaningful value
   static void init(uint8_t adc_and_discard_first = 1) {
-    ADCSRA = _BV(ADEN) // turn ADC power on
-             | calc_prescaler() << ADPS0; // set prescaler
-
     PRR &= ~(_BV(PRADC)); // disable Power Reduction ADC
 
     static_assert(Input::port == _ports::Port::C && (Input::bit == 0 ||
-                                                       Input::bit == 1 ||
-                                                       Input::bit == 2 ||
-                                                       Input::bit == 3 ||
-                                                       Input::bit == 4 ||
-                                                       Input::bit == 5 ||
-                                                       Input::bit == 8 ||  // Temperature
-                                                       Input::bit == 14 || // V1_1
-                                                       Input::bit == 15),  // Gnd
+                                                     Input::bit == 1 ||
+                                                     Input::bit == 2 ||
+                                                     Input::bit == 3 ||
+                                                     Input::bit == 4 ||
+                                                     Input::bit == 5 ||
+                                                     Input::bit == _adc::Input::Temperature::bit ||  // Temperature
+                                                     Input::bit == _adc::Input::V1_1::bit || // V1_1
+                                                     Input::bit == _adc::Input::Gnd::bit),  // Gnd
                   "Only ADC0-ADC5, _adc::Input::Temperature, _adc::Input::V1_1 and _adc::Input::Gnd are acceptable inputs");
 
     uint8_t source = Input::bit << MUX0;
@@ -110,8 +125,13 @@ public:
       ADCSRB |= (uint8_t) Mode << ADTS0;
       ADCSRA |= _BV(ADATE);
     }
+    // BALI Note: check if ADSC is high here
+    ADCSRA = _BV(ADEN) // turn ADC power on
+             | calc_prescaler() << ADPS0; // set prescaler
+
     if (adc_and_discard_first) {
       ADCSRA |= _BV(ADSC);
+      // BALI Note: should we make sure that IRQ is ignored?
     }
   }
   
@@ -131,7 +151,7 @@ public:
       ADCSRA |= _BV(ADSC);
     } else {
       // enable irq and start
-      sei();
+      sei(); // BALI Note: we usually don't enable irqs, should we?
       ADCSRA |= _BV(ADIE) | _BV(ADSC);
     }
   }

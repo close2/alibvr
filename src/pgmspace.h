@@ -2,6 +2,10 @@
 
 #include <avr/pgmspace.h>
 
+/* BALI notes
+ * add automatic conversion to const
+ */
+
 template <typename T = uint8_t>
 class PgmDataPtr {
 public:

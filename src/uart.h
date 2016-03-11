@@ -14,6 +14,16 @@
 #include "internal/adapter.h"
 #include "transmission.h"
 
+/* BALI notes
+ * - change BAUD_TOL to constexpr.
+ * - move Cpu =  to global file?
+ * - tx_now can_tx_now (similar for rx) should be renamed to tx_now_hw..
+ * - rename tx_irq to tx_irq_start or tx_start.
+ * - can compiler optimize tx_starter away? If yes, should we hide tx_irq?
+ * - in handle, use asm for UCSR0A reading.  (Because order is important.)
+ * - Adapter should handle both little and big endianess.
+ */
+
 #pragma push_macro("BAUD_TOL")
 #ifndef BAUD_TOL
 #  define BAUD_TOL 2

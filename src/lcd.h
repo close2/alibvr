@@ -14,9 +14,22 @@
 #  define DEBUG(message)
 #endif
 
+/* BALI notes
+ *
+ * - change enums to enum class
+ *
+ * - change template args to 1 LcdSettings class.
+ * 
+ * - use new port interface.
+ * 
+ * - make TwoLineMode an template argument.
+ * 
+ * - remove DEBUG
+ */
+
 namespace _lcd {
   static const uint8_t enable_bit = 5;
-  static const uint8_t reg_select_bit = 4;
+  static const uint8_t default_reg_select_bit = 4;
 
   enum Command_Data {
     Command = 0,
@@ -32,40 +45,28 @@ namespace _lcd {
     SetDisplayAddress = 0b10000000
   };
   
-  // calculated during compile time!
-  // if d7 - d4 is alligned on PORTC_3 - PORTC_0  and reg_select and enable are on PORTC as well, shift those bits, so that a single assignment sets all flags
+  // Calculated during compile time!
+  // If d7 - d4 is alligned on PORTx_3 - PORTx_0 and reg_select is on PORTx as
+  // well, shift the reg select bit, so that a single assignment can be used.
+  // Returns the bit position of reg_select on our data byte.
   template <typename LCD_D7, typename LCD_D6, typename LCD_D5, typename LCD_D4, typename LCD_ENABLE, typename LCD_REG_SELECT>
-  static inline uint8_t _reg_select_bit() {
+  constexpr inline uint8_t _reg_select_bit() {
     const uint8_t reg_sel = LCD_REG_SELECT::bit;
     if (reg_sel > 3) return reg_sel;
-    else return _lcd::reg_select_bit;
+    else return _lcd::default_reg_select_bit;
   }
-#pragma push_macro("REG_BIT")
-#undef REG_BIT
-#define REG_BIT _reg_select_bit<LCD_D7, LCD_D6, LCD_D5, LCD_D4, LCD_ENABLE, LCD_REG_SELECT>()
-  
-  // calculated during compile time!
-  template <typename LCD_D7, typename LCD_D6, typename LCD_D5, typename LCD_D4, typename LCD_ENABLE, typename LCD_REG_SELECT>
-  static inline uint8_t _enable_bit() {
-    const uint8_t reg_sel = _reg_select_bit<LCD_D7, LCD_D6, LCD_D5, LCD_D4, LCD_ENABLE, LCD_REG_SELECT>();
-    const uint8_t enable = LCD_ENABLE::bit;
-    if (enable != reg_sel && enable > 3) return enable;
-    if (reg_sel != _lcd::enable_bit) return _lcd::enable_bit;
-    if (reg_sel != 4) return 4;
-    // 5 must be free
-    return 5;
-  }
-#pragma push_macro("ENABLE_BIT")
-#undef ENABLE_BIT
-#define ENABLE_BIT _enable_bit<LCD_D7, LCD_D6, LCD_D5, LCD_D4, LCD_ENABLE, LCD_REG_SELECT>()
   
   // Timings from the excellent Guide from Julyan Ilett
   // google for »how to use intelligent l.c.d.s ilett«
 
   template <typename LCD_D7, typename LCD_D6, typename LCD_D5, typename LCD_D4, typename LCD_ENABLE, typename LCD_REG_SELECT, enum _lcd::Command_Data Command_Or_Data>
   static inline void _lcd_send_nibble(const uint8_t& data_4_bit) {
-    const uint8_t data = data_4_bit | (Command_Or_Data << REG_BIT);
-    const uint8_t reg_bit = REG_BIT;
+    // reg_select might be on another port in which case calculating the
+    // position of the reg_bit doesn't help.  If however it is on the same port
+    // and the data bits are aligned, assigning the data bits and the reg bit
+    // might be possible in one PORT assignment.
+    const uint8_t reg_bit = _reg_select_bit<LCD_D7, LCD_D6, LCD_D5, LCD_D4, LCD_ENABLE, LCD_REG_SELECT>();
+    const uint8_t data = data_4_bit | (Command_Or_Data << reg_bit);
     if (reg_bit == 4) set_8_bits<LCD_D7, 3, LCD_D6, 2, LCD_D5, 1, LCD_D4, 0, LCD_REG_SELECT, 4, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1>(PORTB, PORTC, PORTD, data);
     if (reg_bit == 5) set_8_bits<LCD_D7, 3, LCD_D6, 2, LCD_D5, 1, LCD_D4, 0, LCD_REG_SELECT, 5, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1>(PORTB, PORTC, PORTD, data);
     if (reg_bit == 6) set_8_bits<LCD_D7, 3, LCD_D6, 2, LCD_D5, 1, LCD_D4, 0, LCD_REG_SELECT, 6, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1>(PORTB, PORTC, PORTD, data);
@@ -105,8 +106,6 @@ namespace _lcd {
       SET_BIT(LCD_ENABLE, PORT, 0);
       set_8_bits<LCD_D7, 3, LCD_D6, 2, LCD_D5, 1, LCD_D4, 0, LCD_ENABLE, 4, LCD_REG_SELECT, 5, PIN_UNUSED, -1, PIN_UNUSED, -1>(DDRB, DDRC, DDRD, 0b11111111);
   }
-#pragma pop_macro("ENABLE_BIT")
-#pragma pop_macro("REG_BIT")
 }
 
 template <typename LCD_D7, typename LCD_D6, typename LCD_D5, typename LCD_D4, typename LCD_ENABLE, typename LCD_REG_SELECT>

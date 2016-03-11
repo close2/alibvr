@@ -10,6 +10,25 @@
 #include "internal/clock_prescale.h"
 
 
+/* BALI Notes
+ * - maybe split timers into 2 templates def. for init and one for Tasks
+ *   better: provide an alias just make sure we can not call ::init on alias
+ *   < TaskA, Task, B, TaskOvF>
+ *   using Timer0 = _timer0 <...>
+ *                            ↑ invalid values
+ * - maybe go through Irq Handler list and find out if there's a registered Task
+ *   to know if IRQ should be enabled.
+ * - explain modes (rename ctc?)
+ * - move TimderDef (PIN_A, PIN_B) to ports.h?
+ * - make || consistent (sometimes || is in front sometimes after)
+ *   static_assert(X
+ *              || Y ||
+ *                 Z);
+ * - add static_assert for Mode (In addition to ClockSelect)
+ * - template <typename F, typename Timer>
+ *   using MiniTaskA...
+ */
+
 namespace _timer0 {
   
   // this is only a possibility to prevent compilations of unsupported modes

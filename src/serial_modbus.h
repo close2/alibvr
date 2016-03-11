@@ -4,12 +4,22 @@
 #include "uart.h"
 
 
+/* BALI notes
+ * modbus.h doesn't handle the communication detail. This file handles
+ * 4bit ↔ 8bit conversion and checksum verification.
+ * Valid bytes are passed to Modbus class.
+ * - remove all get_xxx and make those variables static
+ * - change tx_start to use tx_starter
+ */
+
+
 /*
 Code walk through with an example:
 11 03 00 6B 00 01 
 [0]    11 → addressId
 [1]    03 → ReadHoldingRegisters
-[2][3] 00 6b → 107 (official name is 40108 because for holding registers the naming convention is to add 40001 to the "real" address)
+[2][3] 00 6b → 107 (modbus spec name is 40108 because for holding registers the
+                    naming convention is to add 40001 to the "real" address)
 [4][5] 00 01 → number of registers to read (we only support 1; see below)
 which becomes:
 : 1 1  0 3  0 0  6 B  0 0  0 1  8 0  CR LF
@@ -44,16 +54,15 @@ calling SerialModbus::tx_start  (Notice that SerialModbus is a template argument
 of Modbus.  SerialModbus will then enable irqs for Uart transmitting.)
 
 For irq sending Uart calls SerialModbus::tx_is_empty() and tx_pop()
-Notice again that SerialModbus is a template argument of Uart.
+SerialModbus is a template argument of Uart!
 During transmission partial_char is used for storing 4bit-values (same as during
 reception) and state is used to as flag to know if crc, cr and lf have already be
 sent.
+
+SerialModbus simply wraps modubs tx, rx,... and splits/combines bytes to 4bit
+representation and adds CRC, CR, LF.
 */
 
-#pragma push_macro("BAUD_TOL")
-#ifndef BAUD_TOL
-#  define BAUD_TOL 2
-#endif
 
 namespace _serial_modbus {
   enum CtrlChar {
@@ -135,11 +144,11 @@ public:
   }
   
   static void reset() {
-      _Modbus::reset();
       get_state() = _serial_modbus::Receiving_Waiting_For_Start;
       get_partial_char() = 0xFF;
       get_crc_c() = 0;
       get_last_byte() = 0x00;
+      _Modbus::reset();
   }
   
   static inline void rx(uint8_t c) {
@@ -205,12 +214,12 @@ public:
     }
 
     // store byte in last_byte
-    last_byte = Adapter::hex_to_v4bit(c);
+    last_byte = Adapter::hex_to_v4bit(c); // first store first half
     if (last_byte > 0x0F) {
       reset();
       return;
     }
-    last_byte |= partial_char << 4;
+    last_byte |= partial_char << 4; // then add second half
 
     partial_char = 0xFF;
     add_crc(last_byte);
@@ -240,8 +249,8 @@ public:
     // Sending_Start → before sending :
     // Sending_Data  → before or during sending data from Modbus
     //                 and sending crc
-    // Sending_End1  → before sending End1
-    // Sending_End2  → before sending End2
+    // Sending_End1  → before sending End1 (CR)
+    // Sending_End2  → before sending End2 (LF)
     // Sending_Done  → Done
     if (state == _serial_modbus::Sending_Done) {
       // finished Sending, prepare for Receiving
@@ -274,8 +283,8 @@ public:
         return _serial_modbus::End2;
       default:
         if (_Modbus::tx_is_empty()) {
-          state = _serial_modbus::Sending_End1;
-          const uint8_t& crc = get_crc_c();
+          state = _serial_modbus::Sending_End1; // switch to Sending_End1 (CR)
+          const uint8_t& crc = get_crc_c();     // but send CRC first.
           return _split_into_4bits(-crc);
         }
         const uint8_t& c = _Modbus::tx_pop();
@@ -299,5 +308,3 @@ public:
 };
 
 #define REGISTER_SERIAL_MODBUS "internal/register_serial_modbus.h"
-
-#pragma pop_macro("BAUD_TOL")

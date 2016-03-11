@@ -2,6 +2,10 @@
 
 #include <stdio.h>
 
+/* BALI notes:
+ * make size template arguments?
+ * add 32bit version
+ */
 static void print_4bit_hex(uint8_t i) {
         if (i < 10) putchar('0' + i);
         else putchar ('a' + i - 10);

@@ -5,6 +5,22 @@
 #include "internal/timer.h"
 #include <util/delay.h>
 
+/* BALI NOTES
+ * - how to use / what is ServoPause
+ *   AFAICR a servo needs a high every n ms and ServoPause should make sure
+ *   that this pause exists: 111222222233ppppp111222222233pppppp
+ *   where numbers represent highs for the servo n
+ * - define default for ServoPause PauseLength
+ * - how many servos can we handle?
+ * - how precise is our timing?
+ * - Note: All servos are processed sequentially.
+ * - Improve doc: get_ulse_length units are us.
+ * - Provide wrapper class (for the necessary interface see ServoPause)
+ * - Make task interface compatible to timer-task.
+ *   template<typename T, typename Timer = Timer0, _timer::Unit U = A>
+ *                ↑ add this to timer-task (irq) interface and provide defaults
+ */
+
 namespace _servo {
   
   const uint16_t no_remaining = 0xFFFF;
@@ -40,7 +56,7 @@ private:
   }
   
   template<typename Timer, typename Servo>
-  static inline void handleServo(uint16_t& remaining_us, uint8_t& counter, uint8_t& currentServo, const typename Timer::size_t& prev_ocr, typename Timer::size_t& next_ocr_in) {
+  static inline void handle1Servo(uint16_t& remaining_us, uint8_t& counter, uint8_t& currentServo, const typename Timer::size_t& prev_ocr, typename Timer::size_t& next_ocr_in) {
     const uint16_t half_round_units = half_round<Timer>();
     
     // these should be calculated by the compiler
@@ -79,6 +95,7 @@ public:
   static typename Timer::size_t run(const typename Timer::size_t prev_ocr) {
     
     static_assert(Timer::TimerMode == _timer::Mode::Normal, "Servo is only possible if Timer is in Normal mode");
+    static_assert(sizeof...(ServoList) > 0, "You have not provided any Servo definitions");
     
     static uint8_t staticCurrentServo = 0;
     uint8_t currentServo = staticCurrentServo;
@@ -91,10 +108,10 @@ public:
       uint8_t counter = 0;
       
       // note the Brace-enclosed initializer list constructor
-      pass{(handleServo<Timer, ServoList>(remaining_us, counter, currentServo, prev_ocr, new_ocr), 1)...};
+      pass{(handle1Servo<Timer, ServoList>(remaining_us, counter, currentServo, prev_ocr, new_ocr), 1)...};
       if (currentServo == sizeof...(ServoList)) { // done with real servos
         currentServo = 0;
-
+        
         // restart, no pause is needed
         continue;
       }
