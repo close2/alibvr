@@ -38,14 +38,20 @@ namespace _ports {
   
   template <enum Port p, uint8_t b, enum IOReg io>
   struct _Io;
-    
+  
   template <enum Port p, uint8_t b>
   struct Pin {
     static const enum Port port = p;
     static const uint8_t   bit = b;
-    typedef _Io<p, b, IOReg::DDRx>  DDRx;
-    typedef _Io<p, b, IOReg::PORTx> PORTx;
-    typedef _Io<p, b, IOReg::PINx>  PINx;
+    
+    typedef _Io<p, b, IOReg::DDRx>  _DDR;
+    static _DDR DDR;
+    
+    typedef _Io<p, b, IOReg::PORTx> _PORT;
+    static _PORT PORT;
+    
+    typedef _Io<p, b, IOReg::PINx>  _PIN;
+    static _PIN PIN;
   };
 }
 
@@ -185,17 +191,30 @@ typedef PIN_DIP_13 PIN_D7;
 
 
 namespace _ports {
-  
-  template <enum Port p, uint8_t b, enum IOReg io>
-  struct _Io {
-    static const enum Port port = p;
-    static const uint8_t bit = b;
-    static const enum IOReg io_reg = io;
-  };
-  
   enum class _Read_Write {
     Read,
     Write
+  };
+  
+  template <class Io, enum _Read_Write RW>
+  uint8_t _set_or_get(uint8_t val);
+  
+  template <enum Port p, uint8_t b, enum IOReg io>
+  struct _Io {
+    typedef _Io<p, b, io> _Io_t;
+    
+    static const enum Port port = p;
+    static const uint8_t bit = b;
+    static const enum IOReg io_reg = io;
+    
+    _Io_t& operator=(const uint8_t val) {
+      _set_or_get<_Io_t, _Read_Write::Write>(val);
+      return *this;
+    }
+    
+    operator uint8_t() {
+      return _set_or_get<_Io_t, _Read_Write::Read>(0);
+    }
   };
   
   template <enum _Read_Write RW, class R>
@@ -250,21 +269,6 @@ namespace _ports {
 
 }
 
-
-template <class Io>
-void set_bit(uint8_t val = 1) {
-  _ports::_set_or_get<Io, _ports::_Read_Write::Write>(val);
-}
-
-template <class Io>
-void clear_bit() {
-  set_bit<Io>(0);
-}
-
-template <class Io>
-uint8_t get_bit() {
-  return _ports::_set_or_get<Io, _ports::_Read_Write::Read>(0);
-}
 
 namespace _ports {
   // V .. value

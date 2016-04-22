@@ -22,7 +22,7 @@
 // ⇒ 1st result is copy of 3rd
 
 /* BALI notes:
- * make aliuas tempalte, which doesn't have an input-Pin and extend init with
+ * make alias template, which doesn't have an input-Pin and extend init with
  * template argument which by default takes Input pin of class
  * also add select_input<>() function
  * 
@@ -30,8 +30,6 @@
  * 
  * reorder template arguments: Input, Ref Mode (Mode will usually be
  * Single Conversion)
- * 
- * improve name: adc_and_discard_first to adc_and_start_adc ?
  * 
  * move prepare* to adc_8bit / 10bit and add argument (sleep)
  * disable irq afterwards if it wasn't enabled.
@@ -73,6 +71,11 @@ namespace _adc {
       static const enum _ports::Port port = _ports::Port::C;
       static const uint8_t bit = 15;
     };
+    
+    struct Unset {
+      static const enum _ports::Port port;
+      static const uint8_t bit;
+    };
   }
 
   struct DoNothing {
@@ -80,16 +83,15 @@ namespace _adc {
     template <typename size_t>
     static void adc_complete(const size_t& result) {};
   };
-
 }
 
-template <_adc::Mode           Mode,
-          _adc::Ref            Ref,
-          typename             Input,
+template <_adc::Ref            DefaultRef = _adc::Ref::AVcc,
+          typename             DefaultInput = _adc::Input::Unset,
+          _adc::Mode           DefaultMode = _adc::Mode::SingleConversion,
           typename             Task = _adc::DoNothing>
 class Adc {
 private:
-  constexpr static uint8_t calc_prescaler() {
+  constexpr static uint8_t _calc_prescaler() {
     // is F_CPU divided by n (prescaler) below 200kHz? then prescaler is ok
     // returns bits for ADPS2, ADPS1, ADPS0
     return (F_CPU /   2) <= 200000 ? 0b000 :
@@ -102,9 +104,29 @@ private:
            0b000;  // if nothing works only divide by 2 (safest prescaler)
   }
   
+  static void _start_adc(uint8_t goto_sleep_for_noise_reduction) {
+    // FIXME remember irq setting and ADIE flag
+    if (goto_sleep_for_noise_reduction) {
+      // enable irq
+      sei();
+      ADCSRA |= _BV(ADIE);
+      
+      set_sleep_mode(SLEEP_MODE_IDLE);
+    
+      ADCSRA |= _BV(ADSC);
+      sleep_mode();
+    } else {
+      // start conversion:
+      ADCSRA |= _BV(ADSC);
+    }
+  }
+  
 public:
   // the first adc is not guaranteed to have a meaningful value
-  static void init(uint8_t adc_and_discard_first = 1) {
+  template <typename Input = DefaultInput,
+            _adc::Ref Ref = DefaultRef,
+            _adc::Mode Mode = DefaultMode>
+  static void init() {
     PRR &= ~(_BV(PRADC)); // disable Power Reduction ADC
 
     static_assert(Input::port == _ports::Port::C && (Input::bit == 0 ||
@@ -117,6 +139,10 @@ public:
                                                      Input::bit == _adc::Input::V1_1::bit || // V1_1
                                                      Input::bit == _adc::Input::Gnd::bit),  // Gnd
                   "Only ADC0-ADC5, _adc::Input::Temperature, _adc::Input::V1_1 and _adc::Input::Gnd are acceptable inputs");
+    
+    static_assert(Input::port != _ports::Port::C || Input::bit != _adc::Input::Temperature::bit ||
+                  Ref == _adc::Ref::V1_1,
+                  "If input is temperature only V1_1 gives meaningful results.");
 
     uint8_t source = Input::bit << MUX0;
     ADMUX = ((uint8_t) Ref) << REFS0 // set ref
@@ -127,12 +153,7 @@ public:
     }
     // BALI Note: check if ADSC is high here
     ADCSRA = _BV(ADEN) // turn ADC power on
-             | calc_prescaler() << ADPS0; // set prescaler
-
-    if (adc_and_discard_first) {
-      ADCSRA |= _BV(ADSC);
-      // BALI Note: should we make sure that IRQ is ignored?
-    }
+             | _calc_prescaler() << ADPS0; // set prescaler
   }
   
   static void turn_off() {
@@ -171,30 +192,7 @@ public:
     }
   }
   
-  static void prepare_adc_8bit_noise_reduction() {
-    busy_wait_adc_finished();
-    ADMUX |= _BV(ADLAR); // 8bit → left adjusted
-    
-    // enable irq
-    sei();
-    ADCSRA |= _BV(ADIE);
-  }
-  
-  static void prepare_adc_10bit_noise_reduction() {
-    busy_wait_adc_finished();
-    ADMUX &= ~(_BV(ADLAR)); // 10bit → right adjusted
-    
-    // enable irq
-    sei();
-    ADCSRA |= _BV(ADIE);
-  }
-  
-  static void sleep_idle() {
-    set_sleep_mode(SLEEP_MODE_IDLE);
-    sleep_mode();
-  }
-  
-  static uint8_t adc_finished() {
+  static uint8_t is_adc_finished() {
     return (ADCSRA & _BV(ADSC)) == 0;
   }
   
@@ -212,22 +210,30 @@ public:
     return res | ADCH << 8;
   }
   
-  static uint8_t adc_8bit() {
+  static uint8_t adc_8bit(uint8_t goto_sleep_for_noise_reduction = 0) {
     busy_wait_adc_finished();
     ADMUX |= _BV(ADLAR); // 8bit → left adjusted
+
     // start conversion:
-    ADCSRA |= _BV(ADSC);
+    _start_adc(goto_sleep_for_noise_reduction);
+
+    // leave busy_wait outside else branch, because sleep for noise reduction
+    // might wake up because of another irq.
     busy_wait_adc_finished();
     return get_adc_8bit_result();
   }
   
-  static uint16_t adc_10bit() {
+  static uint16_t adc_10bit(uint8_t goto_sleep_for_noise_reduction = 0) {
     busy_wait_adc_finished();
     ADMUX &= ~(_BV(ADLAR)); // 10bit → right adjusted
-    // start conversion:
-    ADCSRA |= _BV(ADSC);
-    busy_wait_adc_finished();
     
+    // start conversion:
+    _start_adc(goto_sleep_for_noise_reduction);
+    
+    busy_wait_adc_finished();
+    // leave busy_wait outside else branch, because sleep for noise reduction
+    // might wake up because of another irq.
+
     return get_adc_10bit_result();
   }
   

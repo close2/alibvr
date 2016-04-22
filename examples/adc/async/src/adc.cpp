@@ -1,9 +1,8 @@
 const auto f_cpu = 8000000UL;
 
-#include "macros.h"
+#include "ports.h"
 #include "adc.h"
 
-#include "macros.h"
 #include "tasks.h"
 #include "lcd.h"
 #include "pgmspace.h"
@@ -14,7 +13,7 @@ const auto f_cpu = 8000000UL;
 
 #include "spi.h"
 
-template <uint16_t PulseLength, typename P>
+template <uint16_t PulseLength, struct _ports::Pin P>
 class Servo_Def {
 public:
   static uint16_t get_pulse_length() {
@@ -22,19 +21,19 @@ public:
   }
   
   static void on() {
-    SET_BIT(P, DDR, 1);
-    SET_BIT(P, PORT, 1);
+    P::DDR = 1;
+    P::PORT = 1;
   }
   
   static void off() {
-    SET_BIT(P, PORT, 0);
+    P::PORT = 0;
   }
 };
 
 typedef Servo_Def<1300, PIN_8> Servo1;
 typedef Servo_Def<1800, PIN_6> Servo2;
 
-template <typename P>
+template <struct _ports::Pin P>
 class Servo_Var {
 public:
   static uint16_t get_pulse_length() {
@@ -47,12 +46,12 @@ public:
   }
   
   static void on() {
-    SET_BIT(P, DDR, 1);
-    SET_BIT(P, PORT, 1);
+    P::DDR = 1;
+    P::PORT = 1;
   }
   
   static void off() {
-    SET_BIT(P, PORT, 0);
+    P::PORT = 0;
   }
 };
 
