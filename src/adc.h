@@ -1,8 +1,9 @@
 #pragma once
 
-#include <avr/io.h>
+#include <avr/sfr_defs.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
+#include <util/atomic.h>
 
 #include "ports.h"
 #include "type_traits.h"
@@ -85,10 +86,10 @@ namespace _adc {
   };
 }
 
-template <_adc::Ref            DefaultRef = _adc::Ref::AVcc,
-          typename             DefaultInput = _adc::Input::Unset,
-          _adc::Mode           DefaultMode = _adc::Mode::SingleConversion,
-          typename             Task = _adc::DoNothing>
+template <_adc::Ref  DefaultRef   = _adc::Ref::AVcc,
+          typename   DefaultInput = _adc::Input::Unset,
+          _adc::Mode DefaultMode  = _adc::Mode::SingleConversion,
+          typename   Task         = _adc::DoNothing>
 class Adc {
 private:
   constexpr static uint8_t _calc_prescaler() {
@@ -104,20 +105,35 @@ private:
            0b000;  // if nothing works only divide by 2 (safest prescaler)
   }
   
-  static void _start_adc(uint8_t goto_sleep_for_noise_reduction) {
-    // FIXME remember irq setting and ADIE flag
-    if (goto_sleep_for_noise_reduction) {
-      // enable irq
-      sei();
-      ADCSRA |= _BV(ADIE);
-      
-      set_sleep_mode(SLEEP_MODE_IDLE);
-    
-      ADCSRA |= _BV(ADSC);
-      sleep_mode();
-    } else {
+  static void _do_adc(uint8_t goto_sleep_for_noise_reduction) {
+    if (!goto_sleep_for_noise_reduction) {
       // start conversion:
       ADCSRA |= _BV(ADSC);
+      busy_wait_adc_finished();
+    } else {
+      uint8_t old_adie = ADCSRA & _BV(ADIE);
+      
+      if (!old_adie) ADCSRA |= _BV(ADIE);
+      
+      set_sleep_mode(SLEEP_MODE_IDLE);
+
+      // Enable irq
+      NONATOMIC_BLOCK(NONATOMIC_RESTORESTATE) {
+        // By calling sleep_mode avr goes to sleep and automatically starts
+        // conversion.
+        sleep_mode();
+        
+        // We might wake up because of another IRQ.  In that case simple wait
+        // until adc has finished.
+        busy_wait_adc_finished();
+      }
+
+      // Restore ADIE if it wasn't enabled.  Wait until adc has finished.
+      // Otherwise IRQ might not be called if CPU wakes up because of another
+      // IRQ.
+      if (!old_adie) {
+        ADCSRA &= ~(_BV(ADIE));
+      }
     }
   }
   
@@ -127,8 +143,6 @@ public:
             _adc::Ref Ref = DefaultRef,
             _adc::Mode Mode = DefaultMode>
   static void init() {
-    PRR &= ~(_BV(PRADC)); // disable Power Reduction ADC
-
     static_assert(Input::port == _ports::Port::C && (Input::bit == 0 ||
                                                      Input::bit == 1 ||
                                                      Input::bit == 2 ||
@@ -143,17 +157,23 @@ public:
     static_assert(Input::port != _ports::Port::C || Input::bit != _adc::Input::Temperature::bit ||
                   Ref == _adc::Ref::V1_1,
                   "If input is temperature only V1_1 gives meaningful results.");
+    
+    PRR &= ~(_BV(PRADC)); // disable Power Reduction ADC
 
-    uint8_t source = Input::bit << MUX0;
-    ADMUX = ((uint8_t) Ref) << REFS0 // set ref
+    const uint8_t ref = ((uint8_t) Ref) << REFS0;
+    const uint8_t source = Input::bit << MUX0;
+    ADMUX = ref // set ref
             | source;    // set source
     if (Mode != _adc::Mode::SingleConversion) {
       ADCSRB |= (uint8_t) Mode << ADTS0;
       ADCSRA |= _BV(ADATE);
     }
-    // BALI Note: check if ADSC is high here
+    
     ADCSRA = _BV(ADEN) // turn ADC power on
              | _calc_prescaler() << ADPS0; // set prescaler
+             
+    const uint8_t is_do_nothing_task = std::is_same<_adc::DoNothing, Task>();
+    if (!is_do_nothing_task) ADCSRA |= _BV(ADIE);
   }
   
   static void turn_off() {
@@ -166,30 +186,14 @@ public:
     busy_wait_adc_finished();
     ADMUX |= _BV(ADLAR); // 8bit → left adjusted
     
-    uint8_t do_nothing_task = std::is_same<_adc::DoNothing, Task>();
-    if (do_nothing_task) {
-      // start conversion:
-      ADCSRA |= _BV(ADSC);
-    } else {
-      // enable irq and start
-      sei(); // BALI Note: we usually don't enable irqs, should we?
-      ADCSRA |= _BV(ADIE) | _BV(ADSC);
-    }
+    ADCSRA |= _BV(ADSC);
   }
   
   static void start_adc_10bit() {
     busy_wait_adc_finished();
     ADMUX &= ~(_BV(ADLAR)); // 10bit → right adjusted
     
-    uint8_t do_nothing_task = std::is_same<_adc::DoNothing, Task>();
-    if (do_nothing_task) {
-      // start conversion:
-      ADCSRA |= _BV(ADSC);
-    } else {
-      // enable irq and start
-      sei();
-      ADCSRA |= _BV(ADIE) | _BV(ADSC);
-    }
+    ADCSRA |= _BV(ADSC);
   }
   
   static uint8_t is_adc_finished() {
@@ -205,7 +209,9 @@ public:
   }
   
   static uint16_t get_adc_10bit_result() {
-    // first read ADCL (and hope gcc doesn't optimize this in some way..)
+    // gcc isn't allowed to change order of instructions because ADCL and
+    // ADCH are marked as volatile.
+    // http://www.nongnu.org/avr-libc/user-manual/optimization.html
     uint16_t res = ADCL;
     return res | ADCH << 8;
   }
@@ -215,11 +221,8 @@ public:
     ADMUX |= _BV(ADLAR); // 8bit → left adjusted
 
     // start conversion:
-    _start_adc(goto_sleep_for_noise_reduction);
+    _do_adc(goto_sleep_for_noise_reduction);
 
-    // leave busy_wait outside else branch, because sleep for noise reduction
-    // might wake up because of another irq.
-    busy_wait_adc_finished();
     return get_adc_8bit_result();
   }
   
@@ -228,20 +231,16 @@ public:
     ADMUX &= ~(_BV(ADLAR)); // 10bit → right adjusted
     
     // start conversion:
-    _start_adc(goto_sleep_for_noise_reduction);
+    _do_adc(goto_sleep_for_noise_reduction);
     
-    busy_wait_adc_finished();
-    // leave busy_wait outside else branch, because sleep for noise reduction
-    // might wake up because of another irq.
-
     return get_adc_10bit_result();
   }
   
   
   template <typename I>
   static inline void handle(I) {
-    uint8_t do_nothing_task = std::is_same<_adc::DoNothing, Task>();
-    if (!do_nothing_task) {
+    const uint8_t is_do_nothing_task = std::is_same<_adc::DoNothing, Task>();
+    if (!is_do_nothing_task) {
       // instead of having a separate flag to remember if a 10bit or 8bit adc
       // had been requested, we simply look at the left/right adjusted flag
       if (ADMUX & _BV(ADLAR)) {
