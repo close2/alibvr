@@ -1,5 +1,5 @@
 # name of your main code file without the .c / .cpp suffix
-NAME = adc
+TARGETS ?= adc_sync adc_async pulse_uart_tx
 # location of alibvr
 ALIBVR = alibvr
 # type of atmega chip
@@ -40,9 +40,12 @@ FLASH_COMMAND	= avrdude -pm328 -c avrisp2 -P usb
 # if usbprog can't connect try this (http://stackoverflow.com/questions/15313269/avrispmkii-connection-status-unknown-status-0x00):
 # FLASH_COMMAND	= avrdude -pm328 -c avrisp2 -P usb -B 22
 
-FLASH_FLAGS           = -U flash:w:$(NAME).hex
-FLASH_FAST_FLAGS      = -V -U flash:w:$(NAME).hex
-FLASH_EEP_FLAGS       = -U eeprom:w:$(NAME).eep
+# needs NAME.hex appended.  For instance flash:w:adc.hex
+FLASH_FLAGS           = -U flash:w:
+# needs NAME.hex appended.  For instance flash:w:adc.hex
+FLASH_FAST_FLAGS      = -V -U flash:w:
+# needs NAME.eep appended.  For instance eeprom:w:adc.eep
+FLASH_EEP_FLAGS       = -U eeprom:w:
 FLASH_FUSE_8MHZ_FLAGS = -U lfuse:w:0xe2:m -U hfuse:w:0xd9:m -U efuse:w:0x07:m
 FLASH_FUSE_1MHZ_FLAGS = -U lfuse:w:0x62:m -U hfuse:w:0xd9:m -U efuse:w:0x07:m
 
@@ -58,7 +61,7 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 # get the calibration byte
 #avrdude -pm48 -D -c usbasp -U cal:r:cal.tmp:r
 
-.PHONY: release debug .all clean clobber flash flashEep flashFast flashFuse8Mhz startSim
+.PHONY: release debug .all clean clobber flash flash-eep flash-fast flash-fuse-8-MHz start-sim check-flash-is-set
 
 
 release : CFLAGS = $(CFLAGS_RELEASE)
@@ -69,8 +72,7 @@ debug : CFLAGS = $(CFLAGS_DEBUG)
 debug : CXXFLAGS = $(CXXFLAGS_DEBUG)
 debug : .all
 
-
-.all : $(NAME).hex $(NAME).eep $(NAME).obj
+.all : $(TARGETS:%=%.hex) $(TARGETS:%=%.eep) $(TARGETS:%=%.obj)
 
 
 %.obj : %.o
@@ -89,22 +91,27 @@ debug : .all
 	$(OBJDUMP) -S --disassemble $< > $@
 
 clean :
-	rm -f $(NAME).o $(NAME).obj $(NAME).s *.sch~ gschem.log *.S~ *.hex *.map *.eep compile.flags
+	rm -f $(TARGETS:%=%.o) $(TARGETS:%=%.obj) $(TARGETS:%=%.s) *.sch~ gschem.log *.S~ *.hex *.map *.eep compile.flags
 
 clobber : clean
-	rm -f $(NAME).hex $(NAME).ps $(NAME).eep
+	rm -f $(TARGETS:%=%.hex) $(TARGETS:%=%.ps) $(TARGETS:%=%.eep)
 
-flash : $(NAME).hex
-	$(FLASH_COMMAND) $(FLASH_FLAGS)
+flash : check-flash-is-set $(FLASH).hex
+	$(FLASH_COMMAND) "$(FLASH_FLAGS)$<"
 
-flashFast : $(NAME).hex
-	$(FLASH_COMMAND) $(FLASH_FAST_FLAGS)
+flash-fast : check-flash-is-set $(FLASH).hex
+	$(FLASH_COMMAND) $(FLASH_FAST_FLAGS)$<
 
-flashEep : $(NAME).eep
-	$(FLASH_COMMAND) $(FLASH_EEP_FLAGS)
+flash-eep : check-flash-is-set $(FLASH).eep
+	$(FLASH_COMMAND) $(FLASH_EEP_FLAGS)$<
 
-flashFuse8MHz :
+flash-fuse-8-MHz :
 	$(FLASH_COMMAND) $(FLASH_FUSE_8MHZ_FLAGS)
 
-startSim :
+check-flash-is-set :
+ifndef FLASH
+	$(error You have to set the FLASH variable when flashing.  Example: make flash FLASH=adc_sync)
+endif
+
+start-sim :
 	./simavr.sh &
