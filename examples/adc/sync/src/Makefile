@@ -1,5 +1,5 @@
 # name of your main code file without the .c / .cpp suffix
-NAME = adc
+NAMES = adc_sync adc_async
 # location of alibvr
 ALIBVR = alibvr
 # type of atmega chip
@@ -40,9 +40,12 @@ FLASH_COMMAND	= avrdude -pm328 -c avrisp2 -P usb
 # if usbprog can't connect try this (http://stackoverflow.com/questions/15313269/avrispmkii-connection-status-unknown-status-0x00):
 # FLASH_COMMAND	= avrdude -pm328 -c avrisp2 -P usb -B 22
 
-FLASH_FLAGS           = -U flash:w:$(NAME).hex
-FLASH_FAST_FLAGS      = -V -U flash:w:$(NAME).hex
-FLASH_EEP_FLAGS       = -U eeprom:w:$(NAME).eep
+# needs NAME.hex appended.  For instance flash:w:adc.hex
+FLASH_FLAGS           = -U flash:w:
+# needs NAME.hex appended.  For instance flash:w:adc.hex
+FLASH_FAST_FLAGS      = -V -U flash:w:
+# needs NAME.eep appended.  For instance eeprom:w:adc.eep
+FLASH_EEP_FLAGS       = -U eeprom:w:
 FLASH_FUSE_8MHZ_FLAGS = -U lfuse:w:0xe2:m -U hfuse:w:0xd9:m -U efuse:w:0x07:m
 FLASH_FUSE_1MHZ_FLAGS = -U lfuse:w:0x62:m -U hfuse:w:0xd9:m -U efuse:w:0x07:m
 
@@ -69,8 +72,7 @@ debug : CFLAGS = $(CFLAGS_DEBUG)
 debug : CXXFLAGS = $(CXXFLAGS_DEBUG)
 debug : .all
 
-
-.all : $(NAME).hex $(NAME).eep $(NAME).obj
+.all : $(NAMES:%=%.hex) $(NAMES:%=%.eep) $(NAMES:%=%.obj)
 
 
 %.obj : %.o
@@ -89,19 +91,19 @@ debug : .all
 	$(OBJDUMP) -S --disassemble $< > $@
 
 clean :
-	rm -f $(NAME).o $(NAME).obj $(NAME).s *.sch~ gschem.log *.S~ *.hex *.map *.eep compile.flags
+	rm -f $(NAMES:%=%.o) $(NAMES:%=%.obj) $(NAMES:%=%.s) *.sch~ gschem.log *.S~ *.hex *.map *.eep compile.flags
 
 clobber : clean
-	rm -f $(NAME).hex $(NAME).ps $(NAME).eep
+	rm -f $(NAMES:%=%.hex) $(NAMES:%=%.ps) $(NAMES:%=%.eep)
 
 flash : $(NAME).hex
-	$(FLASH_COMMAND) $(FLASH_FLAGS)
+	$(FLASH_COMMAND) $(FLASH_FLAGS)$<
 
 flashFast : $(NAME).hex
-	$(FLASH_COMMAND) $(FLASH_FAST_FLAGS)
+	$(FLASH_COMMAND) $(FLASH_FAST_FLAGS)$<
 
 flashEep : $(NAME).eep
-	$(FLASH_COMMAND) $(FLASH_EEP_FLAGS)
+	$(FLASH_COMMAND) $(FLASH_EEP_FLAGS)$<
 
 flashFuse8MHz :
 	$(FLASH_COMMAND) $(FLASH_FUSE_8MHZ_FLAGS)
