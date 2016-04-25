@@ -84,6 +84,19 @@ namespace _adc {
     template <typename size_t>
     static void adc_complete(const size_t& result) {};
   };
+  
+  // forward declaration
+  template <uint8_t goto_sleep_for_noise_reduction>
+  void do_adc();
+  
+  
+  void busy_wait_adc_finished() {
+    loop_until_bit_is_clear(ADCSRA, ADSC);
+  }
+  
+  // forward declaration which will be defined when irq handler is registered.
+  // (in header file)
+  void irq_handler_for_adc_must_be_registered_for_noise_reduction();
 }
 
 template <_adc::Ref  DefaultRef   = _adc::Ref::AVcc,
@@ -105,6 +118,8 @@ private:
            0b000;  // if nothing works only divide by 2 (safest prescaler)
   }
   
+  
+  /*
   static void _do_adc(uint8_t goto_sleep_for_noise_reduction) {
     if (!goto_sleep_for_noise_reduction) {
       // start conversion:
@@ -136,6 +151,7 @@ private:
       }
     }
   }
+  */
   
 public:
   // the first adc is not guaranteed to have a meaningful value
@@ -201,7 +217,7 @@ public:
   }
   
   static void busy_wait_adc_finished() {
-    loop_until_bit_is_clear(ADCSRA, ADSC);
+    _adc::busy_wait_adc_finished();
   }
   
   static uint8_t get_adc_8bit_result() {
@@ -216,22 +232,24 @@ public:
     return res | ADCH << 8;
   }
   
-  static uint8_t adc_8bit(uint8_t goto_sleep_for_noise_reduction = 0) {
+  template<uint8_t goto_sleep_for_noise_reduction = 0>
+  static uint8_t adc_8bit() {
     busy_wait_adc_finished();
     ADMUX |= _BV(ADLAR); // 8bit → left adjusted
 
     // start conversion:
-    _do_adc(goto_sleep_for_noise_reduction);
+    _adc::do_adc<goto_sleep_for_noise_reduction>();
 
     return get_adc_8bit_result();
   }
   
-  static uint16_t adc_10bit(uint8_t goto_sleep_for_noise_reduction = 0) {
+  template<uint8_t goto_sleep_for_noise_reduction = 0>
+  static uint16_t adc_10bit() {
     busy_wait_adc_finished();
     ADMUX &= ~(_BV(ADLAR)); // 10bit → right adjusted
     
     // start conversion:
-    _do_adc(goto_sleep_for_noise_reduction);
+    _adc::do_adc<goto_sleep_for_noise_reduction>();
     
     return get_adc_10bit_result();
   }
@@ -254,4 +272,42 @@ public:
   }
 };
 
+namespace _adc {
+  template <uint8_t goto_sleep_for_noise_reduction>
+  void do_adc() {
+    irq_handler_for_adc_must_be_registered_for_noise_reduction();
+    uint8_t old_adie = ADCSRA & _BV(ADIE);
+    
+    if (!old_adie) ADCSRA |= _BV(ADIE);
+    
+    set_sleep_mode(SLEEP_MODE_IDLE);
+    
+    // Enable irq
+    NONATOMIC_BLOCK(NONATOMIC_RESTORESTATE) {
+      // By calling sleep_mode avr goes to sleep and automatically starts
+      // conversion.
+      sleep_mode();
+      
+      // We might wake up because of another IRQ.  In that case simple wait
+      // until adc has finished.
+      busy_wait_adc_finished();
+    }
+    
+    // Restore ADIE if it wasn't enabled.  Wait until adc has finished.
+    // Otherwise IRQ might not be called if CPU wakes up because of another
+    // IRQ.
+    if (!old_adie) {
+      ADCSRA &= ~(_BV(ADIE));
+    }
+  }
+  
+  template <>
+  void do_adc<0>() {
+    // start conversion:
+    ADCSRA |= _BV(ADSC);
+    busy_wait_adc_finished();
+  }
+}
+
 #define REGISTER_ADC "internal/register_adc.h"
+
