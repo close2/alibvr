@@ -53,6 +53,14 @@ namespace _ports {
     typedef _Io<p, b, IOReg::PINx>  _PIN;
     static _PIN PIN;
   };
+  
+  // The compiler will optimize these instantiations away.
+  // When using optimizations these definitions aren't even necessary.
+  // In debug mode (i.e. with no optimizations) gcc will however complain
+  // if we don't add them here.
+  template <enum Port p, uint8_t b> typename Pin<p, b>::_DDR Pin<p, b>::DDR;
+  template <enum Port p, uint8_t b> typename Pin<p, b>::_PORT Pin<p, b>::PORT;
+  template <enum Port p, uint8_t b> typename Pin<p, b>::_PIN Pin<p, b>::PIN;
 }
 
 typedef struct _ports::Pin<_ports::Port::B, -1> PIN_UNUSED;
