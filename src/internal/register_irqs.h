@@ -1,7 +1,7 @@
 #pragma once
 
 #include <avr/interrupt.h>
-#include "../irqs.h"
+#include "irqs.h"
 
 namespace _irqs {
   inline uint8_t you_must_include_register_irqs_h() {return 0;}

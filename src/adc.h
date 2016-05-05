@@ -67,22 +67,12 @@ namespace _adc {
 
   // forward declaration
   template <uint8_t goto_sleep_for_noise_reduction>
-  void do_adc();
+  void _do_adc();
   
   
   void busy_wait_adc_finished() {
     loop_until_bit_is_clear(ADCSRA, ADSC);
   }
-  
-  /*
-  template <typename f_adc_complete>
-  struct AdcIrqTask {
-    template <typename size_t>
-    static void adc_complete(const size_t& result) {
-      f_adc_complete(result);
-    };
-  };
-  */
   
   // forward declaration which will be defined when irq handler is registered.
   // (in header file)
@@ -197,7 +187,7 @@ public:
     ADMUX |= _BV(ADLAR); // 8bit → left adjusted
 
     // start conversion:
-    _adc::do_adc<goto_sleep_for_noise_reduction>();
+    _adc::_do_adc<goto_sleep_for_noise_reduction>();
 
     return get_adc_8bit_result();
   }
@@ -208,7 +198,7 @@ public:
     ADMUX &= ~(_BV(ADLAR)); // 10bit → right adjusted
     
     // start conversion:
-    _adc::do_adc<goto_sleep_for_noise_reduction>();
+    _adc::_do_adc<goto_sleep_for_noise_reduction>();
     
     return get_adc_10bit_result();
   }
@@ -230,8 +220,9 @@ public:
 };
 
 namespace _adc {
+  
   template <uint8_t goto_sleep_for_noise_reduction>
-  void do_adc() {
+  void _do_adc() {
     irq_handler_for_adc_must_be_registered_for_noise_reduction();
     uint8_t old_adie = ADCSRA & _BV(ADIE);
     
@@ -259,7 +250,7 @@ namespace _adc {
   }
   
   template <>
-  void do_adc<0>() {
+  void _do_adc<0>() {
     // start conversion:
     ADCSRA |= _BV(ADSC);
     busy_wait_adc_finished();
