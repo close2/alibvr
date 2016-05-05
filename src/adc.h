@@ -6,6 +6,7 @@
 #include <util/atomic.h>
 
 #include "ports.h"
+#include "irqs.h"
 #include "type_traits.h"
 
 // TODO MALTA NOTES:
@@ -213,8 +214,7 @@ public:
   }
   
   
-  template <typename I>
-  static inline void handle(I) {
+  static inline void handle(const enum _irqs::Irq i) {
     // instead of having a separate flag to remember if a 10bit or 8bit adc
     // had been requested, we simply look at the left/right adjusted flag
     if (ADMUX & _BV(ADLAR)) {

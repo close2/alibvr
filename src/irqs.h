@@ -10,22 +10,7 @@
 
 /* BALI notes
  * - add has_registered_tasks similar to execIrqTasks
- * - change IRQ_TASK macro to Functor? class:
- * tempalte<typename F>
- * struct Task {
- *   F f;
- *   IrqTask(F f) { this.f = f };
- *   template <typename I>
- *   void handle(I) {f(I);}
- * }
- * or similar.
  * 
- * explain Handled template argument of execIrqTasks:
- * whenever an IRQ is received all Irq-tasks are considered (see execIrqTasks).
- * If at least one Taks is registered for this IRQ (T::I::irq) Handled changes
- * to State<1>.
- * Otherwise the specialisation for no Task left will call the resetVector.
- * (I.e. reset the avr)
  */
 
 namespace _irqs {
@@ -58,17 +43,14 @@ namespace _irqs {
     IRQ_SPM_READY = 0x019
   };
   
-  template <enum Irq I>
-  struct IrqWrapper {
-    static const enum Irq irq = I;
-  };
   
-  template <typename T, typename J>
+  typedef void (*handler_f)(enum Irq);
+  template <handler_f T, enum Irq I>
   struct IrqTaskWrapper {
-    typedef J I;
-    template <typename I>
-    static inline void handle(I) {
-      T::handle(I());
+    static const enum Irq irq = I;
+    
+    static inline void handle(enum Irq i) {
+      T(i);
     }
   };
 
@@ -77,14 +59,19 @@ namespace _irqs {
     static const uint8_t state = B;
   };
   
+  // Whenever an IRQ is received all Irq-tasks are considered (see execIrqTasks).
+  // If at least one Taks is registered for this IRQ (T::I::irq) Handled changes
+  // to State<1>.
+  // Otherwise the specialisation for no Task left will call the resetVector.
+  // (I.e. reset the avr)
   // FIXME move this to internal, so that register_irqs can include it.
-  template <typename Handled, typename I, template <typename ...> class List, typename T, typename ...Tasks>
-  static void execIrqTasks();
+  //template <typename Handled, typename I, template <typename ...> class List, typename T, typename ...Tasks>
+  //static void execIrqTasks();
   
-  template <typename Handled, typename I, typename T>
-  inline static void execIrqTasks(Handled, I, _task_list::TaskList<T>) {
-    if (T::I::irq == I::irq) {
-      T::handle(I());
+  template <typename Handled, Irq I, typename T>
+  inline static void execIrqTasks(_task_list::TaskList<T>) {
+    if (T::irq == I) {
+      T::handle(I);
       return;
     }
     if (!Handled::state) {
@@ -94,26 +81,13 @@ namespace _irqs {
     }
   }
 
-  template <typename Handled, typename I, typename T, typename ...Tasks>
-  inline static void execIrqTasks(Handled, I, _task_list::TaskList<T, Tasks...>) {
-    if (T::I::irq == I::irq) {
-      T::handle(I());
-      execIrqTasks(State<1>(), I(), _task_list::TaskList<Tasks...>());
+  template <typename Handled, Irq I, typename T, typename ...Tasks>
+  inline static void execIrqTasks(_task_list::TaskList<T, Tasks...>) {
+    if (T::irq == I) {
+      T::handle(I);
+      execIrqTasks<State<1>, I>(_task_list::TaskList<Tasks...>());
     } else {
-      execIrqTasks(Handled(), I(), _task_list::TaskList<Tasks...>());
+      execIrqTasks<Handled, I>(_task_list::TaskList<Tasks...>());
     }
   }
 }
-
-
-// if you change the name of a task here, adapt mini-tasks as well!
-//#define IRQ_TASK(name, forIrq) 
-//  static inline uint8_t handles(_irqs::Irq irq) { return irq == _irqs::forIrq; } 
-
-#define IRQ_TASK(name) \
-struct name { \
-  template <typename I> \
-  static inline void handle(I); \
-}; \
-template <typename I> \
-inline void name::handle(I)

@@ -1,30 +1,26 @@
+#include "macros.h"
+
+#include "macro_counter.h"
+
 // no guards!
-#pragma push_macro("IRQ_TASKLIST_NAME_GEN")
-#pragma push_macro("__IRQ_TASKLIST_NAME_GEN")
-#pragma push_macro("_IRQ_TASKLIST_NAME_GEN")
-#pragma push_macro("__REMINDER_NAME_GEN")
-#pragma push_macro("_REMINDER_NAME_GEN")
-#pragma push_macro("REMINDER_NAME_GEN")
-#pragma push_macro("IRQ_TASK_USAGE_COUNT")
+#pragma push_macro("IRQ_TASKLIST_NAME")
+#pragma push_macro("IRQ_TASK_F")
+#pragma push_macro("REMINDER_NAME")
+
 #pragma push_macro("ITL")
 
-#ifndef IRQ_TASK_USAGE_COUNT
-#  define IRQ_TASK_USAGE_COUNT 0
-#endif
+#define IRQ_TASKLIST_NAME CAT(IrqTaskListType, _COUNTER)
+#define IRQ_TASK_F CAT(irq_task_f, _COUNTER)
+#define REMINDER_NAME CAT(reminder, _COUNTER)
 
-#define __IRQ_TASKLIST_NAME_GEN(newTask, n) IrqTaskList##newTask##_##n
-#define _IRQ_TASKLIST_NAME_GEN(newTask, n) __IRQ_TASKLIST_NAME_GEN(newTask, n)
-#define IRQ_TASKLIST_NAME_GEN(newTask) _IRQ_TASKLIST_NAME_GEN(newTask, IRQ_TASK_USAGE_COUNT)
-
-#define __REMINDER_NAME_GEN(newTask, n) _Reminder##newTask##_##n
-#define _REMINDER_NAME_GEN(newTask, n) __REMINDER_NAME_GEN(newTask, n)
-#define REMINDER_NAME_GEN(newTask) _REMINDER_NAME_GEN(newTask, IRQ_TASK_USAGE_COUNT)
 
 namespace _irqs {
-  typedef typename _task_list::concat<IRQ_TASK_LIST, IrqTaskWrapper<NEW_IRQ_TASK, IrqWrapper<IRQ_NAME> > >::task IRQ_TASKLIST_NAME_GEN(NEW_IRQ_TASK);
+  void IRQ_TASK_F(Irq _i) { NEW_IRQ_TASK(_i); }
+  
+  typedef typename _task_list::concat<IRQ_TASK_LIST, IrqTaskWrapper<IRQ_TASK_F, IRQ_NAME> >::task IRQ_TASKLIST_NAME;
   
   inline uint8_t you_must_include_register_irqs_h();
-  static const uint8_t __attribute__ ((unused)) REMINDER_NAME_GEN(NEW_IRQ_TASK) = you_must_include_register_irqs_h();
+  static const uint8_t __attribute__ ((unused)) REMINDER_NAME = you_must_include_register_irqs_h();
 }
 
 #pragma push_macro("ITL")
@@ -572,16 +568,12 @@ namespace _irqs {
 #endif
 
 namespace _irqs {
-  typedef IRQ_TASKLIST_NAME_GEN(NEW_IRQ_TASK) ITL;
+  typedef IRQ_TASKLIST_NAME ITL;
 }
 
 #undef NEW_IRQ_TASK
 
-#pragma pop_macro("TASKLIST_NAME_GEN")
-#pragma pop_macro("_TASKLIST_NAME_GEN")
-#pragma pop_macro("__TASKLIST_NAME_GEN")
-#pragma pop_macro("IRQ_TASK_USAGE_COUNT")
 #pragma pop_macro("ITL")
-#pragma pop_macro("__REMINDER_NAME_GEN")
-#pragma pop_macro("_REMINDER_NAME_GEN")
-#pragma pop_macro("REMINDER_NAME_GEN")
+#pragma pop_macro("IRQ_TASKLIST_NAME")
+#pragma pop_macro("IRQ_TASK_F")
+#pragma pop_macro("REMINDER_NAME")
