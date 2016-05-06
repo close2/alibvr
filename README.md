@@ -43,9 +43,9 @@ The pin layout is compatible to arduino / arduino lite
 
 ```
                                      ┏━u━┓
-            PCINT14            PC6  1│┃   ┃28  PC5 (AI 5/*D19) PCINT13 ADC5 SCL
-RXD         PCINT16      (D 0) PD0  2│┃   ┃27  PC4 (AI 4/*D18) PCINT12 ADC4 SDA
-TXD         PCINT17      (D 1) PD1  3│┃   ┃26  PC3 (AI 3/*D17) PCINT11 ADC3
+            PCINT14            PC6  1┃   ┃28  PC5 (AI 5/*D19) PCINT13 ADC5 SCL
+RXD         PCINT16      (D 0) PD0  2┃   ┃27  PC4 (AI 4/*D18) PCINT12 ADC4 SDA
+TXD         PCINT17      (D 1) PD1  3┃   ┃26  PC3 (AI 3/*D17) PCINT11 ADC3
       INT0  PCINT18      (D 2) PD2  4┃   ┃25  PC2 (AI 2/*D16) PCINT10 ADC2
 OC2B  INT1  PCINT19 PWM+ (D 3) PD3  5┃   ┃24  PC1 (AI 1/*D15) PCINT9  ADC1
 XCK   T0    PCINT20      (D 4) PD4  6┃   ┃23  PC0 (AI 0/*D14) PCINT8  ADC0
