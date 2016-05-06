@@ -72,7 +72,7 @@ Turn an Led on pin C2 on.
 typedef PIN_C2 Led;
 /* other possible ways to typedef the Led:
 typedef PIN_DIP_25 Led;
-typedef PIN_15 Led;
+typedef PIN_16 Led;
 */
 
 __attribute__ ((OS_main)) int main(void) {
