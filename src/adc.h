@@ -104,9 +104,9 @@ private:
   
 public:
   // the first adc is not guaranteed to have a meaningful value
-  template <typename Input = DefaultInput,
-            _adc::Ref Ref = DefaultRef,
-            _adc::Mode Mode = DefaultMode>
+  template <typename   Input = DefaultInput,
+            _adc::Ref  Ref   = DefaultRef,
+            _adc::Mode Mode  = DefaultMode>
   static void init() {
     static_assert(Input::port == _ports::Port::C && (Input::bit == 0 ||
                                                      Input::bit == 1 ||
