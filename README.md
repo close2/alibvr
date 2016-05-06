@@ -93,7 +93,18 @@ __attribute__ ((OS_main)) int main(void) {
 }
 ```
 
-Compiled with `-Os` this will produce the following code:
+I've added a compiled (`-Os`) objdump of this code at the bottom.
+
+Note that the compiler was able to optimize the `Led::xxx` assignments
+into simple `sbi` calls.
+
+
+# Assembler output of a simple program.
+
+This objdump demonstrates that the compiler is able to optimize
+the C++ code into simple assembler calls.
+
+The Led example above compiled with `-Os` will produce the following code:
 
 ```c-objdump
 build/led.o:     file format elf32-avr
