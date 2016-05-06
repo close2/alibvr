@@ -101,9 +101,7 @@ Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
-```
-...
-```c-objdump
+removed 24 similar irq table entries, which all point to <__bad_interrupt>
   64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
 
 00000068 <__ctors_end>:
