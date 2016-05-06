@@ -39,6 +39,15 @@ Contains the typedef definitions for all pins.
 
 Whenever you need to access a port use a provided `typedef`.
 
+Those typedefs provide static access to PORT, PIN and DDR bits.  This is
+done using a C++ cast operator and any overhead will be removed by the
+compiler.
+
+To set PORT, PIN or DDR of pin: `PIN_16::DDR = 1`.  
+To read from a pin: `uint8_t in = PIN_16::PIN;`
+
+See [ports.h](src/ports.h) for all available typedefs.
+
 The pin layout is compatible to arduino / arduino lite
 
 ```
