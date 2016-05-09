@@ -12,7 +12,7 @@ Examples:
 =========
 
 Examples may be found in my other github-repository:
-(alibvr-examples)[https://www.github.com/close2/alibvr-examples]
+[alibvr-examples](https://www.github.com/close2/alibvr-examples)
 
 
 Goal of this library:
@@ -39,14 +39,14 @@ Contains the typedef definitions for all pins.
 
 Whenever you need to access a port use a provided `typedef`.
 
-### PORT PIN DDR
+DDR, PORT and PIN of every pin may be accessed through `::DDR` (and similar)
+of those typedefs.
 
-Those typedefs provide static access to PORT, PIN and DDR bits.  This is
-done using a C++ cast operator and any overhead will be removed by the
-compiler.
-
-**To set PORT, PIN or DDR of pin: `PIN_16::DDR = 1;`.**  
-**To read from a pin: `uint8_t in = PIN_16::PIN;`**
+```C++
+typedef PIN_C2 Pin_In;
+Pin_In::DDR = 0;
+uint8_t i = Pin_In::PIN;
+```
 
 ### `typedef`s
 
@@ -103,7 +103,24 @@ Note that the compiler was able to optimize the `Led::xxx` assignments
 into simple `sbi` calls.
 
 
-# Assembler output of a simple program.
+## Analog to digital conversion  ADC
+
+When doing adc you have to specify
+* an input
+* a reference voltage
+* a mode
+
+
+### Input selection
+
+In addition to the provided `typedef`s for pins there are also
+* `_adc::Input::Temperature`
+* `_adc::Input::V1_1` and
+* `_adc::Input::Gnd`
+
+
+Assembler output of a simple program.
+=====================================
 
 This objdump demonstrates that the compiler is able to optimize
 the C++ code into simple assembler calls.

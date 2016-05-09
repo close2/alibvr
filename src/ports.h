@@ -36,6 +36,21 @@ namespace _ports {
     PINx
   };
   
+  enum class DataDirection {
+    Read = 0,
+    Write = 1,
+    Input = Read,
+    Output = Write,
+    In = Read,
+    Out = Write
+  };
+  
+  enum class PullUp {
+    Off = 0,
+    On = 1,
+    HighZ = 0
+  };
+  
   template <enum Port p, uint8_t b, enum IOReg io>
   struct _Io;
   
@@ -52,6 +67,29 @@ namespace _ports {
     
     typedef _Io<p, b, IOReg::PINx>  _PIN;
     static _PIN PIN;
+    
+    static void setDD(const enum DataDirection dd) {
+      DDR = (uint8_t) dd;
+    }
+    
+    static enum DataDirection getDD() {
+      return DDR == 0 ? DataDirection::In : DataDirection::Out;
+    }
+    
+    static void setPullUp(const enum PullUp pullUp) {
+      PORT = (uint8_t) pullUp;
+    }
+    
+    static enum PullUp getPullUp() {
+      return PORT == 0 ? PullUp::Off : PullUp::On;
+    }
+    
+    static void setToInput(const enum PullUp pullUp) {
+      setDD(DataDirection::Input);
+      setPullUp(pullUp);
+    }
+    
+    static void toggle() { PIN = 1; }
   };
   
   // The compiler will optimize these instantiations away.
@@ -199,12 +237,7 @@ typedef PIN_DIP_13 PIN_D7;
 
 
 namespace _ports {
-  enum class _Read_Write {
-    Read,
-    Write
-  };
-  
-  template <class Io, enum _Read_Write RW>
+  template <class Io, enum DataDirection RW>
   uint8_t _set_or_get(uint8_t val);
   
   template <enum Port p, uint8_t b, enum IOReg io>
@@ -216,25 +249,47 @@ namespace _ports {
     static const enum IOReg io_reg = io;
     
     _Io_t& operator=(const uint8_t val) {
-      _set_or_get<_Io_t, _Read_Write::Write>(val);
+      _set_or_get<_Io_t, DataDirection::Write>(val);
+      return *this;
+    }
+    
+    _Io_t& operator=(const enum DataDirection val) {
+      static_assert(io == IOReg::DDRx, "Usage of DataDirection enum for incorrect register (not DDR).");
+      _set_or_get<_Io_t, DataDirection::Write>((uint8_t) val);
+      return *this;
+    }
+    
+    _Io_t& operator=(const enum PullUp val) {
+      static_assert(io == IOReg::PORTx, "Usage of PullUp enum for incorrect register (not PORT).");
+      _set_or_get<_Io_t, DataDirection::Write>((uint8_t) val);
       return *this;
     }
     
     operator uint8_t() {
-      return _set_or_get<_Io_t, _Read_Write::Read>(0);
+      return _set_or_get<_Io_t, DataDirection::Read>(0);
+    }
+    
+    operator PullUp() {
+      static_assert(io == IOReg::PORTx, "PullUp enum conversion requested for incorrect register (not PORT).");
+      return _set_or_get<_Io_t, DataDirection::Read>(0) == 0 ? PullUp::Off : PullUp::On;
+    }
+    
+    operator DataDirection() {
+      static_assert(io == IOReg::DDRx, "DataDirection enum conversion requested for incorrect register (not DDR).");
+      return _set_or_get<_Io_t, DataDirection::Read>(0) == 0 ? DataDirection::Input : DataDirection::Output;
     }
   };
   
-  template <enum _Read_Write RW, class R>
+  template <enum DataDirection RW, class R>
   uint8_t _set_or_get_f(R& reg, uint8_t bit, uint8_t value) {
-    if (RW == _Read_Write::Write) {
+    if (RW == DataDirection::Write) {
       if (value) reg |= _BV(bit);
       else reg &= ~_BV(bit);
       return 0;
     } else return reg & _BV(bit);
   }
   
-  template <class Io, enum _Read_Write RW>
+  template <class Io, enum DataDirection RW>
   uint8_t _set_or_get(uint8_t val) {
     static_assert(Io::io_reg == IOReg::DDRx ||
                   Io::io_reg == IOReg::PINx ||
@@ -291,7 +346,7 @@ namespace _ports {
             class D2, uint8_t B2,
             class D1, uint8_t B1,
             class D0, uint8_t B0,
-            enum _Read_Write RW, typename V, typename P>
+            enum DataDirection RW, typename V, typename P>
   inline static uint8_t _set_or_get_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
       uint8_t vB __attribute__ ((unused)) = 0;
       uint8_t vC __attribute__ ((unused)) = 0;
@@ -332,59 +387,59 @@ namespace _ports {
       if (D0::bit < 8 && B0 < 8) {
         const uint8_t shift0 = (D0::bit >= 8) ? 0 : D0::bit;
         mask0 |= 1 << shift0;
-        if (RW == _ports::_Read_Write::Write) v0 |= val & _BV(B0);
+        if (RW == _ports::DataDirection::Write) v0 |= val & _BV(B0);
       }
       if (D1::bit < 8 && B1 < 8) {
         const uint8_t shift1 = (D1::bit >= 8) ? 0 : D1::bit;
         mask1 |= 1 << shift1;
-        if (RW == _ports::_Read_Write::Write) v1 |= val & _BV(B1);
+        if (RW == _ports::DataDirection::Write) v1 |= val & _BV(B1);
       }
       if (D2::bit < 8 && B2 < 8) {
         const uint8_t shift2 = (D2::bit >= 8) ? 0 : D2::bit;
         mask2 |= 1 << shift2;
-        if (RW == _ports::_Read_Write::Write) v2 |= val & _BV(B2);
+        if (RW == _ports::DataDirection::Write) v2 |= val & _BV(B2);
       }
       if (D3::bit < 8 && B3 < 8) {
         const uint8_t shift3 = (D3::bit >= 8) ? 0 : D3::bit;
         mask3 |= 1 << shift3;
-        if (RW == _ports::_Read_Write::Write) v3 |= val & _BV(B3);
+        if (RW == _ports::DataDirection::Write) v3 |= val & _BV(B3);
       }
       if (D4::bit < 8 && B4 < 8) {
         const uint8_t shift4 = (D4::bit >= 8) ? 0 : D4::bit;
         mask4 |= 1 << shift4;
-        if (RW == _ports::_Read_Write::Write) v4 |= val & _BV(B4);
+        if (RW == _ports::DataDirection::Write) v4 |= val & _BV(B4);
       }
       if (D5::bit < 8 && B5 < 8) {
         const uint8_t shift5 = (D5::bit >= 8) ? 0 : D5::bit;
         mask5 |= 1 << shift5;
-        if (RW == _ports::_Read_Write::Write) v5 |= val & _BV(B5);
+        if (RW == _ports::DataDirection::Write) v5 |= val & _BV(B5);
       }
       if (D6::bit < 8 && B6 < 8) {
         const uint8_t shift6 = (D6::bit >= 8) ? 0 : D6::bit;
         mask6 |= 1 << shift6;
-        if (RW == _ports::_Read_Write::Write) v6 |= val & _BV(B6);
+        if (RW == _ports::DataDirection::Write) v6 |= val & _BV(B6);
       }
       if (D7::bit < 8 && B7 < 8) {
         const uint8_t shift7 = (D7::bit >= 8) ? 0 : D7::bit;
         mask7 |= 1 << shift7;
-        if (RW == _ports::_Read_Write::Write) v7 |= val & _BV(B7);
+        if (RW == _ports::DataDirection::Write) v7 |= val & _BV(B7);
       }
   
       if (maskB != 0) {
-        if (RW == _ports::_Read_Write::Write) portB = (portB & ~maskB) | vB;
+        if (RW == _ports::DataDirection::Write) portB = (portB & ~maskB) | vB;
         else vB = portB;
       }
       if (maskC != 0) {
-        if (RW == _ports::_Read_Write::Write) portC = (portC & ~maskC) | vC;
+        if (RW == _ports::DataDirection::Write) portC = (portC & ~maskC) | vC;
         else vC = portC;
       }
       if (maskD != 0) {
-        if (RW == _ports::_Read_Write::Write) portD = (portD & ~maskD) | vD;
+        if (RW == _ports::DataDirection::Write) portD = (portD & ~maskD) | vD;
         else vD = portD;
       }
       
       uint8_t ret = 0;
-      if (RW == _ports::_Read_Write::Read) {
+      if (RW == _ports::DataDirection::Read) {
         ret |= (v0 & _BV(D0::bit)) ? _BV(B0) : 0;
         ret |= (v1 & _BV(D1::bit)) ? _BV(B1) : 0;
         ret |= (v2 & _BV(D2::bit)) ? _BV(B2) : 0;
@@ -406,7 +461,7 @@ namespace _ports {
             class D2, uint8_t B2,
             class D1, uint8_t B1,
             class D0, uint8_t B0,
-            enum _Read_Write RW, typename V, typename P>
+            enum DataDirection RW, typename V, typename P>
   inline static uint8_t _set_or_get_8_bits(const V& val) {
     static_assert(Reg == IOReg::DDRx ||
                   Reg == IOReg::PINx ||
@@ -434,7 +489,7 @@ template <class D7, uint8_t B7,
           class D0, uint8_t B0,
           typename V, typename P>
 inline static void set_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
-  _ports::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::_Read_Write::Write>(portB, portC, portD, val);
+  _ports::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Write>(portB, portC, portD, val);
 }
 
 template <class D7, uint8_t B7,
@@ -447,7 +502,7 @@ template <class D7, uint8_t B7,
           class D0, uint8_t B0,
           typename V, typename P>
 inline static uint8_t get_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
-  return _ports::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::_Read_Write::Read>(portB, portC, portD, val);
+  return _ports::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Read>(portB, portC, portD, val);
 }
 
 template <enum _ports::IOReg IOReg,
@@ -461,7 +516,7 @@ template <enum _ports::IOReg IOReg,
           class D0, uint8_t B0,
           typename V, typename P>
 inline static void set_8_bits(const V& val) {
-  _ports::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::_Read_Write::Write>(val);
+  _ports::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Write>(val);
 }
 
 template <enum _ports::IOReg IOReg,
@@ -475,7 +530,7 @@ template <enum _ports::IOReg IOReg,
           class D0, uint8_t B0,
           typename V, typename P>
 inline static void get_8_bits(const V& val) {
-  _ports::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::_Read_Write::Read>(val);
+  _ports::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Read>(val);
 }
 
 
