@@ -61,12 +61,40 @@ enum class PullUp {
 ```
 
 ```C++
+enum class IOReg {
+  DDRx, PORTx, PINx
+};
+```
+
+```C++
 typedef PIN_C2 Pin_In;   // Give PIN_C2 a "name".
 Pin_In::DDR = 0;         // PIN_C2::DDR = 0; would work as well.
 Pin_In::DDR = _ports::DataDirection::Read;  // Use the (safer) provided enum.
 Pin_In::setDd(_ports::DataDirection::Read); // Equivalent to the previous line.
 Pin_In::setToInput(_ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
 uint8_t i = Pin_In::PIN; // Read a value from pin using automatic conversion.
+
+//                     #      *      §      ~          #*§~
+set_4_nibble<PORTx, 2, PIN_9, PIN_3, PIN_2, PIN_1>(0b00101100);
+// equivalent to: PIN_9::PORT = 1; PIN_3::PORT = 0; PIN_2 = 1; PIN_1 = 1;
+// PORTx: assign PORT (see enum class IOReg).
+// 2: offset index into byte by 2.
+// PIN_9: assign bit (3 + offset) of input to this pin.
+// PIN_3: assign bit (2 + offset) of input to this pin.
+// PIN_2: assign bit (1 + offset) of input to this pin.
+// PIN_1: assign bit (0 + offset) of input to this pin.
+
+set_8_bits<PIN_C2, PIN_C3, PIN_C4, PIN_C5>(
+template <class D7, uint8_t B7,
+          class D6, uint8_t B6,
+          class D5, uint8_t B5,
+          class D4, uint8_t B4,
+          class D3, uint8_t B3,
+          class D2, uint8_t B2,
+          class D1, uint8_t B1,
+          class D0, uint8_t B0,
+          typename V, typename P>
+inline static void set_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
 ```
 
 ### `typedef`s

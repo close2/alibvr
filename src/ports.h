@@ -48,7 +48,7 @@ namespace _ports {
   enum class PullUp {
     Off = 0,
     On = 1,
-    HighZ = 0
+    HighZ = Off
   };
   
   template <enum Port p, uint8_t b, enum IOReg io>
@@ -514,7 +514,7 @@ template <enum _ports::IOReg IOReg,
           class D2, uint8_t B2,
           class D1, uint8_t B1,
           class D0, uint8_t B0,
-          typename V, typename P>
+          typename V>
 inline static void set_8_bits(const V& val) {
   _ports::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Write>(val);
 }
@@ -528,7 +528,7 @@ template <enum _ports::IOReg IOReg,
           class D2, uint8_t B2,
           class D1, uint8_t B1,
           class D0, uint8_t B0,
-          typename V, typename P>
+          typename V>
 inline static void get_8_bits(const V& val) {
   _ports::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Read>(val);
 }
@@ -543,7 +543,7 @@ template <enum _ports::IOReg IOReg,
           class D2,
           class D1,
           class D0,
-          typename V, typename P>
+          typename V>
 inline static void set_8_byte(const V& val) {
   set_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(val);
 }
@@ -554,7 +554,7 @@ template <enum _ports::IOReg IOReg,
           class D2,
           class D1,
           class D0,
-          typename V, typename P>
+          typename V>
 inline static void set_4_nibble(V& val) {
   set_8_byte<IOReg, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, D3, 3 + offset, D2, 2 + offset, D1, 1 + offset, D0, 0 + offset>(val);
 }
