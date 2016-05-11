@@ -39,8 +39,8 @@ Contains the typedef definitions for all pins.
 
 Whenever you need to access a port use a provided `typedef`.
 
-DDR, PORT and PIN of every pin may be accessed through `::DDR` (and similar)
-of those typedefs.
+`DDR`, `PORT` and `PIN` of every pin may be accessed through `::DDR`,
+`::PORT` and `::PIN` on those typedefs.
 
 Data direction and pull-up resistor may also be set using enums.  (Note that
 the compiler is able to verify that a data direction enum is only used on
@@ -51,21 +51,22 @@ enum class DataDirection {
   Read = 0,  Input = Read,   In = Read,
   Write = 1, Output = Write, Out = Write
 };
+```
 
+```C++
 enum class PullUp {
-  Off = 0, HighZ = 0
-  On = 1,
+  Off = 0, HighZ = Off,
+  On = 1
 };
 ```
 
 ```C++
-typedef PIN_C2 Pin_In;
-Pin_In::DDR = 0;
-Pin_In::DDR = _ports::DataDirection::Read;
-Pin_In::setDd(_ports::DataDirection::Read);
-Pin_In::setToInput(_ports::PullUp::HighZ);
-Pin_In::
-uint8_t i = Pin_In::PIN;
+typedef PIN_C2 Pin_In;   // Give PIN_C2 a "name".
+Pin_In::DDR = 0;         // PIN_C2::DDR = 0; would work as well.
+Pin_In::DDR = _ports::DataDirection::Read;  // Use the (safer) provided enum.
+Pin_In::setDd(_ports::DataDirection::Read); // Equivalent to the previous line.
+Pin_In::setToInput(_ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
+uint8_t i = Pin_In::PIN; // Read a value from pin using automatic conversion.
 ```
 
 ### `typedef`s
