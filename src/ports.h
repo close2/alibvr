@@ -536,14 +536,14 @@ inline static void get_8_bits(const V& val) {
 
 template <enum _ports::IOReg IOReg,
           class D7,
-          class D6,
-          class D5,
-          class D4,
-          class D3,
-          class D2,
-          class D1,
-          class D0,
-          typename V>
+          class D6 = PIN_UNUSED,
+          class D5 = PIN_UN,
+          class D4 = PIN_UN,
+          class D3 = PIN_UN,
+          class D2 = PIN_UN,
+          class D1 = PIN_UN,
+          class D0 = PIN_UN,
+          typename V = uint8_t>
 inline static void set_8_byte(const V& val) {
   set_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(val);
 }

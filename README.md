@@ -74,16 +74,17 @@ Pin_In::setDd(_ports::DataDirection::Read); // Equivalent to the previous line.
 Pin_In::setToInput(_ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
 uint8_t i = Pin_In::PIN; // Read a value from pin using automatic conversion.
 
-//                     #      *      §      ~          #*§~
-set_4_nibble<PORTx, 2, PIN_9, PIN_3, PIN_2, PIN_1>(0b00101100);
-// equivalent to: PIN_9::PORT = 1; PIN_3::PORT = 0; PIN_2 = 1; PIN_1 = 1;
-
-set_8_byte<DDRx, PIN_9, PIN_2, PIN_UNUSED, PIN_4, PIN_5, PIN_3, PIN_7, PIN_UNUSED>(0xF0);
+set_8_byte<DDRx, PIN_9, PIN_2, PIN_UNUSED, PIN_4, PIN_5, PIN_3, PIN_7>(0xF0);
 // equivalent to: PIN_9::DDR = 1; PIN_2::DDR = 1; PIN_4::DDR = 1;
 //                PIN_5::DDR = 0; PIN_3::DDR = 0; PIN_7::DDR = 0;
 
 set_8_bits<DDRx, PIN_7, 1, PIN_3, 2, PIN_9, 7, PIN_2, 6, PIN_4, 4, PIN_5, 3>(0xF0);
 // equivalent to previous set_8_byte instruction PIN_7::DDR = (0xF0 & _BV(1));...
+
+//                     #      *      §      ~          #*§~
+set_4_nibble<PORTx, 2, PIN_9, PIN_3, PIN_2, PIN_1>(0b00101100);
+// equivalent to: PIN_9::PORT = 1; PIN_3::PORT = 0; PIN_2 = 1; PIN_1 = 1;
+
 ```
 
 ### `typedef`s
