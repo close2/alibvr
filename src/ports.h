@@ -237,7 +237,7 @@ typedef PIN_DIP_13 PIN_D7;
 
 
 namespace _ports {
-  template <class Io, enum DataDirection RW>
+  template <class Io, enum DataDirection Dd>
   uint8_t _set_or_get(uint8_t val);
   
   template <enum Port p, uint8_t b, enum IOReg io>
@@ -280,16 +280,16 @@ namespace _ports {
     }
   };
   
-  template <enum DataDirection RW, class R>
+  template <enum DataDirection Dd, class R>
   uint8_t _set_or_get_f(R& reg, uint8_t bit, uint8_t value) {
-    if (RW == DataDirection::Write) {
+    if (Dd == DataDirection::Write) {
       if (value) reg |= _BV(bit);
       else reg &= ~_BV(bit);
       return 0;
     } else return reg & _BV(bit);
   }
   
-  template <class Io, enum DataDirection RW>
+  template <class Io, enum DataDirection Dd>
   uint8_t _set_or_get(uint8_t val) {
     static_assert(Io::io_reg == IOReg::DDRx ||
                   Io::io_reg == IOReg::PINx ||
@@ -299,31 +299,31 @@ namespace _ports {
       case IOReg::DDRx:
         switch(Io::port) {
           case Port::B:
-            return _set_or_get_f<RW>(DDRB, Io::bit, val);
+            return _set_or_get_f<Dd>(DDRB, Io::bit, val);
           case Port::C:
-            return _set_or_get_f<RW>(DDRC, Io::bit, val);
+            return _set_or_get_f<Dd>(DDRC, Io::bit, val);
           case Port::D:
-            return _set_or_get_f<RW>(DDRD, Io::bit, val);
+            return _set_or_get_f<Dd>(DDRD, Io::bit, val);
         }
         break;
       case IOReg::PORTx:
         switch(Io::port) {
           case Port::B:
-            return _set_or_get_f<RW>(PORTB, Io::bit, val);
+            return _set_or_get_f<Dd>(PORTB, Io::bit, val);
           case Port::C:
-            return _set_or_get_f<RW>(PORTC, Io::bit, val);
+            return _set_or_get_f<Dd>(PORTC, Io::bit, val);
           case Port::D:
-            return _set_or_get_f<RW>(PORTD, Io::bit, val);
+            return _set_or_get_f<Dd>(PORTD, Io::bit, val);
         }
         break;
       case IOReg::PINx:
         switch(Io::port) {
           case Port::B:
-            return _set_or_get_f<RW>(PINB, Io::bit, val);
+            return _set_or_get_f<Dd>(PINB, Io::bit, val);
           case Port::C:
-            return _set_or_get_f<RW>(PINC, Io::bit, val);
+            return _set_or_get_f<Dd>(PINC, Io::bit, val);
           case Port::D:
-            return _set_or_get_f<RW>(PIND, Io::bit, val);
+            return _set_or_get_f<Dd>(PIND, Io::bit, val);
         }
         break;
     }
@@ -346,7 +346,7 @@ namespace _ports {
             class D2, uint8_t B2,
             class D1, uint8_t B1,
             class D0, uint8_t B0,
-            enum DataDirection RW, typename V, typename P>
+            enum DataDirection Dd, typename V, typename P>
   inline static uint8_t _set_or_get_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
       uint8_t vB __attribute__ ((unused)) = 0;
       uint8_t vC __attribute__ ((unused)) = 0;
@@ -387,59 +387,59 @@ namespace _ports {
       if (D0::bit < 8 && B0 < 8) {
         const uint8_t shift0 = (D0::bit >= 8) ? 0 : D0::bit;
         mask0 |= 1 << shift0;
-        if (RW == _ports::DataDirection::Write) v0 |= val & _BV(B0);
+        if (Dd == _ports::DataDirection::Write) v0 |= val & _BV(B0);
       }
       if (D1::bit < 8 && B1 < 8) {
         const uint8_t shift1 = (D1::bit >= 8) ? 0 : D1::bit;
         mask1 |= 1 << shift1;
-        if (RW == _ports::DataDirection::Write) v1 |= val & _BV(B1);
+        if (Dd == _ports::DataDirection::Write) v1 |= val & _BV(B1);
       }
       if (D2::bit < 8 && B2 < 8) {
         const uint8_t shift2 = (D2::bit >= 8) ? 0 : D2::bit;
         mask2 |= 1 << shift2;
-        if (RW == _ports::DataDirection::Write) v2 |= val & _BV(B2);
+        if (Dd == _ports::DataDirection::Write) v2 |= val & _BV(B2);
       }
       if (D3::bit < 8 && B3 < 8) {
         const uint8_t shift3 = (D3::bit >= 8) ? 0 : D3::bit;
         mask3 |= 1 << shift3;
-        if (RW == _ports::DataDirection::Write) v3 |= val & _BV(B3);
+        if (Dd == _ports::DataDirection::Write) v3 |= val & _BV(B3);
       }
       if (D4::bit < 8 && B4 < 8) {
         const uint8_t shift4 = (D4::bit >= 8) ? 0 : D4::bit;
         mask4 |= 1 << shift4;
-        if (RW == _ports::DataDirection::Write) v4 |= val & _BV(B4);
+        if (Dd == _ports::DataDirection::Write) v4 |= val & _BV(B4);
       }
       if (D5::bit < 8 && B5 < 8) {
         const uint8_t shift5 = (D5::bit >= 8) ? 0 : D5::bit;
         mask5 |= 1 << shift5;
-        if (RW == _ports::DataDirection::Write) v5 |= val & _BV(B5);
+        if (Dd == _ports::DataDirection::Write) v5 |= val & _BV(B5);
       }
       if (D6::bit < 8 && B6 < 8) {
         const uint8_t shift6 = (D6::bit >= 8) ? 0 : D6::bit;
         mask6 |= 1 << shift6;
-        if (RW == _ports::DataDirection::Write) v6 |= val & _BV(B6);
+        if (Dd == _ports::DataDirection::Write) v6 |= val & _BV(B6);
       }
       if (D7::bit < 8 && B7 < 8) {
         const uint8_t shift7 = (D7::bit >= 8) ? 0 : D7::bit;
         mask7 |= 1 << shift7;
-        if (RW == _ports::DataDirection::Write) v7 |= val & _BV(B7);
+        if (Dd == _ports::DataDirection::Write) v7 |= val & _BV(B7);
       }
   
       if (maskB != 0) {
-        if (RW == _ports::DataDirection::Write) portB = (portB & ~maskB) | vB;
+        if (Dd == _ports::DataDirection::Write) portB = (portB & ~maskB) | vB;
         else vB = portB;
       }
       if (maskC != 0) {
-        if (RW == _ports::DataDirection::Write) portC = (portC & ~maskC) | vC;
+        if (Dd == _ports::DataDirection::Write) portC = (portC & ~maskC) | vC;
         else vC = portC;
       }
       if (maskD != 0) {
-        if (RW == _ports::DataDirection::Write) portD = (portD & ~maskD) | vD;
+        if (Dd == _ports::DataDirection::Write) portD = (portD & ~maskD) | vD;
         else vD = portD;
       }
       
       uint8_t ret = 0;
-      if (RW == _ports::DataDirection::Read) {
+      if (Dd == _ports::DataDirection::Read) {
         ret |= (v0 & _BV(D0::bit)) ? _BV(B0) : 0;
         ret |= (v1 & _BV(D1::bit)) ? _BV(B1) : 0;
         ret |= (v2 & _BV(D2::bit)) ? _BV(B2) : 0;
@@ -461,60 +461,90 @@ namespace _ports {
             class D2, uint8_t B2,
             class D1, uint8_t B1,
             class D0, uint8_t B0,
-            enum DataDirection RW, typename V, typename P>
+            enum DataDirection Dd, typename V, typename P>
   inline static uint8_t _set_or_get_8_bits(const V& val) {
     static_assert(Reg == IOReg::DDRx ||
                   Reg == IOReg::PINx ||
                   Reg == IOReg::PORTx,
-                  "IO Register is unknown.  Only Ddr, Pin and Port are supported.");
+                  "IO Register is unknown.  Only IOReg::DDRx, IOReg::PINx and IOReg::PORTx are supported.");
     switch (Reg) {
       case IOReg::DDRx:
-        return _set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, RW>(DDRB, DDRC, DDRD, val);
+        return _set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, Dd>(DDRB, DDRC, DDRD, val);
       case IOReg::PORTx:
-        return _set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, RW>(PORTB, PORTC, PORTD, val);
+        return _set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, Dd>(PORTB, PORTC, PORTD, val);
       case IOReg::PINx:
-        return _set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, RW>(PINB, PINC, PIND, val);
+        return _set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, Dd>(PINB, PINC, PIND, val);
     }
     return 0; // should never happen
   }
 }
 
 template <class D7, uint8_t B7,
-          class D6, uint8_t B6,
-          class D5, uint8_t B5,
-          class D4, uint8_t B4,
-          class D3, uint8_t B3,
-          class D2, uint8_t B2,
-          class D1, uint8_t B1,
-          class D0, uint8_t B0,
-          typename V, typename P>
-inline static void set_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
-  _ports::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Write>(portB, portC, portD, val);
+          class D6 = PIN_UNUSED, uint8_t B6 = -1,
+          class D5 = PIN_UNUSED, uint8_t B5 = -1,
+          class D4 = PIN_UNUSED, uint8_t B4 = -1,
+          class D3 = PIN_UNUSED, uint8_t B3 = -1,
+          class D2 = PIN_UNUSED, uint8_t B2 = -1,
+          class D1 = PIN_UNUSED, uint8_t B1 = -1,
+          class D0 = PIN_UNUSED, uint8_t B0 = -1,
+          typename V = uint8_t,
+	  typename P = uint8_t>
+inline static void set_8_bits(P& regB __attribute__ ((unused)), P& regC __attribute__ ((unused)), P& regD __attribute__ ((unused)), const V& val) {
+  _ports::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Write>(regB, regC, regD, val);
 }
 
 template <class D7, uint8_t B7,
-          class D6, uint8_t B6,
-          class D5, uint8_t B5,
-          class D4, uint8_t B4,
-          class D3, uint8_t B3,
-          class D2, uint8_t B2,
-          class D1, uint8_t B1,
-          class D0, uint8_t B0,
-          typename V, typename P>
-inline static uint8_t get_8_bits(P& portB __attribute__ ((unused)), P& portC __attribute__ ((unused)), P& portD __attribute__ ((unused)), const V& val) {
-  return _ports::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Read>(portB, portC, portD, val);
+          class D6 = PIN_UNUSED, uint8_t B6 = -1,
+          class D5 = PIN_UNUSED, uint8_t B5 = -1,
+          class D4 = PIN_UNUSED, uint8_t B4 = -1,
+          class D3 = PIN_UNUSED, uint8_t B3 = -1,
+          class D2 = PIN_UNUSED, uint8_t B2 = -1,
+          class D1 = PIN_UNUSED, uint8_t B1 = -1,
+          class D0 = PIN_UNUSED, uint8_t B0 = -1,
+          typename P = uint8_t>
+inline static uint8_t get_8_bits(P& regB __attribute__ ((unused)), P& regC __attribute__ ((unused)), P& regD __attribute__ ((unused))) {
+  return _ports::_set_or_get_8_bits<D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Read>(regB, regC, regD, 0);
 }
+
+
+template <class D7,
+          class D6 = PIN_UNUSED,
+          class D5 = PIN_UNUSED,
+          class D4 = PIN_UNUSED,
+          class D3 = PIN_UNUSED,
+          class D2 = PIN_UNUSED,
+          class D1 = PIN_UNUSED,
+          class D0 = PIN_UNUSED,
+          typename V = uint8_t,
+	  typename P = uint8_t>
+inline static void set_8_byte(P& regB __attribute__ ((unused)), P& regC __attribute__ ((unused)), P& regD __attribute__ ((unused)), const V& val) {
+  set_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(regB, regC, regD, val);
+}
+
+template <class D7,
+          class D6 = PIN_UNUSED,
+          class D5 = PIN_UNUSED,
+          class D4 = PIN_UNUSED,
+          class D3 = PIN_UNUSED,
+          class D2 = PIN_UNUSED,
+          class D1 = PIN_UNUSED,
+          class D0 = PIN_UNUSED,
+          typename P = uint8_t>
+inline static uint8_t get_8_byte(P& regB __attribute__ ((unused)), P& regC __attribute__ ((unused)), P& regD __attribute__ ((unused))) {
+  return get_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(regB, regC, regD, 0);
+}
+
 
 template <enum _ports::IOReg IOReg,
           class D7, uint8_t B7,
-          class D6, uint8_t B6,
-          class D5, uint8_t B5,
-          class D4, uint8_t B4,
-          class D3, uint8_t B3,
-          class D2, uint8_t B2,
-          class D1, uint8_t B1,
-          class D0, uint8_t B0,
-          typename V>
+          class D6 = PIN_UNUSED, uint8_t B6 = -1,
+          class D5 = PIN_UNUSED, uint8_t B5 = -1,
+          class D4 = PIN_UNUSED, uint8_t B4 = -1,
+          class D3 = PIN_UNUSED, uint8_t B3 = -1,
+          class D2 = PIN_UNUSED, uint8_t B2 = -1,
+          class D1 = PIN_UNUSED, uint8_t B1 = -1,
+          class D0 = PIN_UNUSED, uint8_t B0 = -1,
+          typename V = uint8_t>
 inline static void set_8_bits(const V& val) {
   _ports::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Write>(val);
 }
@@ -527,26 +557,38 @@ template <enum _ports::IOReg IOReg,
           class D3 = PIN_UNUSED, uint8_t B3 = -1,
           class D2 = PIN_UNUSED, uint8_t B2 = -1,
           class D1 = PIN_UNUSED, uint8_t B1 = -1,
-          class D0 = PIN_UNUSED, uint8_t B0 = -1,
-          typename V = uint8_t>
-inline static void get_8_bits(const V& val) {
-  _ports::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Read>(val);
+          class D0 = PIN_UNUSED, uint8_t B0 = -1>
+inline static uint8_t get_8_bits() {
+  return _ports::_set_or_get_8_bits<IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0, _ports::DataDirection::Read>(0);
 }
-
 
 template <enum _ports::IOReg IOReg,
           class D7,
           class D6 = PIN_UNUSED,
-          class D5 = PIN_UN,
-          class D4 = PIN_UN,
-          class D3 = PIN_UN,
-          class D2 = PIN_UN,
-          class D1 = PIN_UN,
-          class D0 = PIN_UN,
+          class D5 = PIN_UNUSED,
+          class D4 = PIN_UNUSED,
+          class D3 = PIN_UNUSED,
+          class D2 = PIN_UNUSED,
+          class D1 = PIN_UNUSED,
+          class D0 = PIN_UNUSED>
+inline static uint8_t get_8_byte() {
+  return get_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>();
+}
+
+template <enum _ports::IOReg IOReg,
+          class D7,
+          class D6 = PIN_UNUSED,
+          class D5 = PIN_UNUSED,
+          class D4 = PIN_UNUSED,
+          class D3 = PIN_UNUSED,
+          class D2 = PIN_UNUSED,
+          class D1 = PIN_UNUSED,
+          class D0 = PIN_UNUSED,
           typename V = uint8_t>
 inline static void set_8_byte(const V& val) {
   set_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(val);
 }
+
 
 template <enum _ports::IOReg IOReg,
           uint8_t offset,
