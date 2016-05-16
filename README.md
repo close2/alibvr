@@ -46,6 +46,63 @@ Data direction and pull-up resistor may also be set using enums.  (Note that
 the compiler is able to verify that a data direction enum is only used on
 register DDR!  Macros would not be able to do so.)
 
+### Setting or reading single DDR, PORT or PIN bits:
+
+```C++
+typedef PIN_C2 Pin_In;   // Give PIN_C2 a "name".
+Pin_In::DDR = 0;         // PIN_C2::DDR = 0; would work as well.
+Pin_In::DDR = _ports::DataDirection::Read;  // Use the (safer) provided enum.
+Pin_In::setDd(_ports::DataDirection::Read); // Equivalent to the previous line.
+Pin_In::setToInput(_ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
+uint8_t i = Pin_In::PIN; // Read a value from pin using automatic conversion.
+```
+
+### Assigning / Reading multiple DDR, PORT or PIN bits in an optimized way:
+
+```C++
+// Possible IORegs: DDRx, PINx and PORTx
+
+//                              #      *                  §      ~      ¤      |        #* §~¤|
+set_8_byte<_ports::IOReg::DDRx, PIN_9, PIN_2, PIN_UNUSED, PIN_4, PIN_5, PIN_3, PIN_7>(0b11110000);
+// equivalent to: PIN_9::DDR = 1; PIN_2::DDR = 1; PIN_4::DDR = 1;
+//                PIN_5::DDR = 0; PIN_3::DDR = 0; PIN_7::DDR = 0;
+
+uint8_t x1 = get_8_byte<_ports::IOReg::DDRx, PIN_9, PIN_2, PIN_UNUSED, PIN_4, PIN_5, PIN_3, PIN_7>();
+// Unused pins are set to 0.  If called after the previous set_8_byte would
+// return 0b11010000
+
+//                             |         ¤         #         *         §         ~           #* §~¤|
+set_8_bits<_ports::IOReg::DDRx,PIN_7, 1, PIN_3, 2, PIN_9, 7, PIN_2, 6, PIN_4, 4, PIN_5, 3>(0b11110000);
+// Equivalent to previous set_8_byte instruction PIN_7::DDR = (0xF0 & _BV(1));...
+
+uint8_t x2 = get_8_bits<_ports::IOReg::DDRx,
+                        PIN_7, 1,
+                        PIN_3, 2,
+                        PIN_9, 7,
+                        PIN_2, 6,
+                        PIN_4, 4,
+                        PIN_5, 3>();
+// Equivalent to previous get_8_byte instruction.
+
+//            offset↓  #      *      §      ~          #*§~
+set_4_nibble<PORTx, 2, PIN_9, PIN_3, PIN_2, PIN_1>(0b00101100);
+// equivalent to: PIN_9::PORT = 1; PIN_3::PORT = 0; PIN_2 = 1; PIN_1 = 1;
+```
+
+### Assigning / Reading multiple bits from provided registers in an optimized way:
+
+```C++
+// Version where you have to provide regB, regC and regD are also availabe:
+// (except for set_4_nibble)
+uint8_t rB = 0, rC = 0, rD = 0;
+set_8_byte<PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(rB, rC, rD, 0b11110000);
+// rB becomes 0b00000010  (because of B1)
+// rD becomes 0b00010100  (because of D2 and D4)
+// D5, D3 and D7 would set corresponding bits in rD to 0.
+```
+
+### Enums:
+
 ```C++
 enum class DataDirection {
   Read = 0,  Input = Read,   In = Read,
@@ -66,45 +123,6 @@ enum class IOReg {
 };
 ```
 
-```C++
-typedef PIN_C2 Pin_In;   // Give PIN_C2 a "name".
-Pin_In::DDR = 0;         // PIN_C2::DDR = 0; would work as well.
-Pin_In::DDR = _ports::DataDirection::Read;  // Use the (safer) provided enum.
-Pin_In::setDd(_ports::DataDirection::Read); // Equivalent to the previous line.
-Pin_In::setToInput(_ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
-uint8_t i = Pin_In::PIN; // Read a value from pin using automatic conversion.
-
-// ** Destination or origin defined through _ports::IOReg enum: **
-// Possible IORegs: DDRx, PINx and PORTx
-
-//               #      *                  §      ~      ¤      |        #* §~¤|
-set_8_byte<_ports::IOReg::DDRx, PIN_9, PIN_2, PIN_UNUSED, PIN_4, PIN_5, PIN_3, PIN_7>(0b11110000);
-// equivalent to: PIN_9::DDR = 1; PIN_2::DDR = 1; PIN_4::DDR = 1;
-//                PIN_5::DDR = 0; PIN_3::DDR = 0; PIN_7::DDR = 0;
-
-uint8_t x1 = get_8_byte<_ports::IOReg::DDRx, PIN_9, PIN_2, PIN_UNUSED, PIN_4, PIN_5, PIN_3, PIN_7>();
-// Unused pins are set to 0.  If called after the previous set_8_byte would
-// return 0b11010000
-
-//               |         ¤         #         *         §         ~           #* §~¤|
-set_8_bits<_ports::IOReg::DDRx, PIN_7, 1, PIN_3, 2, PIN_9, 7, PIN_2, 6, PIN_4, 4, PIN_5, 3>(0b11110000);
-// Equivalent to previous set_8_byte instruction PIN_7::DDR = (0xF0 & _BV(1));...
-
-uint8_t x2 = get_8_bits<_ports::IOReg::DDRx, PIN_7, 1, PIN_3, 2, PIN_9, 7, PIN_2, 6, PIN_4, 4, PIN_5, 3>();
-// Equivalent to previous get_8_byte instruction.
-
-//            offset↓  #      *      §      ~          #*§~
-set_4_nibble<PORTx, 2, PIN_9, PIN_3, PIN_2, PIN_1>(0b00101100);
-// equivalent to: PIN_9::PORT = 1; PIN_3::PORT = 0; PIN_2 = 1; PIN_1 = 1;
-
-// Version where you have to provide regB, regC and regD are also availabe:
-// (except for set_4_nibble)
-uint8_t rB = 0, rC = 0, rD = 0;
-set_8_byte<PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(rB, rC, rD, 0b11110000);
-// rB becomes 0b00000010  (because of B1)
-// rD becomes 0b00010100  (because of D2 and D4)
-// D5, D3 and D7 would set corresponding bits in rD to 0.
-```
 
 ### `typedef`s
 
