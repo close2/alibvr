@@ -101,8 +101,8 @@ set_4_nibble<PORTx, 2, PIN_B1, PIN_D3, PIN_D2, PIN_D1>(0b00101100);
 ### Assigning / Reading multiple bits from provided registers in an optimized way:
 
 ```C++
-// Version where you have to provide regB, regC and regD are also availabe:
-// (except for set_4_nibble)
+// For all get* / set* functions a version where you have to
+// provide regB, regC and regD exists.  (Except set_4_nibble).
 uint8_t rB = 0, rC = 0, rD = 0;
 set_8_byte<PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(rB, rC, rD, 0b11110000);
 // rB becomes 0b00000010  (because of B1)
