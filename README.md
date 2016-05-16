@@ -40,7 +40,7 @@ Contains the typedef definitions for all pins.
 Whenever you need to access a port use a provided `typedef`.
 
 `DDR`, `PORT` and `PIN` of every pin may be accessed through `::DDR`,
-`::PORT` and `::PIN` on those typedefs.
+`::PORT` and `::PIN` on those `typedef`s.
 
 Data direction and pull-up resistor may also be set using enums.  (Note that
 the compiler is able to verify that a data direction enum is only used on
@@ -49,11 +49,15 @@ register DDR!  Macros would not be able to do so.)
 ### Setting or reading single DDR, PORT or PIN bits:
 
 ```C++
-typedef PIN_C2 Pin_In;   // Give PIN_C2 a "name".
+typedef PIN_C2 Pin_In;   // Give PIN_C2 a meaningful name.
+
+// Use your favorite way of setting DDR of pin C2:
 Pin_In::DDR = 0;         // PIN_C2::DDR = 0; would work as well.
 Pin_In::DDR = _ports::DataDirection::Read;  // Use the (safer) provided enum.
 Pin_In::setDd(_ports::DataDirection::Read); // Equivalent to the previous line.
+
 Pin_In::setToInput(_ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
+
 uint8_t i = Pin_In::PIN; // Read a value from pin using automatic conversion.
 ```
 
