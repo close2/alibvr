@@ -135,8 +135,6 @@ enum class IOReg {
 
 ### `typedef`s
 
-See [ports.h](src/ports.h) for all available typedefs.
-
 The pin layout is compatible to arduino / arduino lite.
 
 Prefix names in the following graph with `Pin_` to get
@@ -171,19 +169,12 @@ Turn an Led on pin C2 on.
 #include "ports.h"
 
 typedef PIN_C2 Led;
-/* other possible ways to typedef the Led:
-typedef PIN_DIP_25 Led;
-typedef PIN_16 Led;
-typedef PIN_ADC2 Led;
-*/
 
 __attribute__ ((OS_main)) int main(void) {
-  // put Led pin into output mode.
-  Led::DDR = 1;
-
-  Led::PORT = 1;
-  for (;;);
-  return 0;
+  Led::DDR = 1;   // Put Led pin into output mode.
+  Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
+  
+  for (;;); return 0;
 }
 ```
 
