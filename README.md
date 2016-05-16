@@ -58,16 +58,16 @@ Pin_In::setDd(_ports::DataDirection::Read); // Equivalent to the previous line.
 
 Pin_In::setToInput(_ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
 
-uint8_t i = Pin_In::PIN; // Read a value from pin using automatic conversion.
+uint8_t i = Pin_In::PIN; // Read a value.
 ```
 
 ### Assigning / Reading multiple DDR, PORT or PIN bits in an optimized way:
 
 ```C++
-// Possible IORegs: DDRx, PINx and PORTx
+// Possible IORegs: _ports::IOReg::DDRx, _ports::IOReg::PINx and _ports::IOReg::PORTx
 
-//                              #       *                   §       ~       ¤       |         #* §~¤|
-set_8_byte<_ports::IOReg::DDRx, PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(0b11110000);
+//               #       *                   §       ~       ¤       |         #* §~¤|
+set_8_byte<DDRx, PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(0b11110000);
 // Equivalent to: PIN_B1::DDR = 1; PIN_D2::DDR = 1; PIN_D4::DDR = 1;
 //                PIN_D5::DDR = 0; PIN_D3::DDR = 0; PIN_D7::DDR = 0; but efficiently:
 // DDRB = (DDRB & 0b11111101) | 0b00000010;
