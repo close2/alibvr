@@ -66,31 +66,36 @@ uint8_t i = Pin_In::PIN; // Read a value from pin using automatic conversion.
 ```C++
 // Possible IORegs: DDRx, PINx and PORTx
 
-//                              #      *                  §      ~      ¤      |        #* §~¤|
-set_8_byte<_ports::IOReg::DDRx, PIN_9, PIN_2, PIN_UNUSED, PIN_4, PIN_5, PIN_3, PIN_7>(0b11110000);
-// equivalent to: PIN_9::DDR = 1; PIN_2::DDR = 1; PIN_4::DDR = 1;
-//                PIN_5::DDR = 0; PIN_3::DDR = 0; PIN_7::DDR = 0;
+//                              #       *                   §       ~       ¤       |         #* §~¤|
+set_8_byte<_ports::IOReg::DDRx, PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(0b11110000);
+// Equivalent to: PIN_B1::DDR = 1; PIN_D2::DDR = 1; PIN_D4::DDR = 1;
+//                PIN_D5::DDR = 0; PIN_D3::DDR = 0; PIN_D7::DDR = 0; but efficiently:
+// DDRB = (DDRB & 0b11111101) | 0b00000010;
+// DDRD = (DDRD & 0b01000011) | 0b00010100;
 
-uint8_t x1 = get_8_byte<_ports::IOReg::DDRx, PIN_9, PIN_2, PIN_UNUSED, PIN_4, PIN_5, PIN_3, PIN_7>();
-// Unused pins are set to 0.  If called after the previous set_8_byte would
+uint8_t x1 = get_8_byte<_ports::IOReg::DDRx,
+                        PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>();
+// Unused pins are set read as 0.  If called after the previous set_8_byte would
 // return 0b11010000
 
-//                             |         ¤         #         *         §         ~           #* §~¤|
-set_8_bits<_ports::IOReg::DDRx,PIN_7, 1, PIN_3, 2, PIN_9, 7, PIN_2, 6, PIN_4, 4, PIN_5, 3>(0b11110000);
-// Equivalent to previous set_8_byte instruction PIN_7::DDR = (0xF0 & _BV(1));...
+// Specify which bit should be assigned to which pin:
+//               |          ¤          #          *          §          ~            #* §~¤|
+set_8_bits<DDRx, PIN_D7, 1, PIN_D3, 2, PIN_B1, 7, PIN_D2, 6, PIN_D4, 4, PIN_D5, 3>(0b11110000);
+// Equivalent to previous set_8_byte instruction.
 
+// Specify which bit in returned value is which pin:
 uint8_t x2 = get_8_bits<_ports::IOReg::DDRx,
-                        PIN_7, 1,
-                        PIN_3, 2,
-                        PIN_9, 7,
-                        PIN_2, 6,
-                        PIN_4, 4,
-                        PIN_5, 3>();
+                        PIN_D7, 1,
+                        PIN_D3, 2,
+                        PIN_B1, 7,
+                        PIN_D2, 6,
+                        PIN_D4, 4,
+                        PIN_D5, 3>();
 // Equivalent to previous get_8_byte instruction.
 
-//            offset↓  #      *      §      ~          #*§~
-set_4_nibble<PORTx, 2, PIN_9, PIN_3, PIN_2, PIN_1>(0b00101100);
-// equivalent to: PIN_9::PORT = 1; PIN_3::PORT = 0; PIN_2 = 1; PIN_1 = 1;
+//            offset↓  #       *       §       ~           #*§~
+set_4_nibble<PORTx, 2, PIN_B1, PIN_D3, PIN_D2, PIN_D1>(0b00101100);
+// equivalent to: PIN_B1::PORT = 1; PIN_D3::PORT = 0; PIN_D2 = 1; PIN_D1 = 1;
 ```
 
 ### Assigning / Reading multiple bits from provided registers in an optimized way:
