@@ -37,7 +37,7 @@ Usage:
 
 See [doc/ports.md](ports) for a detailed description.
 
-Contains the typedef definitions for all pins.
+Contains the `typedef` definitions for all pins.
 
 Whenever you need to access a port use a provided `typedef`.
 
@@ -47,6 +47,34 @@ Whenever you need to access a port use a provided `typedef`.
 Data direction and pull-up resistor may also be set using enums.  (Note that
 the compiler is able to verify that a data direction enum is only used on
 register DDR!  Macros would not be able to do so.)
+
+### `typedef`s
+
+The pin layout is compatible to arduino / arduino lite.
+
+Prefix names in the following graph with `Pin_` to get
+provided `typedef`s.  Example: `B5` becomes `Pin_B5`, `8` becomes `Pin_8`
+
+```
+                                 ┏━u━┓
+                     C6    DIP_1 ┃   ┃ DIP_28   19   C5   ADC5   SCL
+RXD              0   D0    DIP_2 ┃   ┃ DIP_27   18   C4   ADC4   SDA
+TXD              1   D1    DIP_3 ┃   ┃ DIP_26   17   C3   ADC3
+        INT0     2   D2    DIP_4 ┃   ┃ DIP_25   16   C2   ADC2
+OC2B    INT1     3   D3    DIP_5 ┃   ┃ DIP_24   15   C1   ADC1
+XCK     T0       4   D4    DIP_6 ┃   ┃ DIP_23   14   C0   ADC0
+                             VCC ┃   ┃ GND
+                             GND ┃   ┃ AREF
+XTAL1   TOSC1   20   B6    DIP_9 ┃   ┃ AVCC
+XTAL2   TOSC2   21   B7   DIP_10 ┃   ┃ DIP_19   13   B5   SCK
+T1      OC0B     5   D5   DIP_11 ┃   ┃ DIP_18   12   B4   MISO
+AIN0    OC0A     6   D6   DIP_12 ┃   ┃ DIP_17   11   B3   MOSI   OC2A
+AIN1             7   D7   DIP_13 ┃   ┃ DIP_16   10   B2   SS     OC1B
+ICP1    CLK0     8   B0   DIP_14 ┃   ┃ DIP_15    9   B1          OC1A
+                                 ┗━━━┛
+```
+Pins `VCC`, `GND`, `AREF` and `AVCC` are only for documentation
+and don't provide `typedef`s.
 
 ### Setting or reading single DDR, PORT or PIN bits:
 
@@ -77,8 +105,8 @@ set_8_byte<DDRx, PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(0b1
 
 uint8_t x1 = get_8_byte<_ports::IOReg::DDRx,
                         PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>();
-// Unused pins are set read as 0.  If called after the previous set_8_byte would
-// return 0b11010000
+// Unused pins are read as 0.
+// If called after the previous set_8_byte would return 0b11010000
 
 // Specify which bit should be assigned to which pin:
 //               |          ¤          #          *          §          ~            #* §~¤|
@@ -97,7 +125,7 @@ uint8_t x2 = get_8_bits<_ports::IOReg::DDRx,
 
 //            offset↓  #       *       §       ~           #*§~
 set_4_nibble<PORTx, 2, PIN_B1, PIN_D3, PIN_D2, PIN_D1>(0b00101100);
-// equivalent to: PIN_B1::PORT = 1; PIN_D3::PORT = 0; PIN_D2 = 1; PIN_D1 = 1;
+// equivalent to: PIN_B1::PORT = 1; PIN_D3::PORT = 0; PIN_D2 = 1; PIN_D1 = 1; but efficiently.
 ```
 
 ### Assigning / Reading multiple bits from provided registers in an optimized way:
@@ -133,35 +161,6 @@ enum class IOReg {
   DDRx, PORTx, PINx
 };
 ```
-
-
-### `typedef`s
-
-The pin layout is compatible to arduino / arduino lite.
-
-Prefix names in the following graph with `Pin_` to get
-provided `typedef`s.  Example: `B5` becomes `Pin_B5`, `8` becomes `Pin_8`
-
-```
-                                 ┏━u━┓
-                     C6    DIP_1 ┃   ┃ DIP_28   19   C5   ADC5   SCL
-RXD              0   D0    DIP_2 ┃   ┃ DIP_27   18   C4   ADC4   SDA
-TXD              1   D1    DIP_3 ┃   ┃ DIP_26   17   C3   ADC3
-        INT0     2   D2    DIP_4 ┃   ┃ DIP_25   16   C2   ADC2
-OC2B    INT1     3   D3    DIP_5 ┃   ┃ DIP_24   15   C1   ADC1
-XCK     T0       4   D4    DIP_6 ┃   ┃ DIP_23   14   C0   ADC0
-                             VCC ┃   ┃ GND
-                             GND ┃   ┃ AREF
-XTAL1   TOSC1   20   B6    DIP_9 ┃   ┃ AVCC
-XTAL2   TOSC2   21   B7   DIP_10 ┃   ┃ DIP_19   13   B5   SCK
-T1      OC0B     5   D5   DIP_11 ┃   ┃ DIP_18   12   B4   MISO
-AIN0    OC0A     6   D6   DIP_12 ┃   ┃ DIP_17   11   B3   MOSI   OC2A
-AIN1             7   D7   DIP_13 ┃   ┃ DIP_16   10   B2   SS     OC1B
-ICP1    CLK0     8   B0   DIP_14 ┃   ┃ DIP_15    9   B1          OC1A
-                                 ┗━━━┛
-```
-Pins `VCC`, `GND`, `AREF` and `AVCC` are only for documentation
-and don't provide `typedef`s.
 
 ### Example:
 
