@@ -4,6 +4,18 @@
 #include <avr/io.h>
 
 
+/**
+ * @brief Avr Atmegas access and control pins through registers.
+ *        The registers are 8 bit wide and up to 8 pins are therefore
+ *        controlled with every register.
+ * 
+ * * The DDR registers controls the data directions.  
+ * * The PORT registers the output or the pull up resistors.  
+ * * The PIN registers toggle the output or are used to read
+ *   values from pins.
+ * 
+ **/
+
 // PIN layout is compatible to arduino / arduino lite
 //                                      ┏━u━┓
 //             PCINT14            PC6  1┃   ┃28  PC5 (AI 5/*D19) PCINT13 ADC5 SCL
@@ -24,6 +36,7 @@
 
 
 namespace _ports {
+  
   enum class Port {
     B,
     C,
@@ -36,6 +49,16 @@ namespace _ports {
     PINx
   };
   
+  /**
+   * @brief Type safe enum for DataDirection.
+   * 
+   * When using this enum the compiler can verify that the correct
+   * register is used (i.e. casts to and from this enum are only
+   * implemented on the Pin::DDR variable.)
+   * 
+   * This enum is also used internally when one function implements
+   * either a read or a write operation depending on this enum.
+   **/
   enum class DataDirection {
     Read = 0,
     Write = 1,
@@ -45,6 +68,13 @@ namespace _ports {
     Out = Write
   };
   
+  /**
+   * @brief Type safe enum for the internal Pull Up resistor.
+   * 
+   * When using this enum the compiler can verify that the correct
+   * register is used (i.e. casts to and from this enum are only
+   * implemented on the Pin::PORT variable.)
+   **/
   enum class PullUp {
     Off = 0,
     On = 1,
@@ -54,41 +84,124 @@ namespace _ports {
   template <enum Port p, uint8_t b, enum IOReg io>
   struct _Io;
   
+  /**
+   * @brief Every pin has one ore multiple typedefs of this class.
+   * 
+   * The port name (enum Port) and the bit in the registers is provided
+   * as static variables.
+   * 
+   * In addition reading or setting the value of a pin is simplified
+   * through #DDR #PORT and #PIN which have cast converters from uint8_t.
+   * 
+   * Using those static members (#DDR, #PORT or #PIN) liberates you from
+   * writing bit operations.  If your pin is for instance B2, a typical
+   * way to  set the DDR value of the pin to 0 would have been:
+   * `PORTB &= ~(_BV(2));`.
+   * 
+   * The exact same thing may now be done by writing:
+   * `PORT_B2::DDR = 0;`
+   * 
+   * When using the enums #DataDirection or #PullUp the compiler
+   * verifies that the enum is used for the correct register.
+   * 
+   * The compiler does not verify that you are in the correct "mode".
+   * Calling setPullUp() when the pin is in output mode will change the
+   * output!  You would need to switch to input first
+   * (`DDR = DataDirection::Input;`).
+   **/
   template <enum Port p, uint8_t b>
   struct Pin {
+    
+    /// @brief The port name (enum Port) of this pin.
     static const enum Port port = p;
+    
+    /// @brief The bit position (0-7) inside the DDRx, PORTx or PINx
+    /// register.
     static const uint8_t   bit = b;
     
+    
     typedef _Io<p, b, IOReg::DDRx>  _DDR;
+    
+    /// @brief Simplified access to the DDR value of this pin.
+    ///
+    /// A cast operator of this variable allows you to read and write
+    /// the DDR value for this bit as if every bit had its own uint8_t.
+    ///
+    /// Cast operators to and from enum #DataDirection are also implemented
+    /// and prevent accidental use of an incorrect register.
+    /// 
+    /// Examples:
+    ///
+    /// * `PORT_C3::DDR = DataDirection::Input;`
+    /// * `uint8_t currentDDR = PORT_C3::DDR;`
+    /// * `enum DataDirection currentDDR2 = PORT_C3::DDR;`
     static _DDR DDR;
     
+    
     typedef _Io<p, b, IOReg::PORTx> _PORT;
+    
+    /// @brief Simplified access to the PORT value of this pin.
+    ///
+    /// A cast operator of this variable allows you to read and write
+    /// the PORT value for this bit as if every bit had its own uint8_t.
+    ///
+    /// Cast operators to and from enum #PullUp are also implemented and
+    /// prevent accidental use of an incorrect register.
+    ///
+    /// Examples:
+    ///
+    /// * `PORT_ADC4::PORT = 1;`
+    /// * `uint8_t currentPort = PORT_ADC4::PORT;`
+    /// * `enum PullUp currentPullUp = PORT_ADC4::PORT;`
     static _PORT PORT;
     
+    
     typedef _Io<p, b, IOReg::PINx>  _PIN;
+    
+    /// @brief Simplified access to the PIN value of this pin.
+    ///
+    /// A cast operator of this variable allows you to read and write
+    /// the DDR value for this bit as if every bit had its own uint8_t.
+    ///
+    /// Examples:
+    ///
+    /// * `PORT_C3::DDR = DataDirection::Input;`
+    /// * `uint8_t currentDDR = PORT_C3::DDR;`
+    /// * `DataDirection currentDDR2 = PORT_C3::DDR;`
     static _PIN PIN;
     
+    /// @brief Equivalent to `DDR = dd;`.
     static void setDD(const enum DataDirection dd) {
       DDR = (uint8_t) dd;
     }
     
+    /// @brief returns either DataDirection::In or DataDirection::Output
+    /// by reading from DDR and casting the bit value.
     static enum DataDirection getDD() {
       return DDR == 0 ? DataDirection::In : DataDirection::Out;
     }
     
+    /// @brief Equivalent to `PORT = pullUp;`.
     static void setPullUp(const enum PullUp pullUp) {
       PORT = (uint8_t) pullUp;
     }
     
+    /// @brief returns either PullUp::Off or PullUp::On
+    /// by reading from PORT and casting the bit value.
     static enum PullUp getPullUp() {
       return PORT == 0 ? PullUp::Off : PullUp::On;
     }
     
+    /// @brief Equivalent to first setting the data direction
+    /// `DDR = DataDirection::Input;` followed by setting the pull up
+    /// resistor: `PORT = pullup;`.
     static void setToInput(const enum PullUp pullUp) {
       setDD(DataDirection::Input);
       setPullUp(pullUp);
     }
     
+    /// @brief Equivalent to `PIN = 1;` which toggles the output if
+    /// pin is in output mode.
     static void toggle() { PIN = 1; }
   };
   
