@@ -173,7 +173,7 @@ Functions</h2></td></tr>
 <tr class="separator:ada41109199590d9ccafae0f6d2adaf99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad48d351c7d83de929acb9e149663d41"><td class="memTemplParams" colspan="2">template&lt;class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1, typename R  = uint8_t, typename V  = uint8_t&gt; </td></tr>
 <tr class="memitem:aad48d351c7d83de929acb9e149663d41"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#aad48d351c7d83de929acb9e149663d41">set_8_bits</a> (R &amp;rB __attribute__((unused)), R &amp;rC __attribute__((unused)), R &amp;rD __attribute__((unused)), const V &amp;val)</td></tr>
-<tr class="memdesc:aad48d351c7d83de929acb9e149663d41"><td class="mdescLeft">&#160;</td><td class="mdescRight">For every (<a class="el" href="../../d0/d6d/structports_1_1__Io.html" title="This class implements the cast operations from uint8_t and some enums. ">_Io</a>, 'bit position') pair template arguments, uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit to write on this register. Uses the bit in <code>val</code> at 'bit position' as value.  <a href="#aad48d351c7d83de929acb9e149663d41">More...</a><br /></td></tr>
+<tr class="memdesc:aad48d351c7d83de929acb9e149663d41"><td class="mdescLeft">&#160;</td><td class="mdescRight">For every (<a class="el" href="../../d0/d6d/structports_1_1__Io.html" title="This class implements the cast operations from uint8_t and some enums. ">_Io</a>, 'bit position') pair template arguments, uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit to write on this register. Uses the bit in val at 'bit position' as value.  <a href="#aad48d351c7d83de929acb9e149663d41">More...</a><br /></td></tr>
 <tr class="separator:aad48d351c7d83de929acb9e149663d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa361d75af5b2f101c6304d1385c023ce"><td class="memTemplParams" colspan="2">template&lt;class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1, typename R  = uint8_t&gt; </td></tr>
 <tr class="memitem:aa361d75af5b2f101c6304d1385c023ce"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#aa361d75af5b2f101c6304d1385c023ce">get_8_bits</a> (R &amp;rB __attribute__((unused)), R &amp;rC __attribute__((unused)), R &amp;rD __attribute__((unused)))</td></tr>
@@ -183,10 +183,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a19c06fd6aa6bf54de902e8ac44cc2e56"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#a19c06fd6aa6bf54de902e8ac44cc2e56">set_8_byte</a> (R &amp;rB __attribute__((unused)), R &amp;rC __attribute__((unused)), R &amp;rD __attribute__((unused)), const V &amp;val)</td></tr>
 <tr class="memdesc:a19c06fd6aa6bf54de902e8ac44cc2e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit * to write on this register. Assigns bit 7 from #val to the first <a class="el" href="../../d0/d6d/structports_1_1__Io.html" title="This class implements the cast operations from uint8_t and some enums. ">_Io</a>, bit 6 for the second,...  <a href="#a19c06fd6aa6bf54de902e8ac44cc2e56">More...</a><br /></td></tr>
 <tr class="separator:a19c06fd6aa6bf54de902e8ac44cc2e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7c53c89524885166881b936005b731e"><td class="memTemplParams" colspan="2">template&lt;class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED, typename R  = uint8_t&gt; </td></tr>
-<tr class="memitem:ad7c53c89524885166881b936005b731e"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#ad7c53c89524885166881b936005b731e">get_8_byte</a> (P &amp;rB __attribute__((unused)), R &amp;rC __attribute__((unused)), R &amp;rD __attribute__((unused)))</td></tr>
-<tr class="memdesc:ad7c53c89524885166881b936005b731e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit to read on this register. Returns the read value in uint8_t at the corresponding bit position.  <a href="#ad7c53c89524885166881b936005b731e">More...</a><br /></td></tr>
-<tr class="separator:ad7c53c89524885166881b936005b731e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c8245a3d0dc93b98260967a21c4db5b"><td class="memTemplParams" colspan="2">template&lt;class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED, typename R  = uint8_t&gt; </td></tr>
+<tr class="memitem:a8c8245a3d0dc93b98260967a21c4db5b"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#a8c8245a3d0dc93b98260967a21c4db5b">get_8_byte</a> (R &amp;rB __attribute__((unused)), R &amp;rC __attribute__((unused)), R &amp;rD __attribute__((unused)))</td></tr>
+<tr class="memdesc:a8c8245a3d0dc93b98260967a21c4db5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit to read on this register. Returns the read value in uint8_t at the corresponding bit position.  <a href="#a8c8245a3d0dc93b98260967a21c4db5b">More...</a><br /></td></tr>
+<tr class="separator:a8c8245a3d0dc93b98260967a21c4db5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9262ca010e65ff684986eef2900942f"><td class="memTemplParams" colspan="2"><a class="anchor" id="ac9262ca010e65ff684986eef2900942f"></a>
 template&lt;enum ports::_IOReg IOReg, class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1, typename V  = uint8_t&gt; </td></tr>
 <tr class="memitem:ac9262ca010e65ff684986eef2900942f"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>set_8_bits</b> (const V &amp;val)</td></tr>
@@ -559,7 +559,7 @@ template&lt;class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, clas
 
 </div>
 </div>
-<a class="anchor" id="ad7c53c89524885166881b936005b731e"></a>
+<a class="anchor" id="a8c8245a3d0dc93b98260967a21c4db5b"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -571,7 +571,7 @@ template&lt;class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4 
         <tr>
           <td class="memname">static uint8_t ports::get_8_byte </td>
           <td>(</td>
-          <td class="paramtype">P &amp;rB &#160;</td>
+          <td class="paramtype">R &amp;rB &#160;</td>
           <td class="paramname"><em>__attribute__</em>(unused), </td>
         </tr>
         <tr>
@@ -659,7 +659,7 @@ template&lt;class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, clas
 </table>
 </div><div class="memdoc">
 
-<p>For every (<a class="el" href="../../d0/d6d/structports_1_1__Io.html" title="This class implements the cast operations from uint8_t and some enums. ">_Io</a>, 'bit position') pair template arguments, uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit to write on this register. Uses the bit in <code>val</code> at 'bit position' as value. </p>
+<p>For every (<a class="el" href="../../d0/d6d/structports_1_1__Io.html" title="This class implements the cast operations from uint8_t and some enums. ">_Io</a>, 'bit position') pair template arguments, uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit to write on this register. Uses the bit in val at 'bit position' as value. </p>
 <p>Example: D7 == PIN_B3 and B7 == 2 and val == 0b11001100:</p>
 <p>PIN_B3 has port B and pin 3.</p>
 <p>Uses <code>val &amp; _BV(2)</code>, which is 1 and assigns it to rB at position 3 (remember: port B, pin 3).</p>
