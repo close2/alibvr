@@ -3,5 +3,9 @@
 MKDOC=$0
 P=$(dirname $MKDOC)
 
-dart $P/doc-code-collector/bin/main.dart
+cd "$P"
+
+doxygen
+
+dart doc-code-collector/bin/main.dart
 cp doc/build/README.md .
