@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:mime/mime.dart' as mime;
 
 /**
  * This script extracts code snippets from codeDir.
@@ -44,7 +45,7 @@ main(List<String> args) async {
     fileSnippets.forEach((match) => snippets[match.group(1)] = match.group(3));
   });
 
-  var d = new Directory(docDest);
+  var d = new Directory('$docDir/$docDest');
   if (d.exists()) {
     d.deleteSync(recursive: true);
   }
@@ -57,9 +58,23 @@ main(List<String> args) async {
     } else {
       var dirSrc = new Directory('$docDir/$docSource');
       docFiles =
-          dirSrc.listSync(recursive: true).where((fse) => isFile(fse.path));
+          dirSrc.listSync(recursive: true, followLinks: false).where((fse) => isFile(fse.path));
     }
     docFiles.forEach((File fse) {
+      var outFileName = fse.path.substring(docDir.length + 1);
+      var outFile = new File('${d.path}/$outFileName')
+        ..createSync(recursive: true);
+
+      var mimeType = mime.lookupMimeType(fse.path);
+      if (mimeType != null && !mimeType.startsWith('text')) {
+        var dest = outFile.path;
+        // assume binary or image and simply copy
+        outFile.deleteSync(); // create and delete so that recursive flag
+        // creates the directory structure
+        fse.copySync(dest);
+        return;
+      }
+
       String content = fse.readAsStringSync();
 
       // replace all occurences of +++SnippetName+++ with the snippet Code
@@ -68,12 +83,8 @@ main(List<String> args) async {
           (content, snippetName) =>
               content.replaceAll('+++$snippetName+++', snippets[snippetName]));
 
-      var outFileName = fse.path.substring(docDir.length + 1);
-
       // create outputFile:
-      new File('$docDest/$outFileName')
-        ..createSync(recursive: true)
-        ..writeAsStringSync(content);
+      outFile.writeAsStringSync(content);
     });
   }
 }

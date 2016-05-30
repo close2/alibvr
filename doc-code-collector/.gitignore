@@ -4,4 +4,6 @@
 packages
 pubspec.lock # (Remove this pattern if you wish to check in your lock file)
 
+doc/build
+
 .idea
