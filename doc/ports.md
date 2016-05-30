@@ -76,3 +76,49 @@ into simple `sbi` calls.
 
 
 
+
+
+Assembler output of a simple program.
+=====================================
+
+This objdump demonstrates that the compiler is able to optimize
+the C++ code into simple assembler calls.
+
+The Led example above compiled with `-Os` will produce the following code:
+
+```c-objdump
+build/led.o:     file format elf32-avr
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+removed 24 similar irq table entries, which all point to <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 40 00 	call	0x80	; 0x80 <main>
+  78:	0c 94 43 00 	jmp	0x86	; 0x86 <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <main>:
+  80:	3a 9a       	sbi	0x07, 2	; 7
+  82:	42 9a       	sbi	0x08, 2	; 8
+  84:	ff cf       	rjmp	.-2      	; 0x84 <main+0x4>
+
+00000086 <_exit>:
+  86:	f8 94       	cli
+
+00000088 <__stop_program>:
+  88:	ff cf       	rjmp	.-2      	; 0x88 <__stop_program>
+
+```
+
+

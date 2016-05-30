@@ -1,0 +1,102 @@
+\hypertarget{namespace__ports}{}\section{\+\_\+ports Namespace Reference}
+\label{namespace__ports}\index{\+\_\+ports@{\+\_\+ports}}
+
+
+Avr Atmegas access and control pins through registers. The registers are 8 bit wide and up to 8 pins are therefore controlled with every register.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__ports_1_1__Io}{\+\_\+\+Io}
+\item 
+struct \hyperlink{struct__ports_1_1Pin}{Pin}
+\begin{DoxyCompactList}\small\item\em Every pin has one ore multiple typedefs of this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries Port} \{ \\*
+{\bfseries B}, 
+\\*
+{\bfseries C}, 
+\\*
+{\bfseries D}
+ \}\hypertarget{namespace__ports_aeb4f39cd7ce364bad8e33bf417b9426b}{}\label{namespace__ports_aeb4f39cd7ce364bad8e33bf417b9426b}
+
+\item 
+enum {\bfseries I\+O\+Reg} \{ \\*
+{\bfseries D\+D\+Rx}, 
+\\*
+{\bfseries P\+O\+R\+Tx}, 
+\\*
+{\bfseries P\+I\+Nx}
+ \}\hypertarget{namespace__ports_a87369626c3b8294b283bf269ab0f7a9e}{}\label{namespace__ports_a87369626c3b8294b283bf269ab0f7a9e}
+
+\item 
+enum \hyperlink{namespace__ports_a20e5153351b42b5fd86473fa045c98ea}{Data\+Direction} \{ \\*
+{\bfseries Read} = 0, 
+\\*
+{\bfseries Write} = 1, 
+\\*
+{\bfseries Input} = Read, 
+\\*
+{\bfseries Output} = Write, 
+\\*
+{\bfseries In} = Read, 
+\\*
+{\bfseries Out} = Write
+ \}\begin{DoxyCompactList}\small\item\em Type safe enum for Data\+Direction. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespace__ports_a39c7c69d8e84949d7f7680e5b25a3742}{Pull\+Up} \{ \\*
+{\bfseries Off} = 0, 
+\\*
+{\bfseries On} = 1, 
+\\*
+{\bfseries HighZ} = Off
+ \}\begin{DoxyCompactList}\small\item\em Type safe enum for the internal Pull Up resistor. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Io , enum Data\+Direction Dd$>$ }\\uint8\+\_\+t {\bfseries \+\_\+set\+\_\+or\+\_\+get} (uint8\+\_\+t val)\hypertarget{namespace__ports_a781d3f5383608f336f740e714c2cc758}{}\label{namespace__ports_a781d3f5383608f336f740e714c2cc758}
+
+\item 
+{\footnotesize template$<$enum Data\+Direction Dd, class R $>$ }\\uint8\+\_\+t {\bfseries \+\_\+set\+\_\+or\+\_\+get\+\_\+f} (R \&reg, uint8\+\_\+t bit, uint8\+\_\+t value)\hypertarget{namespace__ports_a2e35face5e603bbecee1769438712116}{}\label{namespace__ports_a2e35face5e603bbecee1769438712116}
+
+\item 
+{\footnotesize template$<$class D7 , uint8\+\_\+t B7, class D6 , uint8\+\_\+t B6, class D5 , uint8\+\_\+t B5, class D4 , uint8\+\_\+t B4, class D3 , uint8\+\_\+t B3, class D2 , uint8\+\_\+t B2, class D1 , uint8\+\_\+t B1, class D0 , uint8\+\_\+t B0, enum Data\+Direction Dd, typename V , typename P $>$ }\\static uint8\+\_\+t {\bfseries \+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits} (P \&portB \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), P \&portC \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), P \&portD \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), const V \&val)\hypertarget{namespace__ports_ad68eeb9c395918e6b4b8fa3a3541000b}{}\label{namespace__ports_ad68eeb9c395918e6b4b8fa3a3541000b}
+
+\item 
+{\footnotesize template$<$enum I\+O\+Reg Reg, class D7 , uint8\+\_\+t B7, class D6 , uint8\+\_\+t B6, class D5 , uint8\+\_\+t B5, class D4 , uint8\+\_\+t B4, class D3 , uint8\+\_\+t B3, class D2 , uint8\+\_\+t B2, class D1 , uint8\+\_\+t B1, class D0 , uint8\+\_\+t B0, enum Data\+Direction Dd, typename V , typename P $>$ }\\static uint8\+\_\+t {\bfseries \+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits} (const V \&val)\hypertarget{namespace__ports_a5cfab313489ac3e5c3a7370a853410e4}{}\label{namespace__ports_a5cfab313489ac3e5c3a7370a853410e4}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Avr Atmegas access and control pins through registers. The registers are 8 bit wide and up to 8 pins are therefore controlled with every register. 
+
+
+\begin{DoxyItemize}
+\item The D\+DR registers controls the data directions.
+\item The P\+O\+RT registers the output or the pull up resistors.
+\item The P\+IN registers toggle the output or are used to read values from pins. 
+\end{DoxyItemize}
+
+\subsection{Enumeration Type Documentation}
+\index{\+\_\+ports@{\+\_\+ports}!Data\+Direction@{Data\+Direction}}
+\index{Data\+Direction@{Data\+Direction}!\+\_\+ports@{\+\_\+ports}}
+\subsubsection[{\texorpdfstring{Data\+Direction}{DataDirection}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf \+\_\+ports\+::\+Data\+Direction}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{namespace__ports_a20e5153351b42b5fd86473fa045c98ea}{}\label{namespace__ports_a20e5153351b42b5fd86473fa045c98ea}
+
+
+Type safe enum for Data\+Direction. 
+
+When using this enum the compiler can verify that the correct register is used (i.\+e. casts to and from this enum are only implemented on the \hyperlink{struct__ports_1_1Pin_a98b2b6c1bbac0b66435fa91223add866}{Pin\+::\+D\+DR} variable.)
+
+This enum is also used internally when one function implements either a read or a write operation depending on this enum. \index{\+\_\+ports@{\+\_\+ports}!Pull\+Up@{Pull\+Up}}
+\index{Pull\+Up@{Pull\+Up}!\+\_\+ports@{\+\_\+ports}}
+\subsubsection[{\texorpdfstring{Pull\+Up}{PullUp}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf \+\_\+ports\+::\+Pull\+Up}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{namespace__ports_a39c7c69d8e84949d7f7680e5b25a3742}{}\label{namespace__ports_a39c7c69d8e84949d7f7680e5b25a3742}
+
+
+Type safe enum for the internal Pull Up resistor. 
+
+When using this enum the compiler can verify that the correct register is used (i.\+e. casts to and from this enum are only implemented on the \hyperlink{struct__ports_1_1Pin_a7ae4c8a631070ea0652b8ea59416bc37}{Pin\+::\+P\+O\+RT} variable.) 

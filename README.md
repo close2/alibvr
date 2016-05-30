@@ -35,7 +35,7 @@ Usage:
 
 ## ports.h
 
-See [doc/ports.md](ports) for a detailed description.
+See the [doc/doxygen](doxygen) documentation for a detailed description.
 
 Contains the `typedef` definitions for all pins.
 
@@ -83,10 +83,10 @@ typedef PIN_C2 Pin_In;   // Give PIN_C2 a meaningful name.
 
 // Use your favorite way of setting DDR of pin C2:
 Pin_In::DDR = 0;         // PIN_C2::DDR = 0; would work as well.
-Pin_In::DDR = _ports::DataDirection::Read;  // Use the (safer) provided enum.
-Pin_In::setDd(_ports::DataDirection::Read); // Equivalent to the previous line.
+Pin_In::DDR = ports::DataDirection::Read;  // Use the (safer) provided enum.
+Pin_In::setDd(ports::DataDirection::Read); // Equivalent to the previous line.
 
-Pin_In::setToInput(_ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
+Pin_In::setToInput(ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
 
 uint8_t i = Pin_In::PIN; // Read a value.
 ```
@@ -94,7 +94,7 @@ uint8_t i = Pin_In::PIN; // Read a value.
 ### Assigning / Reading multiple DDR, PORT or PIN bits in an optimized way:
 
 ```C++
-// Possible IORegs: _ports::IOReg::DDRx, _ports::IOReg::PINx and _ports::IOReg::PORTx
+// Possible IORegs: ports::IOReg::DDRx, ports::IOReg::PINx and ports::IOReg::PORTx
 
 //               #       *                   §       ~       ¤       |         #* §~¤|
 set_8_byte<DDRx, PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(0b11110000);
@@ -103,7 +103,7 @@ set_8_byte<DDRx, PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(0b1
 // DDRB = (DDRB & 0b11111101) | 0b00000010;
 // DDRD = (DDRD & 0b01000011) | 0b00010100;
 
-uint8_t x1 = get_8_byte<_ports::IOReg::DDRx,
+uint8_t x1 = get_8_byte<ports::IOReg::DDRx,
                         PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>();
 // Unused pins are read as 0.
 // If called after the previous set_8_byte would return 0b11010000
@@ -114,7 +114,7 @@ set_8_bits<DDRx, PIN_D7, 1, PIN_D3, 2, PIN_B1, 7, PIN_D2, 6, PIN_D4, 4, PIN_D5, 
 // Equivalent to previous set_8_byte instruction.
 
 // Specify which bit in returned value is which pin:
-uint8_t x2 = get_8_bits<_ports::IOReg::DDRx,
+uint8_t x2 = get_8_bits<ports::IOReg::DDRx,
                         PIN_D7, 1,
                         PIN_D3, 2,
                         PIN_B1, 7,

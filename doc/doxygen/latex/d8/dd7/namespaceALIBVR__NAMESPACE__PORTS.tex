@@ -1,0 +1,89 @@
+\hypertarget{namespaceALIBVR__NAMESPACE__PORTS}{}\section{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS Namespace Reference}
+\label{namespaceALIBVR__NAMESPACE__PORTS}\index{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS@{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS}}
+
+
+Avr Atmegas access and control pins through registers. The registers are 8 bit wide and up to 8 pins are therefore controlled with every register.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structALIBVR__NAMESPACE__PORTS_1_1__Io}{\+\_\+\+Io}
+\item 
+struct \hyperlink{structALIBVR__NAMESPACE__PORTS_1_1Pin}{Pin}
+\begin{DoxyCompactList}\small\item\em Every pin has one ore multiple typedefs of this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries Port} \{ \\*
+{\bfseries B}, 
+\\*
+{\bfseries C}, 
+\\*
+{\bfseries D}
+ \}\hypertarget{namespaceALIBVR__NAMESPACE__PORTS_ae3a5aac33310f4589bb60b1effac7117}{}\label{namespaceALIBVR__NAMESPACE__PORTS_ae3a5aac33310f4589bb60b1effac7117}
+
+\item 
+enum {\bfseries I\+O\+Reg} \{ \\*
+{\bfseries D\+D\+Rx}, 
+\\*
+{\bfseries P\+O\+R\+Tx}, 
+\\*
+{\bfseries P\+I\+Nx}
+ \}\hypertarget{namespaceALIBVR__NAMESPACE__PORTS_abe0c7d9ac42bf0b4ef88be60953d156f}{}\label{namespaceALIBVR__NAMESPACE__PORTS_abe0c7d9ac42bf0b4ef88be60953d156f}
+
+\item 
+enum \hyperlink{namespaceALIBVR__NAMESPACE__PORTS_a1c84bd36a7c4d1204c926927f8534ed4}{Data\+Direction} \{ \\*
+{\bfseries Read} = 0, 
+\\*
+{\bfseries Write} = 1, 
+\\*
+{\bfseries Input} = Read, 
+\\*
+{\bfseries Output} = Write, 
+\\*
+{\bfseries In} = Read, 
+\\*
+{\bfseries Out} = Write
+ \}\begin{DoxyCompactList}\small\item\em Type safe enum for Data\+Direction. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespaceALIBVR__NAMESPACE__PORTS_ac5b094ab18f4038d56ff1401ebe8d4f3}{Pull\+Up} \{ \\*
+{\bfseries Off} = 0, 
+\\*
+{\bfseries On} = 1, 
+\\*
+{\bfseries HighZ} = Off
+ \}\begin{DoxyCompactList}\small\item\em Type safe enum for the internal Pull Up resistor. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Avr Atmegas access and control pins through registers. The registers are 8 bit wide and up to 8 pins are therefore controlled with every register. 
+
+
+\begin{DoxyItemize}
+\item The D\+DR registers controls the data directions.
+\item The P\+O\+RT registers the output or the pull up resistors.
+\item The P\+IN registers toggle the output or are used to read values from pins.
+\end{DoxyItemize}
+
+By default ports related classes, enums,... are defined inside the {\ttfamily ports} namespace. If this creates a name clash with your code you may modify the namespace name by setting \hyperlink{namespaceALIBVR__NAMESPACE__PORTS}{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS} or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. 
+
+\subsection{Enumeration Type Documentation}
+\index{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS@{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS}!Data\+Direction@{Data\+Direction}}
+\index{Data\+Direction@{Data\+Direction}!A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS@{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS}}
+\subsubsection[{\texorpdfstring{Data\+Direction}{DataDirection}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+T\+S\+::\+Data\+Direction}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{namespaceALIBVR__NAMESPACE__PORTS_a1c84bd36a7c4d1204c926927f8534ed4}{}\label{namespaceALIBVR__NAMESPACE__PORTS_a1c84bd36a7c4d1204c926927f8534ed4}
+
+
+Type safe enum for Data\+Direction. 
+
+When using this enum the compiler can verify that the correct register is used (i.\+e. casts to and from this enum are only implemented on the \hyperlink{structALIBVR__NAMESPACE__PORTS_1_1Pin_a91515b99dfbd7423ffa4771ec32bfbe8}{Pin\+::\+D\+DR} variable.)
+
+This enum is also used internally when one function implements either a read or a write operation depending on this enum. \index{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS@{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS}!Pull\+Up@{Pull\+Up}}
+\index{Pull\+Up@{Pull\+Up}!A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS@{A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS}}
+\subsubsection[{\texorpdfstring{Pull\+Up}{PullUp}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+T\+S\+::\+Pull\+Up}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{namespaceALIBVR__NAMESPACE__PORTS_ac5b094ab18f4038d56ff1401ebe8d4f3}{}\label{namespaceALIBVR__NAMESPACE__PORTS_ac5b094ab18f4038d56ff1401ebe8d4f3}
+
+
+Type safe enum for the internal Pull Up resistor. 
+
+When using this enum the compiler can verify that the correct register is used (i.\+e. casts to and from this enum are only implemented on the \hyperlink{structALIBVR__NAMESPACE__PORTS_1_1Pin_aaa60d0cc181d9170487e5429a3c63227}{Pin\+::\+P\+O\+RT} variable.) 
