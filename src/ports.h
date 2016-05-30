@@ -736,168 +736,168 @@ namespace NS {
     D2, B2,
     D1, B1,
     D0, B0>(rB, rC, rD, val);
-                                }
-                                
-                                
-                                /**
-                                 * @brief For every (_Io, 'bit position') pair template arguments, uses
-                                 * _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit
-                                 * to read on this register.  Returns the read value in uint8_t at
-                                 * 'bit position'.
-                                 * 
-                                 * Example: D7 == PIN_B3 and B7 == 2:
-                                 * 
-                                 * PIN_B3 has port B and pin 3.
-                                 * 
-                                 * Uses `rB & _BV(3)` and returns it at bit position 2.
-                                 * 
-                                 * @tparam Dx Dx::port and Dx::pin must be defined
-                                 * @tparam Bx the bit position
-                                 **/
-                                template <class D7, uint8_t B7,
-                                class D6 = PIN_UNUSED, uint8_t B6 = -1,
-                                class D5 = PIN_UNUSED, uint8_t B5 = -1,
-                                class D4 = PIN_UNUSED, uint8_t B4 = -1,
-                                class D3 = PIN_UNUSED, uint8_t B3 = -1,
-                                class D2 = PIN_UNUSED, uint8_t B2 = -1,
-                                class D1 = PIN_UNUSED, uint8_t B1 = -1,
-                                class D0 = PIN_UNUSED, uint8_t B0 = -1,
-                                typename R = uint8_t>
-                                inline static uint8_t get_8_bits(R& rB __attribute__ ((unused)),
-                                                                 R& rC __attribute__ ((unused)),
-                                                                 R& rD __attribute__ ((unused))) {
-                                  return NS::_set_or_get_8_bits<NS::DataDirection::Read, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(rB, rC, rD, 0);
-                                                                 }
-                                                                 
-                                                                 
-                                                                 /**
-                                                                  * @brief Uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide
-                                                                  * which bit * to write on this register.
-                                                                  * Assigns bit 7 from #val to the first _Io, bit 6 for the second,...
-                                                                  * 
-                                                                  * Example: D7 == PIN_B3 and val == 0b11001100:
-                                                                  * 
-                                                                  * PIN_B3 has port B and pin 3.
-                                                                  * 
-                                                                  * Uses `val & _BV(7)`, which is 1 and assigns it to rB
-                                                                  *   at position 3 (remember: port B, pin 3).
-                                                                  * 
-                                                                  * @tparam Dx Dx::port and Dx::pin must be defined
-                                                                  **/
-                                                                 template <class D7,
-                                                                 class D6 = PIN_UNUSED,
-                                                                 class D5 = PIN_UNUSED,
-                                                                 class D4 = PIN_UNUSED,
-                                                                 class D3 = PIN_UNUSED,
-                                                                 class D2 = PIN_UNUSED,
-                                                                 class D1 = PIN_UNUSED,
-                                                                 class D0 = PIN_UNUSED,
-                                                                 typename R = uint8_t,
-                                                                 typename V = uint8_t>
-                                                                 inline static void set_8_byte(R& rB __attribute__ ((unused)),
-                                                                                               R& rC __attribute__ ((unused)),
-                                                                                               R& rD __attribute__ ((unused)),
-                                                                                               const V& val) {
-                                                                   set_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, val);
-                                                                                               }
-                                                                                               
-                                                                                               
-                                                                                               /**
-                                                                                                * @brief Uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide
-                                                                                                * which bit to read on this register.
-                                                                                                * Returns the read value in uint8_t at the corresponding bit position.
-                                                                                                * 
-                                                                                                * For the first _Io in bit 7, the second _Io in bit 6,...
-                                                                                                * 
-                                                                                                * Example: D7 == PIN_B3
-                                                                                                * 
-                                                                                                * PIN_B3 has port B and pin 3.
-                                                                                                * 
-                                                                                                * Uses `rB & _BV(3)` and returns it at bit position 7.
-                                                                                                * 
-                                                                                                * @tparam Dx Dx::port and Dx::pin must be defined
-                                                                                                **/
-                                                                                               template <class D7,
-                                                                                               class D6 = PIN_UNUSED,
-                                                                                               class D5 = PIN_UNUSED,
-                                                                                               class D4 = PIN_UNUSED,
-                                                                                               class D3 = PIN_UNUSED,
-                                                                                               class D2 = PIN_UNUSED,
-                                                                                               class D1 = PIN_UNUSED,
-                                                                                               class D0 = PIN_UNUSED,
-                                                                                               typename R = uint8_t>
-                                                                                               inline static uint8_t get_8_byte(P& rB __attribute__ ((unused)),
-                                                                                                                                R& rC __attribute__ ((unused)),
-                                                                                                                                R& rD __attribute__ ((unused))) {
-                                                                                                 return get_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, 0);
-                                                                                                                                }
-                                                                                                                                
-                                                                                                                                
-                                                                                                                                template <enum NS::_IOReg IOReg,
-                                                                                                                                class D7, uint8_t B7,
-                                                                                                                                class D6 = PIN_UNUSED, uint8_t B6 = -1,
-                                                                                                                                class D5 = PIN_UNUSED, uint8_t B5 = -1,
-                                                                                                                                class D4 = PIN_UNUSED, uint8_t B4 = -1,
-                                                                                                                                class D3 = PIN_UNUSED, uint8_t B3 = -1,
-                                                                                                                                class D2 = PIN_UNUSED, uint8_t B2 = -1,
-                                                                                                                                class D1 = PIN_UNUSED, uint8_t B1 = -1,
-                                                                                                                                class D0 = PIN_UNUSED, uint8_t B0 = -1,
-                                                                                                                                typename V = uint8_t>
-                                                                                                                                inline static void set_8_bits(const V& val) {
-                                                                                                                                  NS::_set_or_get_8_bits<NS::DataDirection::Write, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(val);
-                                                                                                                                }
-                                                                                                                                
-                                                                                                                                template <enum NS::_IOReg IOReg,
-                                                                                                                                class D7, uint8_t B7,
-                                                                                                                                class D6 = PIN_UNUSED, uint8_t B6 = -1,
-                                                                                                                                class D5 = PIN_UNUSED, uint8_t B5 = -1,
-                                                                                                                                class D4 = PIN_UNUSED, uint8_t B4 = -1,
-                                                                                                                                class D3 = PIN_UNUSED, uint8_t B3 = -1,
-                                                                                                                                class D2 = PIN_UNUSED, uint8_t B2 = -1,
-                                                                                                                                class D1 = PIN_UNUSED, uint8_t B1 = -1,
-                                                                                                                                class D0 = PIN_UNUSED, uint8_t B0 = -1>
-                                                                                                                                inline static uint8_t get_8_bits() {
-                                                                                                                                  return NS::_set_or_get_8_bits<NS::DataDirection::Read, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(0);
-                                                                                                                                }
-                                                                                                                                
-                                                                                                                                template <enum NS::_IOReg IOReg,
-                                                                                                                                class D7,
-                                                                                                                                class D6 = PIN_UNUSED,
-                                                                                                                                class D5 = PIN_UNUSED,
-                                                                                                                                class D4 = PIN_UNUSED,
-                                                                                                                                class D3 = PIN_UNUSED,
-                                                                                                                                class D2 = PIN_UNUSED,
-                                                                                                                                class D1 = PIN_UNUSED,
-                                                                                                                                class D0 = PIN_UNUSED>
-                                                                                                                                inline static uint8_t get_8_byte() {
-                                                                                                                                  return get_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>();
-                                                                                                                                }
-                                                                                                                                
-                                                                                                                                template <enum NS::_IOReg IOReg,
-                                                                                                                                class D7,
-                                                                                                                                class D6 = PIN_UNUSED,
-                                                                                                                                class D5 = PIN_UNUSED,
-                                                                                                                                class D4 = PIN_UNUSED,
-                                                                                                                                class D3 = PIN_UNUSED,
-                                                                                                                                class D2 = PIN_UNUSED,
-                                                                                                                                class D1 = PIN_UNUSED,
-                                                                                                                                class D0 = PIN_UNUSED,
-                                                                                                                                typename V = uint8_t>
-                                                                                                                                inline static void set_8_byte(const V& val) {
-                                                                                                                                  set_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(val);
-                                                                                                                                }
-                                                                                                                                
-                                                                                                                                
-                                                                                                                                template <enum NS::_IOReg IOReg,
-                                                                                                                                uint8_t offset,
-                                                                                                                                class D3,
-                                                                                                                                class D2,
-                                                                                                                                class D1,
-                                                                                                                                class D0,
-                                                                                                                                typename V>
-                                                                                                                                inline static void set_4_nibble(V& val) {
-                                                                                                                                  set_8_byte<IOReg, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, D3, 3 + offset, D2, 2 + offset, D1, 1 + offset, D0, 0 + offset>(val);
-                                                                                                                                }
+  }
+
+
+  /**
+   * @brief For every (_Io, 'bit position') pair template arguments, uses
+   * _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit
+   * to read on this register.  Returns the read value in uint8_t at
+   * 'bit position'.
+   * 
+   * Example: D7 == PIN_B3 and B7 == 2:
+   * 
+   * PIN_B3 has port B and pin 3.
+   * 
+   * Uses `rB & _BV(3)` and returns it at bit position 2.
+   * 
+   * @tparam Dx Dx::port and Dx::pin must be defined
+   * @tparam Bx the bit position
+   **/
+  template <class D7, uint8_t B7,
+  class D6 = PIN_UNUSED, uint8_t B6 = -1,
+  class D5 = PIN_UNUSED, uint8_t B5 = -1,
+  class D4 = PIN_UNUSED, uint8_t B4 = -1,
+  class D3 = PIN_UNUSED, uint8_t B3 = -1,
+  class D2 = PIN_UNUSED, uint8_t B2 = -1,
+  class D1 = PIN_UNUSED, uint8_t B1 = -1,
+  class D0 = PIN_UNUSED, uint8_t B0 = -1,
+  typename R = uint8_t>
+  inline static uint8_t get_8_bits(R& rB __attribute__ ((unused)),
+                                   R& rC __attribute__ ((unused)),
+                                   R& rD __attribute__ ((unused))) {
+    return NS::_set_or_get_8_bits<NS::DataDirection::Read, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(rB, rC, rD, 0);
+  }
+
+
+  /**
+   * @brief Uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide
+   * which bit * to write on this register.
+   * Assigns bit 7 from #val to the first _Io, bit 6 for the second,...
+   * 
+   * Example: D7 == PIN_B3 and val == 0b11001100:
+   * 
+   * PIN_B3 has port B and pin 3.
+   * 
+   * Uses `val & _BV(7)`, which is 1 and assigns it to rB
+   *   at position 3 (remember: port B, pin 3).
+   * 
+   * @tparam Dx Dx::port and Dx::pin must be defined
+   **/
+  template <class D7,
+  class D6 = PIN_UNUSED,
+  class D5 = PIN_UNUSED,
+  class D4 = PIN_UNUSED,
+  class D3 = PIN_UNUSED,
+  class D2 = PIN_UNUSED,
+  class D1 = PIN_UNUSED,
+  class D0 = PIN_UNUSED,
+  typename R = uint8_t,
+  typename V = uint8_t>
+  inline static void set_8_byte(R& rB __attribute__ ((unused)),
+                                R& rC __attribute__ ((unused)),
+                                R& rD __attribute__ ((unused)),
+                                const V& val) {
+    set_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, val);
+  }
+
+
+  /**
+   * @brief Uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide
+   * which bit to read on this register.
+   * Returns the read value in uint8_t at the corresponding bit position.
+   * 
+   * For the first _Io in bit 7, the second _Io in bit 6,...
+   * 
+   * Example: D7 == PIN_B3
+   * 
+   * PIN_B3 has port B and pin 3.
+   * 
+   * Uses `rB & _BV(3)` and returns it at bit position 7.
+   * 
+   * @tparam Dx Dx::port and Dx::pin must be defined
+   **/
+  template <class D7,
+  class D6 = PIN_UNUSED,
+  class D5 = PIN_UNUSED,
+  class D4 = PIN_UNUSED,
+  class D3 = PIN_UNUSED,
+  class D2 = PIN_UNUSED,
+  class D1 = PIN_UNUSED,
+  class D0 = PIN_UNUSED,
+  typename R = uint8_t>
+  inline static uint8_t get_8_byte(R& rB __attribute__ ((unused)),
+                                   R& rC __attribute__ ((unused)),
+                                   R& rD __attribute__ ((unused))) {
+    return get_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, 0);
+  }
+
+
+  template <enum NS::_IOReg IOReg,
+  class D7, uint8_t B7,
+  class D6 = PIN_UNUSED, uint8_t B6 = -1,
+  class D5 = PIN_UNUSED, uint8_t B5 = -1,
+  class D4 = PIN_UNUSED, uint8_t B4 = -1,
+  class D3 = PIN_UNUSED, uint8_t B3 = -1,
+  class D2 = PIN_UNUSED, uint8_t B2 = -1,
+  class D1 = PIN_UNUSED, uint8_t B1 = -1,
+  class D0 = PIN_UNUSED, uint8_t B0 = -1,
+  typename V = uint8_t>
+  inline static void set_8_bits(const V& val) {
+    NS::_set_or_get_8_bits<NS::DataDirection::Write, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(val);
+  }
+  
+  template <enum NS::_IOReg IOReg,
+  class D7, uint8_t B7,
+  class D6 = PIN_UNUSED, uint8_t B6 = -1,
+  class D5 = PIN_UNUSED, uint8_t B5 = -1,
+  class D4 = PIN_UNUSED, uint8_t B4 = -1,
+  class D3 = PIN_UNUSED, uint8_t B3 = -1,
+  class D2 = PIN_UNUSED, uint8_t B2 = -1,
+  class D1 = PIN_UNUSED, uint8_t B1 = -1,
+  class D0 = PIN_UNUSED, uint8_t B0 = -1>
+  inline static uint8_t get_8_bits() {
+    return NS::_set_or_get_8_bits<NS::DataDirection::Read, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(0);
+  }
+  
+  template <enum NS::_IOReg IOReg,
+  class D7,
+  class D6 = PIN_UNUSED,
+  class D5 = PIN_UNUSED,
+  class D4 = PIN_UNUSED,
+  class D3 = PIN_UNUSED,
+  class D2 = PIN_UNUSED,
+  class D1 = PIN_UNUSED,
+  class D0 = PIN_UNUSED>
+  inline static uint8_t get_8_byte() {
+    return get_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>();
+  }
+  
+  template <enum NS::_IOReg IOReg,
+  class D7,
+  class D6 = PIN_UNUSED,
+  class D5 = PIN_UNUSED,
+  class D4 = PIN_UNUSED,
+  class D3 = PIN_UNUSED,
+  class D2 = PIN_UNUSED,
+  class D1 = PIN_UNUSED,
+  class D0 = PIN_UNUSED,
+  typename V = uint8_t>
+  inline static void set_8_byte(const V& val) {
+    set_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(val);
+  }
+  
+  
+  template <enum NS::_IOReg IOReg,
+  uint8_t offset,
+  class D3,
+  class D2,
+  class D1,
+  class D0,
+  typename V>
+  inline static void set_4_nibble(V& val) {
+    set_8_byte<IOReg, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, D3, 3 + offset, D2, 2 + offset, D1, 1 + offset, D0, 0 + offset>(val);
+  }
 }
 
 #pragma pop_macro("NS")
