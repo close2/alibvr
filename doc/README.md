@@ -25,7 +25,7 @@ functions.  This library will never create objects!
 
 Pins are assigned using `typedef`s instead of macros.
 
-Using C++ templates it should be possible to have very few / none C-macros.
+Using C++ templates it should be possible to have very few / no C-macros.
 Also C++ templates are all "resolved" during compile time.  This means that
 the produced code is very compact.
 
@@ -79,16 +79,7 @@ and don't provide `typedef`s.
 ### Setting or reading single DDR, PORT or PIN bits:
 
 ```C++
-typedef PIN_C2 Pin_In;   // Give PIN_C2 a meaningful name.
-
-// Use your favorite way of setting DDR of pin C2:
-Pin_In::DDR = 0;         // PIN_C2::DDR = 0; would work as well.
-Pin_In::DDR = ports::DataDirection::Read;  // Use the (safer) provided enum.
-Pin_In::setDd(ports::DataDirection::Read); // Equivalent to the previous line.
-
-Pin_In::setToInput(ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
-
-uint8_t i = Pin_In::PIN; // Read a value.
++++PORTS_DDR_PORT_PIN+++
 ```
 
 ### Assigning / Reading multiple DDR, PORT or PIN bits in an optimized way:
