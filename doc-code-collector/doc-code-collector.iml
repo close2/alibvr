@@ -5,9 +5,9 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/bin/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/test/build/doxygen/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/test/build/doxygen/rec_1/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/test/build/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/test/doc/build/doxygen/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/test/doc/build/doxygen/rec_1/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/test/doc/build/packages" />
       <excludeFolder url="file://$MODULE_DIR$/test/doc/code/packages" />
       <excludeFolder url="file://$MODULE_DIR$/test/doc/code/rec1/packages" />
       <excludeFolder url="file://$MODULE_DIR$/test/doc/doxygen/packages" />
