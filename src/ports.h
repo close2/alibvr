@@ -36,6 +36,8 @@
  * Prefix names in the following graph with `Pin_` to get
  * provided `typedef`s.  Example: `B5` becomes `Pin_B5`, `8` becomes `Pin_8`
  * 
+ * «PORT_TYPEDEFS[^ \* ,]»
+ * 
  * ```
  *                                  ┏━u━┓
  *                      C6    DIP_1 ┃   ┃ DIP_28   19   C5   ADC5   SCL
@@ -54,6 +56,7 @@
  * ICP1    CLK0     8   B0   DIP_14 ┃   ┃ DIP_15    9   B1          OC1A
  *                                  ┗━━━┛
  * ```
+ * ¤
  **/
 
 
