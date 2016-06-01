@@ -32,11 +32,23 @@ bool isFile(String path) {
   return FileSystemEntity.typeSync(path) == FileSystemEntityType.FILE;
 }
 
+String applyRegExp(String input, String regFrom, String regTo) {
+  if (regFrom == null || regTo == null) {
+    return input;
+  }
+  var r = new RegExp(regFrom);
+  return input.split('\n').map((line) => line.replaceAll(r, regTo)).join('\n');
+}
+
 main(List<String> args) async {
   // Go recursively over all code files and build map of code snippets.
   var dir = new Directory('$docDir/$codeDir');
 
   var files = dir.list(recursive: true);
+
+  const rRegFrom = r'([^,]+)';
+  const rRegTo = r'([^\]]+)';
+  const rReg = r'(\[' + rRegFrom + r'\,' + rRegTo + r'\])?';
 
   await files.where((fse) => isFile(fse.path)).forEach((fse) {
     String content = (fse as File).readAsStringSync();
@@ -51,9 +63,6 @@ main(List<String> args) async {
     // « or ¤*/ do not have to be at the beginning or end of a line.
     // Nested snippets are not yet supported.
     const rSnippetName = r'([^»\[]+)';
-    const rRegFrom = r'([^,]+)';
-    const rRegTo = r'([^\]]+)';
-    const rReg = r'(\[' + rRegFrom + r'\,' + rRegTo + r'\])?';
     const rEndComment = r'(\*/)?';
     const rCode = r'([^¤]*)';
     const rEnd = r'(¤[^*]|/\*¤\*/)';
@@ -63,26 +72,13 @@ main(List<String> args) async {
     var fileSnippets = regExp.allMatches(content);
 
     fileSnippets.forEach((match) {
-      for (int i = 1; i < match.groupCount + 1; i++) {
-        print('$i: |||${match.group(i)}|||');
-      }
-    });
+      var name = match[1];
+      var code = match[6];
 
-    fileSnippets.forEach((match) {
-      var name = match.group(1);
-      var code = match.group(6);
-
-      var regFrom = match.group(3);
-      var regTo = match.group(4);
-      if (regFrom != null && regTo != null) {
-        var r = new RegExp(regFrom);
-        code = code
-            .split('\n')
-            .map((line) => line.replaceAll(r, regTo))
-            .join('\n');
-      }
+      var regFrom = match[3];
+      var regTo = match[4];
+      code = applyRegExp(code, regFrom, regTo);
       snippets[name] = code;
-      print("Adding $name: $code");
     });
   });
 
@@ -120,10 +116,14 @@ main(List<String> args) async {
       String content = fse.readAsStringSync();
 
       // replace all occurences of +++SnippetName+++ with the snippet Code
-      content = snippets.keys.fold(
-          content,
-          (content, snippetName) =>
-              content.replaceAll('+++$snippetName+++', snippets[snippetName]));
+      content = snippets.keys.fold(content, (String content, snippetName) {
+        var r = r'\+\+\+' + snippetName + rReg + r'\+\+\+';
+        var reg = new RegExp(r);
+        return content.replaceAllMapped(reg, (m) {
+          var sn = snippets[snippetName];
+          return applyRegExp(sn, m[2], m[3]);
+        });
+      });
 
       // create outputFile:
       outFile.writeAsStringSync(content);
