@@ -55,6 +55,8 @@ The pin layout is compatible to arduino / arduino lite.
 Prefix names in the following graph with `Pin_` to get
 provided `typedef`s.  Example: `B5` becomes `Pin_B5`, `8` becomes `Pin_8`
 
+
+
 ```
                                  ┏━u━┓
                      C6    DIP_1 ┃   ┃ DIP_28   19   C5   ADC5   SCL
@@ -73,6 +75,8 @@ AIN1             7   D7   DIP_13 ┃   ┃ DIP_16   10   B2   SS     OC1B
 ICP1    CLK0     8   B0   DIP_14 ┃   ┃ DIP_15    9   B1          OC1A
                                  ┗━━━┛
 ```
+
+
 Pins `VCC`, `GND`, `AREF` and `AVCC` are only for documentation
 and don't provide `typedef`s.
 
@@ -80,17 +84,17 @@ and don't provide `typedef`s.
 
 ```C++
 
-  typedef PIN_C2 Pin_In;   // Give PIN_C2 a meaningful name.
+typedef PIN_C2 Pin_In;   // Give PIN_C2 a meaningful name.
 
-  // Use your favorite way of setting DDR of pin C2:
-  Pin_In::DDR = 0;         // PIN_C2::DDR = 0; would work as well.
-  Pin_In::DDR = ports::DataDirection::Read;  // Use the (safer) provided enum.
-  Pin_In::setDD(ports::DataDirection::Read); // Equivalent to the previous line.
+// Use your favorite way of setting DDR of pin C2:
+Pin_In::DDR = 0;         // PIN_C2::DDR = 0; would work as well.
+Pin_In::DDR = ports::DataDirection::Read;  // Use the (safer) provided enum.
+Pin_In::setDD(ports::DataDirection::Read); // Equivalent to the previous line.
 
-  Pin_In::setToInput(ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
+Pin_In::setToInput(ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
 
-  uint8_t i = Pin_In::PIN; // Read a value.
-  
+uint8_t i = Pin_In::PIN; // Read a value.
+
 ```
 
 ### Assigning / Reading multiple DDR, PORT or PIN bits in an optimized way:

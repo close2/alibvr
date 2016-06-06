@@ -69,9 +69,9 @@ The port name (enum \+\_\+\+Port) and the bit in the registers is provided as st
 
 In addition reading or setting the value of a pin is simplified through \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{D\+DR} \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+O\+RT} and \hyperlink{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{P\+IN} which have cast converters from uint8\+\_\+t.
 
-Using those static members (\hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{D\+DR}, \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+O\+RT} or \hyperlink{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{P\+IN}) liberates you from writing bit operations. If your pin is for instance B2, a typical way to set the D\+DR value of the pin to 0 would have been\+: {\ttfamily P\+O\+R\+TB \&= $\sim$(\+\_\+\+B\+V(2));}.
+Using those static members (\hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{D\+DR}, \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+O\+RT} or \hyperlink{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{P\+IN}) liberates you from writing bit operations. If your pin is for instance B2, a typical way to set the D\+DR value of the pin to 0 would have been\+: {\ttfamily +++\+P\+O\+R\+T\+B+++}
 
-The exact same thing may now be done by writing\+: {\ttfamily P\+O\+R\+T\+\_\+\+B2\+::\+D\+DR = 0;}
+The exact same thing may now be done by writing\+: {\ttfamily +++\+P\+O\+R\+T\+\_\+\+B2+++}
 
 When using the enums \hyperlink{namespaceports_a46987e78fa447129742fadda5eccafb4}{Data\+Direction} or \hyperlink{namespaceports_a49bf0ccedb4cfed89a328574e53bec07}{Pull\+Up} the compiler verifies that the enum is used for the correct register.
 

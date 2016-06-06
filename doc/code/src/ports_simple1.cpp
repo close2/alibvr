@@ -1,7 +1,7 @@
 #include "ports.h"
 
 __attribute__ ((OS_main)) int main(void) {
-  // «PORTS_DDR_PORT_PIN»
+  // «PORTS_DDR_PORT_PIN[^ *,]»
   typedef PIN_C2 Pin_In;   // Give PIN_C2 a meaningful name.
 
   // Use your favorite way of setting DDR of pin C2:
@@ -12,6 +12,14 @@ __attribute__ ((OS_main)) int main(void) {
   Pin_In::setToInput(ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
 
   uint8_t i = Pin_In::PIN; // Read a value.
+  /*¤*/
+  
+  // «PORTB[^ *,]»
+  PORTB &= ~(_BV(2));
+  /*¤*/
+  
+  // «PORT_B2[^ *,]»
+  PORT_B2::DDR = 0;
   /*¤*/
   
   for (;;);

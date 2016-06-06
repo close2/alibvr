@@ -69,7 +69,8 @@ namespace NS {
    **/
   enum class _Port {
     B,
-    C,
+    /* «ENUM_C[^ *,]» */
+    C/*¤*/,
     D
   };
   
@@ -136,10 +137,10 @@ namespace NS {
    * Using those static members (#DDR, #PORT or #PIN) liberates you from
    * writing bit operations.  If your pin is for instance B2, a typical
    * way to  set the DDR value of the pin to 0 would have been:
-   * `+++PORTB+++`
+   * `PORTB &= ~(_BV(2));`.
    * 
    * The exact same thing may now be done by writing:
-   * `+++PORT_B2+++`
+   * `PORT_B2::DDR = 0;`
    * 
    * When using the enums #DataDirection or #PullUp the compiler
    * verifies that the enum is used for the correct register.
