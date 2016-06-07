@@ -155,6 +155,12 @@ void copyPathInjectingSnippets(
   });
 }
 
-_mapF fileNameMapper(String rmPrefix, String addPrefix) {
-  return (String path) => '$addPrefix/${path.substring(rmPrefix.length + 1)}';
+_mapF fileNameMapper(String srcPrefix, String addPrefix) {
+  var rmPrefix =
+      srcPrefix.replaceAllMapped(new RegExp(r'(.*/)(.+)'), (m) => m[1]);
+  log.finer('srcPrefix: $srcPrefix; will remove $rmPrefix from files');
+  return (String path) {
+    log.finest('Stripping $rmPrefix from $path and adding $addPrefix');
+    return '$addPrefix/${path.substring(rmPrefix.length)}';
+  };
 }

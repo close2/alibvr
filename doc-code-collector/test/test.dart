@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 import 'package:doc_code_collector/snippets/snippets.dart' as sn;
 
 main() {
-  Logger.root.level = Level.FINE;
+  Logger.root.level = Level.FINEST;
   Logger.root.onRecord.listen((LogRecord rec) {
     print('${rec.level.name}: ${rec.time}: ${rec.message}');
   });
@@ -24,6 +24,11 @@ main() {
       var snippets = sn.extractSnippetsFromFile(new File('data/ports.h'));
       expect(snippets['ENUM_C'], equals('\nC'));
     });
+  });
+
+  test('FileNameMapper only keeps last path element of src', () {
+    var mapper = sn.fileNameMapper('src/with/some/path/elements', 'dst');
+    expect(mapper('src/with/some/path/elements/file1'), equals('dst/elements/file1'));
   });
 
   group('Injecting snippets', () {

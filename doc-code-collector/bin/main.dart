@@ -41,6 +41,11 @@ ArgParser buildArgParser() {
         help: 'File or directory of the documentation which will then copied '
             'to dst.  The copied files will have the snippets injected.',
         allowMultiple: true)
+    ..addFlag('reduceSrcPathForCopy',
+        abbr: 'r',
+        help: 'When copying documentation source files, reduce the path of src'
+            'to the last file / directory element.',
+        defaultsTo: true)
     ..addFlag('help',
         abbr: 'h',
         help: 'Display this help.',
@@ -77,9 +82,12 @@ main(List<String> args) {
   var dst = parsed['dst'];
   prepareDstDir(dst, deleteFirst: parsed['deleteDst']);
 
-  parsed['src'].foreach((path) =>
-      copyPathInjectingSnippets(path, fileNameMapper('', dst), snippets));
+  parsed['src'].foreach((path) {
+    var mapper = parsed['reduceSrcPathForCopy']
+        ? fileNameMapper(path, dst)
+        : fileNameMapper('', dst);
+    copyPathInjectingSnippets(path, mapper, snippets);
+  });
 
   exit(0);
 }
-
