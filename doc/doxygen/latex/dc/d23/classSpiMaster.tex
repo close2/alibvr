@@ -1,0 +1,61 @@
+\hypertarget{classSpiMaster}{}\section{Spi\+Master$<$ Clock\+Select, tx\+\_\+buffer\+\_\+size, rx\+\_\+buffer\+\_\+size, Irq\+Task, SS, Data\+Order, Data\+Mode $>$ Class Template Reference}
+\label{classSpiMaster}\index{Spi\+Master$<$ Clock\+Select, tx\+\_\+buffer\+\_\+size, rx\+\_\+buffer\+\_\+size, Irq\+Task, S\+S, Data\+Order, Data\+Mode $>$@{Spi\+Master$<$ Clock\+Select, tx\+\_\+buffer\+\_\+size, rx\+\_\+buffer\+\_\+size, Irq\+Task, S\+S, Data\+Order, Data\+Mode $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSpiMaster}{\+\_\+\+Spi\+Master} \& {\bfseries operator$>$$>$} (uint8\+\_\+t \&c)\hypertarget{classSpiMaster_a2a50e37ac4a9f972265621a8fac114be}{}\label{classSpiMaster_a2a50e37ac4a9f972265621a8fac114be}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{classSpiMaster}{\+\_\+\+Spi\+Master} \& {\bfseries operator$<$$<$} (const T \&t)\hypertarget{classSpiMaster_a14f96a6b4507097f6ae6f2a6cb118740}{}\label{classSpiMaster_a14f96a6b4507097f6ae6f2a6cb118740}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bfseries tx} (uint8\+\_\+t c)\hypertarget{classSpiMaster_a55f357e78370f5e7bc892d1aa4af043f}{}\label{classSpiMaster_a55f357e78370f5e7bc892d1aa4af043f}
+
+\item 
+static uint8\+\_\+t {\bfseries rx} ()\hypertarget{classSpiMaster_a62afbaee16684c143f6315c89412ab60}{}\label{classSpiMaster_a62afbaee16684c143f6315c89412ab60}
+
+\item 
+static uint8\+\_\+t {\bfseries can\+\_\+rx} ()\hypertarget{classSpiMaster_a10e11bffbea8197a07b254062fafec3b}{}\label{classSpiMaster_a10e11bffbea8197a07b254062fafec3b}
+
+\item 
+static uint8\+\_\+t {\bfseries can\+\_\+tx} ()\hypertarget{classSpiMaster_a9478f44b1f23d9c82abb4f3584737205}{}\label{classSpiMaster_a9478f44b1f23d9c82abb4f3584737205}
+
+\item 
+static void {\bfseries init} (\+\_\+spi\+::\+Data\+Direction initial\+Dd=\+\_\+spi\+::\+Data\+Direction\+::\+Read\+Write, uint8\+\_\+t initial\+Value=0)\hypertarget{classSpiMaster_a879542c1d862a164d784e8b375fbb942}{}\label{classSpiMaster_a879542c1d862a164d784e8b375fbb942}
+
+\item 
+static void {\bfseries reset} (\+\_\+spi\+::\+Data\+Direction new\+Dd=\+\_\+spi\+::\+Data\+Direction\+::\+Read\+Write)\hypertarget{classSpiMaster_a1f5bab94ef9c0901ffec3c09c17737bc}{}\label{classSpiMaster_a1f5bab94ef9c0901ffec3c09c17737bc}
+
+\item 
+static void {\bfseries flush} ()\hypertarget{classSpiMaster_a9bae8ce49d9eed070c60eac687668a4c}{}\label{classSpiMaster_a9bae8ce49d9eed070c60eac687668a4c}
+
+\item 
+static uint8\+\_\+t {\bfseries has\+\_\+error} (\+\_\+spi\+::\+Error\+Check error\+Check=\+\_\+transmission\+::\+Error\+Check\+::\+Now)\hypertarget{classSpiMaster_a4ae321d9b66221b61655081b885c7ccd}{}\label{classSpiMaster_a4ae321d9b66221b61655081b885c7ccd}
+
+\item 
+{\footnotesize template$<$class I $>$ }\\static void {\bfseries handle} (I)\hypertarget{classSpiMaster_a3780e4e94498a8b184a7a5268099516a}{}\label{classSpiMaster_a3780e4e94498a8b184a7a5268099516a}
+
+\item 
+static void {\bfseries sleep\+\_\+until\+\_\+data\+\_\+available} ()\hypertarget{classSpiMaster_a326ac17e36658088a33d27ad788ce315}{}\label{classSpiMaster_a326ac17e36658088a33d27ad788ce315}
+
+\item 
+static void {\bfseries rx} (uint8\+\_\+t \&c)\hypertarget{classSpiMaster_a531c31eeecb93de2deae102c3a89e46e}{}\label{classSpiMaster_a531c31eeecb93de2deae102c3a89e46e}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\static void {\bfseries tx} (const T \&t)\hypertarget{classSpiMaster_ad4971c2ca4c7e3eb26c938f807f3daa2}{}\label{classSpiMaster_ad4971c2ca4c7e3eb26c938f807f3daa2}
+
+\item 
+static void {\bfseries tx} (\+\_\+spi\+::\+Data\+Direction dd)\hypertarget{classSpiMaster_aadf80e091329354903f5eef086efaf32}{}\label{classSpiMaster_aadf80e091329354903f5eef086efaf32}
+
+\item 
+static void {\bfseries tx} (\hyperlink{class__transmission_1_1ClearErrors}{\+\_\+spi\+::\+Clear\+Errors} e)\hypertarget{classSpiMaster_a5bf811b0e51d0dcbbf53a19850bb58fb}{}\label{classSpiMaster_a5bf811b0e51d0dcbbf53a19850bb58fb}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/spi.\+h\end{DoxyCompactItemize}
