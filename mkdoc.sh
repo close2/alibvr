@@ -1,16 +1,10 @@
 #!/bin/bash
 
+DART_DOC_PROG="doc-code-collector/bin/build-alibvr-doc.dart"
+
 MKDOC=$0
 P=$(dirname $MKDOC)
-DOC_CODE_DIR="doc/code"
-
 cd "$P"
-cd "$DOC_CODE_DIR"
-make clean
 
-cd -
+dart "$DART_DOC_PROG"
 
-doxygen
-
-dart doc-code-collector/bin/main.dart
-cp doc/build/README.md .
