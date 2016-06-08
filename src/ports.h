@@ -139,7 +139,7 @@ namespace NS {
    * `+++PORTB+++`
    * 
    * The exact same thing may now be done by writing:
-   * `+++PORT_B2+++`
+   * `+++PIN_B2+++`
    * 
    * When using the enums #DataDirection or #PullUp the compiler
    * verifies that the enum is used for the correct register.

@@ -1,21 +1,32 @@
 library snippets;
 
 import 'dart:io';
-import 'package:mime/mime.dart' as mime;
 import 'package:logging/logging.dart';
 
 Logger log = new Logger('snippets');
 
+var fileTextWhiteList = ['.c', '.h', '.cpp', '.md', '.txt', '.html', '.S'];
+
 const rSnippetName = r'([^»\[]+)';
 const rEndComment = r'( ?\*/)?';
-const rCode = r'([^¤]*)';
-const rEnd = r'(¤[^*]|¤$|/\*¤\*/)';
+const rOptionalEol = r'\n?';
+// Some trickery to get snippets to loose the first and last eol
+// together with *.
+// See the port defintions of README.md and ports.h for an example of
+// complicated eols.
+const rCode = r'([^¤]*[^¤\n \*])';
+const rOptionalEolWs = r'\n? *\*? *';
+const rEnd = r'(¤[^*]|¤$|/\*¤\*/|// *¤)';
 const rRegFrom = r'([^,]+)';
 const rRegTo = r'([^\]]*)';
 const rReg = r'(\[' + rRegFrom + r'\,' + rRegTo + r'\])?';
 
 bool isFile(String path) {
   return FileSystemEntity.typeSync(path) == FileSystemEntityType.FILE;
+}
+
+bool isTextFile(String path) {
+  return fileTextWhiteList.any((ending) => path.endsWith(ending));
 }
 
 String applyRegExp(String input, String regFrom, String regTo) {
@@ -38,8 +49,15 @@ Map<String, String> extractSnippetsFromString(String content) {
   // /*«Sn Name»*/uint8_t x = 3;/*¤*/
   // « or ¤*/ do not have to be at the beginning or end of a line.
   // Nested snippets are not yet supported.
-  //  match        1              2 3 4         5             6       7
-  const r = r'«' + rSnippetName + rReg + r'»' + rEndComment + rCode + rEnd;
+  const r = r'«' +   // match:
+      rSnippetName + // 1
+      rReg +         // 2 3 4
+      r'»' +
+      rEndComment +  // 5
+      rOptionalEol +
+      rCode +        // 6
+      rOptionalEolWs +
+      rEnd;          // 7
   var regExp = new RegExp(r);
   var fileSnippets = regExp.allMatches(content);
 
@@ -68,10 +86,13 @@ Map<String, String> extractSnippetsFromDirRec(Directory dir) {
   log.fine('Trying to extract snippets from directory: «${dir.path}»');
   var files = dir.listSync(recursive: true);
 
-  return files.where((fse) => isFile(fse.path)).fold(
-      {},
-      (Map<String, String> prev, fse) =>
-          prev..addAll(extractSnippetsFromFile(fse)));
+  return files
+      .where((fse) => isFile(fse.path))
+      .where((fse) => isTextFile(fse.path))
+      .fold(
+          {},
+          (Map<String, String> prev, fse) =>
+              prev..addAll(extractSnippetsFromFile(fse)));
 }
 
 Map<String, String> extractSnippetsFromPath(String path) {
@@ -103,8 +124,7 @@ void copyInjectingSnippets(File from, File to, Map<String, String> snippets) {
   log.fine('Copy while injecting snippets file «${from.path}» to «${to.path}»');
   to.createSync(recursive: true);
 
-  var mimeType = mime.lookupMimeType(from.path);
-  if (mimeType != null && !mimeType.startsWith('text')) {
+  if (!isTextFile(from.path)) {
     log.fine(
         '«${from.path}» is not of type text.  Simply copying to «${to.path}»');
     var dest = to.path;
@@ -157,7 +177,7 @@ void copyPathInjectingSnippets(
 
 _mapF fileNameMapper(String srcPrefix, String addPrefix) {
   var rmPrefix =
-      srcPrefix.replaceAllMapped(new RegExp(r'(.*/)(.+)'), (m) => m[1]);
+      srcPrefix.replaceAllMapped(new RegExp(r'((.*/)*)(.+)'), (m) => m[1]);
   log.finer('srcPrefix: $srcPrefix; will remove $rmPrefix from files');
   return (String path) {
     log.finest('Stripping $rmPrefix from $path and adding $addPrefix');

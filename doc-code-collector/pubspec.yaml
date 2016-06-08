@@ -2,7 +2,6 @@ name: doc_code_collector
 version: 0.0.1
 description: A simple console application.
 dependencies:
-  mime: '^0.9.3'
   logging: any
   test: any
   args: '^0.13.4'

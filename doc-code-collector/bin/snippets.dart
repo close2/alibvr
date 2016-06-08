@@ -50,7 +50,13 @@ ArgParser buildArgParser() {
         abbr: 'h',
         help: 'Display this help.',
         negatable: false,
-        defaultsTo: false);
+        defaultsTo: false)
+    ..addOption('textFileExt',
+        abbr: 't',
+        help: 'Only selected file endings are considered as text files. '
+            'All other files are ignored while looking for or inject '
+            'snippets.  You may add other endings here.  Example: «.doc»',
+        allowMultiple: true);
 }
 
 void printUsage(ArgParser parser) {
@@ -76,13 +82,15 @@ main(List<String> args) {
     exit(1);
   }
 
+  fileTextWhiteList.addAll(parsed['textFileExt']);
+
   var snippets = parsed['code']
-      .fold({}, (prev, code) => prev.addAll(extractSnippetsFromPath(code)));
+      .fold({}, (prev, code) => prev..addAll(extractSnippetsFromPath(code)));
 
   var dst = parsed['dst'];
-  prepareDstDir(dst, deleteFirst: parsed['deleteDst']);
+  prepareDstDir(new Directory(dst), deleteFirst: parsed['deleteDst']);
 
-  parsed['src'].foreach((path) {
+  parsed['src'].forEach((path) {
     var mapper = parsed['reduceSrcPathForCopy']
         ? fileNameMapper(path, dst)
         : fileNameMapper('', dst);
