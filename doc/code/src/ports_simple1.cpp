@@ -18,8 +18,8 @@ __attribute__ ((OS_main)) int main(void) {
   PORTB &= ~(_BV(2));
   /*¤*/
   
-  // «PORT_B2[^ *,]»
-  PORT_B2::DDR = 0;
+  // «PIN_B2[^ *,]»
+  PIN_B2::DDR = 0;
   /*¤*/
   
   for (;;);

@@ -1,7 +1,9 @@
 # Created by https://www.gitignore.io/api/kdevelop4,c++
 # [2015-09-25; cl] added *.eep and *.hex
 # [2015-10-03; cl] added qt creator files; vcd trace files
+# [2016-06-08; cl] added doc/build
 
+doc/build
 
 *.vcd
 

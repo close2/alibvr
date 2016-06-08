@@ -56,7 +56,6 @@ Prefix names in the following graph with `Pin_` to get
 provided `typedef`s.  Example: `B5` becomes `Pin_B5`, `8` becomes `Pin_8`
 
 
-
 ```
                                  ┏━u━┓
                      C6    DIP_1 ┃   ┃ DIP_28   19   C5   ADC5   SCL
@@ -76,14 +75,12 @@ ICP1    CLK0     8   B0   DIP_14 ┃   ┃ DIP_15    9   B1          OC1A
                                  ┗━━━┛
 ```
 
-
 Pins `VCC`, `GND`, `AREF` and `AVCC` are only for documentation
 and don't provide `typedef`s.
 
 ### Setting or reading single DDR, PORT or PIN bits:
 
 ```C++
-
 typedef PIN_C2 Pin_In;   // Give PIN_C2 a meaningful name.
 
 // Use your favorite way of setting DDR of pin C2:
@@ -94,7 +91,6 @@ Pin_In::setDD(ports::DataDirection::Read); // Equivalent to the previous line.
 Pin_In::setToInput(ports::PullUp::HighZ);  // Sets DDR and then PORT (pullup).
 
 uint8_t i = Pin_In::PIN; // Read a value.
-
 ```
 
 ### Assigning / Reading multiple DDR, PORT or PIN bits in an optimized way:
