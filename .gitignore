@@ -2,8 +2,10 @@
 # [2015-09-25; cl] added *.eep and *.hex
 # [2015-10-03; cl] added qt creator files; vcd trace files
 # [2016-06-08; cl] added doc/build
+# [2016-06-09; cl] added gh-pages
 
 doc/build
+gh-pages
 
 *.vcd
 
