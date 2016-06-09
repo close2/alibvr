@@ -77,7 +77,7 @@ main() {
   var doxyfileDstF = new File('$dst/Doxyfile');
   doxyfileDstF.writeAsStringSync(doxyFileF.readAsStringSync().replaceFirst(
       new RegExp(r'\nOUTPUT_DIRECTORY.*\n'),
-      '\nOUTPUT_DIRECTORY = ../doxygen\n'));
+      '\nOUTPUT_DIRECTORY = $doxygenOutRel\n'));
 
   var srcWSnDir = new Directory('$dst/$src');
   if (!srcWSnDir.existsSync()) {
