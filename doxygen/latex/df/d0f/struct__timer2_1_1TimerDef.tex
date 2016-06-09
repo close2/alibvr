@@ -1,0 +1,64 @@
+\hypertarget{struct__timer2_1_1TimerDef}{}\section{\+\_\+timer2\+:\+:Timer\+Def Struct Reference}
+\label{struct__timer2_1_1TimerDef}\index{\+\_\+timer2\+::\+Timer\+Def@{\+\_\+timer2\+::\+Timer\+Def}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint8\+\_\+t {\bfseries size\+\_\+t}\hypertarget{struct__timer2_1_1TimerDef_a4de2d0355f8365156f840b61eb29907d}{}\label{struct__timer2_1_1TimerDef_a4de2d0355f8365156f840b61eb29907d}
+
+\item 
+typedef \hyperlink{structports_1_1Pin}{P\+I\+N\+\_\+11} {\bfseries P\+I\+N\+\_\+A}\hypertarget{struct__timer2_1_1TimerDef_acfaae68213dbf4d8e66001bdcfd4938c}{}\label{struct__timer2_1_1TimerDef_acfaae68213dbf4d8e66001bdcfd4938c}
+
+\item 
+typedef \hyperlink{structports_1_1Pin}{P\+I\+N\+\_\+3} {\bfseries P\+I\+N\+\_\+B}\hypertarget{struct__timer2_1_1TimerDef_af4f3372005a05f2aa242f3d3fb942267}{}\label{struct__timer2_1_1TimerDef_af4f3372005a05f2aa242f3d3fb942267}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\static void {\bfseries init} (uint8\+\_\+t \&tcnt, uint8\+\_\+t \&timsk, uint8\+\_\+t \&tccra, uint8\+\_\+t \&tccrb, uint8\+\_\+t \&ocr\+\_\+A, uint8\+\_\+t \&ocr\+\_\+B, const uint8\+\_\+t \&initial\+\_\+ocr\+\_\+A, const uint8\+\_\+t \&initial\+\_\+ocr\+\_\+B)\hypertarget{struct__timer2_1_1TimerDef_ae62a0aed34d1f08b3762198423643d5d}{}\label{struct__timer2_1_1TimerDef_ae62a0aed34d1f08b3762198423643d5d}
+
+\item 
+{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static decltype(O\+C\+R2A)\& {\bfseries ocr} ()\hypertarget{struct__timer2_1_1TimerDef_a523743f5df50cbf31d78788a540523c8}{}\label{struct__timer2_1_1TimerDef_a523743f5df50cbf31d78788a540523c8}
+
+\item 
+static auto {\bfseries tcnt} () -\/$>$ decltype(T\+C\+N\+T2)\&\hypertarget{struct__timer2_1_1TimerDef_a77ffa6627938529350f5d566511f3e9a}{}\label{struct__timer2_1_1TimerDef_a77ffa6627938529350f5d566511f3e9a}
+
+\item 
+static auto {\bfseries timsk} () -\/$>$ decltype(T\+I\+M\+S\+K2)\&\hypertarget{struct__timer2_1_1TimerDef_a7112e5b8029941e7bef449e1961031f9}{}\label{struct__timer2_1_1TimerDef_a7112e5b8029941e7bef449e1961031f9}
+
+\item 
+static auto {\bfseries tccra} () -\/$>$ decltype(T\+C\+C\+R2A)\&\hypertarget{struct__timer2_1_1TimerDef_a3e39ad00e0e112a8280ae59df1d14e8f}{}\label{struct__timer2_1_1TimerDef_a3e39ad00e0e112a8280ae59df1d14e8f}
+
+\item 
+static auto {\bfseries tccrb} () -\/$>$ decltype(T\+C\+C\+R2B)\&\hypertarget{struct__timer2_1_1TimerDef_a9239a84a67f6c09ef673735a2b0dbb73}{}\label{struct__timer2_1_1TimerDef_a9239a84a67f6c09ef673735a2b0dbb73}
+
+\item 
+{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static constexpr uint8\+\_\+t {\bfseries \+\_\+com\+\_\+0} ()\hypertarget{struct__timer2_1_1TimerDef_a051f747118eef23a55327e261380d707}{}\label{struct__timer2_1_1TimerDef_a051f747118eef23a55327e261380d707}
+
+\item 
+{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static constexpr uint8\+\_\+t {\bfseries \+\_\+com\+\_\+1} ()\hypertarget{struct__timer2_1_1TimerDef_abbc0de13e62f594ab751822434e2c061}{}\label{struct__timer2_1_1TimerDef_abbc0de13e62f594ab751822434e2c061}
+
+\item 
+{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static constexpr uint8\+\_\+t {\bfseries \+\_\+ocie} ()\hypertarget{struct__timer2_1_1TimerDef_ab77aee2b07c43d07a5c7e95c23d06013}{}\label{struct__timer2_1_1TimerDef_ab77aee2b07c43d07a5c7e95c23d06013}
+
+\item 
+static constexpr uint8\+\_\+t {\bfseries \+\_\+toie} ()\hypertarget{struct__timer2_1_1TimerDef_aa59a8f3a6a38e482611d438fc79307b4}{}\label{struct__timer2_1_1TimerDef_aa59a8f3a6a38e482611d438fc79307b4}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const auto {\bfseries I\+R\+Q\+\_\+A} = \+\_\+irqs\+::\+I\+R\+Q\+\_\+\+T\+I\+M\+E\+R2\+\_\+\+C\+O\+M\+PA\hypertarget{struct__timer2_1_1TimerDef_ad503a9efd5c167fcf37266cd6cf9240a}{}\label{struct__timer2_1_1TimerDef_ad503a9efd5c167fcf37266cd6cf9240a}
+
+\item 
+static const auto {\bfseries I\+R\+Q\+\_\+B} = \+\_\+irqs\+::\+I\+R\+Q\+\_\+\+T\+I\+M\+E\+R2\+\_\+\+C\+O\+M\+PB\hypertarget{struct__timer2_1_1TimerDef_ab0c4a6c52f3f57a3e2db98cf8740c704}{}\label{struct__timer2_1_1TimerDef_ab0c4a6c52f3f57a3e2db98cf8740c704}
+
+\item 
+static const auto {\bfseries I\+R\+Q\+\_\+\+O\+VF} = \+\_\+irqs\+::\+I\+R\+Q\+\_\+\+T\+I\+M\+E\+R2\+\_\+\+O\+VF\hypertarget{struct__timer2_1_1TimerDef_ae90a87cb6b1c430896596df0cd71a1e0}{}\label{struct__timer2_1_1TimerDef_ae90a87cb6b1c430896596df0cd71a1e0}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/timer2.\+h\end{DoxyCompactItemize}

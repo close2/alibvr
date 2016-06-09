@@ -1,0 +1,46 @@
+\hypertarget{classSerialModbus}{}\section{Serial\+Modbus$<$ address\+Id, Modbus\+Data\+List, baud, stop\+\_\+bits, parity\+\_\+bit, data\+\_\+bits, baud\+\_\+tol $>$ Class Template Reference}
+\label{classSerialModbus}\index{Serial\+Modbus$<$ address\+Id, Modbus\+Data\+List, baud, stop\+\_\+bits, parity\+\_\+bit, data\+\_\+bits, baud\+\_\+tol $>$@{Serial\+Modbus$<$ address\+Id, Modbus\+Data\+List, baud, stop\+\_\+bits, parity\+\_\+bit, data\+\_\+bits, baud\+\_\+tol $>$}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classSerialModbus}{Serial\+Modbus}$<$ address\+Id, Modbus\+Data\+List, baud, stop\+\_\+bits, parity\+\_\+bit, data\+\_\+bits $>$ {\bfseries \+\_\+\+Serial\+Modbus}\hypertarget{classSerialModbus_a5bcd2b6c412dc9490c20fb74ed6f1c6f}{}\label{classSerialModbus_a5bcd2b6c412dc9490c20fb74ed6f1c6f}
+
+\item 
+typedef \hyperlink{classModbus}{Modbus}$<$ address\+Id, Modbus\+Data\+List, \hyperlink{classSerialModbus}{\+\_\+\+Serial\+Modbus} $>$ {\bfseries \+\_\+\+Modbus}\hypertarget{classSerialModbus_a510d3c49df1125fd0de1d8a4b29418a9}{}\label{classSerialModbus_a510d3c49df1125fd0de1d8a4b29418a9}
+
+\item 
+typedef \hyperlink{classUart}{Uart}$<$ baud, 0, 0, 1, \hyperlink{classSerialModbus}{\+\_\+\+Serial\+Modbus}, stop\+\_\+bits, parity\+\_\+bit, data\+\_\+bits, baud\+\_\+tol $>$ {\bfseries \+\_\+\+Uart}\hypertarget{classSerialModbus_a1545c72d8a0138c4c4807427994037b6}{}\label{classSerialModbus_a1545c72d8a0138c4c4807427994037b6}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bfseries init} ()\hypertarget{classSerialModbus_ad8f96c1efa89ccbb10186b9b77ea2bc1}{}\label{classSerialModbus_ad8f96c1efa89ccbb10186b9b77ea2bc1}
+
+\item 
+static void {\bfseries reset} ()\hypertarget{classSerialModbus_a0ae598204577db1fd82e68d2b41930b8}{}\label{classSerialModbus_a0ae598204577db1fd82e68d2b41930b8}
+
+\item 
+static void {\bfseries rx} (uint8\+\_\+t c)\hypertarget{classSerialModbus_a9926866e6d3f6149d0114b5a451c0d0d}{}\label{classSerialModbus_a9926866e6d3f6149d0114b5a451c0d0d}
+
+\item 
+static uint8\+\_\+t {\bfseries tx\+\_\+is\+\_\+empty} ()\hypertarget{classSerialModbus_a40a4049b9d9d1a544527d6fa00368d4b}{}\label{classSerialModbus_a40a4049b9d9d1a544527d6fa00368d4b}
+
+\item 
+static uint8\+\_\+t {\bfseries tx\+\_\+pop} ()\hypertarget{classSerialModbus_ad54e0c898019b1a054d5e16545dfd77e}{}\label{classSerialModbus_ad54e0c898019b1a054d5e16545dfd77e}
+
+\item 
+static void {\bfseries tx\+\_\+start} ()\hypertarget{classSerialModbus_a1a357b1926059d1a5de9f67d0dfbc58d}{}\label{classSerialModbus_a1a357b1926059d1a5de9f67d0dfbc58d}
+
+\item 
+static void {\bfseries tx\+\_\+starter} (void($\ast$f)())\hypertarget{classSerialModbus_aea9b2c09800c4a2abf06c8451ba10694}{}\label{classSerialModbus_aea9b2c09800c4a2abf06c8451ba10694}
+
+\item 
+static void {\bfseries tx\+\_\+done} ()\hypertarget{classSerialModbus_a3734d117de4c94df22bbbe09d4e5782d}{}\label{classSerialModbus_a3734d117de4c94df22bbbe09d4e5782d}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/serial\+\_\+modbus.\+h\end{DoxyCompactItemize}
