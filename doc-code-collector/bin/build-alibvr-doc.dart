@@ -30,7 +30,7 @@ main() {
   const docs = const [src, 'doc/$readme'];
 
   // relative from dst
-  const doxygenOutRel = '../doxygen';
+  const doxygenOutRel = '../../gh-pages/doxygen';
 
   // Make sure our documentation code really compiles:
   makes.forEach((makePath) {
