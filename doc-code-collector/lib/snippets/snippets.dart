@@ -20,6 +20,19 @@ const rEnd = r'(¤[^*]|¤$|/\*¤\*/|// *¤)';
 const rRegFrom = r'([^,]+)';
 const rRegTo = r'([^\]]*)';
 const rReg = r'(\[' + rRegFrom + r'\,' + rRegTo + r'\])?';
+const rSnippet = r'«' + // match:
+    rSnippetName + // 1
+    rReg + // 2 3 4
+    r'»' +
+    rEndComment + // 5
+    rOptionalEol +
+    rCode + // 6
+    rOptionalEolWs +
+    rEnd; // 7
+const int snippetNameIndex = 1;
+const int regFromIndex = 3;
+const int regToIndex = 4;
+const int codeIndex = 6;
 
 bool isFile(String path) {
   return FileSystemEntity.typeSync(path) == FileSystemEntityType.FILE;
@@ -49,25 +62,16 @@ Map<String, String> extractSnippetsFromString(String content) {
   // /*«Sn Name»*/uint8_t x = 3;/*¤*/
   // « or ¤*/ do not have to be at the beginning or end of a line.
   // Nested snippets are not yet supported.
-  const r = r'«' +   // match:
-      rSnippetName + // 1
-      rReg +         // 2 3 4
-      r'»' +
-      rEndComment +  // 5
-      rOptionalEol +
-      rCode +        // 6
-      rOptionalEolWs +
-      rEnd;          // 7
-  var regExp = new RegExp(r);
+  var regExp = new RegExp(rSnippet);
   var fileSnippets = regExp.allMatches(content);
 
   var snippets = <String, String>{};
   fileSnippets.forEach((match) {
-    var name = match[1];
-    var code = match[6];
+    var name = match[snippetNameIndex];
+    var code = match[codeIndex];
 
-    var regFrom = match[3];
-    var regTo = match[4];
+    var regFrom = match[regFromIndex];
+    var regTo = match[regToIndex];
     code = applyRegExp(code, regFrom, regTo);
     log.fine('Found snippet «$name»');
     log.finer('  «$name»: «$code»');
@@ -120,7 +124,12 @@ String injectSnippets(String content, Map<String, String> snippets) {
   });
 }
 
-void copyInjectingSnippets(File from, File to, Map<String, String> snippets) {
+String rmSnippetAnnotation(String content) {
+  return content.replaceAllMapped(rSnippet, (m) => m[codeIndex]);
+}
+
+void copyInjectingSnippets(File from, File to, Map<String, String> snippets,
+    {removeSnippetAnnotations: false}) {
   log.fine('Copy while injecting snippets file «${from.path}» to «${to.path}»');
   to.createSync(recursive: true);
 
@@ -135,10 +144,15 @@ void copyInjectingSnippets(File from, File to, Map<String, String> snippets) {
     return;
   }
 
-  String content = from.readAsStringSync();
+  var content = from.readAsStringSync();
+  content = injectSnippets(content, snippets);
+
+  if (removeSnippetAnnotations) {
+    content = rmSnippetAnnotation(content);
+  }
 
   // create outputFile:
-  to.writeAsStringSync(injectSnippets(content, snippets));
+  to.writeAsStringSync(content);
 }
 
 void prepareDstDir(Directory dst, {deleteFirst: true}) {
@@ -154,7 +168,8 @@ void prepareDstDir(Directory dst, {deleteFirst: true}) {
 typedef String _mapF(String);
 
 void copyPathInjectingSnippets(
-    String path, _mapF srcDstMapFunction, Map<String, String> snippets) {
+    String path, _mapF srcDstMapFunction, Map<String, String> snippets,
+    {removeSnippetAnnotations: false}) {
   log.fine('Copy file ${path} if file or recursively all files in ${path} '
       'if dir while injecting snippets using a '
       'src-to-dst map function');
@@ -171,7 +186,8 @@ void copyPathInjectingSnippets(
 
   files.forEach((File f) {
     var dstF = new File(srcDstMapFunction(f.path));
-    copyInjectingSnippets(f, dstF, snippets);
+    copyInjectingSnippets(f, dstF, snippets,
+        removeSnippetAnnotations: removeSnippetAnnotations);
   });
 }
 

@@ -56,7 +56,12 @@ ArgParser buildArgParser() {
         help: 'Only selected file endings are considered as text files. '
             'All other files are ignored while looking for or inject '
             'snippets.  You may add other endings here.  Example: «.doc»',
-        allowMultiple: true);
+        allowMultiple: true)
+    ..addFlag('cleanSrcFromAnnotations',
+        abbr: 'c',
+        help: 'When copying documentation source files, remove annotations of '
+            'code snippets.',
+        defaultsTo: true);
 }
 
 void printUsage(ArgParser parser) {
@@ -94,7 +99,7 @@ main(List<String> args) {
     var mapper = parsed['reduceSrcPathForCopy']
         ? fileNameMapper(path, dst)
         : fileNameMapper('', dst);
-    copyPathInjectingSnippets(path, mapper, snippets);
+    copyPathInjectingSnippets(path, mapper, snippets, removeSnippetAnnotations: parsed['cleanSrcFromAnnotations']);
   });
 
   exit(0);
