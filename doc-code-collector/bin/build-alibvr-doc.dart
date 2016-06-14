@@ -58,8 +58,13 @@ main() {
   var dstArgs = ['-d', dst];
   var codeArgs = codes.fold([], (prev, code) => prev..addAll(['-c', code]));
   var docArgs = docs.fold([], (prev, docSrc) => prev..addAll(['-s', docSrc]));
+  var otherArgs = ['-c'];
 
-  var args = [snippetsProg]..addAll(dstArgs)..addAll(codeArgs)..addAll(docArgs);
+  var args = [snippetsProg]
+    ..addAll(dstArgs)
+    ..addAll(codeArgs)
+    ..addAll(docArgs)
+    ..addAll(otherArgs);
   log.finer('Executing dart with $args as arguments');
   var exitCodeSnippets = Process.runSync('dart', args).exitCode;
   if (exitCodeSnippets != 0) {
