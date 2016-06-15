@@ -58,7 +58,7 @@ main() {
   var dstArgs = ['-d', dst];
   var codeArgs = codes.fold([], (prev, code) => prev..addAll(['-c', code]));
   var docArgs = docs.fold([], (prev, docSrc) => prev..addAll(['-s', docSrc]));
-  var otherArgs = ['-c'];
+  var otherArgs = ['--cleanSrcFromAnnotations'];
 
   var args = [snippetsProg]
     ..addAll(dstArgs)

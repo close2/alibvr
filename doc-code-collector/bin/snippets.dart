@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:logging/logging.dart';
+
 import 'package:args/args.dart';
 import 'package:doc_code_collector/snippets/snippets.dart';
 
@@ -58,10 +60,10 @@ ArgParser buildArgParser() {
             'snippets.  You may add other endings here.  Example: «.doc»',
         allowMultiple: true)
     ..addFlag('cleanSrcFromAnnotations',
-        abbr: 'c',
         help: 'When copying documentation source files, remove annotations of '
             'code snippets.',
-        defaultsTo: true);
+        defaultsTo: true)
+    ..addFlag('verbose', abbr: 'v', help: 'Display debug output.');
 }
 
 void printUsage(ArgParser parser) {
@@ -73,6 +75,11 @@ void printUsage(ArgParser parser) {
 }
 
 main(List<String> args) {
+  Logger.root.level = Level.SEVERE;
+  Logger.root.onRecord.listen((LogRecord rec) {
+    print('${rec.level.name}: ${rec.time}: ${rec.message}');
+  });
+
   var parser = buildArgParser();
   var parsed = parser.parse(args);
   if (parsed['help']) {
@@ -87,6 +94,10 @@ main(List<String> args) {
     exit(1);
   }
 
+  if (parsed['verbose']) {
+    Logger.root.level = Level.FINEST;
+  }
+
   fileTextWhiteList.addAll(parsed['textFileExt']);
 
   var snippets = parsed['code']
@@ -99,7 +110,8 @@ main(List<String> args) {
     var mapper = parsed['reduceSrcPathForCopy']
         ? fileNameMapper(path, dst)
         : fileNameMapper('', dst);
-    copyPathInjectingSnippets(path, mapper, snippets, removeSnippetAnnotations: parsed['cleanSrcFromAnnotations']);
+    copyPathInjectingSnippets(path, mapper, snippets,
+        removeSnippetAnnotations: parsed['cleanSrcFromAnnotations']);
   });
 
   exit(0);

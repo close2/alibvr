@@ -9,13 +9,13 @@ var fileTextWhiteList = ['.c', '.h', '.cpp', '.md', '.txt', '.html', '.S'];
 
 const rSnippetName = r'([^»\[]+)';
 const rEndComment = r'( ?\*/)?';
-const rOptionalEol = r'\n?';
+const rOptionalEol = r'(\n?)';
 // Some trickery to get snippets to loose the first and last eol
 // together with *.
 // See the port defintions of README.md and ports.h for an example of
 // complicated eols.
 const rCode = r'([^¤]*[^¤\n \*])';
-const rOptionalEolWs = r'\n? *\*? *';
+const rOptionalEolWs = r'(\n?) *\*? *';
 const rEnd = r'(¤[^*]|¤$|/\*¤\*/|// *¤)';
 const rRegFrom = r'([^,]+)';
 const rRegTo = r'([^\]]*)';
@@ -25,14 +25,17 @@ const rSnippet = r'«' + // match:
     rReg + // 2 3 4
     r'»' +
     rEndComment + // 5
-    rOptionalEol +
-    rCode + // 6
-    rOptionalEolWs +
-    rEnd; // 7
+    rOptionalEol + // 6
+    rCode + // 7
+    rOptionalEolWs + // 8
+    rEnd; // 9
+var rSnippetRegExp = new RegExp(rSnippet);
 const int snippetNameIndex = 1;
 const int regFromIndex = 3;
 const int regToIndex = 4;
-const int codeIndex = 6;
+const int codeIndex = 7;
+const int optEol1Index = 6;
+const int optEol2Index = 8;
 
 bool isFile(String path) {
   return FileSystemEntity.typeSync(path) == FileSystemEntityType.FILE;
@@ -62,8 +65,7 @@ Map<String, String> extractSnippetsFromString(String content) {
   // /*«Sn Name»*/uint8_t x = 3;/*¤*/
   // « or ¤*/ do not have to be at the beginning or end of a line.
   // Nested snippets are not yet supported.
-  var regExp = new RegExp(rSnippet);
-  var fileSnippets = regExp.allMatches(content);
+  var fileSnippets = rSnippetRegExp.allMatches(content);
 
   var snippets = <String, String>{};
   fileSnippets.forEach((match) {
@@ -125,7 +127,14 @@ String injectSnippets(String content, Map<String, String> snippets) {
 }
 
 String rmSnippetAnnotation(String content) {
-  return content.replaceAllMapped(rSnippet, (m) => m[codeIndex]);
+  return content.replaceAllMapped(rSnippetRegExp, (m) {
+    var eol1 = (m[optEol1Index].isNotEmpty) ? '\n' : '';
+    var eol2 = (m[optEol2Index].isNotEmpty) ? '\n' : '';
+    var repl = '$eol1${m[codeIndex]}$eol2';
+    log.finer('Found snippet annotation ${m.input.substring(m.start, m.end)} '
+        'and will replace it with $repl');
+    return repl;
+  });
 }
 
 void copyInjectingSnippets(File from, File to, Map<String, String> snippets,
@@ -148,6 +157,7 @@ void copyInjectingSnippets(File from, File to, Map<String, String> snippets,
   content = injectSnippets(content, snippets);
 
   if (removeSnippetAnnotations) {
+    log.fine('Removing SnippetAnnotations.');
     content = rmSnippetAnnotation(content);
   }
 
@@ -181,7 +191,8 @@ void copyPathInjectingSnippets(
     var dir = new Directory(path);
     files = dir
         .listSync(recursive: true, followLinks: false)
-        .where((fse) => isFile(fse.path));
+        .where((fse) => isFile(fse.path))
+        .map((fse) => fse as File);
   }
 
   files.forEach((File f) {
