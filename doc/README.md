@@ -30,12 +30,19 @@ Also C++ templates are all "resolved" during compile time.  This means that
 the produced code is very compact.
 
 
+Doxygen documentation:
+======================
+
+This README only provides an overview.
+
+Please see the [http://close2.github.io/alibvr/doxygen/html/](doxygen)
+documentation for a detailed description.
+
+
 Usage:
 ======
 
 ## ports.h
-
-See the [doc/doxygen](doxygen) documentation for a detailed description.
 
 Contains the `typedef` definitions for all pins.
 
