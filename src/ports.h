@@ -31,6 +31,9 @@
  * code you may modify the namespace name by setting
  * ALIBVR_NAMESPACE_PORTS or ALIBVR_NAMESPACE_PREFIX.
  * 
+ * All pin selections in this library are done using `typedef`s.
+ * See below for an example.
+ * 
  * The pin layout is compatible to arduino / arduino lite.
  * 
  * Prefix names in the following graph with `Pin_` to get
@@ -63,7 +66,7 @@
 namespace NS {
   
   /**
-   * @brief Used in pin typedefs to specify the port of the pin.
+   * @brief Used in pin `typedef`s to specify the port of a pin.
    * 
    * Probably only useful internally.
    **/
@@ -94,8 +97,8 @@ namespace NS {
    * 
    * @see Pin::DDR
    * 
-   * This enum is also used internally when one function implements
-   * either a read or a write operation depending on this enum.
+   * This enum is also used internally when one function implements --
+   * depending on this enum -- either a read or a write operation.
    **/
   enum class DataDirection {
     Read = 0,
@@ -121,14 +124,18 @@ namespace NS {
     HighZ = Off
   };
   
+  // forward declaration
   template <enum _Port p, uint8_t b, enum _IOReg io>
   struct _Io;
   
   /**
-   * @brief Every pin has one ore multiple typedefs of this class.
+   * @brief Every pin of the IC is defined using the template arguments
+   * `enum _Port p` and `uint8_t b` using `typedef`s of this class.
    * 
-   * The port name (enum _Port) and the bit in the registers is provided
-   * as static variables.
+   * The port (enum _Port) and the bit (inside the control registers) is
+   * provided through static variables.
+   * 
+   * Example: `if (aPinTypedef::port == _Port::B) ...`
    * 
    * In addition reading or setting the value of a pin is simplified
    * through #DDR #PORT and #PIN which have cast converters from uint8_t.
@@ -144,19 +151,23 @@ namespace NS {
    * When using the enums #DataDirection or #PullUp the compiler
    * verifies that the enum is used for the correct register.
    * 
-   * The compiler does not verify that you are in the correct "mode".
-   * Calling setPullUp() when the pin is in output mode will change the
-   * output!  You would need to switch to input first
+   * The compiler does however not verify that you are in the correct
+   * "mode".  Calling setPullUp() when the pin is in output mode will
+   * change the output!  You would need to switch to input first
    * (`DDR = DataDirection::Input;`).
    **/
   template <enum _Port p, uint8_t b>
   struct Pin {
     
     /// @brief The port name (enum _Port) of this pin.
+    /// 
+    /// Simply exposes the template argument.
     static const enum _Port port = p;
     
     /// @brief The bit position (0-7) inside the DDRx, PORTx or PINx
     /// register.
+    ///
+    /// Simply exposes the template argument.
     static const uint8_t   bit = b;
     
     
@@ -172,9 +183,9 @@ namespace NS {
     /// 
     /// Examples:
     ///
-    /// * `PORT_C3::DDR = DataDirection::Input;`
-    /// * `uint8_t currentDDR = PORT_C3::DDR;`
-    /// * `enum DataDirection currentDDR2 = PORT_C3::DDR;`
+    /// * `+++PIN_DDR_Ex1+++`
+    /// * `+++PIN_DDR_Ex2+++`
+    /// * `+++PIN_DDR_Ex3+++`
     static _DDR DDR;
     
     
@@ -190,9 +201,10 @@ namespace NS {
     ///
     /// Examples:
     ///
-    /// * `PORT_ADC4::PORT = 1;`
-    /// * `uint8_t currentPort = PORT_ADC4::PORT;`
-    /// * `enum PullUp currentPullUp = PORT_ADC4::PORT;`
+    /// * `+++PIN_PORT_Ex1+++`
+    /// * `+++PIN_PORT_Ex2+++`
+    /// * `+++PIN_PORT_Ex3+++`
+    /// * `+++PIN_PORT_Ex4+++`
     static _PORT PORT;
     
     
@@ -205,9 +217,8 @@ namespace NS {
     ///
     /// Examples:
     ///
-    /// * `PORT_C3::DDR = DataDirection::Input;`
-    /// * `uint8_t currentDDR = PORT_C3::DDR;`
-    /// * `DataDirection currentDDR2 = PORT_C3::DDR;`
+    /// * `+++PIN_PIN_Ex1+++`
+    /// * `+++PIN_PIN_Ex2+++`
     static _PIN PIN;
     
     /// @brief Equivalent to `DDR = dd;`.
@@ -241,7 +252,8 @@ namespace NS {
     }
     
     /// @brief Equivalent to `PIN = 1;` which toggles the output if
-    /// pin is in output mode.
+    /// pin is in output mode or the internal pullup register in input
+    /// mode.
     static void toggle() { PIN = 1; }
   };
   
@@ -253,6 +265,7 @@ namespace NS {
   template <enum _Port p, uint8_t b> typename Pin<p, b>::_PORT Pin<p, b>::PORT;
   template <enum _Port p, uint8_t b> typename Pin<p, b>::_PIN Pin<p, b>::PIN;
 }
+
 
 typedef struct NS::Pin<NS::_Port::B, -1> PIN_UNUSED;
 
@@ -390,14 +403,15 @@ typedef PIN_DIP_13 PIN_D7;
 
 
 namespace NS {
+  // forward declaration
   template <enum DataDirection Dd, class Io>
   uint8_t _set_or_get(uint8_t val);
   
   /**
    * @brief This class implements the cast operations from uint8_t and
-   * some enums.
+   * the typesafe enums: DataDirection and PullUp.
    * 
-   * All functions redirect to _set_or_get().
+   * All functions redirect to the internal _set_or_get() function.
    */
   template <enum _Port p, uint8_t b, enum _IOReg io>
   struct _Io {
@@ -447,11 +461,10 @@ namespace NS {
    * @tparam Dd (an enum ports::DataDirection) specifies the direction.
    * @param value is ignored if Dd is ports::DataDirection::Read.
    * 
-   * Probably only useful internally.  Bit operations are not that hard
-   * and we usually have the ports::DataDirection enum anyway.
+   * Probably only useful internally.
    **/
   template <enum DataDirection Dd, class R>
-  uint8_t _set_or_get_f(R& reg, uint8_t bit, uint8_t value) {
+  uint8_t inline _set_or_get_f(R& reg, uint8_t bit, uint8_t value) {
     if (Dd == DataDirection::Write) {
       if (value) reg |= _BV(bit);
       else reg &= ~_BV(bit);
@@ -463,9 +476,9 @@ namespace NS {
   /**
    * @brief Redirects to _set_or_get_f() with the correct register.
    * 
-   * @param value is ignored if Dd is ports::DataDirection::Read.
-   * @tparam Io must have 2 static members: `io_reg` and `port`.
-   * `typedef`s inside this file provide those static values.
+   * @param val is ignored if Dd is ports::DataDirection::Read.
+   * @tparam Io must have 3 static members: `io_reg`, `port` and `bit`.
+   * The class Pin `typedef`s are intended for this.
    * 
    * If for instance Io::io_reg == DDRx and Io::port == _Port::B
    * _set_or_get_f() is called with `DDRB`.
@@ -515,31 +528,20 @@ namespace NS {
   
   
   /**
-   * @brief For every (_Io, 'bit position') pair template arguments, uses
-   * _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit
-   * to read / write from this register.  If Dd is read returns this value
-   * in the 'bit position'.  If Dd is write uses the bit in #val at
-   * 'bit position' for the asignment.
+   * @brief If Dd is DataDirection::Write takes a bit value from @p val and
+   * writes this bit to @p rB, @p rC or @p rD.  If @p Dd is
+   * DataDirection::Read reads a bit value from @p rB, @p rC or @p rD and
+   * returns the value in the `uint8_t` return value.
    * 
-   * Example: D7 == PIN_B3 and B7 == 2 and val == 0b11001100:
-   * 
-   * PIN_B3 has port B and pin 3.
-   * 
-   * If
-   * 
-   * * Dd is write: uses `val & _BV(2)`, which is 1 and assigns it to rB
-   *   at position 3 (remember: port B, pin 3).
-   * * Dd is read: reads from rB at position 3 and returns the read value
-   *   at position 2 in the returned `uint8_t`.
-   * 
-   * If Dd is read, #val is not used.
-   * 
+   * See set_8_bits() for a more detailed explaination when @p Dd == DataDirection::Write
+   * and get_8_bits() when @p Dd == DataDirection::Read.
+   *
    * Don't be intimated by the length of this function, a good compiler
    * will optimize this to a few simple instructions.
    * 
    * @tparam Dd data direction
-   * @tparam Dx Dx::port and Dx::pin must be defined
-   * @tparam Bx the bit position
+   * @tparam D7 `D7::port` and `D7::pin` specify a bit position in @p rB, @p rC or @p rD.
+   * @tparam B7 a bit position in val.
    **/
   template <enum DataDirection Dd,
             class D7, uint8_t B7,
@@ -551,13 +553,13 @@ namespace NS {
             class D1, uint8_t B1,
             class D0, uint8_t B0,
             typename R, typename V>
-  inline static uint8_t _set_or_get_8_bits_regs(R& rB __attribute__ ((unused)),
-                                                R& rC __attribute__ ((unused)),
-                                                R& rD __attribute__ ((unused)),
-                                                const V& val __attribute__ ((unused))) {
-      uint8_t vB __attribute__ ((unused)) = 0;
-      uint8_t vC __attribute__ ((unused)) = 0;
-      uint8_t vD __attribute__ ((unused)) = 0;
+  inline static uint8_t _set_or_get_8_bits_regs(R& rB,
+                                                R& rC,
+                                                R& rD,
+                                                const V& val) {
+      uint8_t vB = 0;
+      uint8_t vC = 0;
+      uint8_t vD = 0;
       uint8_t maskB = 0;
       uint8_t maskC = 0;
       uint8_t maskD = 0;
@@ -664,7 +666,6 @@ namespace NS {
  * @brief Redirects to _set_or_get_8_bits_regs().
  * 
  * @tparam Reg may either be `DDRx`, `PINx` or `PORTx`.
- * 
  * * `DDRx`: redirects with `DDRB`, `DDRC` and `DDRD` as registers.
  * * `PORTx`: redirects with `PORTB`, `PORTC` and `PORTD` as registers.
  * * `PINx`: redirects with `PINB`, `PINC` and `PIND` as registers.
@@ -701,34 +702,54 @@ namespace NS {
 
   
   /**
-   * @brief For every (_Io, 'bit position') pair template arguments, uses
-   * _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit
-   * to write on this register.  Uses the bit in val at 'bit position' as
-   * value.
+   * @brief Takes a bit value from @p val and writes this bit to @p rB,
+   * @p rC or @p rD.
+   *
+   * There are 8 template argument pairs (D7, B7) .. (D0, B0).  
+   * Every of those pairs is indepedent and the order of those pairs
+   * is not important [1].
    * 
-   * Example: D7 == PIN_B3 and B7 == 2 and val == 0b11001100:
+   * The following explaination only explains one pair (D7, B7).  The other
+   * pairs behave exactly the same.
    * 
-   * PIN_B3 has port B and pin 3.
+   * @p D7 must have 2 static values: `D7::port` and `D7::bit`.  See struct Pin.
    * 
-   * Uses `val & _BV(2)`, which is 1 and assigns it to rB
-   *   at position 3 (remember: port B, pin 3).
+   * @p D7 "points" to a bit (`D7::bit`) in either @p rB, @p rC or @p rD (`D7::port`).
+   * @p B7 points to a bit in @p val or to a bit in the return value.
    * 
-   * @tparam Dx Dx::port and Dx::pin must be defined
-   * @tparam Bx the bit position
+   * The bit @p B7 in @p val is copied to @p D7.
+   * 
+   * 
+   * Example: assume `D7 == PIN_B3` and `B7 == 1` and `val == 0b00000010`
+   * 
+   * then:  
+   * `PIN_B3::port` is `_Port::B`  
+   * `PIN_B3::bit` is 3.
+   * 
+   * Uses `val & _BV(1)`, which is 1 and assigns it to @p rB at position 3.
+   * 
+   * [1]: The order is relevant, when a Pin `typedef` (D*) or bit position (B*)
+   * is used more than once.  Earlier template arguments take precedence.  
+   * Don't rely on this behaviour, I might change this at some point!
+   * 
+   * @tparam Dd data direction
+   * @tparam D7 `D7::port` and `D7::pin` specify a bit position in @p rB,
+   *             @p rC or @p rD.
+   * @tparam B7 a bit position in @p val.
    **/
   template <class D7, uint8_t B7,
-  class D6 = PIN_UNUSED, uint8_t B6 = -1,
-  class D5 = PIN_UNUSED, uint8_t B5 = -1,
-  class D4 = PIN_UNUSED, uint8_t B4 = -1,
-  class D3 = PIN_UNUSED, uint8_t B3 = -1,
-  class D2 = PIN_UNUSED, uint8_t B2 = -1,
-  class D1 = PIN_UNUSED, uint8_t B1 = -1,
-  class D0 = PIN_UNUSED, uint8_t B0 = -1,
-  typename R = uint8_t,
-  typename V = uint8_t>
-  inline static void set_8_bits(R& rB __attribute__ ((unused)),
-                                R& rC __attribute__ ((unused)),
-                                R& rD __attribute__ ((unused)),
+            class D6 = PIN_UNUSED, uint8_t B6 = -1,
+            class D5 = PIN_UNUSED, uint8_t B5 = -1,
+            class D4 = PIN_UNUSED, uint8_t B4 = -1,
+            class D3 = PIN_UNUSED, uint8_t B3 = -1,
+            class D2 = PIN_UNUSED, uint8_t B2 = -1,
+            class D1 = PIN_UNUSED, uint8_t B1 = -1,
+            class D0 = PIN_UNUSED, uint8_t B0 = -1,
+            typename R = uint8_t,
+            typename V = uint8_t>
+  inline static void set_8_bits(R& rB,
+                                R& rC,
+                                R& rD,
                                 const V& val) {
     NS::_set_or_get_8_bits<NS::DataDirection::Write,
     D7, B7,
@@ -743,19 +764,46 @@ namespace NS {
 
 
   /**
-   * @brief For every (_Io, 'bit position') pair template arguments, uses
-   * _Io::port to select #rB, #rC or #rD and _Io::bit to decide which bit
-   * to read on this register.  Returns the read value in uint8_t at
-   * 'bit position'.
+   * @brief Reads a bit value from @p rB, @p rC or @p rD and returns the
+   * value in the `uint8_t` return value.
    * 
-   * Example: D7 == PIN_B3 and B7 == 2:
+   * There are 8 template argument pairs (@p D7, @p B7) .. (@p D0, @p B0).  
+   * Every of those pairs is indepedent and the order of those pairs
+   * is not important [1].
    * 
-   * PIN_B3 has port B and pin 3.
+   * The following explaination only explains one pair (@p D7, @p B7).
+   * The other pairs behave exactly the same.
    * 
-   * Uses `rB & _BV(3)` and returns it at bit position 2.
+   * @p D7 must have 2 static values: `D7::port` and `D7::bit`.  See
+   * struct Pin.
    * 
-   * @tparam Dx Dx::port and Dx::pin must be defined
-   * @tparam Bx the bit position
+   * @p D7 "points" to a bit (`D7::bit`) in either @p rB, @p rC or
+   *       @p rD (`D7::port`).
+   * @p B7 points to a bit in the return value.
+   * 
+   * The bit value from @p D7 is copied to bit @p B7 in the returned
+   * `uint8_t`.
+   * 
+   * 
+   * Example: assume `D7 == PIN_B3` and `B7 == 1`
+   * 
+   * then:  
+   * `PIN_B3::port` is `_Port::B`  
+   * `PIN_B3::bit` is 3.
+   * 
+   * Reads from @p rB at position 3 and returns the read value at position 1 in
+   * the returned `uint8_t`.
+   * 
+   * @p val is not used.
+   * 
+   * [1]: The order is relevant, when a Pin `typedef` (D*) or bit position (B*)
+   * is used more than once.  Earlier template arguments take precedence.  
+   * Don't rely on this behaviour, I might change this at some point!
+   * 
+   * @tparam Dd data direction
+   * @tparam D7 `D7::port` and `D7::pin` specify a bit position in @p rB,
+   *            @p rC or @p rD.
+   * @tparam B7 a bit position in @p val.
    **/
   template <class D7, uint8_t B7,
   class D6 = PIN_UNUSED, uint8_t B6 = -1,
@@ -766,26 +814,18 @@ namespace NS {
   class D1 = PIN_UNUSED, uint8_t B1 = -1,
   class D0 = PIN_UNUSED, uint8_t B0 = -1,
   typename R = uint8_t>
-  inline static uint8_t get_8_bits(R& rB __attribute__ ((unused)),
-                                   R& rC __attribute__ ((unused)),
-                                   R& rD __attribute__ ((unused))) {
+  inline static uint8_t get_8_bits(R& rB,
+                                   R& rC,
+                                   R& rD) {
     return NS::_set_or_get_8_bits<NS::DataDirection::Read, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(rB, rC, rD, 0);
   }
 
 
   /**
-   * @brief Uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide
-   * which bit * to write on this register.
-   * Assigns bit 7 from #val to the first _Io, bit 6 for the second,...
+   * @brief See set_8_bits(), to which this function redirects, with
+   * `B7 = 7` .. `B0 = 0`.
    * 
-   * Example: D7 == PIN_B3 and val == 0b11001100:
-   * 
-   * PIN_B3 has port B and pin 3.
-   * 
-   * Uses `val & _BV(7)`, which is 1 and assigns it to rB
-   *   at position 3 (remember: port B, pin 3).
-   * 
-   * @tparam Dx Dx::port and Dx::pin must be defined
+   * @tparam D7 `D7::port` and `D7::pin` must be defined
    **/
   template <class D7,
   class D6 = PIN_UNUSED,
@@ -797,28 +837,16 @@ namespace NS {
   class D0 = PIN_UNUSED,
   typename R = uint8_t,
   typename V = uint8_t>
-  inline static void set_8_byte(R& rB __attribute__ ((unused)),
-                                R& rC __attribute__ ((unused)),
-                                R& rD __attribute__ ((unused)),
-                                const V& val) {
+  inline static void set_8_byte(R& rB, R& rC, R& rD, const V& val) {
     set_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, val);
   }
 
 
   /**
-   * @brief Uses _Io::port to select #rB, #rC or #rD and _Io::bit to decide
-   * which bit to read on this register.
-   * Returns the read value in uint8_t at the corresponding bit position.
+   * @brief See get_8_bits(), to which this function redirects, with
+   * `B7 = 7` .. `B0 = 0`.
    * 
-   * For the first _Io in bit 7, the second _Io in bit 6,...
-   * 
-   * Example: D7 == PIN_B3
-   * 
-   * PIN_B3 has port B and pin 3.
-   * 
-   * Uses `rB & _BV(3)` and returns it at bit position 7.
-   * 
-   * @tparam Dx Dx::port and Dx::pin must be defined
+   * @tparam D7 `D7::port` and `D7::pin` must be defined
    **/
   template <class D7,
   class D6 = PIN_UNUSED,
@@ -829,13 +857,16 @@ namespace NS {
   class D1 = PIN_UNUSED,
   class D0 = PIN_UNUSED,
   typename R = uint8_t>
-  inline static uint8_t get_8_byte(R& rB __attribute__ ((unused)),
-                                   R& rC __attribute__ ((unused)),
-                                   R& rD __attribute__ ((unused))) {
+  inline static uint8_t get_8_byte(R& rB, R& rC, R& rD) {
     return get_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, 0);
   }
 
 
+  /**
+   * @brief See set_8_bits().
+   * 
+   * The destination registers (`rB`, `rC` and `rD`) are chosen using IOReg.
+   **/
   template <enum NS::_IOReg IOReg,
   class D7, uint8_t B7,
   class D6 = PIN_UNUSED, uint8_t B6 = -1,
@@ -850,6 +881,11 @@ namespace NS {
     NS::_set_or_get_8_bits<NS::DataDirection::Write, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(val);
   }
   
+  /**
+   * @brief See get_8_bits().
+   * 
+   * The source registers (`rB`, `rC` and `rD`) are chosen using IOReg.
+   **/
   template <enum NS::_IOReg IOReg,
   class D7, uint8_t B7,
   class D6 = PIN_UNUSED, uint8_t B6 = -1,
@@ -863,6 +899,11 @@ namespace NS {
     return NS::_set_or_get_8_bits<NS::DataDirection::Read, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(0);
   }
   
+  /**
+   * @brief See get_8_byte().
+   * 
+   * The source registers (`rB`, `rC` and `rD`) are chosen using IOReg.
+   **/
   template <enum NS::_IOReg IOReg,
   class D7,
   class D6 = PIN_UNUSED,
@@ -876,6 +917,11 @@ namespace NS {
     return get_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>();
   }
   
+  /**
+   * @brief See set_8_byte().
+   * 
+   * The destination registers (`rB`, `rC` and `rD`) are chosen using IOReg.
+   **/
   template <enum NS::_IOReg IOReg,
   class D7,
   class D6 = PIN_UNUSED,
@@ -891,13 +937,36 @@ namespace NS {
   }
   
   
+  /**
+   * @brief See set_8_byte().  This function is optimized for situations
+   * where you want to set 4 pin values.
+   * 
+   * @p D3, @p D2, @p D1, @p D0 specify the pins.  The bit values for
+   * those pins are taken from @p val.
+   * 
+   * Bit 0 (the lsb) from @p val is assigned to @p D0.  
+   * ..  
+   * Bit 3 from @p val is assigned to @p D3.
+   * 
+   * 
+   * By setting @p offset the bit positions are shifted.
+   * 
+   * If for instance @p offset is 2 then:
+   * 
+   * Bit 2 from @p val is assigned to @p D0.  
+   * ..  
+   * Bit 5 from @p val is assigned to @p D3.
+   * 
+   * 
+   * The destination registers (`rB`, `rC` and `rD`) are chosen using IOReg.
+   **/
   template <enum NS::_IOReg IOReg,
-  uint8_t offset,
   class D3,
   class D2,
   class D1,
   class D0,
-  typename V>
+  uint8_t offset = 0,
+  typename V = uint8_t>
   inline static void set_4_nibble(V& val) {
     set_8_byte<IOReg, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, D3, 3 + offset, D2, 2 + offset, D1, 1 + offset, D0, 0 + offset>(val);
   }
