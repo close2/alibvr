@@ -701,10 +701,14 @@ template&lt;enum ports::_IOReg IOReg, class D3 , class D2 , class D1 , class D0 
 
 <p>See <a class="el" href="../../d4/d49/namespaceports.html#a7034c689dd509dc9c11ba8be46a26fd0" title="See set_8_bits(), to which this function redirects, with B7 = 7 .. B0 = 0. ">set_8_byte()</a>. This function is optimized for situations where you want to set 4 pin values. </p>
 <p><code>D3</code>, <code>D2</code>, <code>D1</code>, <code>D0</code> specify the pins. The bit values for those pins are taken from <code>val</code>.</p>
-<p>Bit 0 (the lsb) from <code>val</code> is assigned to <code>D0</code>. .. Bit 3 from <code>val</code> is assigned to <code>D3</code>.</p>
+<p>Bit 0 (the lsb) from <code>val</code> is assigned to <code>D0</code>. <br />
+.. <br />
+Bit 3 from <code>val</code> is assigned to <code>D3</code>.</p>
 <p>By setting <code>offset</code> the bit positions are shifted.</p>
 <p>If for instance <code>offset</code> is 2 then:</p>
-<p>Bit 2 from <code>val</code> is assigned to <code>D0</code>. .. Bit 5 from <code>val</code> is assigned to <code>D3</code>.</p>
+<p>Bit 2 from <code>val</code> is assigned to <code>D0</code>. <br />
+.. <br />
+Bit 5 from <code>val</code> is assigned to <code>D3</code>.</p>
 <p>The destination registers (<code>rB</code>, <code>rC</code> and <code>rD</code>) are chosen using IOReg. </p>
 
 </div>
