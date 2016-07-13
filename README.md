@@ -35,7 +35,7 @@ Doxygen documentation:
 
 This README only provides an overview.
 
-Please see the [http://close2.github.io/alibvr/doxygen/html/](doxygen)
+Please see the [doxygen](http://close2.github.io/alibvr/doxygen/html/)
 documentation for a detailed description.
 
 
