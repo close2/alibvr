@@ -9,9 +9,9 @@ Avr Atmegas access and control pins through registers. The registers are 8 bit w
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structports_1_1__Io}{\+\_\+\+Io}
-\begin{DoxyCompactList}\small\item\em This class implements the cast operations from uint8\+\_\+t and some enums. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This class implements the cast operations from uint8\+\_\+t and the typesafe enums\+: Data\+Direction and Pull\+Up. \end{DoxyCompactList}\item 
 struct \hyperlink{structports_1_1Pin}{Pin}
-\begin{DoxyCompactList}\small\item\em Every pin has one ore multiple typedefs of this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Every pin of the IC is defined using the template arguments {\ttfamily enum \+\_\+\+Port p} and {\ttfamily uint8\+\_\+t b} using {\ttfamily typedef}s of this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -21,7 +21,7 @@ enum \hyperlink{namespaceports_a9949317f344930bd6ad1097e80c97b67}{\+\_\+\+Port} 
 {\bfseries C}, 
 \\*
 {\bfseries D}
- \}\begin{DoxyCompactList}\small\item\em Used in pin typedefs to specify the port of the pin. \end{DoxyCompactList}
+ \}\begin{DoxyCompactList}\small\item\em Used in pin {\ttfamily typedef}s to specify the port of a pin. \end{DoxyCompactList}
 \item 
 enum \hyperlink{namespaceports_a739630fb6b9a9b963453db8e865b6b14}{\+\_\+\+I\+O\+Reg} \{ \\*
 {\bfseries D\+D\+Rx}, 
@@ -60,33 +60,28 @@ enum \hyperlink{namespaceports_a49bf0ccedb4cfed89a328574e53bec07}{Pull\+Up} \{ \
 \begin{DoxyCompactList}\small\item\em Redirects to \hyperlink{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}{\+\_\+set\+\_\+or\+\_\+get\+\_\+f()} with the correct register. \end{DoxyCompactList}\item 
 {\footnotesize template$<$enum Data\+Direction Dd, class R $>$ }\\uint8\+\_\+t \hyperlink{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}{\+\_\+set\+\_\+or\+\_\+get\+\_\+f} (R \&reg, uint8\+\_\+t bit, uint8\+\_\+t value)
 \begin{DoxyCompactList}\small\item\em Performs the bit \char`\"{}magic\char`\"{} to read a specifc bit from a register or write only one bit to a register. \end{DoxyCompactList}\item 
-{\footnotesize template$<$enum Data\+Direction Dd, class D7 , uint8\+\_\+t B7, class D6 , uint8\+\_\+t B6, class D5 , uint8\+\_\+t B5, class D4 , uint8\+\_\+t B4, class D3 , uint8\+\_\+t B3, class D2 , uint8\+\_\+t B2, class D1 , uint8\+\_\+t B1, class D0 , uint8\+\_\+t B0, typename R , typename V $>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_a49c5f4c094bbfe316f3d63897cd7f6a6}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs} (R \&rB \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rC \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rD \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), const V \&val \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)))
-\begin{DoxyCompactList}\small\item\em For every (\hyperlink{structports_1_1__Io}{\+\_\+\+Io}, \textquotesingle{}bit position\textquotesingle{}) pair template arguments, uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit to read / write from this register. If Dd is read returns this value in the \textquotesingle{}bit position\textquotesingle{}. If Dd is write uses the bit in \#val at \textquotesingle{}bit position\textquotesingle{} for the asignment. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum Data\+Direction Dd, class D7 , uint8\+\_\+t B7, class D6 , uint8\+\_\+t B6, class D5 , uint8\+\_\+t B5, class D4 , uint8\+\_\+t B4, class D3 , uint8\+\_\+t B3, class D2 , uint8\+\_\+t B2, class D1 , uint8\+\_\+t B1, class D0 , uint8\+\_\+t B0, typename R , typename V $>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_a541ed8a2807f6d65c80cdf90cd7106eb}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs} (R \&rB, R \&rC, R \&rD, const V \&val)
+\begin{DoxyCompactList}\small\item\em If Dd is Data\+Direction\+::\+Write takes a bit value from {\ttfamily val} and writes this bit to {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD}. If {\ttfamily Dd} is Data\+Direction\+::\+Read reads a bit value from {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD} and returns the value in the {\ttfamily uint8\+\_\+t} return value. \end{DoxyCompactList}\item 
 {\footnotesize template$<$enum Data\+Direction Dd, enum \+\_\+\+I\+O\+Reg Reg, class D7 , uint8\+\_\+t B7, class D6 , uint8\+\_\+t B6, class D5 , uint8\+\_\+t B5, class D4 , uint8\+\_\+t B4, class D3 , uint8\+\_\+t B3, class D2 , uint8\+\_\+t B2, class D1 , uint8\+\_\+t B1, class D0 , uint8\+\_\+t B0, typename V , typename P $>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_ada41109199590d9ccafae0f6d2adaf99}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits} (const V \&val)
-\begin{DoxyCompactList}\small\item\em Redirects to \hyperlink{namespaceports_a49c5f4c094bbfe316f3d63897cd7f6a6}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs()}. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename R  = uint8\+\_\+t, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_aad48d351c7d83de929acb9e149663d41}{set\+\_\+8\+\_\+bits} (R \&rB \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rC \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rD \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), const V \&val)
-\begin{DoxyCompactList}\small\item\em For every (\hyperlink{structports_1_1__Io}{\+\_\+\+Io}, \textquotesingle{}bit position\textquotesingle{}) pair template arguments, uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit to write on this register. Uses the bit in val at \textquotesingle{}bit position\textquotesingle{} as value. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename R  = uint8\+\_\+t$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_aa361d75af5b2f101c6304d1385c023ce}{get\+\_\+8\+\_\+bits} (R \&rB \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rC \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rD \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)))
-\begin{DoxyCompactList}\small\item\em For every (\hyperlink{structports_1_1__Io}{\+\_\+\+Io}, \textquotesingle{}bit position\textquotesingle{}) pair template arguments, uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit to read on this register. Returns the read value in uint8\+\_\+t at \textquotesingle{}bit position\textquotesingle{}. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_a19c06fd6aa6bf54de902e8ac44cc2e56}{set\+\_\+8\+\_\+byte} (R \&rB \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rC \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rD \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), const V \&val)
-\begin{DoxyCompactList}\small\item\em Uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit $\ast$ to write on this register. Assigns bit 7 from \#val to the first \hyperlink{structports_1_1__Io}{\+\_\+\+Io}, bit 6 for the second,... \end{DoxyCompactList}\item 
-{\footnotesize template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_a8c8245a3d0dc93b98260967a21c4db5b}{get\+\_\+8\+\_\+byte} (R \&rB \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rC \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&rD \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)))
-\begin{DoxyCompactList}\small\item\em Uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit to read on this register. Returns the read value in uint8\+\_\+t at the corresponding bit position. \end{DoxyCompactList}\item 
-{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename V  = uint8\+\_\+t$>$ }\\static void {\bfseries set\+\_\+8\+\_\+bits} (const V \&val)\hypertarget{namespaceports_ac9262ca010e65ff684986eef2900942f}{}\label{namespaceports_ac9262ca010e65ff684986eef2900942f}
-
-\item 
-{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1$>$ }\\static uint8\+\_\+t {\bfseries get\+\_\+8\+\_\+bits} ()\hypertarget{namespaceports_a2a0a17506421aaa10b7c087124a09b72}{}\label{namespaceports_a2a0a17506421aaa10b7c087124a09b72}
-
-\item 
-{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED$>$ }\\static uint8\+\_\+t {\bfseries get\+\_\+8\+\_\+byte} ()\hypertarget{namespaceports_abcf67102d107c0aaad21fbb9f15563ae}{}\label{namespaceports_abcf67102d107c0aaad21fbb9f15563ae}
-
-\item 
-{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename V  = uint8\+\_\+t$>$ }\\static void {\bfseries set\+\_\+8\+\_\+byte} (const V \&val)\hypertarget{namespaceports_a61265646961334c58df6d4ed66e290d0}{}\label{namespaceports_a61265646961334c58df6d4ed66e290d0}
-
-\item 
-{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, uint8\+\_\+t offset, class D3 , class D2 , class D1 , class D0 , typename V $>$ }\\static void {\bfseries set\+\_\+4\+\_\+nibble} (V \&val)\hypertarget{namespaceports_af6f06d849f89492a6d3603f926c4595b}{}\label{namespaceports_af6f06d849f89492a6d3603f926c4595b}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Redirects to \hyperlink{namespaceports_a541ed8a2807f6d65c80cdf90cd7106eb}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename R  = uint8\+\_\+t, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{set\+\_\+8\+\_\+bits} (R \&rB, R \&rC, R \&rD, const V \&val)
+\begin{DoxyCompactList}\small\item\em Takes a bit value from {\ttfamily val} and writes this bit to {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename R  = uint8\+\_\+t$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{get\+\_\+8\+\_\+bits} (R \&rB, R \&rC, R \&rD)
+\begin{DoxyCompactList}\small\item\em Reads a bit value from {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD} and returns the value in the {\ttfamily uint8\+\_\+t} return value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_a7034c689dd509dc9c11ba8be46a26fd0}{set\+\_\+8\+\_\+byte} (R \&rB, R \&rC, R \&rD, const V \&val)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{set\+\_\+8\+\_\+bits()}, to which this function redirects, with {\ttfamily B7 = 7} .. {\ttfamily B0 = 0}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_ae7d1ffc9ed6454ca61b006ffe43e4e6e}{get\+\_\+8\+\_\+byte} (R \&rB, R \&rC, R \&rD)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{get\+\_\+8\+\_\+bits()}, to which this function redirects, with {\ttfamily B7 = 7} .. {\ttfamily B0 = 0}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_ac9262ca010e65ff684986eef2900942f}{set\+\_\+8\+\_\+bits} (const V \&val)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{set\+\_\+8\+\_\+bits()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_a2a0a17506421aaa10b7c087124a09b72}{get\+\_\+8\+\_\+bits} ()
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{get\+\_\+8\+\_\+bits()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_abcf67102d107c0aaad21fbb9f15563ae}{get\+\_\+8\+\_\+byte} ()
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_ae7d1ffc9ed6454ca61b006ffe43e4e6e}{get\+\_\+8\+\_\+byte()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_a61265646961334c58df6d4ed66e290d0}{set\+\_\+8\+\_\+byte} (const V \&val)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_a7034c689dd509dc9c11ba8be46a26fd0}{set\+\_\+8\+\_\+byte()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D3 , class D2 , class D1 , class D0 , uint8\+\_\+t offset = 0, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_af6f06d849f89492a6d3603f926c4595b}{set\+\_\+4\+\_\+nibble} (V \&val)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_a7034c689dd509dc9c11ba8be46a26fd0}{set\+\_\+8\+\_\+byte()}. This function is optimized for situations where you want to set 4 pin values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -100,6 +95,8 @@ Avr Atmegas access and control pins through registers. The registers are 8 bit w
 \end{DoxyItemize}
 
 By default ports related classes, enums,... are defined inside the {\ttfamily ports} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX.
+
+All pin selections in this library are done using {\ttfamily typedef}s. See below for an example.
 
 The pin layout is compatible to arduino / arduino lite.
 
@@ -139,7 +136,7 @@ Probably only useful internally. \index{ports@{ports}!\+\_\+\+Port@{\+\_\+\+Port
 \subsubsection[{\texorpdfstring{\+\_\+\+Port}{_Port}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ports\+::\+\_\+\+Port}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{namespaceports_a9949317f344930bd6ad1097e80c97b67}{}\label{namespaceports_a9949317f344930bd6ad1097e80c97b67}
 
 
-Used in pin typedefs to specify the port of the pin. 
+Used in pin {\ttfamily typedef}s to specify the port of a pin. 
 
 Probably only useful internally. \index{ports@{ports}!Data\+Direction@{Data\+Direction}}
 \index{Data\+Direction@{Data\+Direction}!ports@{ports}}
@@ -153,7 +150,7 @@ When using this enum the compiler can verify that the correct register is used (
 \begin{DoxySeeAlso}{See also}
 \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{Pin\+::\+D\+DR}
 \end{DoxySeeAlso}
-This enum is also used internally when one function implements either a read or a write operation depending on this enum. \index{ports@{ports}!Pull\+Up@{Pull\+Up}}
+This enum is also used internally when one function implements -- depending on this enum -- either a read or a write operation. \index{ports@{ports}!Pull\+Up@{Pull\+Up}}
 \index{Pull\+Up@{Pull\+Up}!ports@{ports}}
 \subsubsection[{\texorpdfstring{Pull\+Up}{PullUp}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ports\+::\+Pull\+Up}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{namespaceports_a49bf0ccedb4cfed89a328574e53bec07}{}\label{namespaceports_a49bf0ccedb4cfed89a328574e53bec07}
 
@@ -179,12 +176,12 @@ Redirects to \hyperlink{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}{\+\_\+
 
 
 \begin{DoxyParams}{Parameters}
-{\em value} & is ignored if Dd is ports\+::\+Data\+Direction\+::\+Read. \\
+{\em val} & is ignored if Dd is ports\+::\+Data\+Direction\+::\+Read. \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Io} & must have 2 static members\+: {\ttfamily io\+\_\+reg} and {\ttfamily port}. {\ttfamily typedef}s inside this file provide those static values.\\
+{\em Io} & must have 3 static members\+: {\ttfamily io\+\_\+reg}, {\ttfamily port} and {\ttfamily bit}. The class \hyperlink{structports_1_1Pin}{Pin} {\ttfamily typedef}s are intended for this.\\
 \hline
 \end{DoxyTemplParams}
 If for instance Io\+::io\+\_\+reg == D\+D\+Rx and Io\+::port == \+\_\+\+Port\+::B \hyperlink{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}{\+\_\+set\+\_\+or\+\_\+get\+\_\+f()} is called with {\ttfamily D\+D\+RB}.
@@ -198,47 +195,33 @@ Probably only useful internally. \index{ports@{ports}!\+\_\+set\+\_\+or\+\_\+get
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_ada41109199590d9ccafae0f6d2adaf99}{}\label{namespaceports_ada41109199590d9ccafae0f6d2adaf99}
 
 
-Redirects to \hyperlink{namespaceports_a49c5f4c094bbfe316f3d63897cd7f6a6}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs()}. 
+Redirects to \hyperlink{namespaceports_a541ed8a2807f6d65c80cdf90cd7106eb}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs()}. 
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Reg} & may either be {\ttfamily D\+D\+Rx}, {\ttfamily P\+I\+Nx} or {\ttfamily P\+O\+R\+Tx}.\\
-\hline
-\end{DoxyTemplParams}
-
+{\em Reg} & may either be {\ttfamily D\+D\+Rx}, {\ttfamily P\+I\+Nx} or {\ttfamily P\+O\+R\+Tx}.
 \begin{DoxyItemize}
 \item {\ttfamily D\+D\+Rx}\+: redirects with {\ttfamily D\+D\+RB}, {\ttfamily D\+D\+RC} and {\ttfamily D\+D\+RD} as registers.
 \item {\ttfamily P\+O\+R\+Tx}\+: redirects with {\ttfamily P\+O\+R\+TB}, {\ttfamily P\+O\+R\+TC} and {\ttfamily P\+O\+R\+TD} as registers.
 \item {\ttfamily P\+I\+Nx}\+: redirects with {\ttfamily P\+I\+NB}, {\ttfamily P\+I\+NC} and {\ttfamily P\+I\+ND} as registers.
-\end{DoxyItemize}
-
-See other \hyperlink{namespaceports_a49c5f4c094bbfe316f3d63897cd7f6a6}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs()} for the meaning of all other parameters. \index{ports@{ports}!\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs@{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs}}
+\end{DoxyItemize}\\
+\hline
+\end{DoxyTemplParams}
+See other \hyperlink{namespaceports_a541ed8a2807f6d65c80cdf90cd7106eb}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs()} for the meaning of all other parameters. \index{ports@{ports}!\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs@{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs}}
 \index{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs@{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs}!ports@{ports}}
-\subsubsection[{\texorpdfstring{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs(\+R \&r\+B \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+C \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+D \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), const V \&val \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)))}{_set_or_get_8_bits_regs(R &rB __attribute__((unused)), R &rC __attribute__((unused)), R &rD __attribute__((unused)), const V &val __attribute__((unused)))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum Data\+Direction Dd, class D7 , uint8\+\_\+t B7, class D6 , uint8\+\_\+t B6, class D5 , uint8\+\_\+t B5, class D4 , uint8\+\_\+t B4, class D3 , uint8\+\_\+t B3, class D2 , uint8\+\_\+t B2, class D1 , uint8\+\_\+t B1, class D0 , uint8\+\_\+t B0, typename R , typename V $>$ static uint8\+\_\+t ports\+::\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs (
+\subsubsection[{\texorpdfstring{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs(\+R \&r\+B, R \&r\+C, R \&r\+D, const V \&val)}{_set_or_get_8_bits_regs(R &rB, R &rC, R &rD, const V &val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum Data\+Direction Dd, class D7 , uint8\+\_\+t B7, class D6 , uint8\+\_\+t B6, class D5 , uint8\+\_\+t B5, class D4 , uint8\+\_\+t B4, class D3 , uint8\+\_\+t B3, class D2 , uint8\+\_\+t B2, class D1 , uint8\+\_\+t B1, class D0 , uint8\+\_\+t B0, typename R , typename V $>$ static uint8\+\_\+t ports\+::\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs (
 \begin{DoxyParamCaption}
-\item[{R \&rB }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rC }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rD }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{const V \&val }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused)}
+\item[{R \&}]{rB, }
+\item[{R \&}]{rC, }
+\item[{R \&}]{rD, }
+\item[{const V \&}]{val}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_a49c5f4c094bbfe316f3d63897cd7f6a6}{}\label{namespaceports_a49c5f4c094bbfe316f3d63897cd7f6a6}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_a541ed8a2807f6d65c80cdf90cd7106eb}{}\label{namespaceports_a541ed8a2807f6d65c80cdf90cd7106eb}
 
 
-For every (\hyperlink{structports_1_1__Io}{\+\_\+\+Io}, \textquotesingle{}bit position\textquotesingle{}) pair template arguments, uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit to read / write from this register. If Dd is read returns this value in the \textquotesingle{}bit position\textquotesingle{}. If Dd is write uses the bit in \#val at \textquotesingle{}bit position\textquotesingle{} for the asignment. 
+If Dd is Data\+Direction\+::\+Write takes a bit value from {\ttfamily val} and writes this bit to {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD}. If {\ttfamily Dd} is Data\+Direction\+::\+Read reads a bit value from {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD} and returns the value in the {\ttfamily uint8\+\_\+t} return value. 
 
-Example\+: D7 == P\+I\+N\+\_\+\+B3 and B7 == 2 and val == 0b11001100\+:
-
-P\+I\+N\+\_\+\+B3 has port B and pin 3.
-
-If
-
-
-\begin{DoxyItemize}
-\item Dd is write\+: uses {\ttfamily val \& \+\_\+\+B\+V(2)}, which is 1 and assigns it to rB at position 3 (remember\+: port B, pin 3).
-\item Dd is read\+: reads from rB at position 3 and returns the read value at position 2 in the returned {\ttfamily uint8\+\_\+t}.
-\end{DoxyItemize}
-
-If Dd is read, \#val is not used.
+See \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{set\+\_\+8\+\_\+bits()} for a more detailed explaination when {\ttfamily Dd} == Data\+Direction\+::\+Write and \hyperlink{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{get\+\_\+8\+\_\+bits()} when {\ttfamily Dd} == Data\+Direction\+::\+Read.
 
 Don\textquotesingle{}t be intimated by the length of this function, a good compiler will optimize this to a few simple instructions.
 
@@ -246,9 +229,9 @@ Don\textquotesingle{}t be intimated by the length of this function, a good compi
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Dd} & data direction \\
 \hline
-{\em Dx} & Dx\+::port and Dx\+::pin must be defined \\
+{\em D7} & {\ttfamily D7\+::port} and {\ttfamily D7\+::pin} specify a bit position in {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD}. \\
 \hline
-{\em Bx} & the bit position \\
+{\em B7} & a bit position in val. \\
 \hline
 \end{DoxyTemplParams}
 \index{ports@{ports}!\+\_\+set\+\_\+or\+\_\+get\+\_\+f@{\+\_\+set\+\_\+or\+\_\+get\+\_\+f}}
@@ -259,7 +242,7 @@ Don\textquotesingle{}t be intimated by the length of this function, a good compi
 \item[{uint8\+\_\+t}]{bit, }
 \item[{uint8\+\_\+t}]{value}
 \end{DoxyParamCaption}
-)}\hypertarget{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}{}\label{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}{}\label{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}
 
 
 Performs the bit \char`\"{}magic\char`\"{} to read a specifc bit from a register or write only one bit to a register. 
@@ -274,107 +257,189 @@ Performs the bit \char`\"{}magic\char`\"{} to read a specifc bit from a register
 {\em value} & is ignored if Dd is ports\+::\+Data\+Direction\+::\+Read.\\
 \hline
 \end{DoxyParams}
-Probably only useful internally. Bit operations are not that hard and we usually have the \hyperlink{namespaceports_a46987e78fa447129742fadda5eccafb4}{ports\+::\+Data\+Direction} enum anyway. \index{ports@{ports}!get\+\_\+8\+\_\+bits@{get\+\_\+8\+\_\+bits}}
+Probably only useful internally. \index{ports@{ports}!get\+\_\+8\+\_\+bits@{get\+\_\+8\+\_\+bits}}
 \index{get\+\_\+8\+\_\+bits@{get\+\_\+8\+\_\+bits}!ports@{ports}}
-\subsubsection[{\texorpdfstring{get\+\_\+8\+\_\+bits(\+R \&r\+B \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+C \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+D \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)))}{get_8_bits(R &rB __attribute__((unused)), R &rC __attribute__((unused)), R &rD __attribute__((unused)))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename R  = uint8\+\_\+t$>$ static uint8\+\_\+t ports\+::get\+\_\+8\+\_\+bits (
+\subsubsection[{\texorpdfstring{get\+\_\+8\+\_\+bits(\+R \&r\+B, R \&r\+C, R \&r\+D)}{get_8_bits(R &rB, R &rC, R &rD)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename R  = uint8\+\_\+t$>$ static uint8\+\_\+t ports\+::get\+\_\+8\+\_\+bits (
 \begin{DoxyParamCaption}
-\item[{R \&rB }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rC }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rD }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused)}
+\item[{R \&}]{rB, }
+\item[{R \&}]{rC, }
+\item[{R \&}]{rD}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_aa361d75af5b2f101c6304d1385c023ce}{}\label{namespaceports_aa361d75af5b2f101c6304d1385c023ce}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{}\label{namespaceports_a9a1959ec95780c00a964b174a27b2a37}
 
 
-For every (\hyperlink{structports_1_1__Io}{\+\_\+\+Io}, \textquotesingle{}bit position\textquotesingle{}) pair template arguments, uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit to read on this register. Returns the read value in uint8\+\_\+t at \textquotesingle{}bit position\textquotesingle{}. 
+Reads a bit value from {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD} and returns the value in the {\ttfamily uint8\+\_\+t} return value. 
 
-Example\+: D7 == P\+I\+N\+\_\+\+B3 and B7 == 2\+:
+There are 8 template argument pairs ({\ttfamily D7}, {\ttfamily B7}) .. ({\ttfamily D0}, {\ttfamily B0}). Every of those pairs is indepedent and the order of those pairs is not important \mbox{[}1\mbox{]}.
 
-P\+I\+N\+\_\+\+B3 has port B and pin 3.
+The following explaination only explains one pair ({\ttfamily D7}, {\ttfamily B7}). The other pairs behave exactly the same.
 
-Uses {\ttfamily rB \& \+\_\+\+B\+V(3)} and returns it at bit position 2.
+{\ttfamily D7} must have 2 static values\+: {\ttfamily D7\+::port} and {\ttfamily D7\+::bit}. See struct \hyperlink{structports_1_1Pin}{Pin}.
+
+{\ttfamily D7} \char`\"{}points\char`\"{} to a bit ({\ttfamily D7\+::bit}) in either {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD} ({\ttfamily D7\+::port}). {\ttfamily B7} points to a bit in the return value.
+
+The bit value from {\ttfamily D7} is copied to bit {\ttfamily B7} in the returned {\ttfamily uint8\+\_\+t}.
+
+Example\+: assume {\ttfamily D7 == P\+I\+N\+\_\+\+B3} and {\ttfamily B7 == 1}
+
+then\+: {\ttfamily \hyperlink{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}{P\+I\+N\+\_\+\+B3\+::port}} is {\ttfamily \+\_\+\+Port\+::B} {\ttfamily \hyperlink{structports_1_1Pin_aea726b85cfe5e49822dd2517da5c860f}{P\+I\+N\+\_\+\+B3\+::bit}} is 3.
+
+Reads from {\ttfamily rB} at position 3 and returns the read value at position 1 in the returned {\ttfamily uint8\+\_\+t}.
+
+{\ttfamily val} is not used.
+
+\mbox{[}1\mbox{]}\+: The order is relevant, when a \hyperlink{structports_1_1Pin}{Pin} {\ttfamily typedef} (D$\ast$) or bit position (B$\ast$) is used more than once. Earlier template arguments take precedence. Don\textquotesingle{}t rely on this behaviour, I might change this at some point!
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Dx} & Dx\+::port and Dx\+::pin must be defined \\
+{\em Dd} & data direction \\
 \hline
-{\em Bx} & the bit position \\
+{\em D7} & {\ttfamily D7\+::port} and {\ttfamily D7\+::pin} specify a bit position in {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD}. \\
+\hline
+{\em B7} & a bit position in {\ttfamily val}. \\
+\hline
+\end{DoxyTemplParams}
+\index{ports@{ports}!get\+\_\+8\+\_\+bits@{get\+\_\+8\+\_\+bits}}
+\index{get\+\_\+8\+\_\+bits@{get\+\_\+8\+\_\+bits}!ports@{ports}}
+\subsubsection[{\texorpdfstring{get\+\_\+8\+\_\+bits()}{get_8_bits()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1$>$ static uint8\+\_\+t ports\+::get\+\_\+8\+\_\+bits (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_a2a0a17506421aaa10b7c087124a09b72}{}\label{namespaceports_a2a0a17506421aaa10b7c087124a09b72}
+
+
+See \hyperlink{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{get\+\_\+8\+\_\+bits()}. 
+
+The source registers ({\ttfamily rB}, {\ttfamily rC} and {\ttfamily rD}) are chosen using I\+O\+Reg. \index{ports@{ports}!get\+\_\+8\+\_\+byte@{get\+\_\+8\+\_\+byte}}
+\index{get\+\_\+8\+\_\+byte@{get\+\_\+8\+\_\+byte}!ports@{ports}}
+\subsubsection[{\texorpdfstring{get\+\_\+8\+\_\+byte(\+R \&r\+B, R \&r\+C, R \&r\+D)}{get_8_byte(R &rB, R &rC, R &rD)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t$>$ static uint8\+\_\+t ports\+::get\+\_\+8\+\_\+byte (
+\begin{DoxyParamCaption}
+\item[{R \&}]{rB, }
+\item[{R \&}]{rC, }
+\item[{R \&}]{rD}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_ae7d1ffc9ed6454ca61b006ffe43e4e6e}{}\label{namespaceports_ae7d1ffc9ed6454ca61b006ffe43e4e6e}
+
+
+See \hyperlink{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{get\+\_\+8\+\_\+bits()}, to which this function redirects, with {\ttfamily B7 = 7} .. {\ttfamily B0 = 0}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em D7} & {\ttfamily D7\+::port} and {\ttfamily D7\+::pin} must be defined \\
 \hline
 \end{DoxyTemplParams}
 \index{ports@{ports}!get\+\_\+8\+\_\+byte@{get\+\_\+8\+\_\+byte}}
 \index{get\+\_\+8\+\_\+byte@{get\+\_\+8\+\_\+byte}!ports@{ports}}
-\subsubsection[{\texorpdfstring{get\+\_\+8\+\_\+byte(\+R \&r\+B \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+C \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+D \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)))}{get_8_byte(R &rB __attribute__((unused)), R &rC __attribute__((unused)), R &rD __attribute__((unused)))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t$>$ static uint8\+\_\+t ports\+::get\+\_\+8\+\_\+byte (
+\subsubsection[{\texorpdfstring{get\+\_\+8\+\_\+byte()}{get_8_byte()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED$>$ static uint8\+\_\+t ports\+::get\+\_\+8\+\_\+byte (
 \begin{DoxyParamCaption}
-\item[{R \&rB }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rC }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rD }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused)}
+{}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_a8c8245a3d0dc93b98260967a21c4db5b}{}\label{namespaceports_a8c8245a3d0dc93b98260967a21c4db5b}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_abcf67102d107c0aaad21fbb9f15563ae}{}\label{namespaceports_abcf67102d107c0aaad21fbb9f15563ae}
 
 
-Uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit to read on this register. Returns the read value in uint8\+\_\+t at the corresponding bit position. 
+See \hyperlink{namespaceports_ae7d1ffc9ed6454ca61b006ffe43e4e6e}{get\+\_\+8\+\_\+byte()}. 
 
-For the first \hyperlink{structports_1_1__Io}{\+\_\+\+Io} in bit 7, the second \hyperlink{structports_1_1__Io}{\+\_\+\+Io} in bit 6,...
+The source registers ({\ttfamily rB}, {\ttfamily rC} and {\ttfamily rD}) are chosen using I\+O\+Reg. \index{ports@{ports}!set\+\_\+4\+\_\+nibble@{set\+\_\+4\+\_\+nibble}}
+\index{set\+\_\+4\+\_\+nibble@{set\+\_\+4\+\_\+nibble}!ports@{ports}}
+\subsubsection[{\texorpdfstring{set\+\_\+4\+\_\+nibble(\+V \&val)}{set_4_nibble(V &val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D3 , class D2 , class D1 , class D0 , uint8\+\_\+t offset = 0, typename V  = uint8\+\_\+t$>$ static void ports\+::set\+\_\+4\+\_\+nibble (
+\begin{DoxyParamCaption}
+\item[{V \&}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_af6f06d849f89492a6d3603f926c4595b}{}\label{namespaceports_af6f06d849f89492a6d3603f926c4595b}
 
-Example\+: D7 == P\+I\+N\+\_\+\+B3
 
-P\+I\+N\+\_\+\+B3 has port B and pin 3.
+See \hyperlink{namespaceports_a7034c689dd509dc9c11ba8be46a26fd0}{set\+\_\+8\+\_\+byte()}. This function is optimized for situations where you want to set 4 pin values. 
 
-Uses {\ttfamily rB \& \+\_\+\+B\+V(3)} and returns it at bit position 7.
+{\ttfamily D3}, {\ttfamily D2}, {\ttfamily D1}, {\ttfamily D0} specify the pins. The bit values for those pins are taken from {\ttfamily val}.
+
+Bit 0 (the lsb) from {\ttfamily val} is assigned to {\ttfamily D0}. .. Bit 3 from {\ttfamily val} is assigned to {\ttfamily D3}.
+
+By setting {\ttfamily offset} the bit positions are shifted.
+
+If for instance {\ttfamily offset} is 2 then\+:
+
+Bit 2 from {\ttfamily val} is assigned to {\ttfamily D0}. .. Bit 5 from {\ttfamily val} is assigned to {\ttfamily D3}.
+
+The destination registers ({\ttfamily rB}, {\ttfamily rC} and {\ttfamily rD}) are chosen using I\+O\+Reg. \index{ports@{ports}!set\+\_\+8\+\_\+bits@{set\+\_\+8\+\_\+bits}}
+\index{set\+\_\+8\+\_\+bits@{set\+\_\+8\+\_\+bits}!ports@{ports}}
+\subsubsection[{\texorpdfstring{set\+\_\+8\+\_\+bits(\+R \&r\+B, R \&r\+C, R \&r\+D, const V \&val)}{set_8_bits(R &rB, R &rC, R &rD, const V &val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename R  = uint8\+\_\+t, typename V  = uint8\+\_\+t$>$ static void ports\+::set\+\_\+8\+\_\+bits (
+\begin{DoxyParamCaption}
+\item[{R \&}]{rB, }
+\item[{R \&}]{rC, }
+\item[{R \&}]{rD, }
+\item[{const V \&}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{}\label{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}
+
+
+Takes a bit value from {\ttfamily val} and writes this bit to {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD}. 
+
+There are 8 template argument pairs (D7, B7) .. (D0, B0). Every of those pairs is indepedent and the order of those pairs is not important \mbox{[}1\mbox{]}.
+
+The following explaination only explains one pair (D7, B7). The other pairs behave exactly the same.
+
+{\ttfamily D7} must have 2 static values\+: {\ttfamily D7\+::port} and {\ttfamily D7\+::bit}. See struct \hyperlink{structports_1_1Pin}{Pin}.
+
+{\ttfamily D7} \char`\"{}points\char`\"{} to a bit ({\ttfamily D7\+::bit}) in either {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD} ({\ttfamily D7\+::port}). {\ttfamily B7} points to a bit in {\ttfamily val} or to a bit in the return value.
+
+The bit {\ttfamily B7} in {\ttfamily val} is copied to {\ttfamily D7}.
+
+Example\+: assume {\ttfamily D7 == P\+I\+N\+\_\+\+B3} and {\ttfamily B7 == 1} and {\ttfamily val == 0b00000010}
+
+then\+: {\ttfamily \hyperlink{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}{P\+I\+N\+\_\+\+B3\+::port}} is {\ttfamily \+\_\+\+Port\+::B} {\ttfamily \hyperlink{structports_1_1Pin_aea726b85cfe5e49822dd2517da5c860f}{P\+I\+N\+\_\+\+B3\+::bit}} is 3.
+
+Uses {\ttfamily val \& \+\_\+\+B\+V(1)}, which is 1 and assigns it to {\ttfamily rB} at position 3.
+
+\mbox{[}1\mbox{]}\+: The order is relevant, when a \hyperlink{structports_1_1Pin}{Pin} {\ttfamily typedef} (D$\ast$) or bit position (B$\ast$) is used more than once. Earlier template arguments take precedence. Don\textquotesingle{}t rely on this behaviour, I might change this at some point!
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Dx} & Dx\+::port and Dx\+::pin must be defined \\
+{\em Dd} & data direction \\
+\hline
+{\em D7} & {\ttfamily D7\+::port} and {\ttfamily D7\+::pin} specify a bit position in {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD}. \\
+\hline
+{\em B7} & a bit position in {\ttfamily val}. \\
 \hline
 \end{DoxyTemplParams}
 \index{ports@{ports}!set\+\_\+8\+\_\+bits@{set\+\_\+8\+\_\+bits}}
 \index{set\+\_\+8\+\_\+bits@{set\+\_\+8\+\_\+bits}!ports@{ports}}
-\subsubsection[{\texorpdfstring{set\+\_\+8\+\_\+bits(\+R \&r\+B \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+C \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+D \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), const V \&val)}{set_8_bits(R &rB __attribute__((unused)), R &rC __attribute__((unused)), R &rD __attribute__((unused)), const V &val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename R  = uint8\+\_\+t, typename V  = uint8\+\_\+t$>$ static void ports\+::set\+\_\+8\+\_\+bits (
+\subsubsection[{\texorpdfstring{set\+\_\+8\+\_\+bits(const V \&val)}{set_8_bits(const V &val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, uint8\+\_\+t B0 = -\/1, typename V  = uint8\+\_\+t$>$ static void ports\+::set\+\_\+8\+\_\+bits (
 \begin{DoxyParamCaption}
-\item[{R \&rB }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rC }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rD }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
 \item[{const V \&}]{val}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_aad48d351c7d83de929acb9e149663d41}{}\label{namespaceports_aad48d351c7d83de929acb9e149663d41}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_ac9262ca010e65ff684986eef2900942f}{}\label{namespaceports_ac9262ca010e65ff684986eef2900942f}
 
 
-For every (\hyperlink{structports_1_1__Io}{\+\_\+\+Io}, \textquotesingle{}bit position\textquotesingle{}) pair template arguments, uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit to write on this register. Uses the bit in val at \textquotesingle{}bit position\textquotesingle{} as value. 
+See \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{set\+\_\+8\+\_\+bits()}. 
 
-Example\+: D7 == P\+I\+N\+\_\+\+B3 and B7 == 2 and val == 0b11001100\+:
+The destination registers ({\ttfamily rB}, {\ttfamily rC} and {\ttfamily rD}) are chosen using I\+O\+Reg. \index{ports@{ports}!set\+\_\+8\+\_\+byte@{set\+\_\+8\+\_\+byte}}
+\index{set\+\_\+8\+\_\+byte@{set\+\_\+8\+\_\+byte}!ports@{ports}}
+\subsubsection[{\texorpdfstring{set\+\_\+8\+\_\+byte(\+R \&r\+B, R \&r\+C, R \&r\+D, const V \&val)}{set_8_byte(R &rB, R &rC, R &rD, const V &val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t, typename V  = uint8\+\_\+t$>$ static void ports\+::set\+\_\+8\+\_\+byte (
+\begin{DoxyParamCaption}
+\item[{R \&}]{rB, }
+\item[{R \&}]{rC, }
+\item[{R \&}]{rD, }
+\item[{const V \&}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_a7034c689dd509dc9c11ba8be46a26fd0}{}\label{namespaceports_a7034c689dd509dc9c11ba8be46a26fd0}
 
-P\+I\+N\+\_\+\+B3 has port B and pin 3.
 
-Uses {\ttfamily val \& \+\_\+\+B\+V(2)}, which is 1 and assigns it to rB at position 3 (remember\+: port B, pin 3).
+See \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{set\+\_\+8\+\_\+bits()}, to which this function redirects, with {\ttfamily B7 = 7} .. {\ttfamily B0 = 0}. 
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Dx} & Dx\+::port and Dx\+::pin must be defined \\
-\hline
-{\em Bx} & the bit position \\
+{\em D7} & {\ttfamily D7\+::port} and {\ttfamily D7\+::pin} must be defined \\
 \hline
 \end{DoxyTemplParams}
 \index{ports@{ports}!set\+\_\+8\+\_\+byte@{set\+\_\+8\+\_\+byte}}
 \index{set\+\_\+8\+\_\+byte@{set\+\_\+8\+\_\+byte}!ports@{ports}}
-\subsubsection[{\texorpdfstring{set\+\_\+8\+\_\+byte(\+R \&r\+B \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+C \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), R \&r\+D \+\_\+\+\_\+attribute\+\_\+\+\_\+((unused)), const V \&val)}{set_8_byte(R &rB __attribute__((unused)), R &rC __attribute__((unused)), R &rD __attribute__((unused)), const V &val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t, typename V  = uint8\+\_\+t$>$ static void ports\+::set\+\_\+8\+\_\+byte (
+\subsubsection[{\texorpdfstring{set\+\_\+8\+\_\+byte(const V \&val)}{set_8_byte(const V &val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum ports\+::\+\_\+\+I\+O\+Reg I\+O\+Reg, class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename V  = uint8\+\_\+t$>$ static void ports\+::set\+\_\+8\+\_\+byte (
 \begin{DoxyParamCaption}
-\item[{R \&rB }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rC }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
-\item[{R \&rD }]{\+\_\+\+\_\+attribute\+\_\+\+\_\+(unused), }
 \item[{const V \&}]{val}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_a19c06fd6aa6bf54de902e8ac44cc2e56}{}\label{namespaceports_a19c06fd6aa6bf54de902e8ac44cc2e56}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceports_a61265646961334c58df6d4ed66e290d0}{}\label{namespaceports_a61265646961334c58df6d4ed66e290d0}
 
 
-Uses \+\_\+\+Io\+::port to select \#rB, \#rC or \#rD and \+\_\+\+Io\+::bit to decide which bit $\ast$ to write on this register. Assigns bit 7 from \#val to the first \hyperlink{structports_1_1__Io}{\+\_\+\+Io}, bit 6 for the second,... 
+See \hyperlink{namespaceports_a7034c689dd509dc9c11ba8be46a26fd0}{set\+\_\+8\+\_\+byte()}. 
 
-Example\+: D7 == P\+I\+N\+\_\+\+B3 and val == 0b11001100\+:
-
-P\+I\+N\+\_\+\+B3 has port B and pin 3.
-
-Uses {\ttfamily val \& \+\_\+\+B\+V(7)}, which is 1 and assigns it to rB at position 3 (remember\+: port B, pin 3).
-
-
-\begin{DoxyTemplParams}{Template Parameters}
-{\em Dx} & Dx\+::port and Dx\+::pin must be defined \\
-\hline
-\end{DoxyTemplParams}
+The destination registers ({\ttfamily rB}, {\ttfamily rC} and {\ttfamily rD}) are chosen using I\+O\+Reg. 

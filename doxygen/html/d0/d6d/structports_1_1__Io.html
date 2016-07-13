@@ -99,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>This class implements the cast operations from uint8_t and some enums.  
+<p>This class implements the cast operations from uint8_t and the typesafe enums: DataDirection and PullUp.  
  <a href="../../d0/d6d/structports_1_1__Io.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="../../d2/d54/ports_8h_source.html">ports.h</a>&gt;</code></p>
@@ -147,8 +147,8 @@ static enum <a class="el" href="../../d4/d49/namespaceports.html#a739630fb6b9a9b
 <div class="textblock"><h3>template&lt;enum _Port p, uint8_t b, enum _IOReg io&gt;<br />
 struct ports::_Io&lt; p, b, io &gt;</h3>
 
-<p>This class implements the cast operations from uint8_t and some enums. </p>
-<p>All functions redirect to <a class="el" href="../../d4/d49/namespaceports.html#aa339a9d178cb414c4cf243450d5887d2" title="Redirects to _set_or_get_f() with the correct register. ">_set_or_get()</a>. </p>
+<p>This class implements the cast operations from uint8_t and the typesafe enums: DataDirection and PullUp. </p>
+<p>All functions redirect to the internal <a class="el" href="../../d4/d49/namespaceports.html#aa339a9d178cb414c4cf243450d5887d2" title="Redirects to _set_or_get_f() with the correct register. ">_set_or_get()</a> function. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="../../d2/d54/ports_8h_source.html">ports.h</a></li>
 </ul>

@@ -2,7 +2,7 @@
 \label{structports_1_1Pin}\index{ports\+::\+Pin$<$ p, b $>$@{ports\+::\+Pin$<$ p, b $>$}}
 
 
-Every pin has one ore multiple typedefs of this class.  
+Every pin of the IC is defined using the template arguments {\ttfamily enum \+\_\+\+Port p} and {\ttfamily uint8\+\_\+t b} using {\ttfamily typedef}s of this class.  
 
 
 
@@ -41,15 +41,13 @@ static void \hyperlink{structports_1_1Pin_ae2f380ea5586a2eaa6e0d0b85dbf0983}{set
 \begin{DoxyCompactList}\small\item\em Equivalent to first setting the data direction {\ttfamily D\+DR = Data\+Direction\+::\+Input;} followed by setting the pull up resistor\+: {\ttfamily P\+O\+RT = pullup;}. \end{DoxyCompactList}\item 
 static void \hyperlink{structports_1_1Pin_a3caf6009548ed46020910f36d2b0f4f9}{toggle} ()\hypertarget{structports_1_1Pin_a3caf6009548ed46020910f36d2b0f4f9}{}\label{structports_1_1Pin_a3caf6009548ed46020910f36d2b0f4f9}
 
-\begin{DoxyCompactList}\small\item\em Equivalent to {\ttfamily P\+IN = 1;} which toggles the output if pin is in output mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Equivalent to {\ttfamily P\+IN = 1;} which toggles the output if pin is in output mode or the internal pullup register in input mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static enum \hyperlink{namespaceports_a9949317f344930bd6ad1097e80c97b67}{\+\_\+\+Port} \hyperlink{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}{port} = p\hypertarget{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}{}\label{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}
-
+static enum \hyperlink{namespaceports_a9949317f344930bd6ad1097e80c97b67}{\+\_\+\+Port} \hyperlink{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}{port} = p
 \begin{DoxyCompactList}\small\item\em The port name (enum \+\_\+\+Port) of this pin. \end{DoxyCompactList}\item 
-static const uint8\+\_\+t \hyperlink{structports_1_1Pin_aea726b85cfe5e49822dd2517da5c860f}{bit} = b\hypertarget{structports_1_1Pin_aea726b85cfe5e49822dd2517da5c860f}{}\label{structports_1_1Pin_aea726b85cfe5e49822dd2517da5c860f}
-
+static const uint8\+\_\+t \hyperlink{structports_1_1Pin_aea726b85cfe5e49822dd2517da5c860f}{bit} = b
 \begin{DoxyCompactList}\small\item\em The bit position (0-\/7) inside the D\+D\+Rx, P\+O\+R\+Tx or P\+I\+Nx register. \end{DoxyCompactList}\item 
 static \hyperlink{structports_1_1__Io}{\+\_\+\+D\+DR} \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{D\+DR}
 \begin{DoxyCompactList}\small\item\em Simplified access to the D\+DR value of this pin. \end{DoxyCompactList}\item 
@@ -63,9 +61,11 @@ static \hyperlink{structports_1_1__Io}{\+\_\+\+P\+IN} \hyperlink{structports_1_1
 \subsubsection*{template$<$enum \+\_\+\+Port p, uint8\+\_\+t b$>$\\*
 struct ports\+::\+Pin$<$ p, b $>$}
 
-Every pin has one ore multiple typedefs of this class. 
+Every pin of the IC is defined using the template arguments {\ttfamily enum \+\_\+\+Port p} and {\ttfamily uint8\+\_\+t b} using {\ttfamily typedef}s of this class. 
 
-The port name (enum \+\_\+\+Port) and the bit in the registers is provided as static variables.
+The port (enum \+\_\+\+Port) and the bit (inside the control registers) is provided through static variables.
+
+Example\+: {\ttfamily if (a\+Pin\+Typedef\+::port == \+\_\+\+Port\+::B) ...}
 
 In addition reading or setting the value of a pin is simplified through \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{D\+DR} \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+O\+RT} and \hyperlink{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{P\+IN} which have cast converters from uint8\+\_\+t.
 
@@ -75,10 +75,17 @@ The exact same thing may now be done by writing\+: {\ttfamily \hyperlink{structp
 
 When using the enums \hyperlink{namespaceports_a46987e78fa447129742fadda5eccafb4}{Data\+Direction} or \hyperlink{namespaceports_a49bf0ccedb4cfed89a328574e53bec07}{Pull\+Up} the compiler verifies that the enum is used for the correct register.
 
-The compiler does not verify that you are in the correct \char`\"{}mode\char`\"{}. Calling \hyperlink{structports_1_1Pin_a11ba9e7aeda2d867780dee32234f2c7e}{set\+Pull\+Up()} when the pin is in output mode will change the output! You would need to switch to input first ({\ttfamily D\+DR = Data\+Direction\+::\+Input;}). 
+The compiler does however not verify that you are in the correct \char`\"{}mode\char`\"{}. Calling \hyperlink{structports_1_1Pin_a11ba9e7aeda2d867780dee32234f2c7e}{set\+Pull\+Up()} when the pin is in output mode will change the output! You would need to switch to input first ({\ttfamily D\+DR = Data\+Direction\+::\+Input;}). 
 
 \subsection{Member Data Documentation}
-\index{ports\+::\+Pin@{ports\+::\+Pin}!D\+DR@{D\+DR}}
+\index{ports\+::\+Pin@{ports\+::\+Pin}!bit@{bit}}
+\index{bit@{bit}!ports\+::\+Pin@{ports\+::\+Pin}}
+\subsubsection[{\texorpdfstring{bit}{bit}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum \+\_\+\+Port p, uint8\+\_\+t b$>$ const uint8\+\_\+t {\bf ports\+::\+Pin}$<$ p, b $>$\+::bit = b\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structports_1_1Pin_aea726b85cfe5e49822dd2517da5c860f}{}\label{structports_1_1Pin_aea726b85cfe5e49822dd2517da5c860f}
+
+
+The bit position (0-\/7) inside the D\+D\+Rx, P\+O\+R\+Tx or P\+I\+Nx register. 
+
+Simply exposes the template argument. \index{ports\+::\+Pin@{ports\+::\+Pin}!D\+DR@{D\+DR}}
 \index{D\+DR@{D\+DR}!ports\+::\+Pin@{ports\+::\+Pin}}
 \subsubsection[{\texorpdfstring{D\+DR}{DDR}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum \+\_\+\+Port p, uint8\+\_\+t b$>$ {\bf Pin}$<$ p, b $>$\+::{\bf \+\_\+\+D\+DR} {\bf ports\+::\+Pin}$<$ p, b $>$\+::D\+DR\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{}\label{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}
 
@@ -93,9 +100,9 @@ Examples\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily P\+O\+R\+T\+\_\+\+C3\+::\+D\+DR = Data\+Direction\+::\+Input;}
-\item {\ttfamily uint8\+\_\+t current\+D\+DR = P\+O\+R\+T\+\_\+\+C3\+::\+D\+DR;}
-\item {\ttfamily enum Data\+Direction current\+D\+D\+R2 = P\+O\+R\+T\+\_\+\+C3\+::\+D\+DR;} 
+\item {\ttfamily \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{P\+I\+N\+\_\+\+C3\+::\+D\+DR} = Data\+Direction\+::\+Input;}
+\item {\ttfamily uint8\+\_\+t current\+D\+DR = \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{P\+I\+N\+\_\+\+C3\+::\+D\+DR};}
+\item {\ttfamily enum Data\+Direction current\+D\+D\+R2 = \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{P\+I\+N\+\_\+\+C3\+::\+D\+DR};} 
 \end{DoxyItemize}\index{ports\+::\+Pin@{ports\+::\+Pin}!P\+IN@{P\+IN}}
 \index{P\+IN@{P\+IN}!ports\+::\+Pin@{ports\+::\+Pin}}
 \subsubsection[{\texorpdfstring{P\+IN}{PIN}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum \+\_\+\+Port p, uint8\+\_\+t b$>$ {\bf Pin}$<$ p, b $>$\+::{\bf \+\_\+\+P\+IN} {\bf ports\+::\+Pin}$<$ p, b $>$\+::P\+IN\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{}\label{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}
@@ -109,9 +116,8 @@ Examples\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily P\+O\+R\+T\+\_\+\+C3\+::\+D\+DR = Data\+Direction\+::\+Input;}
-\item {\ttfamily uint8\+\_\+t current\+D\+DR = P\+O\+R\+T\+\_\+\+C3\+::\+D\+DR;}
-\item {\ttfamily Data\+Direction current\+D\+D\+R2 = P\+O\+R\+T\+\_\+\+C3\+::\+D\+DR;} 
+\item {\ttfamily \hyperlink{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{P\+I\+N\+\_\+\+C3\+::\+P\+IN} = 1; // equivalent to\+: \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+C3\+::\+P\+O\+RT} = ! \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+C3\+::\+P\+O\+RT};}
+\item {\ttfamily uint8\+\_\+t input = \hyperlink{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{P\+I\+N\+\_\+\+C3\+::\+P\+IN};} 
 \end{DoxyItemize}\index{ports\+::\+Pin@{ports\+::\+Pin}!P\+O\+RT@{P\+O\+RT}}
 \index{P\+O\+RT@{P\+O\+RT}!ports\+::\+Pin@{ports\+::\+Pin}}
 \subsubsection[{\texorpdfstring{P\+O\+RT}{PORT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum \+\_\+\+Port p, uint8\+\_\+t b$>$ {\bf Pin}$<$ p, b $>$\+::{\bf \+\_\+\+P\+O\+RT} {\bf ports\+::\+Pin}$<$ p, b $>$\+::P\+O\+RT\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{}\label{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}
@@ -127,10 +133,18 @@ Examples\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily P\+O\+R\+T\+\_\+\+A\+D\+C4\+::\+P\+O\+RT = 1;}
-\item {\ttfamily uint8\+\_\+t current\+Port = P\+O\+R\+T\+\_\+\+A\+D\+C4\+::\+P\+O\+RT;}
-\item {\ttfamily enum Pull\+Up current\+Pull\+Up = P\+O\+R\+T\+\_\+\+A\+D\+C4\+::\+P\+O\+RT;} 
-\end{DoxyItemize}
+\item {\ttfamily \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+A\+D\+C4\+::\+P\+O\+RT} = 1;}
+\item {\ttfamily uint8\+\_\+t current\+Port = \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+A\+D\+C4\+::\+P\+O\+RT};}
+\item {\ttfamily enum Pull\+Up current\+Pull\+Up = \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+A\+D\+C4\+::\+P\+O\+RT};}
+\item {\ttfamily \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+C3\+::\+P\+O\+RT} = Pull\+Up\+::\+HighZ;} 
+\end{DoxyItemize}\index{ports\+::\+Pin@{ports\+::\+Pin}!port@{port}}
+\index{port@{port}!ports\+::\+Pin@{ports\+::\+Pin}}
+\subsubsection[{\texorpdfstring{port}{port}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum \+\_\+\+Port p, uint8\+\_\+t b$>$ enum {\bf \+\_\+\+Port} {\bf ports\+::\+Pin}$<$ p, b $>$\+::port = p\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}{}\label{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}
+
+
+The port name (enum \+\_\+\+Port) of this pin. 
+
+Simply exposes the template argument. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
