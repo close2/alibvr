@@ -6,7 +6,7 @@ var indexSectionsWithContent =
   3: "t",
   4: "_gst",
   5: "bdp",
-  6: "_dp"
+  6: "_dip"
 };
 
 var indexSectionNames =

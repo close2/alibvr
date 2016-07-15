@@ -4,5 +4,5 @@ var searchData=
   ['get_5f8_5fbyte',['get_8_byte',['../d4/d49/namespaceports.html#ae7d1ffc9ed6454ca61b006ffe43e4e6e',1,'ports::get_8_byte(R &amp;rB, R &amp;rC, R &amp;rD)'],['../d4/d49/namespaceports.html#abcf67102d107c0aaad21fbb9f15563ae',1,'ports::get_8_byte()']]],
   ['getdd',['getDD',['../d8/dc3/structports_1_1Pin.html#a7aabcc753e62bd94ee9a8186e9d050ab',1,'ports::Pin']]],
   ['getpullup',['getPullUp',['../d8/dc3/structports_1_1Pin.html#a5a5e3c8e256954043d749752859ea300',1,'ports::Pin']]],
-  ['gnd',['Gnd',['../d0/dd6/struct__adc_1_1Input_1_1Gnd.html',1,'_adc::Input']]]
+  ['gnd',['Gnd',['../d5/d12/structports_1_1Input_1_1Gnd.html',1,'ports::Input']]]
 ];
