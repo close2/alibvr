@@ -85,7 +85,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -105,44 +104,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Every pin of the IC is defined using the template arguments <code>enum _Port p</code> and <code>uint8_t b</code> using <code>typedef</code>s of this class.  <a href="../../d8/dc3/structports_1_1Pin.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:aeffaf0751452c6411a2604770f30621e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeffaf0751452c6411a2604770f30621e"></a>
-typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>task</b>) (const uint16_t &amp;)</td></tr>
-<tr class="separator:aeffaf0751452c6411a2604770f30621e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ade641edba35659ac8c766d4428e6d9bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade641edba35659ac8c766d4428e6d9bc"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Mode</b> { <br />
-&#160;&#160;<b>SingleConversion</b> = 0xFF, 
-<br />
-&#160;&#160;<b>FreeRunning</b> = 0b000, 
-<br />
-&#160;&#160;<b>TriggerAnalogComp</b> = 0b001, 
-<br />
-&#160;&#160;<b>TriggerExtIrq0</b> = 0b010, 
-<br />
-&#160;&#160;<b>TriggerTimer0CompA</b> = 0b011, 
-<br />
-&#160;&#160;<b>TriggerTimer0OvF</b> = 0b100, 
-<br />
-&#160;&#160;<b>TriggerTimer1CompB</b> = 0b101, 
-<br />
-&#160;&#160;<b>TriggerTimer1OvF</b> = 0b110, 
-<br />
-&#160;&#160;<b>TriggerTimer1Capture</b> = 0b111
-<br />
- }</td></tr>
-<tr class="separator:ade641edba35659ac8c766d4428e6d9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7070853b4e7696da2f8af172beeb7753"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7070853b4e7696da2f8af172beeb7753"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Ref</b> { <br />
-&#160;&#160;<b>ARef</b> = 0b00, 
-<br />
-&#160;&#160;<b>AVcc</b> = 0b01, 
-<br />
-&#160;&#160;<b>V1_1</b> = 0b11
-<br />
- }</td></tr>
-<tr class="separator:a7070853b4e7696da2f8af172beeb7753"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9949317f344930bd6ad1097e80c97b67"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#a9949317f344930bd6ad1097e80c97b67">_Port</a> { <br />
 &#160;&#160;<b>B</b>, 
 <br />
@@ -192,23 +155,6 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa219c67f23a4acb5991fccb020a2045d"><td class="memTemplParams" colspan="2"><a class="anchor" id="aa219c67f23a4acb5991fccb020a2045d"></a>
-template&lt;uint8_t goto_sleep_for_noise_reduction&gt; </td></tr>
-<tr class="memitem:aa219c67f23a4acb5991fccb020a2045d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>_do_adc</b> ()</td></tr>
-<tr class="separator:aa219c67f23a4acb5991fccb020a2045d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac02eb6f4e5666ef8eeeb90e7be3e9d6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac02eb6f4e5666ef8eeeb90e7be3e9d6d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>busy_wait_adc_finished</b> ()</td></tr>
-<tr class="separator:ac02eb6f4e5666ef8eeeb90e7be3e9d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c243d7b6d430d05fec72ed449f7c670"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c243d7b6d430d05fec72ed449f7c670"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>irq_handler_for_adc_must_be_registered_for_noise_reduction</b> ()</td></tr>
-<tr class="separator:a5c243d7b6d430d05fec72ed449f7c670"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e5c617f1651302e24e7e9be6c64cde6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e5c617f1651302e24e7e9be6c64cde6"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>do_nothing</b> (const uint16_t &amp;result)</td></tr>
-<tr class="separator:a7e5c617f1651302e24e7e9be6c64cde6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add39c65bced4784747dd46a87977aa6a"><td class="memTemplParams" colspan="2"><a class="anchor" id="add39c65bced4784747dd46a87977aa6a"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:add39c65bced4784747dd46a87977aa6a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>_do_adc&lt; 0 &gt;</b> ()</td></tr>
-<tr class="separator:add39c65bced4784747dd46a87977aa6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa339a9d178cb414c4cf243450d5887d2"><td class="memTemplParams" colspan="2">template&lt;enum DataDirection Dd, class Io &gt; </td></tr>
 <tr class="memitem:aa339a9d178cb414c4cf243450d5887d2"><td class="memTemplItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#aa339a9d178cb414c4cf243450d5887d2">_set_or_get</a> (uint8_t val)</td></tr>
 <tr class="memdesc:aa339a9d178cb414c4cf243450d5887d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirects to <a class="el" href="../../d4/d49/namespaceports.html#a75686ee2e9a291c0095dec6d73e4af8d" title="Performs the bit &quot;magic&quot; to read a specifc bit from a register or write only one bit to a register...">_set_or_get_f()</a> with the correct register.  <a href="#aa339a9d178cb414c4cf243450d5887d2">More...</a><br /></td></tr>
@@ -241,30 +187,29 @@ template&lt;&gt; </td></tr>
 <tr class="memitem:ae7d1ffc9ed6454ca61b006ffe43e4e6e"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#ae7d1ffc9ed6454ca61b006ffe43e4e6e">get_8_byte</a> (R &amp;rB, R &amp;rC, R &amp;rD)</td></tr>
 <tr class="memdesc:ae7d1ffc9ed6454ca61b006ffe43e4e6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="../../d4/d49/namespaceports.html#a9a1959ec95780c00a964b174a27b2a37" title="Reads a bit value from rB, rC or rD and returns the value in the uint8_t return value. ">get_8_bits()</a>, to which this function redirects, with <code>B7 = 7</code> .. <code>B0 = 0</code>.  <a href="#ae7d1ffc9ed6454ca61b006ffe43e4e6e">More...</a><br /></td></tr>
 <tr class="separator:ae7d1ffc9ed6454ca61b006ffe43e4e6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9262ca010e65ff684986eef2900942f"><td class="memTemplParams" colspan="2">template&lt;enum ports::IOReg IOReg, class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1, typename V  = uint8_t&gt; </td></tr>
+<tr class="memitem:ac9262ca010e65ff684986eef2900942f"><td class="memTemplParams" colspan="2">template&lt;enum NS::IOReg IOReg, class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1, typename V  = uint8_t&gt; </td></tr>
 <tr class="memitem:ac9262ca010e65ff684986eef2900942f"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#ac9262ca010e65ff684986eef2900942f">set_8_bits</a> (const V &amp;val)</td></tr>
 <tr class="memdesc:ac9262ca010e65ff684986eef2900942f"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="../../d4/d49/namespaceports.html#aac15fb87d8fede3f2bf8d764ab42965f" title="Takes a bit value from val and writes this bit to rB, rC or rD. ">set_8_bits()</a>.  <a href="#ac9262ca010e65ff684986eef2900942f">More...</a><br /></td></tr>
 <tr class="separator:ac9262ca010e65ff684986eef2900942f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a0a17506421aaa10b7c087124a09b72"><td class="memTemplParams" colspan="2">template&lt;enum ports::IOReg IOReg, class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1&gt; </td></tr>
+<tr class="memitem:a2a0a17506421aaa10b7c087124a09b72"><td class="memTemplParams" colspan="2">template&lt;enum NS::IOReg IOReg, class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1&gt; </td></tr>
 <tr class="memitem:a2a0a17506421aaa10b7c087124a09b72"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#a2a0a17506421aaa10b7c087124a09b72">get_8_bits</a> ()</td></tr>
 <tr class="memdesc:a2a0a17506421aaa10b7c087124a09b72"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="../../d4/d49/namespaceports.html#a9a1959ec95780c00a964b174a27b2a37" title="Reads a bit value from rB, rC or rD and returns the value in the uint8_t return value. ">get_8_bits()</a>.  <a href="#a2a0a17506421aaa10b7c087124a09b72">More...</a><br /></td></tr>
 <tr class="separator:a2a0a17506421aaa10b7c087124a09b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcf67102d107c0aaad21fbb9f15563ae"><td class="memTemplParams" colspan="2">template&lt;enum ports::IOReg IOReg, class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED&gt; </td></tr>
+<tr class="memitem:abcf67102d107c0aaad21fbb9f15563ae"><td class="memTemplParams" colspan="2">template&lt;enum NS::IOReg IOReg, class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED&gt; </td></tr>
 <tr class="memitem:abcf67102d107c0aaad21fbb9f15563ae"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#abcf67102d107c0aaad21fbb9f15563ae">get_8_byte</a> ()</td></tr>
 <tr class="memdesc:abcf67102d107c0aaad21fbb9f15563ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="../../d4/d49/namespaceports.html#ae7d1ffc9ed6454ca61b006ffe43e4e6e" title="See get_8_bits(), to which this function redirects, with B7 = 7 .. B0 = 0. ">get_8_byte()</a>.  <a href="#abcf67102d107c0aaad21fbb9f15563ae">More...</a><br /></td></tr>
 <tr class="separator:abcf67102d107c0aaad21fbb9f15563ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61265646961334c58df6d4ed66e290d0"><td class="memTemplParams" colspan="2">template&lt;enum ports::IOReg IOReg, class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED, typename V  = uint8_t&gt; </td></tr>
+<tr class="memitem:a61265646961334c58df6d4ed66e290d0"><td class="memTemplParams" colspan="2">template&lt;enum NS::IOReg IOReg, class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED, typename V  = uint8_t&gt; </td></tr>
 <tr class="memitem:a61265646961334c58df6d4ed66e290d0"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#a61265646961334c58df6d4ed66e290d0">set_8_byte</a> (const V &amp;val)</td></tr>
 <tr class="memdesc:a61265646961334c58df6d4ed66e290d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="../../d4/d49/namespaceports.html#a7034c689dd509dc9c11ba8be46a26fd0" title="See set_8_bits(), to which this function redirects, with B7 = 7 .. B0 = 0. ">set_8_byte()</a>.  <a href="#a61265646961334c58df6d4ed66e290d0">More...</a><br /></td></tr>
 <tr class="separator:a61265646961334c58df6d4ed66e290d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6d35bb70c3973212025200a2af3ac5c"><td class="memTemplParams" colspan="2">template&lt;enum ports::IOReg IOReg, class D3 , class D2 , class D1 , class D0 , uint8_t offset = 0, typename V  = const uint8_t&gt; </td></tr>
+<tr class="memitem:af6d35bb70c3973212025200a2af3ac5c"><td class="memTemplParams" colspan="2">template&lt;enum NS::IOReg IOReg, class D3 , class D2 , class D1 , class D0 , uint8_t offset = 0, typename V  = const uint8_t&gt; </td></tr>
 <tr class="memitem:af6d35bb70c3973212025200a2af3ac5c"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d4/d49/namespaceports.html#af6d35bb70c3973212025200a2af3ac5c">set_4_nibble</a> (const V &amp;val)</td></tr>
 <tr class="memdesc:af6d35bb70c3973212025200a2af3ac5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="../../d4/d49/namespaceports.html#aac15fb87d8fede3f2bf8d764ab42965f" title="Takes a bit value from val and writes this bit to rB, rC or rD. ">set_8_bits()</a>. This function is optimized for situations where you want to set 4 pin values.  <a href="#af6d35bb70c3973212025200a2af3ac5c">More...</a><br /></td></tr>
 <tr class="separator:af6d35bb70c3973212025200a2af3ac5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Avr Atmegas access and control pins through registers. The registers are 8 bit wide and up to 8 pins are therefore controlled with every register. </p>
-<p>By default adc related classes, enums,... are defined inside the <code>adc</code> namespace. If this creates a name clash with your code you may modify the namespace name by setting ALIBVR_NAMESPACE_ADC or ALIBVR_NAMESPACE_PREFIX.</p>
 <ul>
 <li>The DDR registers controls the data directions.</li>
 <li>The PORT registers the output or the pull up resistors.</li>
@@ -586,7 +531,7 @@ template&lt;class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, clas
 <p><code>D7</code> "points" to a bit (<code>D7::bit</code>) in either <code>rB</code>, <code>rC</code> or <code>rD</code> (<code>D7::port</code>). <code>B7</code> points to a bit in the return value.</p>
 <p>The bit value from <code>D7</code> is copied to bit <code>B7</code> in the returned <code>uint8_t</code>.</p>
 <p>Example: assume <code>D7 == PIN_B3</code> and <code>B7 == 1</code></p>
-<p>then: <code><a class="el" href="../../d8/dc3/structports_1_1Pin.html#ad63613b8c14441d28e3f3d935da67e77" title="The port name (enum _Port) of this pin. ">PIN_B3::port</a></code> is <code>_Port::B</code> <code><a class="el" href="../../d8/dc3/structports_1_1Pin.html#aea726b85cfe5e49822dd2517da5c860f" title="The bit position (0-7) inside the DDRx, PORTx or PINx register. ">PIN_B3::bit</a></code> is 3.</p>
+<p>then: <code>PIN_B3::port</code> is <code>_Port::B</code> <code>PIN_B3::bit</code> is 3.</p>
 <p>Reads from <code>rB</code> at position 3 and returns the read value at position 1 in the returned <code>uint8_t</code>.</p>
 <p><code>val</code> is not used.</p>
 <p>[1]: The order is relevant, when a <a class="el" href="../../d8/dc3/structports_1_1Pin.html" title="Every pin of the IC is defined using the template arguments enum _Port p and uint8_t b using typedefs...">Pin</a> <code>typedef</code> (D*) or bit position (B*) is used more than once. Earlier template arguments take precedence. Don't rely on this behaviour, I might change this at some point!</p>
@@ -605,7 +550,7 @@ template&lt;class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, clas
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;enum ports::IOReg IOReg, class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1&gt; </div>
+template&lt;enum NS::IOReg IOReg, class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -683,7 +628,7 @@ template&lt;class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;enum ports::IOReg IOReg, class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED&gt; </div>
+template&lt;enum NS::IOReg IOReg, class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -711,7 +656,7 @@ template&lt;enum ports::IOReg IOReg, class D7 , class D6  = PIN_UNUSED, class D5
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;enum ports::IOReg IOReg, class D3 , class D2 , class D1 , class D0 , uint8_t offset = 0, typename V  = const uint8_t&gt; </div>
+template&lt;enum NS::IOReg IOReg, class D3 , class D2 , class D1 , class D0 , uint8_t offset = 0, typename V  = const uint8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -798,7 +743,7 @@ template&lt;class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, clas
 <p><code>D7</code> "points" to a bit (<code>D7::bit</code>) in either <code>rB</code>, <code>rC</code> or <code>rD</code> (<code>D7::port</code>). <code>B7</code> points to a bit in <code>val</code> or to a bit in the return value.</p>
 <p>The bit <code>B7</code> in <code>val</code> is copied to <code>D7</code>.</p>
 <p>Example: assume <code>D7 == PIN_B3</code> and <code>B7 == 1</code> and <code>val == 0b00000010</code></p>
-<p>then: <code><a class="el" href="../../d8/dc3/structports_1_1Pin.html#ad63613b8c14441d28e3f3d935da67e77" title="The port name (enum _Port) of this pin. ">PIN_B3::port</a></code> is <code>_Port::B</code> <code><a class="el" href="../../d8/dc3/structports_1_1Pin.html#aea726b85cfe5e49822dd2517da5c860f" title="The bit position (0-7) inside the DDRx, PORTx or PINx register. ">PIN_B3::bit</a></code> is 3.</p>
+<p>then: <code>PIN_B3::port</code> is <code>_Port::B</code> <code>PIN_B3::bit</code> is 3.</p>
 <p>Uses <code>val &amp; _BV(1)</code>, which is 1 and assigns it to <code>rB</code> at position 3.</p>
 <p>[1]: The order is relevant, when a <a class="el" href="../../d8/dc3/structports_1_1Pin.html" title="Every pin of the IC is defined using the template arguments enum _Port p and uint8_t b using typedefs...">Pin</a> <code>typedef</code> (D*) or bit position (B*) is used more than once. Earlier template arguments take precedence. Don't rely on this behaviour, I might change this at some point!</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -816,7 +761,7 @@ template&lt;class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, clas
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;enum ports::IOReg IOReg, class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1, typename V  = uint8_t&gt; </div>
+template&lt;enum NS::IOReg IOReg, class D7 , uint8_t B7, class D6  = PIN_UNUSED, uint8_t B6 = -1, class D5  = PIN_UNUSED, uint8_t B5 = -1, class D4  = PIN_UNUSED, uint8_t B4 = -1, class D3  = PIN_UNUSED, uint8_t B3 = -1, class D2  = PIN_UNUSED, uint8_t B2 = -1, class D1  = PIN_UNUSED, uint8_t B1 = -1, class D0  = PIN_UNUSED, uint8_t B0 = -1, typename V  = uint8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -901,7 +846,7 @@ template&lt;class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;enum ports::IOReg IOReg, class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED, typename V  = uint8_t&gt; </div>
+template&lt;enum NS::IOReg IOReg, class D7 , class D6  = PIN_UNUSED, class D5  = PIN_UNUSED, class D4  = PIN_UNUSED, class D3  = PIN_UNUSED, class D2  = PIN_UNUSED, class D1  = PIN_UNUSED, class D0  = PIN_UNUSED, typename V  = uint8_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

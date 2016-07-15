@@ -1,0 +1,63 @@
+\hypertarget{namespaceadc}{}\section{adc Namespace Reference}
+\label{namespaceadc}\index{adc@{adc}}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ {\bfseries task}) (const uint16\+\_\+t \&)\hypertarget{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae}{}\label{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae}
+
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries Mode} \{ \\*
+{\bfseries Single\+Conversion} = 0x\+FF, 
+\\*
+{\bfseries Free\+Running} = 0b000, 
+\\*
+{\bfseries Trigger\+Analog\+Comp} = 0b001, 
+\\*
+{\bfseries Trigger\+Ext\+Irq0} = 0b010, 
+\\*
+{\bfseries Trigger\+Timer0\+CompA} = 0b011, 
+\\*
+{\bfseries Trigger\+Timer0\+OvF} = 0b100, 
+\\*
+{\bfseries Trigger\+Timer1\+CompB} = 0b101, 
+\\*
+{\bfseries Trigger\+Timer1\+OvF} = 0b110, 
+\\*
+{\bfseries Trigger\+Timer1\+Capture} = 0b111
+ \}\hypertarget{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}{}\label{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}
+
+\item 
+enum {\bfseries Ref} \{ \\*
+{\bfseries A\+Ref} = 0b00, 
+\\*
+{\bfseries A\+Vcc} = 0b01, 
+\\*
+{\bfseries V1\+\_\+1} = 0b11
+ \}\hypertarget{namespaceadc_adcbc814e47ddcec8104b574b02228d97}{}\label{namespaceadc_adcbc814e47ddcec8104b574b02228d97}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction$>$ }\\void {\bfseries \+\_\+do\+\_\+adc} ()\hypertarget{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}{}\label{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}
+
+\item 
+void {\bfseries busy\+\_\+wait\+\_\+adc\+\_\+finished} ()\hypertarget{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{}\label{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}
+
+\item 
+void {\bfseries irq\+\_\+handler\+\_\+for\+\_\+adc\+\_\+must\+\_\+be\+\_\+registered\+\_\+for\+\_\+noise\+\_\+reduction} ()\hypertarget{namespaceadc_a0f2e8fa37ba3e91fc9e7a58e3543eaaa}{}\label{namespaceadc_a0f2e8fa37ba3e91fc9e7a58e3543eaaa}
+
+\item 
+static void {\bfseries do\+\_\+nothing} (const uint16\+\_\+t \&result)\hypertarget{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}{}\label{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}
+
+\item 
+{\footnotesize template$<$$>$ }\\void {\bfseries \+\_\+do\+\_\+adc$<$ 0 $>$} ()\hypertarget{namespaceadc_a6e0b185b550424440d92bc2b129f6128}{}\label{namespaceadc_a6e0b185b550424440d92bc2b129f6128}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+By default adc related classes, enums,... are defined inside the {\ttfamily adc} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+A\+DC or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. 
