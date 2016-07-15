@@ -3,15 +3,15 @@
 #include <avr/sfr_defs.h>
 #include <avr/io.h>
 
-#pragma push_macro("NS")
+#pragma push_macro("NS_PORTS")
 #ifndef ALIBVR_NAMESPACE_PORTS
 #  ifdef ALIBVR_NAMESPACE_PREFIX
-#    define NS ALIBVR_NAMESPACE_PREFIX ## ports
+#    define NS_PORTS ALIBVR_NAMESPACE_PREFIX ## ports
 #  else
-#    define NS ports
+#    define NS_PORTS ports
 #  endif
 #else
-#  define NS ALIBVR_NAMESPACE_PORTS
+#  define NS_PORTS ALIBVR_NAMESPACE_PORTS
 #endif
 
 
@@ -63,7 +63,7 @@
  **/
 
 
-namespace NS {
+namespace NS_PORTS {
   
   /**
    * @brief Used in pin `typedef`s to specify the port of a pin.
@@ -400,7 +400,7 @@ typedef PIN_DIP_12 PIN_D6;
 typedef PIN_DIP_13 PIN_D7;
 
 
-namespace NS {
+namespace NS_PORTS {
   // forward declaration
   template <enum DataDirection Dd, class Io>
   uint8_t _set_or_get(uint8_t val);
@@ -970,4 +970,4 @@ namespace NS {
   }
 }
 
-#pragma pop_macro("NS")
+#pragma pop_macro("NS_PORTS")

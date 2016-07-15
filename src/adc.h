@@ -10,15 +10,15 @@
 #include "type_traits.h"
 
 
-#pragma push_macro("NS")
+#pragma push_macro("NS_ADC")
 #ifndef ALIBVR_NAMESPACE_ADC
 #  ifdef ALIBVR_NAMESPACE_PREFIX
-#    define NS ALIBVR_NAMESPACE_PREFIX ## adc
+#    define NS_ADC ALIBVR_NAMESPACE_PREFIX ## adc
 #  else
-#    define NS adc
+#    define NS_ADC adc
 #  endif
 #else
-#  define NS ALIBVR_NAMESPACE_ADC
+#  define NS_ADC ALIBVR_NAMESPACE_ADC
 #endif
 
 
@@ -31,7 +31,7 @@
  * 
  **/
 
-namespace NS {
+namespace NS_ADC {
   //«ADC_MODES[^ *,]»
   enum class Mode {
     SingleConversion     = 0xFF,
@@ -230,7 +230,7 @@ public:
   }
 };
 
-namespace NS {
+namespace NS_ADC {
   
   template <uint8_t goto_sleep_for_noise_reduction>
   void _do_adc() {
@@ -270,4 +270,4 @@ namespace NS {
 
 #define REGISTER_ADC "internal/register_adc.h"
 
-#pragma pop_macro("NS")
+#pragma pop_macro("NS_ADC")
