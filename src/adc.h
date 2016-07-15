@@ -10,7 +10,29 @@
 #include "type_traits.h"
 
 
-namespace _adc {
+#pragma push_macro("NS")
+#ifndef ALIBVR_NAMESPACE_ADC
+#  ifdef ALIBVR_NAMESPACE_PREFIX
+#    define NS ALIBVR_NAMESPACE_PREFIX ## adc
+#  else
+#    define NS adc
+#  endif
+#else
+#  define NS ALIBVR_NAMESPACE_ADC
+#endif
+
+
+/**
+ * 
+ * By default adc related classes, enums,... are defined
+ * inside the `adc` namespace.  If this creates a name clash with your
+ * code you may modify the namespace name by setting
+ * ALIBVR_NAMESPACE_ADC or ALIBVR_NAMESPACE_PREFIX.
+ * 
+ **/
+
+namespace NS {
+  //«ADC_MODES[^ *,]»
   enum class Mode {
     SingleConversion     = 0xFF,
     FreeRunning          = 0b000,
@@ -22,12 +44,15 @@ namespace _adc {
     TriggerTimer1OvF     = 0b110,
     TriggerTimer1Capture = 0b111
   };
+  //¤
   
+  //«ADC_REFS[^ *,]»
   enum class Ref {
     ARef = 0b00,
     AVcc = 0b01,
     V1_1 = 0b11
   };
+  //¤
   
   namespace Input {
     struct Temperature {
@@ -205,7 +230,7 @@ public:
   }
 };
 
-namespace _adc {
+namespace NS {
   
   template <uint8_t goto_sleep_for_noise_reduction>
   void _do_adc() {
@@ -245,3 +270,4 @@ namespace _adc {
 
 #define REGISTER_ADC "internal/register_adc.h"
 
+#pragma pop_macro("NS")

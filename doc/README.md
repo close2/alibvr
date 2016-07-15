@@ -118,17 +118,7 @@ enum class IOReg {
 Turn an Led on pin C2 on.
 
 ```C++
-#include "ports.h"
-
-typedef PIN_C2 Led;
-
-__attribute__ ((OS_main)) int main(void) {
-  Led::DDR = 1;   // Put Led pin into output mode.
-  Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
-  
-  for (;;);
-  return 0;
-}
++++LED_EX+++
 ```
 
 Note that the compiler is able to optimize the `Led::xxx` assignments
@@ -141,6 +131,24 @@ When doing adc you have to specify
 * an input
 * a reference voltage
 * a mode
+
+In addition to input pins (see ADC* typedefs above)  
+`Temperature`, `V1_1` and `Gnd` are allowed inputs and defined
+inside an inner `Input` namespace.
+
+Possible references are defined in:
+```C++
++++ADC_REFS+++
+```
+
+Possible modes are defined in:
+```C++
++++ADC_MODES+++
+```
+
+See the doxygen doc for short summaries of those enum values.
+
+
 
 
 ### Input selection

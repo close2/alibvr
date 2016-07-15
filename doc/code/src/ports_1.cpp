@@ -33,10 +33,12 @@ __attribute__ ((OS_main)) int main(void) {
                           PIN_D5, 3>();
   // Equivalent to previous get_8_byte instruction.
 
-  //            offset↓  7-3     6-3     5-3     4-3          vvvv
-  set_4_nibble<PORTx, 3, PIN_B1, PIN_D3, PIN_D2, PIN_D1>(0b00101100);
+  //                bit in value v       v       v       v         vvvv
+  //                         3+3=6   2+3=5   1+3=4   0+3=3   ↓offs 6543
+  set_4_nibble<IOReg::PORTx, PIN_B1, PIN_D3, PIN_D2, PIN_D1, 3>(0b00101100);
   /*¤*/
   
+  if (x1 == 0) x1 = x2;
   for (;;);
   return 0;
 }

@@ -131,8 +131,9 @@ PIN_D4, 4,
 PIN_D5, 3>();
 // Equivalent to previous get_8_byte instruction.
 
-//            offset↓  7-3     6-3     5-3     4-3          vvvv
-set_4_nibble<PORTx, 3, PIN_B1, PIN_D3, PIN_D2, PIN_D1>(0b00101100);
+//                bit in value v       v       v       v         vvvv
+//                         3+3=6   2+3=5   1+3=4   0+3=3   ↓offs 6543
+set_4_nibble<IOReg::PORTx, PIN_B1, PIN_D3, PIN_D2, PIN_D1, 3>(0b00101100);
 ```
 
 ### Assigning / Reading multiple bits from provided registers in an optimized way:
@@ -179,12 +180,12 @@ Turn an Led on pin C2 on.
 typedef PIN_C2 Led;
 
 __attribute__ ((OS_main)) int main(void) {
-  Led::DDR = 1;   // Put Led pin into output mode.
+  Led::DDR = ports::DataDirection::Output;   // Put Led pin into output mode.
   Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
   
   for (;;);
   return 0;
-}
+}//
 ```
 
 Note that the compiler is able to optimize the `Led::xxx` assignments
@@ -197,6 +198,40 @@ When doing adc you have to specify
 * an input
 * a reference voltage
 * a mode
+
+In addition to input pins (see ADC* typedefs above)  
+`Temperature`, `V1_1` and `Gnd` are allowed inputs and defined
+inside an inner `Input` namespace.
+
+Possible references are defined in:
+```C++
+enum class Ref {
+ARef = 0b00,
+AVcc = 0b01,
+V1_1 = 0b11
+};
+//
+```
+
+Possible modes are defined in:
+```C++
+enum class Mode {
+SingleConversion     = 0xFF,
+FreeRunning          = 0b000,
+TriggerAnalogComp    = 0b001,
+TriggerExtIrq0       = 0b010,
+TriggerTimer0CompA   = 0b011,
+TriggerTimer0OvF     = 0b100,
+TriggerTimer1CompB   = 0b101,
+TriggerTimer1OvF     = 0b110,
+TriggerTimer1Capture = 0b111
+};
+//
+```
+
+See the doxygen doc for short summaries of those enum values.
+
+
 
 
 ### Input selection

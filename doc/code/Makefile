@@ -1,5 +1,9 @@
 # name of your main code file without the .c / .cpp suffix
-TARGETS ?= ports_simple1
+CPP_FILES =$(wildcard src/*.cpp)
+C_FILES =$(wildcard src/*.c)
+CPP_TARGETS = $(patsubst src/%.cpp,%,$(CPP_FILES))
+C_TARGETS = $(patsubst src/%.c,%,$(C_FILES))
+TARGETS ?= $(CPP_TARGETS) $(C_TARGETS)
 SOURCEDIR = src
 BUILDDIR = build
 TOOLSDIR = tools

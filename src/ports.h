@@ -79,10 +79,8 @@ namespace NS {
   /**
    * @brief Used as template argument to specify on which register some
    * function should be applied to.
-   * 
-   * Probably only useful internally.
    **/
-  enum class _IOReg {
+  enum class IOReg {
     DDRx,
     PORTx,
     PINx
@@ -125,7 +123,7 @@ namespace NS {
   };
   
   // forward declaration
-  template <enum _Port p, uint8_t b, enum _IOReg io>
+  template <enum _Port p, uint8_t b, enum IOReg io>
   struct _Io;
   
   /**
@@ -171,7 +169,7 @@ namespace NS {
     static const uint8_t   bit = b;
     
     
-    typedef _Io<p, b, _IOReg::DDRx>  _DDR;
+    typedef _Io<p, b, IOReg::DDRx>  _DDR;
     
     /// @brief Simplified access to the DDR value of this pin.
     ///
@@ -189,7 +187,7 @@ namespace NS {
     static _DDR DDR;
     
     
-    typedef _Io<p, b, _IOReg::PORTx> _PORT;
+    typedef _Io<p, b, IOReg::PORTx> _PORT;
     
     /// @brief Simplified access to the PORT value of this pin.
     ///
@@ -208,7 +206,7 @@ namespace NS {
     static _PORT PORT;
     
     
-    typedef _Io<p, b, _IOReg::PINx>  _PIN;
+    typedef _Io<p, b, IOReg::PINx>  _PIN;
     
     /// @brief Simplified access to the PIN value of this pin.
     ///
@@ -413,13 +411,13 @@ namespace NS {
    * 
    * All functions redirect to the internal _set_or_get() function.
    */
-  template <enum _Port p, uint8_t b, enum _IOReg io>
+  template <enum _Port p, uint8_t b, enum IOReg io>
   struct _Io {
     typedef _Io<p, b, io> _Io_t_;
     
     static const enum _Port port = p;
     static const uint8_t bit = b;
-    static const enum _IOReg io_reg = io;
+    static const enum IOReg io_reg = io;
     
     _Io_t_& operator=(const uint8_t val) {
       _set_or_get<DataDirection::Write, _Io_t_>(val);
@@ -427,13 +425,13 @@ namespace NS {
     }
     
     _Io_t_& operator=(const enum DataDirection val) {
-      static_assert(io == _IOReg::DDRx, "Usage of DataDirection enum for incorrect register (not DDR).");
+      static_assert(io == IOReg::DDRx, "Usage of DataDirection enum for incorrect register (not DDR).");
       _set_or_get<DataDirection::Write, _Io_t_>((uint8_t) val);
       return *this;
     }
     
     _Io_t_& operator=(const enum PullUp val) {
-      static_assert(io == _IOReg::PORTx, "Usage of PullUp enum for incorrect register (not PORT).");
+      static_assert(io == IOReg::PORTx, "Usage of PullUp enum for incorrect register (not PORT).");
       _set_or_get<DataDirection::Write, _Io_t_>((uint8_t) val);
       return *this;
     }
@@ -443,12 +441,12 @@ namespace NS {
     }
     
     operator PullUp() {
-      static_assert(io == _IOReg::PORTx, "PullUp enum conversion requested for incorrect register (not PORT).");
+      static_assert(io == IOReg::PORTx, "PullUp enum conversion requested for incorrect register (not PORT).");
       return _set_or_get<DataDirection::Read, _Io_t_>(0) == 0 ? PullUp::Off : PullUp::On;
     }
     
     operator DataDirection() {
-      static_assert(io == _IOReg::DDRx, "DataDirection enum conversion requested for incorrect register (not DDR).");
+      static_assert(io == IOReg::DDRx, "DataDirection enum conversion requested for incorrect register (not DDR).");
       return _set_or_get<DataDirection::Read, _Io_t_>(0) == 0 ? DataDirection::Input : DataDirection::Output;
     }
   };
@@ -487,12 +485,12 @@ namespace NS {
    **/
   template <enum DataDirection Dd, class Io>
   uint8_t _set_or_get(uint8_t val) {
-    static_assert(Io::io_reg == _IOReg::DDRx ||
-                  Io::io_reg == _IOReg::PINx ||
-                  Io::io_reg == _IOReg::PORTx,
+    static_assert(Io::io_reg == IOReg::DDRx ||
+                  Io::io_reg == IOReg::PINx ||
+                  Io::io_reg == IOReg::PORTx,
                   "IO Register is unknown.  Only Ddr, Pin and Port are supported.");
     switch(Io::io_reg) {
-      case _IOReg::DDRx:
+      case IOReg::DDRx:
         switch(Io::port) {
           case _Port::B:
             return _set_or_get_f<Dd>(DDRB, Io::bit, val);
@@ -502,7 +500,7 @@ namespace NS {
             return _set_or_get_f<Dd>(DDRD, Io::bit, val);
         }
         break;
-      case _IOReg::PORTx:
+      case IOReg::PORTx:
         switch(Io::port) {
           case _Port::B:
             return _set_or_get_f<Dd>(PORTB, Io::bit, val);
@@ -512,7 +510,7 @@ namespace NS {
             return _set_or_get_f<Dd>(PORTD, Io::bit, val);
         }
         break;
-      case _IOReg::PINx:
+      case IOReg::PINx:
         switch(Io::port) {
           case _Port::B:
             return _set_or_get_f<Dd>(PINB, Io::bit, val);
@@ -674,7 +672,7 @@ namespace NS {
  * parameters.
  **/
   template <enum DataDirection Dd,
-            enum _IOReg Reg,
+            enum IOReg Reg,
             class D7, uint8_t B7,
             class D6, uint8_t B6,
             class D5, uint8_t B5,
@@ -683,18 +681,18 @@ namespace NS {
             class D2, uint8_t B2,
             class D1, uint8_t B1,
             class D0, uint8_t B0,
-            typename V, typename P>
+            typename V>
   inline static uint8_t _set_or_get_8_bits(const V& val) {
-    static_assert(Reg == _IOReg::DDRx ||
-                  Reg == _IOReg::PINx ||
-                  Reg == _IOReg::PORTx,
-                  "IO Register is unknown.  Only _IOReg::DDRx, _IOReg::PINx and _IOReg::PORTx are supported.");
+    static_assert(Reg == IOReg::DDRx ||
+                  Reg == IOReg::PINx ||
+                  Reg == IOReg::PORTx,
+                  "IO Register is unknown.  Only IOReg::DDRx, IOReg::PINx and IOReg::PORTx are supported.");
     switch (Reg) {
-      case _IOReg::DDRx:
+      case IOReg::DDRx:
         return _set_or_get_8_bits_regs<Dd, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(DDRB, DDRC, DDRD, val);
-      case _IOReg::PORTx:
+      case IOReg::PORTx:
         return _set_or_get_8_bits_regs<Dd, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(PORTB, PORTC, PORTD, val);
-      case _IOReg::PINx:
+      case IOReg::PINx:
         return _set_or_get_8_bits_regs<Dd, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(PINB, PINC, PIND, val);
     }
     return 0; // should never happen
@@ -806,14 +804,14 @@ namespace NS {
    * @tparam B7 a bit position in @p val.
    **/
   template <class D7, uint8_t B7,
-  class D6 = PIN_UNUSED, uint8_t B6 = -1,
-  class D5 = PIN_UNUSED, uint8_t B5 = -1,
-  class D4 = PIN_UNUSED, uint8_t B4 = -1,
-  class D3 = PIN_UNUSED, uint8_t B3 = -1,
-  class D2 = PIN_UNUSED, uint8_t B2 = -1,
-  class D1 = PIN_UNUSED, uint8_t B1 = -1,
-  class D0 = PIN_UNUSED, uint8_t B0 = -1,
-  typename R = uint8_t>
+            class D6 = PIN_UNUSED, uint8_t B6 = -1,
+            class D5 = PIN_UNUSED, uint8_t B5 = -1,
+            class D4 = PIN_UNUSED, uint8_t B4 = -1,
+            class D3 = PIN_UNUSED, uint8_t B3 = -1,
+            class D2 = PIN_UNUSED, uint8_t B2 = -1,
+            class D1 = PIN_UNUSED, uint8_t B1 = -1,
+            class D0 = PIN_UNUSED, uint8_t B0 = -1,
+            typename R = uint8_t>
   inline static uint8_t get_8_bits(R& rB,
                                    R& rC,
                                    R& rD) {
@@ -828,15 +826,15 @@ namespace NS {
    * @tparam D7 `D7::port` and `D7::pin` must be defined
    **/
   template <class D7,
-  class D6 = PIN_UNUSED,
-  class D5 = PIN_UNUSED,
-  class D4 = PIN_UNUSED,
-  class D3 = PIN_UNUSED,
-  class D2 = PIN_UNUSED,
-  class D1 = PIN_UNUSED,
-  class D0 = PIN_UNUSED,
-  typename R = uint8_t,
-  typename V = uint8_t>
+            class D6 = PIN_UNUSED,
+            class D5 = PIN_UNUSED,
+            class D4 = PIN_UNUSED,
+            class D3 = PIN_UNUSED,
+            class D2 = PIN_UNUSED,
+            class D1 = PIN_UNUSED,
+            class D0 = PIN_UNUSED,
+            typename R = uint8_t,
+            typename V = uint8_t>
   inline static void set_8_byte(R& rB, R& rC, R& rD, const V& val) {
     set_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, val);
   }
@@ -849,14 +847,14 @@ namespace NS {
    * @tparam D7 `D7::port` and `D7::pin` must be defined
    **/
   template <class D7,
-  class D6 = PIN_UNUSED,
-  class D5 = PIN_UNUSED,
-  class D4 = PIN_UNUSED,
-  class D3 = PIN_UNUSED,
-  class D2 = PIN_UNUSED,
-  class D1 = PIN_UNUSED,
-  class D0 = PIN_UNUSED,
-  typename R = uint8_t>
+            class D6 = PIN_UNUSED,
+            class D5 = PIN_UNUSED,
+            class D4 = PIN_UNUSED,
+            class D3 = PIN_UNUSED,
+            class D2 = PIN_UNUSED,
+            class D1 = PIN_UNUSED,
+            class D0 = PIN_UNUSED,
+            typename R = uint8_t>
   inline static uint8_t get_8_byte(R& rB, R& rC, R& rD) {
     return get_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, 0);
   }
@@ -867,16 +865,16 @@ namespace NS {
    * 
    * The destination registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::_IOReg IOReg,
-  class D7, uint8_t B7,
-  class D6 = PIN_UNUSED, uint8_t B6 = -1,
-  class D5 = PIN_UNUSED, uint8_t B5 = -1,
-  class D4 = PIN_UNUSED, uint8_t B4 = -1,
-  class D3 = PIN_UNUSED, uint8_t B3 = -1,
-  class D2 = PIN_UNUSED, uint8_t B2 = -1,
-  class D1 = PIN_UNUSED, uint8_t B1 = -1,
-  class D0 = PIN_UNUSED, uint8_t B0 = -1,
-  typename V = uint8_t>
+  template <enum NS::IOReg IOReg,
+            class D7, uint8_t B7,
+            class D6 = PIN_UNUSED, uint8_t B6 = -1,
+            class D5 = PIN_UNUSED, uint8_t B5 = -1,
+            class D4 = PIN_UNUSED, uint8_t B4 = -1,
+            class D3 = PIN_UNUSED, uint8_t B3 = -1,
+            class D2 = PIN_UNUSED, uint8_t B2 = -1,
+            class D1 = PIN_UNUSED, uint8_t B1 = -1,
+            class D0 = PIN_UNUSED, uint8_t B0 = -1,
+            typename V = uint8_t>
   inline static void set_8_bits(const V& val) {
     NS::_set_or_get_8_bits<NS::DataDirection::Write, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(val);
   }
@@ -886,15 +884,15 @@ namespace NS {
    * 
    * The source registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::_IOReg IOReg,
-  class D7, uint8_t B7,
-  class D6 = PIN_UNUSED, uint8_t B6 = -1,
-  class D5 = PIN_UNUSED, uint8_t B5 = -1,
-  class D4 = PIN_UNUSED, uint8_t B4 = -1,
-  class D3 = PIN_UNUSED, uint8_t B3 = -1,
-  class D2 = PIN_UNUSED, uint8_t B2 = -1,
-  class D1 = PIN_UNUSED, uint8_t B1 = -1,
-  class D0 = PIN_UNUSED, uint8_t B0 = -1>
+  template <enum NS::IOReg IOReg,
+            class D7, uint8_t B7,
+            class D6 = PIN_UNUSED, uint8_t B6 = -1,
+            class D5 = PIN_UNUSED, uint8_t B5 = -1,
+            class D4 = PIN_UNUSED, uint8_t B4 = -1,
+            class D3 = PIN_UNUSED, uint8_t B3 = -1,
+            class D2 = PIN_UNUSED, uint8_t B2 = -1,
+            class D1 = PIN_UNUSED, uint8_t B1 = -1,
+            class D0 = PIN_UNUSED, uint8_t B0 = -1>
   inline static uint8_t get_8_bits() {
     return NS::_set_or_get_8_bits<NS::DataDirection::Read, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(0);
   }
@@ -904,15 +902,15 @@ namespace NS {
    * 
    * The source registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::_IOReg IOReg,
-  class D7,
-  class D6 = PIN_UNUSED,
-  class D5 = PIN_UNUSED,
-  class D4 = PIN_UNUSED,
-  class D3 = PIN_UNUSED,
-  class D2 = PIN_UNUSED,
-  class D1 = PIN_UNUSED,
-  class D0 = PIN_UNUSED>
+  template <enum NS::IOReg IOReg,
+            class D7,
+            class D6 = PIN_UNUSED,
+            class D5 = PIN_UNUSED,
+            class D4 = PIN_UNUSED,
+            class D3 = PIN_UNUSED,
+            class D2 = PIN_UNUSED,
+            class D1 = PIN_UNUSED,
+            class D0 = PIN_UNUSED>
   inline static uint8_t get_8_byte() {
     return get_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>();
   }
@@ -922,30 +920,30 @@ namespace NS {
    * 
    * The destination registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::_IOReg IOReg,
-  class D7,
-  class D6 = PIN_UNUSED,
-  class D5 = PIN_UNUSED,
-  class D4 = PIN_UNUSED,
-  class D3 = PIN_UNUSED,
-  class D2 = PIN_UNUSED,
-  class D1 = PIN_UNUSED,
-  class D0 = PIN_UNUSED,
-  typename V = uint8_t>
+  template <enum NS::IOReg IOReg,
+            class D7,
+            class D6 = PIN_UNUSED,
+            class D5 = PIN_UNUSED,
+            class D4 = PIN_UNUSED,
+            class D3 = PIN_UNUSED,
+            class D2 = PIN_UNUSED,
+            class D1 = PIN_UNUSED,
+            class D0 = PIN_UNUSED,
+            typename V = uint8_t>
   inline static void set_8_byte(const V& val) {
     set_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(val);
   }
   
   
   /**
-   * @brief See set_8_byte().  This function is optimized for situations
+   * @brief See set_8_bits().  This function is optimized for situations
    * where you want to set 4 pin values.
    * 
    * @p D3, @p D2, @p D1, @p D0 specify the pins.  The bit values for
    * those pins are taken from @p val.
    * 
-   * Bit 0 (the lsb) from @p val is assigned to @p D0.  
-   * ..  
+   * Bit 0 (the lsb) from @p val is assigned to @p D0.  \n
+   * ..  \n
    * Bit 3 from @p val is assigned to @p D3.
    * 
    * 
@@ -953,22 +951,22 @@ namespace NS {
    * 
    * If for instance @p offset is 2 then:
    * 
-   * Bit 2 from @p val is assigned to @p D0.  
-   * ..  
+   * Bit 2 from @p val is assigned to @p D0.  \n
+   * ..  \n
    * Bit 5 from @p val is assigned to @p D3.
    * 
    * 
    * The destination registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::_IOReg IOReg,
-  class D3,
-  class D2,
-  class D1,
-  class D0,
-  uint8_t offset = 0,
-  typename V = uint8_t>
-  inline static void set_4_nibble(V& val) {
-    set_8_byte<IOReg, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, D3, 3 + offset, D2, 2 + offset, D1, 1 + offset, D0, 0 + offset>(val);
+  template <enum NS::IOReg IOReg,
+            class D3,
+            class D2,
+            class D1,
+            class D0,
+            uint8_t offset = 0,
+            typename V = const uint8_t>
+  inline static void set_4_nibble(const V& val) {
+    set_8_bits<IOReg, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, D3, 3 + offset, D2, 2 + offset, D1, 1 + offset, D0, 0 + offset>(val);
   }
 }
 
