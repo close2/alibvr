@@ -1,0 +1,141 @@
+\hypertarget{classadc_1_1Adc}{}\section{adc\+:\+:Adc$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$ Class Template Reference}
+\label{classadc_1_1Adc}\index{adc\+::\+Adc$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$@{adc\+::\+Adc$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$}}
+
+
+Static functions for initialization, adc controls and irqs.  
+
+
+
+
+{\ttfamily \#include $<$adc.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename I  = Default\+Input, Ref R = Default\+Ref, Mode M = Default\+Mode$>$ }\\static void \hyperlink{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}{init} ()
+\begin{DoxyCompactList}\small\item\em Initialize the adc sub system. \end{DoxyCompactList}\item 
+static void \hyperlink{classadc_1_1Adc_adae69593a7798da99be0fa8ffaf09f06}{turn\+\_\+off} ()
+\begin{DoxyCompactList}\small\item\em Turns the adc subsystem off reducing power consumption. \end{DoxyCompactList}\item 
+static void \hyperlink{classadc_1_1Adc_acca97e4a4c6141505348f0bbfe6c1148}{start\+\_\+adc\+\_\+8bit} ()
+\begin{DoxyCompactList}\small\item\em Busywaits for current conversion to finish, then starts a new one with an 8bit resolution. \end{DoxyCompactList}\item 
+static void \hyperlink{classadc_1_1Adc_aeab3739f2f541da1f3687f5d97b6f8c2}{start\+\_\+adc\+\_\+10bit} ()
+\begin{DoxyCompactList}\small\item\em Busywaits for current conversion to finish, then starts a new one with an 10bit resolution. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \hyperlink{classadc_1_1Adc_ac469d58cc8c55dd3974d80d1445a4db7}{is\+\_\+adc\+\_\+finished} ()\hypertarget{classadc_1_1Adc_ac469d58cc8c55dd3974d80d1445a4db7}{}\label{classadc_1_1Adc_ac469d58cc8c55dd3974d80d1445a4db7}
+
+\begin{DoxyCompactList}\small\item\em Returns true if no conversion is currently running. \end{DoxyCompactList}\item 
+static void \hyperlink{classadc_1_1Adc_a0974180ce659bd3bff9499666e653eeb}{busy\+\_\+wait\+\_\+adc\+\_\+finished} ()\hypertarget{classadc_1_1Adc_a0974180ce659bd3bff9499666e653eeb}{}\label{classadc_1_1Adc_a0974180ce659bd3bff9499666e653eeb}
+
+\begin{DoxyCompactList}\small\item\em Busywaits for current conversion to finish. Returns immediatly if no conversion is running. \end{DoxyCompactList}\item 
+static uint8\+\_\+t {\bfseries get\+\_\+adc\+\_\+8bit\+\_\+result} ()\hypertarget{classadc_1_1Adc_a1044fe51b95416b2030454b3869ec195}{}\label{classadc_1_1Adc_a1044fe51b95416b2030454b3869ec195}
+
+\item 
+static uint16\+\_\+t {\bfseries get\+\_\+adc\+\_\+10bit\+\_\+result} ()\hypertarget{classadc_1_1Adc_a75998163e7a038560cdc29344208ba15}{}\label{classadc_1_1Adc_a75998163e7a038560cdc29344208ba15}
+
+\item 
+{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction = 0$>$ }\\static uint8\+\_\+t {\bfseries adc\+\_\+8bit} ()\hypertarget{classadc_1_1Adc_a2b2e98b10cfa98a34ac491150304f58e}{}\label{classadc_1_1Adc_a2b2e98b10cfa98a34ac491150304f58e}
+
+\item 
+{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction = 0$>$ }\\static uint16\+\_\+t {\bfseries adc\+\_\+10bit} ()\hypertarget{classadc_1_1Adc_ae90131099182fa17167766def8065138}{}\label{classadc_1_1Adc_ae90131099182fa17167766def8065138}
+
+\item 
+static void {\bfseries handle} (const enum \+\_\+irqs\+::\+Irq i)\hypertarget{classadc_1_1Adc_a29553e78481cc637a6dbc5e59da0c3ba}{}\label{classadc_1_1Adc_a29553e78481cc637a6dbc5e59da0c3ba}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$\\*
+class adc\+::\+Adc$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$}
+
+Static functions for initialization, adc controls and irqs. 
+
+If you use different instances of the \hyperlink{classadc_1_1Adc}{Adc} class the adc subsystem is shared. Calling \hyperlink{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}{init()} sets the input, mode or reference for all following conversions. It is possible to register more than one \hyperlink{classadc_1_1Adc}{Adc} irq task but {\itshape all} tasks are executed whenever a conversion finishes.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Default\+Ref} & sets the default reference voltage for conversions. See Ref for possible values. The reference voltage can be changed by passing a different Ref as template argument to the \hyperlink{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}{init()} function. \\
+\hline
+{\em Default\+Input} & sets the default input. In addition to the A\+D\+C-\/pins the classes in the \hyperlink{namespaceadc_1_1Input}{Input} namespace can be used. The input can be changed by passing a different input as template argument to the \hyperlink{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}{init()} function. \\
+\hline
+{\em Default\+Mode} & sets the default mode. See Mode for possible values. The mode can be changed by passing a different mode as template argument to the \hyperlink{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}{init()} function. \\
+\hline
+{\em Task} & is a function which is executed in the irq handler. To register the irq handler assign your typedef to the macro {\ttfamily N\+E\+W\+\_\+\+A\+DC} and {\ttfamily \#include R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+A\+DC}. Then, after your main, {\ttfamily \#include R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+I\+R\+QS}\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyVerb}typedef Adc<Ref::V1_1, Input::Unset, Mode::SingleConversion, f> MyAdc;
+#define NEW_ADC MyAdc
+#include REGISTER_ADC\end{DoxyVerb}
+ \begin{Desc}
+\item[Examples\+: ]\par
+\hyperlink{adc_2_irqs_8cpp-example}{adc\+\_\+2\+\_\+irqs.\+cpp}.\end{Desc}
+
+
+\subsection{Member Function Documentation}
+\index{adc\+::\+Adc@{adc\+::\+Adc}!init@{init}}
+\index{init@{init}!adc\+::\+Adc@{adc\+::\+Adc}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ template$<$typename I  = Default\+Input, Ref R = Default\+Ref, Mode M = Default\+Mode$>$ static void {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}{}\label{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}
+
+
+Initialize the adc sub system. 
+
+Note that the order of the template arguments is different to the order of the template arguments of Adc!
+
+If power consumption is a concern you have to turn the adc subsystem off after having used it. See \hyperlink{classadc_1_1Adc_adae69593a7798da99be0fa8ffaf09f06}{turn\+\_\+off()}.
+
+Simply call \hyperlink{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}{init()} another time to turn it on again.
+
+The first conversion after \hyperlink{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}{init()} is not guaranteed to have a meaningful value!
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em I} & sets the input. In addition to the A\+D\+C-\/pins the classes in the \hyperlink{namespaceadc_1_1Input}{Input} namespace can be used. This template argument overrides the \hyperlink{classadc_1_1Adc}{Adc} argument. \\
+\hline
+{\em R} & sets the reference voltage for conversions. See Ref for possible values. This template argument overrides the \hyperlink{classadc_1_1Adc}{Adc} argument. \\
+\hline
+{\em M} & sets the mode. See Mode for possible values. This template argument overrides the \hyperlink{classadc_1_1Adc}{Adc} argument. \\
+\hline
+\end{DoxyTemplParams}
+\index{adc\+::\+Adc@{adc\+::\+Adc}!start\+\_\+adc\+\_\+10bit@{start\+\_\+adc\+\_\+10bit}}
+\index{start\+\_\+adc\+\_\+10bit@{start\+\_\+adc\+\_\+10bit}!adc\+::\+Adc@{adc\+::\+Adc}}
+\subsubsection[{\texorpdfstring{start\+\_\+adc\+\_\+10bit()}{start_adc_10bit()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ static void {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::start\+\_\+adc\+\_\+10bit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classadc_1_1Adc_aeab3739f2f541da1f3687f5d97b6f8c2}{}\label{classadc_1_1Adc_aeab3739f2f541da1f3687f5d97b6f8c2}
+
+
+Busywaits for current conversion to finish, then starts a new one with an 10bit resolution. 
+
+See \hyperlink{classadc_1_1Adc_acca97e4a4c6141505348f0bbfe6c1148}{start\+\_\+adc\+\_\+8bit()} for more information. All {\itshape 8bit} functions have {\itshape 10bit} equivalents. \index{adc\+::\+Adc@{adc\+::\+Adc}!start\+\_\+adc\+\_\+8bit@{start\+\_\+adc\+\_\+8bit}}
+\index{start\+\_\+adc\+\_\+8bit@{start\+\_\+adc\+\_\+8bit}!adc\+::\+Adc@{adc\+::\+Adc}}
+\subsubsection[{\texorpdfstring{start\+\_\+adc\+\_\+8bit()}{start_adc_8bit()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ static void {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::start\+\_\+adc\+\_\+8bit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classadc_1_1Adc_acca97e4a4c6141505348f0bbfe6c1148}{}\label{classadc_1_1Adc_acca97e4a4c6141505348f0bbfe6c1148}
+
+
+Busywaits for current conversion to finish, then starts a new one with an 8bit resolution. 
+
+This function will not wait for the conversion to finish! Use adc\+\_\+8bit() instead if this is what you want.
+
+To find out if the conversion has finished call \hyperlink{classadc_1_1Adc_ac469d58cc8c55dd3974d80d1445a4db7}{is\+\_\+adc\+\_\+finished()}. To get the result call get\+\_\+adc\+\_\+8bit\+\_\+result(). \index{adc\+::\+Adc@{adc\+::\+Adc}!turn\+\_\+off@{turn\+\_\+off}}
+\index{turn\+\_\+off@{turn\+\_\+off}!adc\+::\+Adc@{adc\+::\+Adc}}
+\subsubsection[{\texorpdfstring{turn\+\_\+off()}{turn_off()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ static void {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::turn\+\_\+off (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classadc_1_1Adc_adae69593a7798da99be0fa8ffaf09f06}{}\label{classadc_1_1Adc_adae69593a7798da99be0fa8ffaf09f06}
+
+
+Turns the adc subsystem off reducing power consumption. 
+
+To turn the system on again, simply call \hyperlink{classadc_1_1Adc_ae453bb940554c62082776bd41a9053a3}{init()} again. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/adc.\+h\end{DoxyCompactItemize}

@@ -1,15 +1,36 @@
 \hypertarget{structadc_1_1Input_1_1Temperature}{}\section{adc\+:\+:Input\+:\+:Temperature Struct Reference}
 \label{structadc_1_1Input_1_1Temperature}\index{adc\+::\+Input\+::\+Temperature@{adc\+::\+Input\+::\+Temperature}}
+
+
+"The measured voltage has a linear relationship to the temperature \mbox{[}...\mbox{]}. The voltage sensitivity is approximately 1 m\+V/°C and the accuracy of the temperature measurement is +/-\/ 10°C." (Atmega docs)  
+
+
+
+
+{\ttfamily \#include $<$adc.\+h$>$}
+
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static enum \+\_\+ports\+::\+Port {\bfseries port} = \+\_\+ports\+::\+Port\+::C\hypertarget{structadc_1_1Input_1_1Temperature_ace2a29165a12abbe19b62b02927003e9}{}\label{structadc_1_1Input_1_1Temperature_ace2a29165a12abbe19b62b02927003e9}
+static enum \hyperlink{namespaceports_a9949317f344930bd6ad1097e80c97b67}{ports\+::\+\_\+\+Port} {\bfseries port} = ports \+::\+\_\+\+Port\+::C\hypertarget{structadc_1_1Input_1_1Temperature_ac012a086a736256fccb6c33396289890}{}\label{structadc_1_1Input_1_1Temperature_ac012a086a736256fccb6c33396289890}
 
 \item 
 static const uint8\+\_\+t {\bfseries bit} = 8\hypertarget{structadc_1_1Input_1_1Temperature_aebcf8f7325e61063e68ffb71788054b9}{}\label{structadc_1_1Input_1_1Temperature_aebcf8f7325e61063e68ffb71788054b9}
 
 \end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+"The measured voltage has a linear relationship to the temperature \mbox{[}...\mbox{]}. The voltage sensitivity is approximately 1 m\+V/°C and the accuracy of the temperature measurement is +/-\/ 10°C." (Atmega docs) 
+
+Typical values\+:
+\begin{DoxyItemize}
+\item -\/45°C\+: 242mV
+\item +25°C\+: 314mV
+\item +85°C\+: 380mV These values are typical values.
+\end{DoxyItemize}
+
+To achieve more accuracy calibrate the temperature sensor by storing a calibration value in the eeprom. See the atmel docs for more information. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

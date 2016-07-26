@@ -13,5 +13,7 @@ var searchData=
   ['spimaster',['SpiMaster',['../dc/d23/classSpiMaster.html',1,'']]],
   ['spislave',['SpiSlave',['../dc/db5/classSpiSlave.html',1,'']]],
   ['spisync',['SpiSync',['../d3/dd5/classSpiSync.html',1,'']]],
+  ['start_5fadc_5f10bit',['start_adc_10bit',['../dd/d16/classadc_1_1Adc.html#aeab3739f2f541da1f3687f5d97b6f8c2',1,'adc::Adc']]],
+  ['start_5fadc_5f8bit',['start_adc_8bit',['../dd/d16/classadc_1_1Adc.html#acca97e4a4c6141505348f0bbfe6c1148',1,'adc::Adc']]],
   ['static_5fbuffer',['Static_Buffer',['../da/da0/classStatic__Buffer.html',1,'']]]
 ];

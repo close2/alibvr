@@ -4,9 +4,9 @@ var indexSectionsWithContent =
   1: "_abcdgilmnpstuv",
   2: "_ap",
   3: "t",
-  4: "_gst",
+  4: "_bdgist",
   5: "bdp",
-  6: "_dip"
+  6: "_dimp"
 };
 
 var indexSectionNames =

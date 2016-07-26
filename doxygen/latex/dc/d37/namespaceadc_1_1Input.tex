@@ -1,0 +1,26 @@
+\hypertarget{namespaceadc_1_1Input}{}\section{adc\+:\+:Input Namespace Reference}
+\label{namespaceadc_1_1Input}\index{adc\+::\+Input@{adc\+::\+Input}}
+
+
+In addition to the A\+D\+C-\/pins the adc subsystem can also use an internal temperature sensor, an internal 1.\+1V reference voltage and ground as input for a conversion.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structadc_1_1Input_1_1Gnd}{Gnd}
+\begin{DoxyCompactList}\small\item\em Ground. \end{DoxyCompactList}\item 
+struct \hyperlink{structadc_1_1Input_1_1Temperature}{Temperature}
+\begin{DoxyCompactList}\small\item\em "The measured voltage has a linear relationship to the temperature \mbox{[}...\mbox{]}. The voltage sensitivity is approximately 1 m\+V/°C and the accuracy of the temperature measurement is +/-\/ 10°C." (Atmega docs) \end{DoxyCompactList}\item 
+struct \hyperlink{structadc_1_1Input_1_1Unset}{Unset}
+\begin{DoxyCompactList}\small\item\em Use \hyperlink{structadc_1_1Input_1_1Unset}{Unset} during initialization if you intend to use different inputs. Using \hyperlink{structadc_1_1Input_1_1Unset}{Unset} doesn\textquotesingle{}t prevent you from using different inputs, but maybe makes your intentations clearer. \end{DoxyCompactList}\item 
+struct \hyperlink{structadc_1_1Input_1_1V1__1}{V1\+\_\+1}
+\begin{DoxyCompactList}\small\item\em The internal 1.\+1V bandgap reference voltage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+In addition to the A\+D\+C-\/pins the adc subsystem can also use an internal temperature sensor, an internal 1.\+1V reference voltage and ground as input for a conversion. 
+
+You may use \hyperlink{structadc_1_1Input_1_1Temperature}{Input\+::\+Temperature}, \hyperlink{structadc_1_1Input_1_1V1__1}{Input\+::\+V1\+\_\+1} and \hyperlink{structadc_1_1Input_1_1Gnd}{Input\+::\+Gnd} as if they were A\+D\+C-\/pins.
+
+The required static fields port and bit are implemented and have special values, so that the code of this library knows when to switch to those inputs. 

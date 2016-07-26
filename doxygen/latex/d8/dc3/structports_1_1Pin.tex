@@ -71,7 +71,7 @@ In addition reading or setting the value of a pin is simplified through \hyperli
 
 Using those static members (\hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{D\+DR}, \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+O\+RT} or \hyperlink{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{P\+IN}) liberates you from writing bit operations. If your pin is for instance B2, a typical way to set the D\+DR value of the pin to 0 would have been\+: {\ttfamily P\+O\+R\+TB \&= $\sim$(\+\_\+\+B\+V(2));}
 
-The exact same thing may now be done by writing\+: {\ttfamily P\+I\+N\+\_\+\+B2\+::\+D\+DR = 0;}
+The exact same thing may now be done by writing\+: {\ttfamily \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{P\+I\+N\+\_\+\+B2\+::\+D\+DR} = 0;}
 
 When using the enums \hyperlink{namespaceports_a46987e78fa447129742fadda5eccafb4}{Data\+Direction} or \hyperlink{namespaceports_a49bf0ccedb4cfed89a328574e53bec07}{Pull\+Up} the compiler verifies that the enum is used for the correct register.
 
@@ -100,10 +100,13 @@ Examples\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily P\+I\+N\+\_\+\+C3\+::\+D\+DR = Data\+Direction\+::\+Input;}
-\item {\ttfamily uint8\+\_\+t current\+D\+DR = P\+I\+N\+\_\+\+C3\+::\+D\+DR;}
-\item {\ttfamily enum Data\+Direction current\+D\+D\+R2 = P\+I\+N\+\_\+\+C3\+::\+D\+DR;} 
-\end{DoxyItemize}\index{ports\+::\+Pin@{ports\+::\+Pin}!P\+IN@{P\+IN}}
+\item {\ttfamily \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{P\+I\+N\+\_\+\+C3\+::\+D\+DR} = Data\+Direction\+::\+Input;}
+\item {\ttfamily uint8\+\_\+t current\+D\+DR = \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{P\+I\+N\+\_\+\+C3\+::\+D\+DR};}
+\item {\ttfamily enum Data\+Direction current\+D\+D\+R2 = \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{P\+I\+N\+\_\+\+C3\+::\+D\+DR};} 
+\end{DoxyItemize}\begin{Desc}
+\item[Examples\+: ]\par
+\hyperlink{adc_2_irqs_8cpp-example}{adc\+\_\+2\+\_\+irqs.\+cpp}.\end{Desc}
+\index{ports\+::\+Pin@{ports\+::\+Pin}!P\+IN@{P\+IN}}
 \index{P\+IN@{P\+IN}!ports\+::\+Pin@{ports\+::\+Pin}}
 \subsubsection[{\texorpdfstring{P\+IN}{PIN}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum \+\_\+\+Port p, uint8\+\_\+t b$>$ {\bf Pin}$<$ p, b $>$\+::{\bf \+\_\+\+P\+IN} {\bf ports\+::\+Pin}$<$ p, b $>$\+::P\+IN\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{}\label{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}
 
@@ -116,8 +119,8 @@ Examples\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily P\+I\+N\+\_\+\+C3\+::\+P\+IN = 1; // equivalent to\+: P\+I\+N\+\_\+\+C3\+::\+P\+O\+RT = ! P\+I\+N\+\_\+\+C3\+::\+P\+O\+RT;}
-\item {\ttfamily uint8\+\_\+t input = P\+I\+N\+\_\+\+C3\+::\+P\+IN;} 
+\item {\ttfamily \hyperlink{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{P\+I\+N\+\_\+\+C3\+::\+P\+IN} = 1; // equivalent to\+: \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+C3\+::\+P\+O\+RT} = ! \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+C3\+::\+P\+O\+RT};}
+\item {\ttfamily uint8\+\_\+t input = \hyperlink{structports_1_1Pin_ae2e45a41082457c350f71f7a720265d4}{P\+I\+N\+\_\+\+C3\+::\+P\+IN};} 
 \end{DoxyItemize}\index{ports\+::\+Pin@{ports\+::\+Pin}!P\+O\+RT@{P\+O\+RT}}
 \index{P\+O\+RT@{P\+O\+RT}!ports\+::\+Pin@{ports\+::\+Pin}}
 \subsubsection[{\texorpdfstring{P\+O\+RT}{PORT}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum \+\_\+\+Port p, uint8\+\_\+t b$>$ {\bf Pin}$<$ p, b $>$\+::{\bf \+\_\+\+P\+O\+RT} {\bf ports\+::\+Pin}$<$ p, b $>$\+::P\+O\+RT\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{}\label{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}
@@ -133,11 +136,14 @@ Examples\+:
 
 
 \begin{DoxyItemize}
-\item {\ttfamily P\+I\+N\+\_\+\+A\+D\+C4\+::\+P\+O\+RT = 1;}
-\item {\ttfamily uint8\+\_\+t current\+Port = P\+I\+N\+\_\+\+A\+D\+C4\+::\+P\+O\+RT;}
-\item {\ttfamily enum Pull\+Up current\+Pull\+Up = P\+I\+N\+\_\+\+A\+D\+C4\+::\+P\+O\+RT;}
-\item {\ttfamily P\+I\+N\+\_\+\+C3\+::\+P\+O\+RT = Pull\+Up\+::\+HighZ;} 
-\end{DoxyItemize}\index{ports\+::\+Pin@{ports\+::\+Pin}!port@{port}}
+\item {\ttfamily \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+A\+D\+C4\+::\+P\+O\+RT} = 1;}
+\item {\ttfamily uint8\+\_\+t current\+Port = \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+A\+D\+C4\+::\+P\+O\+RT};}
+\item {\ttfamily enum Pull\+Up current\+Pull\+Up = \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+A\+D\+C4\+::\+P\+O\+RT};}
+\item {\ttfamily \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{P\+I\+N\+\_\+\+C3\+::\+P\+O\+RT} = Pull\+Up\+::\+HighZ;} 
+\end{DoxyItemize}\begin{Desc}
+\item[Examples\+: ]\par
+\hyperlink{adc_2_irqs_8cpp-example}{adc\+\_\+2\+\_\+irqs.\+cpp}.\end{Desc}
+\index{ports\+::\+Pin@{ports\+::\+Pin}!port@{port}}
 \index{port@{port}!ports\+::\+Pin@{ports\+::\+Pin}}
 \subsubsection[{\texorpdfstring{port}{port}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$enum \+\_\+\+Port p, uint8\+\_\+t b$>$ enum {\bf \+\_\+\+Port} {\bf ports\+::\+Pin}$<$ p, b $>$\+::port = p\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}{}\label{structports_1_1Pin_ad63613b8c14441d28e3f3d935da67e77}
 

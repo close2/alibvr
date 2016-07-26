@@ -1,0 +1,64 @@
+\hypertarget{adc_2_irqs_8cpp-example}{}\section{adc\+\_\+2\+\_\+irqs.\+cpp}
+
+\begin{DoxyCodeInclude}
+\textcolor{preprocessor}{#define F\_CPU 8000000}
+
+\textcolor{preprocessor}{#include "adc.h"}
+\textcolor{preprocessor}{#include "irqs.h"}
+\textcolor{preprocessor}{#include "ports.h"}
+
+\textcolor{keyword}{using namespace }\hyperlink{namespaceadc}{adc};
+
+
+\textcolor{keywordtype}{void} f(\textcolor{keyword}{const} uint16\_t& result) \{
+  \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{PIN\_B4::PORT} = result > 0x0F;
+\}
+
+\textcolor{keywordtype}{void} f2(\textcolor{keyword}{const} uint16\_t& result) \{
+  \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{PIN\_B3::PORT} = result < 0x0F;
+\}
+
+
+\textcolor{comment}{/*}
+\textcolor{comment}{ * THIS IS PROBABLY NOT WHAT YOU WOULD WANT IN YOUR PROGRAM!}
+\textcolor{comment}{ * }
+\textcolor{comment}{ * THE ADC SUBSYSTEM WILL CALL BOTH f AND f2 AFTER EVERY CONVERSION!}
+\textcolor{comment}{ */}
+
+
+\textcolor{comment}{// «ADC\_IRQ\_REG»}
+\textcolor{keyword}{typedef} \hyperlink{classadc_1_1Adc}{Adc<Ref::V1\_1, Input::Unset, Mode::SingleConversion, f>}
+       MyAdc;
+\textcolor{preprocessor}{#define NEW\_ADC MyAdc}
+\textcolor{preprocessor}{#include REGISTER\_ADC}
+\textcolor{comment}{/*¤*/}
+
+\textcolor{keyword}{typedef} \hyperlink{classadc_1_1Adc}{Adc<Ref::AVcc, PIN\_ADC3, Mode::SingleConversion, f2>}
+       MyAdc2;
+\textcolor{preprocessor}{#define NEW\_ADC MyAdc}
+\textcolor{preprocessor}{#include REGISTER\_ADC}
+
+\textcolor{keywordtype}{int} main() \{
+  \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{PIN\_B3::DDR} = ports::DataDirection::Output;
+  \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{PIN\_B4::DDR} = ports::DataDirection::Output;
+  
+  
+  \textcolor{comment}{// If there was only one Adc we could move the init outside the loop,}
+  \textcolor{comment}{// but in this case the init() switches the input}
+  \textcolor{keywordflow}{for}(;;) \{
+    MyAdc::init<PIN\_ADC0>();
+    MyAdc::start\_adc\_10bit();
+    
+    MyAdc::busy\_wait\_adc\_finished();
+    \textcolor{comment}{// After the conversion has finished both! f and f2 will be executed.}
+    
+    MyAdc2::init();
+    MyAdc2::start\_adc\_8bit();
+    MyAdc::busy\_wait\_adc\_finished();
+    \textcolor{comment}{// After the conversion has finished both! f and f2 will be executed.}
+  \}
+\}
+
+\textcolor{preprocessor}{#include REGISTER\_IRQS}
+\end{DoxyCodeInclude}
+ 

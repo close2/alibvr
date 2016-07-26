@@ -43,6 +43,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
       <li class="current"><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
+      <li><a href="../../examples.html"><span>Examples</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -84,6 +85,8 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -92,6 +95,18 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:dc/d37/namespaceadc_1_1Input"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d37/namespaceadc_1_1Input.html">Input</a></td></tr>
+<tr class="memdesc:dc/d37/namespaceadc_1_1Input"><td class="mdescLeft">&#160;</td><td class="mdescRight">In addition to the ADC-pins the adc subsystem can also use an internal temperature sensor, an internal 1.1V reference voltage and ground as input for a conversion. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html">Adc</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static functions for initialization, adc controls and irqs.  <a href="../../dd/d16/classadc_1_1Adc.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a0e6e6773a0ed848acb0887f1ed3c76ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e6e6773a0ed848acb0887f1ed3c76ae"></a>
@@ -100,14 +115,14 @@ typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>task</b>) (
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a8094fa55ea1a7729bb35c230163c0f8f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8094fa55ea1a7729bb35c230163c0f8f"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Mode</b> { <br />
+<tr class="memitem:a8094fa55ea1a7729bb35c230163c0f8f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d26/namespaceadc.html#a8094fa55ea1a7729bb35c230163c0f8f">Mode</a> { <br />
 &#160;&#160;<b>SingleConversion</b> = 0xFF, 
 <br />
 &#160;&#160;<b>FreeRunning</b> = 0b000, 
 <br />
 &#160;&#160;<b>TriggerAnalogComp</b> = 0b001, 
 <br />
-&#160;&#160;<b>TriggerExtIrq0</b> = 0b010, 
+&#160;&#160;<b>TriggerPCInt0</b> = 0b010, 
 <br />
 &#160;&#160;<b>TriggerTimer0CompA</b> = 0b011, 
 <br />
@@ -117,9 +132,10 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<b>TriggerTimer1OvF</b> = 0b110, 
 <br />
-&#160;&#160;<b>TriggerTimer1Capture</b> = 0b111
+&#160;&#160;<b>TriggerTimer1Capt</b> = 0b111
 <br />
- }</td></tr>
+ }<tr class="memdesc:a8094fa55ea1a7729bb35c230163c0f8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">An AD-conversion is either started manually or by specifying a trigger.  <a href="../../de/d26/namespaceadc.html#a8094fa55ea1a7729bb35c230163c0f8f">More...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:a8094fa55ea1a7729bb35c230163c0f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcbc814e47ddcec8104b574b02228d97"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcbc814e47ddcec8104b574b02228d97"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Ref</b> { <br />
 &#160;&#160;<b>ARef</b> = 0b00, 
@@ -138,13 +154,14 @@ template&lt;uint8_t goto_sleep_for_noise_reduction&gt; </td></tr>
 <tr class="memitem:ab569dff590b3bb745fb012aa29ec5723"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>_do_adc</b> ()</td></tr>
 <tr class="separator:ab569dff590b3bb745fb012aa29ec5723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4228912d1c32eafc1987a8adb80f4984"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4228912d1c32eafc1987a8adb80f4984"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>busy_wait_adc_finished</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d26/namespaceadc.html#a4228912d1c32eafc1987a8adb80f4984">busy_wait_adc_finished</a> ()</td></tr>
+<tr class="memdesc:a4228912d1c32eafc1987a8adb80f4984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loops until the current conversion has finished. <br /></td></tr>
 <tr class="separator:a4228912d1c32eafc1987a8adb80f4984"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f2e8fa37ba3e91fc9e7a58e3543eaaa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f2e8fa37ba3e91fc9e7a58e3543eaaa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>irq_handler_for_adc_must_be_registered_for_noise_reduction</b> ()</td></tr>
 <tr class="separator:a0f2e8fa37ba3e91fc9e7a58e3543eaaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d20cd58db88b2e3099aa5689e33235d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d20cd58db88b2e3099aa5689e33235d"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>do_nothing</b> (const uint16_t &amp;result)</td></tr>
+<tr class="memitem:a4d20cd58db88b2e3099aa5689e33235d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d26/namespaceadc.html#a4d20cd58db88b2e3099aa5689e33235d">do_nothing</a> (const uint16_t &amp;result)</td></tr>
+<tr class="memdesc:a4d20cd58db88b2e3099aa5689e33235d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function does nothing and is the default template argument for the irq task.  <a href="#a4d20cd58db88b2e3099aa5689e33235d">More...</a><br /></td></tr>
 <tr class="separator:a4d20cd58db88b2e3099aa5689e33235d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e0b185b550424440d92bc2b129f6128"><td class="memTemplParams" colspan="2"><a class="anchor" id="a6e0b185b550424440d92bc2b129f6128"></a>
 template&lt;&gt; </td></tr>
@@ -153,7 +170,64 @@ template&lt;&gt; </td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>By default adc related classes, enums,... are defined inside the <code>adc</code> namespace. If this creates a name clash with your code you may modify the namespace name by setting ALIBVR_NAMESPACE_ADC or ALIBVR_NAMESPACE_PREFIX. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="a8094fa55ea1a7729bb35c230163c0f8f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="../../de/d26/namespaceadc.html#a8094fa55ea1a7729bb35c230163c0f8f">adc::Mode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>An AD-conversion is either started manually or by specifying a trigger. </p>
+<p>When the selected trigger (a bit in a register) changes from 0 to 1, a conversion is started.</p>
+<p>All ADC triggers are IRQ bits. The TriggerTimer0OvF for instance starts a new conversion whenever the Irq flag for the Timer0 Overflow is changed from 0 to 1.</p>
+<p>If the specific irq is enabled and global irqs are turned on the corresponding irq handler is called. (This behaviour is independent of the ADC subsystem.) Remember to clear the flag if you don't have irqs enabled, as the trigger only activates when the bit changes from 0 to 1!</p>
+<p>The ADC subsystem however does not care if an interrupt is raised and how the bit is set / cleared. It is therefore possible to use the triggers without enabling any irqs at all!</p>
+<p>The FreeRunning mode is actually a trigger like the others. In FreeRunning mode an ADC is started whenever the ADC irq flag is set. This usually means, that the first conversion is started manually. Then, whenever an adc has finished a new conversion is automatically started, because the adc irq flag is set whenever a conversion finishes.</p>
+<p>See irqs for a more detailed description of all irqs. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a4d20cd58db88b2e3099aa5689e33235d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void adc::do_nothing </td>
+          <td>(</td>
+          <td class="paramtype">const uint16_t &amp;&#160;</td>
+          <td class="paramname"><em>result</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function does nothing and is the default template argument for the irq task. </p>
+<p>The <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> template argument function is compared against this function, and if they are different <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> irqs are enabled in the init function. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -1,5 +1,15 @@
 \hypertarget{namespaceadc}{}\section{adc Namespace Reference}
 \label{namespaceadc}\index{adc@{adc}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceadc_1_1Input}{Input}
+\begin{DoxyCompactList}\small\item\em In addition to the A\+D\+C-\/pins the adc subsystem can also use an internal temperature sensor, an internal 1.\+1V reference voltage and ground as input for a conversion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classadc_1_1Adc}{Adc}
+\begin{DoxyCompactList}\small\item\em Static functions for initialization, adc controls and irqs. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -9,14 +19,14 @@ typedef void($\ast$ {\bfseries task}) (const uint16\+\_\+t \&)\hypertarget{names
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum {\bfseries Mode} \{ \\*
+enum \hyperlink{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}{Mode} \{ \\*
 {\bfseries Single\+Conversion} = 0x\+FF, 
 \\*
 {\bfseries Free\+Running} = 0b000, 
 \\*
 {\bfseries Trigger\+Analog\+Comp} = 0b001, 
 \\*
-{\bfseries Trigger\+Ext\+Irq0} = 0b010, 
+{\bfseries Trigger\+P\+C\+Int0} = 0b010, 
 \\*
 {\bfseries Trigger\+Timer0\+CompA} = 0b011, 
 \\*
@@ -26,9 +36,8 @@ enum {\bfseries Mode} \{ \\*
 \\*
 {\bfseries Trigger\+Timer1\+OvF} = 0b110, 
 \\*
-{\bfseries Trigger\+Timer1\+Capture} = 0b111
- \}\hypertarget{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}{}\label{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}
-
+{\bfseries Trigger\+Timer1\+Capt} = 0b111
+ \}\begin{DoxyCompactList}\small\item\em An A\+D-\/conversion is either started manually or by specifying a trigger. \end{DoxyCompactList}
 \item 
 enum {\bfseries Ref} \{ \\*
 {\bfseries A\+Ref} = 0b00, 
@@ -45,15 +54,14 @@ enum {\bfseries Ref} \{ \\*
 {\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction$>$ }\\void {\bfseries \+\_\+do\+\_\+adc} ()\hypertarget{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}{}\label{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}
 
 \item 
-void {\bfseries busy\+\_\+wait\+\_\+adc\+\_\+finished} ()\hypertarget{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{}\label{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}
+void \hyperlink{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{busy\+\_\+wait\+\_\+adc\+\_\+finished} ()\hypertarget{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{}\label{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}
 
-\item 
+\begin{DoxyCompactList}\small\item\em Loops until the current conversion has finished. \end{DoxyCompactList}\item 
 void {\bfseries irq\+\_\+handler\+\_\+for\+\_\+adc\+\_\+must\+\_\+be\+\_\+registered\+\_\+for\+\_\+noise\+\_\+reduction} ()\hypertarget{namespaceadc_a0f2e8fa37ba3e91fc9e7a58e3543eaaa}{}\label{namespaceadc_a0f2e8fa37ba3e91fc9e7a58e3543eaaa}
 
 \item 
-static void {\bfseries do\+\_\+nothing} (const uint16\+\_\+t \&result)\hypertarget{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}{}\label{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}
-
-\item 
+static void \hyperlink{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}{do\+\_\+nothing} (const uint16\+\_\+t \&result)
+\begin{DoxyCompactList}\small\item\em This function does nothing and is the default template argument for the irq task. \end{DoxyCompactList}\item 
 {\footnotesize template$<$$>$ }\\void {\bfseries \+\_\+do\+\_\+adc$<$ 0 $>$} ()\hypertarget{namespaceadc_a6e0b185b550424440d92bc2b129f6128}{}\label{namespaceadc_a6e0b185b550424440d92bc2b129f6128}
 
 \end{DoxyCompactItemize}
@@ -61,3 +69,37 @@ static void {\bfseries do\+\_\+nothing} (const uint16\+\_\+t \&result)\hypertarg
 
 \subsection{Detailed Description}
 By default adc related classes, enums,... are defined inside the {\ttfamily adc} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+A\+DC or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. 
+
+\subsection{Enumeration Type Documentation}
+\index{adc@{adc}!Mode@{Mode}}
+\index{Mode@{Mode}!adc@{adc}}
+\subsubsection[{\texorpdfstring{Mode}{Mode}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf adc\+::\+Mode}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}{}\label{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}
+
+
+An A\+D-\/conversion is either started manually or by specifying a trigger. 
+
+When the selected trigger (a bit in a register) changes from 0 to 1, a conversion is started.
+
+All A\+DC triggers are I\+RQ bits. The Trigger\+Timer0\+OvF for instance starts a new conversion whenever the Irq flag for the Timer0 Overflow is changed from 0 to 1.
+
+If the specific irq is enabled and global irqs are turned on the corresponding irq handler is called. (This behaviour is independent of the A\+DC subsystem.) Remember to clear the flag if you don\textquotesingle{}t have irqs enabled, as the trigger only activates when the bit changes from 0 to 1!
+
+The A\+DC subsystem however does not care if an interrupt is raised and how the bit is set / cleared. It is therefore possible to use the triggers without enabling any irqs at all!
+
+The Free\+Running mode is actually a trigger like the others. In Free\+Running mode an A\+DC is started whenever the A\+DC irq flag is set. This usually means, that the first conversion is started manually. Then, whenever an adc has finished a new conversion is automatically started, because the adc irq flag is set whenever a conversion finishes.
+
+See irqs for a more detailed description of all irqs. 
+
+\subsection{Function Documentation}
+\index{adc@{adc}!do\+\_\+nothing@{do\+\_\+nothing}}
+\index{do\+\_\+nothing@{do\+\_\+nothing}!adc@{adc}}
+\subsubsection[{\texorpdfstring{do\+\_\+nothing(const uint16\+\_\+t \&result)}{do_nothing(const uint16_t &result)}}]{\setlength{\rightskip}{0pt plus 5cm}static void adc\+::do\+\_\+nothing (
+\begin{DoxyParamCaption}
+\item[{const uint16\+\_\+t \&}]{result}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}{}\label{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}
+
+
+This function does nothing and is the default template argument for the irq task. 
+
+The \hyperlink{classadc_1_1Adc}{Adc} template argument function is compared against this function, and if they are different \hyperlink{classadc_1_1Adc}{Adc} irqs are enabled in the init function. 

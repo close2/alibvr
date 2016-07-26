@@ -1,15 +1,31 @@
 \hypertarget{structadc_1_1Input_1_1V1__1}{}\section{adc\+:\+:Input\+:\+:V1\+\_\+1 Struct Reference}
 \label{structadc_1_1Input_1_1V1__1}\index{adc\+::\+Input\+::\+V1\+\_\+1@{adc\+::\+Input\+::\+V1\+\_\+1}}
+
+
+The internal 1.\+1V bandgap reference voltage.  
+
+
+
+
+{\ttfamily \#include $<$adc.\+h$>$}
+
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static enum \+\_\+ports\+::\+Port {\bfseries port} = \+\_\+ports\+::\+Port\+::C\hypertarget{structadc_1_1Input_1_1V1__1_a11d4045dc0d8c756784fa7c6dbcac1ca}{}\label{structadc_1_1Input_1_1V1__1_a11d4045dc0d8c756784fa7c6dbcac1ca}
+static enum \hyperlink{namespaceports_a9949317f344930bd6ad1097e80c97b67}{ports\+::\+\_\+\+Port} {\bfseries port} = ports \+::\+\_\+\+Port\+::C\hypertarget{structadc_1_1Input_1_1V1__1_a0f6e5910e843675ac0a56d2c5b4d9ef6}{}\label{structadc_1_1Input_1_1V1__1_a0f6e5910e843675ac0a56d2c5b4d9ef6}
 
 \item 
 static const uint8\+\_\+t {\bfseries bit} = 14\hypertarget{structadc_1_1Input_1_1V1__1_a810f3c569f78bd751aa399ace63d586d}{}\label{structadc_1_1Input_1_1V1__1_a810f3c569f78bd751aa399ace63d586d}
 
 \end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+The internal 1.\+1V bandgap reference voltage. 
+
+Minimum 1.\+0V, Maximum 1.\+2V
+
+The reference voltage needs some time to stabilize. Typically 40µs, but it may take up to 70µs until it has stabilized. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
