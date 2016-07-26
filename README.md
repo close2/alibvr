@@ -108,27 +108,27 @@ uint8_t i = Pin_In::PIN; // Read a value.
 set_8_byte<IOReg::DDRx, PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>(0b11110000);
 
 uint8_t x1 = get_8_byte<IOReg::DDRx,
-PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>();
+                        PIN_B1, PIN_D2, PIN_UNUSED, PIN_D4, PIN_D5, PIN_D3, PIN_D7>();
 // Unused pins are read as 0.
 // 0b11010000 if called after the previous set_8_byte.
 
 // Specify which bit should be assigned to which pin:
 set_8_bits<IOReg::DDRx, PIN_D7, 1, // extract bit 1 and assign to PIN_D7
-PIN_D3, 2, // extract bit 2 and assign to PIN_D3
-PIN_B1, 7,
-PIN_D2, 6,
-PIN_D4, 4,
-PIN_D5, 3>(0b11110000);
+           PIN_D3, 2, // extract bit 2 and assign to PIN_D3
+           PIN_B1, 7,
+           PIN_D2, 6,
+           PIN_D4, 4,
+           PIN_D5, 3>(0b11110000);
 // Equivalent to previous set_8_byte instruction.
 
 // Specify which bit in returned value is which pin:
 uint8_t x2 = get_8_bits<IOReg::DDRx,
-PIN_D7, 1,
-PIN_D3, 2,
-PIN_B1, 7,
-PIN_D2, 6,
-PIN_D4, 4,
-PIN_D5, 3>();
+                        PIN_D7, 1,
+                        PIN_D3, 2,
+                        PIN_B1, 7,
+                        PIN_D2, 6,
+                        PIN_D4, 4,
+                        PIN_D5, 3>();
 // Equivalent to previous get_8_byte instruction.
 
 //                bit in value v       v       v       v         vvvv
@@ -199,9 +199,12 @@ When doing adc you have to specify
 * a reference voltage
 * a mode
 
+### Input selection
+
 In addition to input pins (see ADC* typedefs above)  
-`Temperature`, `V1_1` and `Gnd` are allowed inputs and defined
-inside an inner `Input` namespace.
+`Input::Temperature`, `Input::V1_1` and `Input::Gnd` are allowed inputs.
+
+### Reference voltages
 
 Possible references are defined in:
 ```C++
@@ -213,18 +216,20 @@ V1_1 = 0b11
 //
 ```
 
+### ADC modes
+
 Possible modes are defined in:
 ```C++
 enum class Mode {
 SingleConversion     = 0xFF,
 FreeRunning          = 0b000,
 TriggerAnalogComp    = 0b001,
-TriggerExtIrq0       = 0b010,
+TriggerPCInt0       = 0b010,
 TriggerTimer0CompA   = 0b011,
 TriggerTimer0OvF     = 0b100,
 TriggerTimer1CompB   = 0b101,
 TriggerTimer1OvF     = 0b110,
-TriggerTimer1Capture = 0b111
+TriggerTimer1Capt = 0b111
 };
 //
 ```
@@ -232,11 +237,3 @@ TriggerTimer1Capture = 0b111
 See the doxygen doc for short summaries of those enum values.
 
 
-
-
-### Input selection
-
-In addition to the provided `typedef`s for pins there are also
-* `_adc::Input::Temperature`
-* `_adc::Input::V1_1` and
-* `_adc::Input::Gnd`

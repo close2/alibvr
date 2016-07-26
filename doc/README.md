@@ -132,14 +132,19 @@ When doing adc you have to specify
 * a reference voltage
 * a mode
 
+### Input selection
+
 In addition to input pins (see ADC* typedefs above)  
-`Temperature`, `V1_1` and `Gnd` are allowed inputs and defined
-inside an inner `Input` namespace.
+`Input::Temperature`, `Input::V1_1` and `Input::Gnd` are allowed inputs.
+
+### Reference voltages
 
 Possible references are defined in:
 ```C++
 +++ADC_REFS+++
 ```
+
+### ADC modes
 
 Possible modes are defined in:
 ```C++
@@ -149,11 +154,3 @@ Possible modes are defined in:
 See the doxygen doc for short summaries of those enum values.
 
 
-
-
-### Input selection
-
-In addition to the provided `typedef`s for pins there are also
-* `_adc::Input::Temperature`
-* `_adc::Input::V1_1` and
-* `_adc::Input::Gnd`

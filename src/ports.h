@@ -3,15 +3,14 @@
 #include <avr/sfr_defs.h>
 #include <avr/io.h>
 
-#pragma push_macro("NS_PORTS")
 #ifndef ALIBVR_NAMESPACE_PORTS
 #  ifdef ALIBVR_NAMESPACE_PREFIX
-#    define NS_PORTS ALIBVR_NAMESPACE_PREFIX ## ports
+#    define ALIBVR_NAMESPACE_PORTS ALIBVR_NAMESPACE_PREFIX ## ports
 #  else
-#    define NS_PORTS ports
+#    define ALIBVR_NAMESPACE_PORTS ports
 #  endif
 #else
-#  define NS_PORTS ALIBVR_NAMESPACE_PORTS
+#  define ALIBVR_NAMESPACE_PORTS ALIBVR_NAMESPACE_PORTS
 #endif
 
 
@@ -30,6 +29,9 @@
  * inside the `ports` namespace.  If this creates a name clash with your
  * code you may modify the namespace name by setting
  * ALIBVR_NAMESPACE_PORTS or ALIBVR_NAMESPACE_PREFIX.
+ * 
+ * Note that after including this file the macro ALIBVR_NAMESPACE_PORTS
+ * is set.
  * 
  * All pin selections in this library are done using `typedef`s.
  * See below for an example.
@@ -63,7 +65,7 @@
  **/
 
 
-namespace NS_PORTS {
+namespace ALIBVR_NAMESPACE_PORTS {
   
   /**
    * @brief Used in pin `typedef`s to specify the port of a pin.
@@ -265,32 +267,32 @@ namespace NS_PORTS {
 }
 
 
-typedef struct NS::Pin<NS::_Port::B, -1> PIN_UNUSED;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, -1> PIN_UNUSED;
 
-typedef struct NS::Pin<NS::_Port::D, 0 > PIN_0 ;
-typedef struct NS::Pin<NS::_Port::D, 1 > PIN_1 ;
-typedef struct NS::Pin<NS::_Port::D, 2 > PIN_2 ;
-typedef struct NS::Pin<NS::_Port::D, 3 > PIN_3 ;
-typedef struct NS::Pin<NS::_Port::D, 4 > PIN_4 ;
-typedef struct NS::Pin<NS::_Port::D, 5 > PIN_5 ;
-typedef struct NS::Pin<NS::_Port::D, 6 > PIN_6 ;
-typedef struct NS::Pin<NS::_Port::D, 7 > PIN_7 ;
-typedef struct NS::Pin<NS::_Port::B, 0 > PIN_8 ;
-typedef struct NS::Pin<NS::_Port::B, 1 > PIN_9 ;
-typedef struct NS::Pin<NS::_Port::B, 2 > PIN_10;
-typedef struct NS::Pin<NS::_Port::B, 3 > PIN_11;
-typedef struct NS::Pin<NS::_Port::B, 4 > PIN_12;
-typedef struct NS::Pin<NS::_Port::B, 5 > PIN_13;
-typedef struct NS::Pin<NS::_Port::C, 0 > PIN_14;
-typedef struct NS::Pin<NS::_Port::C, 1 > PIN_15;
-typedef struct NS::Pin<NS::_Port::C, 2 > PIN_16;
-typedef struct NS::Pin<NS::_Port::C, 3 > PIN_17;
-typedef struct NS::Pin<NS::_Port::C, 4 > PIN_18;
-typedef struct NS::Pin<NS::_Port::C, 5 > PIN_19;
-typedef struct NS::Pin<NS::_Port::B, 6 > PIN_20;
-typedef struct NS::Pin<NS::_Port::B, 7 > PIN_21;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 0 > PIN_0 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 1 > PIN_1 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 2 > PIN_2 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 3 > PIN_3 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 4 > PIN_4 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 5 > PIN_5 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 6 > PIN_6 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 7 > PIN_7 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 0 > PIN_8 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 1 > PIN_9 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 2 > PIN_10;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 3 > PIN_11;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 4 > PIN_12;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 5 > PIN_13;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 0 > PIN_14;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 1 > PIN_15;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 2 > PIN_16;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 3 > PIN_17;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 4 > PIN_18;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 5 > PIN_19;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 6 > PIN_20;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 7 > PIN_21;
 
-typedef struct NS::Pin<NS::_Port::C, 6 > PIN_DIP_1;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 6 > PIN_DIP_1;
 typedef PIN_0  PIN_DIP_2 ;
 typedef PIN_1  PIN_DIP_3 ;
 typedef PIN_2  PIN_DIP_4 ;
@@ -400,7 +402,7 @@ typedef PIN_DIP_12 PIN_D6;
 typedef PIN_DIP_13 PIN_D7;
 
 
-namespace NS_PORTS {
+namespace ALIBVR_NAMESPACE_PORTS {
   // forward declaration
   template <enum DataDirection Dd, class Io>
   uint8_t _set_or_get(uint8_t val);
@@ -562,14 +564,14 @@ namespace NS_PORTS {
       uint8_t maskC = 0;
       uint8_t maskD = 0;
       
-      const uint8_t d0isB = D0::port == NS::_Port::B; const uint8_t d0isC = D0::port == NS::_Port::C;
-      const uint8_t d1isB = D1::port == NS::_Port::B; const uint8_t d1isC = D1::port == NS::_Port::C;
-      const uint8_t d2isB = D2::port == NS::_Port::B; const uint8_t d2isC = D2::port == NS::_Port::C;
-      const uint8_t d3isB = D3::port == NS::_Port::B; const uint8_t d3isC = D3::port == NS::_Port::C;
-      const uint8_t d4isB = D4::port == NS::_Port::B; const uint8_t d4isC = D4::port == NS::_Port::C;
-      const uint8_t d5isB = D5::port == NS::_Port::B; const uint8_t d5isC = D5::port == NS::_Port::C;
-      const uint8_t d6isB = D6::port == NS::_Port::B; const uint8_t d6isC = D6::port == NS::_Port::C;
-      const uint8_t d7isB = D7::port == NS::_Port::B; const uint8_t d7isC = D7::port == NS::_Port::C;
+      const uint8_t d0isB = D0::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d0isC = D0::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
+      const uint8_t d1isB = D1::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d1isC = D1::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
+      const uint8_t d2isB = D2::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d2isC = D2::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
+      const uint8_t d3isB = D3::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d3isC = D3::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
+      const uint8_t d4isB = D4::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d4isC = D4::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
+      const uint8_t d5isB = D5::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d5isC = D5::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
+      const uint8_t d6isB = D6::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d6isC = D6::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
+      const uint8_t d7isB = D7::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d7isC = D7::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
 
       uint8_t& v0 = d0isB ? vB : (d0isC ? vC : vD);
       uint8_t& v1 = d1isB ? vB : (d1isC ? vC : vD);
@@ -594,59 +596,59 @@ namespace NS_PORTS {
       if (D0::bit < 8 && B0 < 8) {
         const uint8_t shift0 = (D0::bit >= 8) ? 0 : D0::bit;
         mask0 |= 1 << shift0;
-        if (Dd == NS::DataDirection::Write) v0 |= val & _BV(B0);
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v0 |= val & _BV(B0);
       }
       if (D1::bit < 8 && B1 < 8) {
         const uint8_t shift1 = (D1::bit >= 8) ? 0 : D1::bit;
         mask1 |= 1 << shift1;
-        if (Dd == NS::DataDirection::Write) v1 |= val & _BV(B1);
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v1 |= val & _BV(B1);
       }
       if (D2::bit < 8 && B2 < 8) {
         const uint8_t shift2 = (D2::bit >= 8) ? 0 : D2::bit;
         mask2 |= 1 << shift2;
-        if (Dd == NS::DataDirection::Write) v2 |= val & _BV(B2);
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v2 |= val & _BV(B2);
       }
       if (D3::bit < 8 && B3 < 8) {
         const uint8_t shift3 = (D3::bit >= 8) ? 0 : D3::bit;
         mask3 |= 1 << shift3;
-        if (Dd == NS::DataDirection::Write) v3 |= val & _BV(B3);
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v3 |= val & _BV(B3);
       }
       if (D4::bit < 8 && B4 < 8) {
         const uint8_t shift4 = (D4::bit >= 8) ? 0 : D4::bit;
         mask4 |= 1 << shift4;
-        if (Dd == NS::DataDirection::Write) v4 |= val & _BV(B4);
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v4 |= val & _BV(B4);
       }
       if (D5::bit < 8 && B5 < 8) {
         const uint8_t shift5 = (D5::bit >= 8) ? 0 : D5::bit;
         mask5 |= 1 << shift5;
-        if (Dd == NS::DataDirection::Write) v5 |= val & _BV(B5);
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v5 |= val & _BV(B5);
       }
       if (D6::bit < 8 && B6 < 8) {
         const uint8_t shift6 = (D6::bit >= 8) ? 0 : D6::bit;
         mask6 |= 1 << shift6;
-        if (Dd == NS::DataDirection::Write) v6 |= val & _BV(B6);
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v6 |= val & _BV(B6);
       }
       if (D7::bit < 8 && B7 < 8) {
         const uint8_t shift7 = (D7::bit >= 8) ? 0 : D7::bit;
         mask7 |= 1 << shift7;
-        if (Dd == NS::DataDirection::Write) v7 |= val & _BV(B7);
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v7 |= val & _BV(B7);
       }
   
       if (maskB != 0) {
-        if (Dd == NS::DataDirection::Write) rB = (rB & ~maskB) | vB;
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) rB = (rB & ~maskB) | vB;
         else vB = rB;
       }
       if (maskC != 0) {
-        if (Dd == NS::DataDirection::Write) rC = (rC & ~maskC) | vC;
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) rC = (rC & ~maskC) | vC;
         else vC = rC;
       }
       if (maskD != 0) {
-        if (Dd == NS::DataDirection::Write) rD = (rD & ~maskD) | vD;
+        if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) rD = (rD & ~maskD) | vD;
         else vD = rD;
       }
       
       uint8_t ret = 0;
-      if (Dd == NS::DataDirection::Read) {
+      if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Read) {
         ret |= (v0 & _BV(D0::bit)) ? _BV(B0) : 0;
         ret |= (v1 & _BV(D1::bit)) ? _BV(B1) : 0;
         ret |= (v2 & _BV(D2::bit)) ? _BV(B2) : 0;
@@ -749,7 +751,7 @@ namespace NS_PORTS {
                                 R& rC,
                                 R& rD,
                                 const V& val) {
-    NS::_set_or_get_8_bits<NS::DataDirection::Write,
+    ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Write,
     D7, B7,
     D6, B6,
     D5, B5,
@@ -815,7 +817,7 @@ namespace NS_PORTS {
   inline static uint8_t get_8_bits(R& rB,
                                    R& rC,
                                    R& rD) {
-    return NS::_set_or_get_8_bits<NS::DataDirection::Read, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(rB, rC, rD, 0);
+    return ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Read, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(rB, rC, rD, 0);
   }
 
 
@@ -865,7 +867,7 @@ namespace NS_PORTS {
    * 
    * The destination registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::IOReg IOReg,
+  template <enum ALIBVR_NAMESPACE_PORTS::IOReg IOReg,
             class D7, uint8_t B7,
             class D6 = PIN_UNUSED, uint8_t B6 = -1,
             class D5 = PIN_UNUSED, uint8_t B5 = -1,
@@ -876,7 +878,7 @@ namespace NS_PORTS {
             class D0 = PIN_UNUSED, uint8_t B0 = -1,
             typename V = uint8_t>
   inline static void set_8_bits(const V& val) {
-    NS::_set_or_get_8_bits<NS::DataDirection::Write, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(val);
+    ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Write, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(val);
   }
   
   /**
@@ -884,7 +886,7 @@ namespace NS_PORTS {
    * 
    * The source registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::IOReg IOReg,
+  template <enum ALIBVR_NAMESPACE_PORTS::IOReg IOReg,
             class D7, uint8_t B7,
             class D6 = PIN_UNUSED, uint8_t B6 = -1,
             class D5 = PIN_UNUSED, uint8_t B5 = -1,
@@ -894,7 +896,7 @@ namespace NS_PORTS {
             class D1 = PIN_UNUSED, uint8_t B1 = -1,
             class D0 = PIN_UNUSED, uint8_t B0 = -1>
   inline static uint8_t get_8_bits() {
-    return NS::_set_or_get_8_bits<NS::DataDirection::Read, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(0);
+    return ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Read, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(0);
   }
   
   /**
@@ -902,7 +904,7 @@ namespace NS_PORTS {
    * 
    * The source registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::IOReg IOReg,
+  template <enum ALIBVR_NAMESPACE_PORTS::IOReg IOReg,
             class D7,
             class D6 = PIN_UNUSED,
             class D5 = PIN_UNUSED,
@@ -920,7 +922,7 @@ namespace NS_PORTS {
    * 
    * The destination registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::IOReg IOReg,
+  template <enum ALIBVR_NAMESPACE_PORTS::IOReg IOReg,
             class D7,
             class D6 = PIN_UNUSED,
             class D5 = PIN_UNUSED,
@@ -958,7 +960,7 @@ namespace NS_PORTS {
    * 
    * The destination registers (`rB`, `rC` and `rD`) are chosen using IOReg.
    **/
-  template <enum NS::IOReg IOReg,
+  template <enum ALIBVR_NAMESPACE_PORTS::IOReg IOReg,
             class D3,
             class D2,
             class D1,
@@ -969,5 +971,3 @@ namespace NS_PORTS {
     set_8_bits<IOReg, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, D3, 3 + offset, D2, 2 + offset, D1, 1 + offset, D0, 0 + offset>(val);
   }
 }
-
-#pragma pop_macro("NS_PORTS")
