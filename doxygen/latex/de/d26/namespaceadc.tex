@@ -51,9 +51,8 @@ enum {\bfseries Ref} \{ \\*
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction$>$ }\\void {\bfseries \+\_\+do\+\_\+adc} ()\hypertarget{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}{}\label{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}
-
-\item 
+{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction$>$ }\\void \hyperlink{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}{\+\_\+do\+\_\+adc} ()
+\begin{DoxyCompactList}\small\item\em Starts a conversion while going to sleep. Then busywaits for the conversion to finish. The busywait is only necessary because other irqs might wake the cpu during a conversion. \end{DoxyCompactList}\item 
 void \hyperlink{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{busy\+\_\+wait\+\_\+adc\+\_\+finished} ()\hypertarget{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{}\label{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}
 
 \begin{DoxyCompactList}\small\item\em Loops until the current conversion has finished. \end{DoxyCompactList}\item 
@@ -62,9 +61,8 @@ void {\bfseries irq\+\_\+handler\+\_\+for\+\_\+adc\+\_\+must\+\_\+be\+\_\+regist
 \item 
 static void \hyperlink{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}{do\+\_\+nothing} (const uint16\+\_\+t \&result)
 \begin{DoxyCompactList}\small\item\em This function does nothing and is the default template argument for the irq task. \end{DoxyCompactList}\item 
-{\footnotesize template$<$$>$ }\\void {\bfseries \+\_\+do\+\_\+adc$<$ 0 $>$} ()\hypertarget{namespaceadc_a6e0b185b550424440d92bc2b129f6128}{}\label{namespaceadc_a6e0b185b550424440d92bc2b129f6128}
-
-\end{DoxyCompactItemize}
+{\footnotesize template$<$$>$ }\\void \hyperlink{namespaceadc_a6e0b185b550424440d92bc2b129f6128}{\+\_\+do\+\_\+adc$<$ 0 $>$} ()
+\begin{DoxyCompactList}\small\item\em Simply starts a conversion and then waits for the conversion to finish. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -91,7 +89,29 @@ The Free\+Running mode is actually a trigger like the others. In Free\+Running m
 See irqs for a more detailed description of all irqs. 
 
 \subsection{Function Documentation}
-\index{adc@{adc}!do\+\_\+nothing@{do\+\_\+nothing}}
+\index{adc@{adc}!\+\_\+do\+\_\+adc@{\+\_\+do\+\_\+adc}}
+\index{\+\_\+do\+\_\+adc@{\+\_\+do\+\_\+adc}!adc@{adc}}
+\subsubsection[{\texorpdfstring{\+\_\+do\+\_\+adc()}{_do_adc()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction$>$ void adc\+::\+\_\+do\+\_\+adc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}{}\label{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}
+
+
+Starts a conversion while going to sleep. Then busywaits for the conversion to finish. The busywait is only necessary because other irqs might wake the cpu during a conversion. 
+
+There is another specialized \+\_\+do\+\_\+adc which does not goto sleep. \index{adc@{adc}!\+\_\+do\+\_\+adc$<$ 0 $>$@{\+\_\+do\+\_\+adc$<$ 0 $>$}}
+\index{\+\_\+do\+\_\+adc$<$ 0 $>$@{\+\_\+do\+\_\+adc$<$ 0 $>$}!adc@{adc}}
+\subsubsection[{\texorpdfstring{\+\_\+do\+\_\+adc$<$ 0 $>$()}{_do_adc< 0 >()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$$>$ void {\bf adc\+::\+\_\+do\+\_\+adc}$<$ 0 $>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceadc_a6e0b185b550424440d92bc2b129f6128}{}\label{namespaceadc_a6e0b185b550424440d92bc2b129f6128}
+
+
+Simply starts a conversion and then waits for the conversion to finish. 
+
+This is the much simpler specialized version of \+\_\+do\+\_\+adc when going to sleep is not requested. \index{adc@{adc}!do\+\_\+nothing@{do\+\_\+nothing}}
 \index{do\+\_\+nothing@{do\+\_\+nothing}!adc@{adc}}
 \subsubsection[{\texorpdfstring{do\+\_\+nothing(const uint16\+\_\+t \&result)}{do_nothing(const uint16_t &result)}}]{\setlength{\rightskip}{0pt plus 5cm}static void adc\+::do\+\_\+nothing (
 \begin{DoxyParamCaption}

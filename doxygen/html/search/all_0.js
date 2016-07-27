@@ -1,6 +1,8 @@
 var searchData=
 [
   ['_5fbitrateconfig',['_BitRateConfig',['../dd/df5/struct__twi_1_1__BitRateConfig.html',1,'_twi']]],
+  ['_5fdo_5fadc',['_do_adc',['../de/d26/namespaceadc.html#ab569dff590b3bb745fb012aa29ec5723',1,'adc']]],
+  ['_5fdo_5fadc_3c_200_20_3e',['_do_adc&lt; 0 &gt;',['../de/d26/namespaceadc.html#a6e0b185b550424440d92bc2b129f6128',1,'adc']]],
   ['_5fio',['_Io',['../d0/d6d/structports_1_1__Io.html',1,'ports']]],
   ['_5fport',['_Port',['../d4/d49/namespaceports.html#a9949317f344930bd6ad1097e80c97b67',1,'ports']]],
   ['_5fpulse_5fuart',['_pulse_uart',['../d1/dd6/namespace__pulse__uart.html',1,'']]],

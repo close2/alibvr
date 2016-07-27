@@ -26,21 +26,16 @@ static uint8\+\_\+t \hyperlink{classadc_1_1Adc_ac469d58cc8c55dd3974d80d1445a4db7
 static void \hyperlink{classadc_1_1Adc_a0974180ce659bd3bff9499666e653eeb}{busy\+\_\+wait\+\_\+adc\+\_\+finished} ()\hypertarget{classadc_1_1Adc_a0974180ce659bd3bff9499666e653eeb}{}\label{classadc_1_1Adc_a0974180ce659bd3bff9499666e653eeb}
 
 \begin{DoxyCompactList}\small\item\em Busywaits for current conversion to finish. Returns immediatly if no conversion is running. \end{DoxyCompactList}\item 
-static uint8\+\_\+t {\bfseries get\+\_\+adc\+\_\+8bit\+\_\+result} ()\hypertarget{classadc_1_1Adc_a1044fe51b95416b2030454b3869ec195}{}\label{classadc_1_1Adc_a1044fe51b95416b2030454b3869ec195}
-
-\item 
-static uint16\+\_\+t {\bfseries get\+\_\+adc\+\_\+10bit\+\_\+result} ()\hypertarget{classadc_1_1Adc_a75998163e7a038560cdc29344208ba15}{}\label{classadc_1_1Adc_a75998163e7a038560cdc29344208ba15}
-
-\item 
-{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction = 0$>$ }\\static uint8\+\_\+t {\bfseries adc\+\_\+8bit} ()\hypertarget{classadc_1_1Adc_a2b2e98b10cfa98a34ac491150304f58e}{}\label{classadc_1_1Adc_a2b2e98b10cfa98a34ac491150304f58e}
-
-\item 
-{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction = 0$>$ }\\static uint16\+\_\+t {\bfseries adc\+\_\+10bit} ()\hypertarget{classadc_1_1Adc_ae90131099182fa17167766def8065138}{}\label{classadc_1_1Adc_ae90131099182fa17167766def8065138}
-
-\item 
-static void {\bfseries handle} (const enum \+\_\+irqs\+::\+Irq i)\hypertarget{classadc_1_1Adc_a29553e78481cc637a6dbc5e59da0c3ba}{}\label{classadc_1_1Adc_a29553e78481cc637a6dbc5e59da0c3ba}
-
-\end{DoxyCompactItemize}
+static uint8\+\_\+t \hyperlink{classadc_1_1Adc_a1044fe51b95416b2030454b3869ec195}{get\+\_\+adc\+\_\+8bit\+\_\+result} ()
+\begin{DoxyCompactList}\small\item\em Returns the result of a previous conversion. \end{DoxyCompactList}\item 
+static uint16\+\_\+t \hyperlink{classadc_1_1Adc_a75998163e7a038560cdc29344208ba15}{get\+\_\+adc\+\_\+10bit\+\_\+result} ()
+\begin{DoxyCompactList}\small\item\em Returns the result of a previous conversion. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction = 0$>$ }\\static uint8\+\_\+t \hyperlink{classadc_1_1Adc_a2b2e98b10cfa98a34ac491150304f58e}{adc\+\_\+8bit} ()
+\begin{DoxyCompactList}\small\item\em Waits for current conversions to finish, then performs an 8bit conversion and returns the result. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction = 0$>$ }\\static uint16\+\_\+t \hyperlink{classadc_1_1Adc_ae90131099182fa17167766def8065138}{adc\+\_\+10bit} ()
+\begin{DoxyCompactList}\small\item\em Waits for current conversions to finish, then performs an 10bit conversion and returns the result. \end{DoxyCompactList}\item 
+static void \hyperlink{classadc_1_1Adc_a29553e78481cc637a6dbc5e59da0c3ba}{handle} (const enum \+\_\+irqs\+::\+Irq i)
+\begin{DoxyCompactList}\small\item\em This is the irq handler which will be registered through {\ttfamily \#include R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+A\+DC}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -71,7 +66,75 @@ If you use different instances of the \hyperlink{classadc_1_1Adc}{Adc} class the
 
 
 \subsection{Member Function Documentation}
-\index{adc\+::\+Adc@{adc\+::\+Adc}!init@{init}}
+\index{adc\+::\+Adc@{adc\+::\+Adc}!adc\+\_\+10bit@{adc\+\_\+10bit}}
+\index{adc\+\_\+10bit@{adc\+\_\+10bit}!adc\+::\+Adc@{adc\+::\+Adc}}
+\subsubsection[{\texorpdfstring{adc\+\_\+10bit()}{adc_10bit()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction = 0$>$ static uint16\+\_\+t {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::adc\+\_\+10bit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classadc_1_1Adc_ae90131099182fa17167766def8065138}{}\label{classadc_1_1Adc_ae90131099182fa17167766def8065138}
+
+
+Waits for current conversions to finish, then performs an 10bit conversion and returns the result. 
+
+See \hyperlink{classadc_1_1Adc_a2b2e98b10cfa98a34ac491150304f58e}{adc\+\_\+8bit()}. \index{adc\+::\+Adc@{adc\+::\+Adc}!adc\+\_\+8bit@{adc\+\_\+8bit}}
+\index{adc\+\_\+8bit@{adc\+\_\+8bit}!adc\+::\+Adc@{adc\+::\+Adc}}
+\subsubsection[{\texorpdfstring{adc\+\_\+8bit()}{adc_8bit()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction = 0$>$ static uint8\+\_\+t {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::adc\+\_\+8bit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classadc_1_1Adc_a2b2e98b10cfa98a34ac491150304f58e}{}\label{classadc_1_1Adc_a2b2e98b10cfa98a34ac491150304f58e}
+
+
+Waits for current conversions to finish, then performs an 8bit conversion and returns the result. 
+
+A\+D-\/conversions are more precise if performed while the cpu is sleeping.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction} & If set to 1 will put the cpu to sleep (idle). In this sleep mode only the cpu-\/clock and flash-\/clock are turned off, which means that other irqs (timer,...) might wake the cpu during a conversion. This case is ignored by this function. (Your result will not be as precise as possible.) ~\newline
+ Irq handling will be globally turned on before a conversion and set back to the previous value afterwards. ~\newline
+ You have to register an irq handler! Even if it is the do\+\_\+nothing function. (See the documentation for the \hyperlink{classadc_1_1Adc}{Adc} template argument Task) \\
+\hline
+\end{DoxyTemplParams}
+\index{adc\+::\+Adc@{adc\+::\+Adc}!get\+\_\+adc\+\_\+10bit\+\_\+result@{get\+\_\+adc\+\_\+10bit\+\_\+result}}
+\index{get\+\_\+adc\+\_\+10bit\+\_\+result@{get\+\_\+adc\+\_\+10bit\+\_\+result}!adc\+::\+Adc@{adc\+::\+Adc}}
+\subsubsection[{\texorpdfstring{get\+\_\+adc\+\_\+10bit\+\_\+result()}{get_adc_10bit_result()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ static uint16\+\_\+t {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::get\+\_\+adc\+\_\+10bit\+\_\+result (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classadc_1_1Adc_a75998163e7a038560cdc29344208ba15}{}\label{classadc_1_1Adc_a75998163e7a038560cdc29344208ba15}
+
+
+Returns the result of a previous conversion. 
+
+Use this function after having performed an 10bit conversion.
+
+There is only one result buffer for both 8bit conversions and 10bit conversions. Calling this function after a 8bit conversion will not return the correct value! \index{adc\+::\+Adc@{adc\+::\+Adc}!get\+\_\+adc\+\_\+8bit\+\_\+result@{get\+\_\+adc\+\_\+8bit\+\_\+result}}
+\index{get\+\_\+adc\+\_\+8bit\+\_\+result@{get\+\_\+adc\+\_\+8bit\+\_\+result}!adc\+::\+Adc@{adc\+::\+Adc}}
+\subsubsection[{\texorpdfstring{get\+\_\+adc\+\_\+8bit\+\_\+result()}{get_adc_8bit_result()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ static uint8\+\_\+t {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::get\+\_\+adc\+\_\+8bit\+\_\+result (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classadc_1_1Adc_a1044fe51b95416b2030454b3869ec195}{}\label{classadc_1_1Adc_a1044fe51b95416b2030454b3869ec195}
+
+
+Returns the result of a previous conversion. 
+
+Use this function after having performed an 8bit conversion.
+
+There is only one result buffer for both 8bit conversions and 10bit conversions. Calling this function after a 10bit conversion will not round the 10bit result but return an incorrect value! \index{adc\+::\+Adc@{adc\+::\+Adc}!handle@{handle}}
+\index{handle@{handle}!adc\+::\+Adc@{adc\+::\+Adc}}
+\subsubsection[{\texorpdfstring{handle(const enum \+\_\+irqs\+::\+Irq i)}{handle(const enum _irqs::Irq i)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ static void {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::handle (
+\begin{DoxyParamCaption}
+\item[{const enum \+\_\+irqs\+::\+Irq}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classadc_1_1Adc_a29553e78481cc637a6dbc5e59da0c3ba}{}\label{classadc_1_1Adc_a29553e78481cc637a6dbc5e59da0c3ba}
+
+
+This is the irq handler which will be registered through {\ttfamily \#include R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+A\+DC}. 
+
+Probably only useful internally. \index{adc\+::\+Adc@{adc\+::\+Adc}!init@{init}}
 \index{init@{init}!adc\+::\+Adc@{adc\+::\+Adc}}
 \subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ template$<$typename I  = Default\+Input, Ref R = Default\+Ref, Mode M = Default\+Mode$>$ static void {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::init (
 \begin{DoxyParamCaption}
@@ -121,9 +184,9 @@ See \hyperlink{classadc_1_1Adc_acca97e4a4c6141505348f0bbfe6c1148}{start\+\_\+adc
 
 Busywaits for current conversion to finish, then starts a new one with an 8bit resolution. 
 
-This function will not wait for the conversion to finish! Use adc\+\_\+8bit() instead if this is what you want.
+This function will not wait for the conversion to finish! Use \hyperlink{classadc_1_1Adc_a2b2e98b10cfa98a34ac491150304f58e}{adc\+\_\+8bit()} instead if this is what you want.
 
-To find out if the conversion has finished call \hyperlink{classadc_1_1Adc_ac469d58cc8c55dd3974d80d1445a4db7}{is\+\_\+adc\+\_\+finished()}. To get the result call get\+\_\+adc\+\_\+8bit\+\_\+result(). \index{adc\+::\+Adc@{adc\+::\+Adc}!turn\+\_\+off@{turn\+\_\+off}}
+To find out if the conversion has finished call \hyperlink{classadc_1_1Adc_ac469d58cc8c55dd3974d80d1445a4db7}{is\+\_\+adc\+\_\+finished()}. To get the result call \hyperlink{classadc_1_1Adc_a1044fe51b95416b2030454b3869ec195}{get\+\_\+adc\+\_\+8bit\+\_\+result()}. \index{adc\+::\+Adc@{adc\+::\+Adc}!turn\+\_\+off@{turn\+\_\+off}}
 \index{turn\+\_\+off@{turn\+\_\+off}!adc\+::\+Adc@{adc\+::\+Adc}}
 \subsubsection[{\texorpdfstring{turn\+\_\+off()}{turn_off()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = do\+\_\+nothing$>$ static void {\bf adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task $>$\+::turn\+\_\+off (
 \begin{DoxyParamCaption}

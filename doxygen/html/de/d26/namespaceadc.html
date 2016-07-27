@@ -149,9 +149,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab569dff590b3bb745fb012aa29ec5723"><td class="memTemplParams" colspan="2"><a class="anchor" id="ab569dff590b3bb745fb012aa29ec5723"></a>
-template&lt;uint8_t goto_sleep_for_noise_reduction&gt; </td></tr>
-<tr class="memitem:ab569dff590b3bb745fb012aa29ec5723"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>_do_adc</b> ()</td></tr>
+<tr class="memitem:ab569dff590b3bb745fb012aa29ec5723"><td class="memTemplParams" colspan="2">template&lt;uint8_t goto_sleep_for_noise_reduction&gt; </td></tr>
+<tr class="memitem:ab569dff590b3bb745fb012aa29ec5723"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d26/namespaceadc.html#ab569dff590b3bb745fb012aa29ec5723">_do_adc</a> ()</td></tr>
+<tr class="memdesc:ab569dff590b3bb745fb012aa29ec5723"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts a conversion while going to sleep. Then busywaits for the conversion to finish. The busywait is only necessary because other irqs might wake the cpu during a conversion.  <a href="#ab569dff590b3bb745fb012aa29ec5723">More...</a><br /></td></tr>
 <tr class="separator:ab569dff590b3bb745fb012aa29ec5723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4228912d1c32eafc1987a8adb80f4984"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4228912d1c32eafc1987a8adb80f4984"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d26/namespaceadc.html#a4228912d1c32eafc1987a8adb80f4984">busy_wait_adc_finished</a> ()</td></tr>
@@ -163,9 +163,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>irq_handler_for_adc_m
 <tr class="memitem:a4d20cd58db88b2e3099aa5689e33235d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d26/namespaceadc.html#a4d20cd58db88b2e3099aa5689e33235d">do_nothing</a> (const uint16_t &amp;result)</td></tr>
 <tr class="memdesc:a4d20cd58db88b2e3099aa5689e33235d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function does nothing and is the default template argument for the irq task.  <a href="#a4d20cd58db88b2e3099aa5689e33235d">More...</a><br /></td></tr>
 <tr class="separator:a4d20cd58db88b2e3099aa5689e33235d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e0b185b550424440d92bc2b129f6128"><td class="memTemplParams" colspan="2"><a class="anchor" id="a6e0b185b550424440d92bc2b129f6128"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a6e0b185b550424440d92bc2b129f6128"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>_do_adc&lt; 0 &gt;</b> ()</td></tr>
+<tr class="memitem:a6e0b185b550424440d92bc2b129f6128"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
+<tr class="memitem:a6e0b185b550424440d92bc2b129f6128"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d26/namespaceadc.html#a6e0b185b550424440d92bc2b129f6128">_do_adc&lt; 0 &gt;</a> ()</td></tr>
+<tr class="memdesc:a6e0b185b550424440d92bc2b129f6128"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simply starts a conversion and then waits for the conversion to finish.  <a href="#a6e0b185b550424440d92bc2b129f6128">More...</a><br /></td></tr>
 <tr class="separator:a6e0b185b550424440d92bc2b129f6128"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -200,6 +200,46 @@ template&lt;&gt; </td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ab569dff590b3bb745fb012aa29ec5723"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint8_t goto_sleep_for_noise_reduction&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void adc::_do_adc </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts a conversion while going to sleep. Then busywaits for the conversion to finish. The busywait is only necessary because other irqs might wake the cpu during a conversion. </p>
+<p>There is another specialized _do_adc which does not goto sleep. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6e0b185b550424440d92bc2b129f6128"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="../../de/d26/namespaceadc.html#ab569dff590b3bb745fb012aa29ec5723">adc::_do_adc</a>&lt; 0 &gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simply starts a conversion and then waits for the conversion to finish. </p>
+<p>This is the much simpler specialized version of _do_adc when going to sleep is not requested. </p>
+
+</div>
+</div>
 <a class="anchor" id="a4d20cd58db88b2e3099aa5689e33235d"></a>
 <div class="memitem">
 <div class="memproto">
