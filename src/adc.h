@@ -355,10 +355,29 @@ namespace ALIBVR_NAMESPACE_ADC {
       while (!is_adc_finished());
     }
     
+    /**
+     * @brief Returns the result of a previous conversion.
+     * 
+     * Use this function after having performed an 8bit conversion.
+     * 
+     * There is only one result buffer for both 8bit conversions
+     * and 10bit conversions.  Calling this function after a 10bit
+     * conversion will not round the 10bit result but return an
+     * incorrect value!
+     **/
     static uint8_t get_adc_8bit_result() {
       return ADCH; // left adjusted → the 8 most significant bits are in ADCH!
     }
     
+    /**
+     * @brief Returns the result of a previous conversion.
+     * 
+     * Use this function after having performed an 10bit conversion.
+     * 
+     * There is only one result buffer for both 8bit conversions
+     * and 10bit conversions.  Calling this function after a 8bit
+     * conversion will not return the correct value!
+     **/
     static uint16_t get_adc_10bit_result() {
       // gcc isn't allowed to change order of instructions because ADCL and
       // ADCH are marked as volatile.
@@ -367,6 +386,26 @@ namespace ALIBVR_NAMESPACE_ADC {
       return res | ADCH << 8;
     }
     
+    /**
+     * @brief Waits for current conversions to finish, then performs an
+     * 8bit conversion and returns the result.
+     * 
+     * AD-conversions are more precise if performed while the cpu is
+     * sleeping.
+     * 
+     * @tparam goto_sleep_for_noise_reduction If set to 1 will put the
+     *         cpu to sleep (idle).  In this sleep mode only the
+     *         cpu-clock and flash-clock are turned off, which means
+     *         that other irqs (timer,...) might wake the cpu during a
+     *         conversion.  This case is ignored by this function.
+     *         (Your result will not be as precise as possible.)  \n
+     *         Irq handling will be globally turned on before a
+     *         conversion and set back to the previous value
+     *         afterwards.  \n
+     *         You have to register an irq handler!  Even if it is the
+     *         do_nothing function.  (See the documentation for the Adc
+     *         template argument Task)
+     **/
     template<uint8_t goto_sleep_for_noise_reduction = 0>
     static uint8_t adc_8bit() {
       busy_wait_adc_finished();
@@ -378,6 +417,12 @@ namespace ALIBVR_NAMESPACE_ADC {
       return get_adc_8bit_result();
     }
     
+    /**
+     * @brief Waits for current conversions to finish, then performs an
+     * 10bit conversion and returns the result.
+     * 
+     * See adc_8bit().
+     **/
     template<uint8_t goto_sleep_for_noise_reduction = 0>
     static uint16_t adc_10bit() {
       busy_wait_adc_finished();
@@ -390,6 +435,12 @@ namespace ALIBVR_NAMESPACE_ADC {
     }
     
     
+    /**
+     * @brief This is the irq handler which will be registered through
+     * `#include REGISTER_ADC`.
+     * 
+     * Probably only useful internally.
+     **/
     static inline void handle(const enum _irqs::Irq i) {
       // instead of having a separate flag to remember if a 10bit or 8bit adc
       // had been requested, we simply look at the left/right adjusted flag
@@ -405,6 +456,13 @@ namespace ALIBVR_NAMESPACE_ADC {
     }
   };
   
+  /**
+   * @brief Starts a conversion while going to sleep.  Then busywaits
+   * for the conversion to finish.  The busywait is only necessary
+   * because other irqs might wake the cpu during a conversion.
+   * 
+   * There is another specialized _do_adc which does not goto sleep.
+   **/
   template <uint8_t goto_sleep_for_noise_reduction>
   void _do_adc() {
     irq_handler_for_adc_must_be_registered_for_noise_reduction();
@@ -433,6 +491,13 @@ namespace ALIBVR_NAMESPACE_ADC {
     }
   }
   
+  /**
+   * @brief Simply starts a conversion and then waits for the
+   * conversion to finish.
+   * 
+   * This is the much simpler specialized version of _do_adc when going
+   * to sleep is not requested.
+   **/
   template <>
   void _do_adc<0>() {
     // start conversion:
