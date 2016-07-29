@@ -27,7 +27,7 @@ typedef Adc<Ref::V1_1, Input::Unset, Mode::SingleConversion, f2> MyAdc2;
 #undef NEW_ADC
 
 // «ADC_NOISE_RED1»
-typedef Adc<Ref::V1_1> NoiseRedAdc;
+typedef Adc<Ref::V1_1> NoiseRedAdc; // use the default do_nothing irq-task
 #define NEW_ADC NoiseRedAdc
 #include REGISTER_ADC
 /*¤*/

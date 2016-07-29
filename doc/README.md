@@ -115,7 +115,7 @@ enum class IOReg {
 
 ### Example:
 
-Turn an Led on pin C2 on.
+Turn on an Led on pin C2.
 
 ```C++
 +++LED_EX+++
@@ -158,15 +158,15 @@ for short descriptions of those enum values.
 
 ### Synchronous conversions
 
-`adc_8bit()` or `adc_10bit() by default start a conversion and
+`adc_8bit()` or `adc_10bit()` by default start a conversion and
 busywait for the conversion to finish.
 
 ```C++
 +++ADC_SYNC+++
 ```
 
-A non-zero template argument will put the cpu into idle sleep, which
-reduces noise and improves conversion results:
+A non-zero template argument to `adc_*bit()` will put the cpu into idle
+sleep, which reduces noise and improves conversion results.
 
 You have to register an ADC-irq handler if you want to use noise
 reduction.  (The default handler would reset the cpu and `adc_*bit`
