@@ -156,6 +156,36 @@ See the
 for short descriptions of those enum values.
 
 
+### Synchronous conversions
+
+`adc_8bit()` or `adc_10bit() by default start a conversion and
+busywait for the conversion to finish.
+
+```C++
++++ADC_SYNC+++
+```
+
+A non-zero template argument will put the cpu into idle sleep, which
+reduces noise and improves conversion results:
+
+You have to register an ADC-irq handler if you want to use noise
+reduction.  (The default handler would reset the cpu and `adc_*bit`
+must enable irqs, so that the cpu leaves sleep mode after a
+conversion.)
+
+Your code will not compile (with a semi-useful error) if you don't
+register a handler.
+
+```C++
++++ADC_NOISE_RED1+++
+// main { ...
++++ADC_NOISE_RED2+++
+// ... }  // end of main
++++ADC_NOISE_RED3+++
+```
+
+### Background conversions
+
 ### Using different inputs, reference voltages or modes
 
 The Adc class itself allows you to specify input, reference voltage and

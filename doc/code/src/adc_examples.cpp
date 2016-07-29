@@ -18,11 +18,20 @@ void f2(const uint16_t& result) {
 typedef Adc<Ref::V1_1, Input::Unset, Mode::SingleConversion, f> MyAdc;
 #define NEW_ADC MyAdc
 #include REGISTER_ADC
+#undef NEW_ADC
   
-typedef Adc<Ref::V1_1, Input::Unset, Mode::SingleConversion, f> MyAdc2;
+typedef Adc<Ref::V1_1, Input::Unset, Mode::SingleConversion, f2> MyAdc2;
 #define NEW_ADC MyAdc2
 #include REGISTER_ADC
 /*¤*/
+#undef NEW_ADC
+
+// «ADC_NOISE_RED1»
+typedef Adc<Ref::V1_1> NoiseRedAdc;
+#define NEW_ADC NoiseRedAdc
+#include REGISTER_ADC
+/*¤*/
+
 
 int main() {
   PIN_B4::DDR = ports::DataDirection::Output;
@@ -37,6 +46,7 @@ int main() {
   Adc1_1::init<PIN_ADC4>();
   adc4 = Adc1_1::adc_8bit();
   /*¤*/
+  // Use variables to avoid warnings.
   if (adc3 == adc4) PIN_B4::PORT = 1;
   
   // «ADC_2_INPUTS2[^  ,]»
@@ -59,10 +69,27 @@ int main() {
   /*¤*/
   
   
+  // «ADC_SYNC[^  ,]»
   MyAdc::init<PIN_ADC0>();
-  MyAdc::start_adc_10bit();
+  uint8_t adc1 = MyAdc::adc_8bit();
+  
+  MyAdc2::init<PIN_ADC1>();
+  uint16_t adc2 = MyAdc2::adc_10bit();
+  /*¤*/
+  
+  // «ADC_NOISE_RED2[^  ,]»
+  NoiseRedAdc::init<PIN_ADC3>();
+  uint16_t adcNoiseRed = NoiseRedAdc::adc_10bit<1>();
+  /*¤*/
+  
+  // Use variables to avoid warnings.
+  if (adc1 == adc2) PIN_ADC3::DDR = 1;
+  if (adcNoiseRed == 0x0F) PIN_ADC3::PORT = 1;
   
   for(;;);
 }
 
+
+// «ADC_NOISE_RED3»
 #include REGISTER_IRQS
+/*¤*/
