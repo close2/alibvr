@@ -59,6 +59,10 @@ If you use different instances of the \hyperlink{classadc_1_1Adc}{Adc} class the
 \end{DoxyTemplParams}
 \begin{DoxyVerb}typedef Adc<Ref::V1_1, Input::Unset, Mode::SingleConversion, f> MyAdc;
 #define NEW_ADC MyAdc
+#include REGISTER_ADC
+
+typedef Adc<Ref::V1_1, Input::Unset, Mode::SingleConversion, f> MyAdc2;
+#define NEW_ADC MyAdc2
 #include REGISTER_ADC\end{DoxyVerb}
  \begin{Desc}
 \item[Examples\+: ]\par
