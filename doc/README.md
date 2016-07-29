@@ -134,7 +134,7 @@ When doing adc you have to specify
 
 ### Input selection
 
-In addition to input pins (see ADC* typedefs above)  
+In addition to input pins (see `PIN_ADC*` typedefs above)  
 `Input::Temperature`, `Input::V1_1` and `Input::Gnd` are allowed inputs.
 
 ### Reference voltages
@@ -151,6 +151,42 @@ Possible modes are defined in:
 +++ADC_MODES+++
 ```
 
-See the doxygen doc for short summaries of those enum values.
+See the
+[doxygen doc](http://close2.github.io/alibvr/doxygen/html/de/d26/namespaceadc.html#a8094fa55ea1a7729bb35c230163c0f8f)
+for short descriptions of those enum values.
 
 
+### Using different inputs, reference voltages or modes
+
+The Adc class itself allows you to specify input, reference voltage and
+mode as template arguments.  It is however possible to override those
+values when calling `init()`.
+
+If you want to change the input, reference voltage or mode, simply call
+`init()` with the new values as template arguments.
+
+To make your intentions clearer in this case, you can use `Input::Unset`
+as template argument for the Adc class, and only pass a real input when
+calling `init()`.  This is however not necessary.  The generated code
+will be either equal or very similar.
+
+Using another Adc class with different template arguments is another
+possibility.  Remember however, that the adc subsystem is shared.
+
+Here one class (`typedef`) is used to sample two inputs.
+```C++
++++ADC_2_INPUTS1+++
+```
+
+The same result using two classes:
+```C++
++++ADC_2_INPUTS2+++
+```
+
+Remember, the subsystem is shared:
+```C++
++++ADC_SHARED+++
+```
+
+It is possible to register multiple `Task`s, but _all_ `Task`s will
+be executed instead of only the one where the conversion was started!

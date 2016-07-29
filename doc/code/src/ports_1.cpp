@@ -15,7 +15,8 @@ __attribute__ ((OS_main)) int main(void) {
   // 0b11010000 if called after the previous set_8_byte.
 
   // Specify which bit should be assigned to which pin:
-  set_8_bits<IOReg::DDRx, PIN_D7, 1, // extract bit 1 and assign to PIN_D7
+  set_8_bits<IOReg::DDRx,
+             PIN_D7, 1, // extract bit 1 and assign to PIN_D7
              PIN_D3, 2, // extract bit 2 and assign to PIN_D3
              PIN_B1, 7,
              PIN_D2, 6,

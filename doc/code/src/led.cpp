@@ -9,4 +9,5 @@ __attribute__ ((OS_main)) int main(void) {
   
   for (;;);
   return 0;
-}//¤
+}
+/*¤*/

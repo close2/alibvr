@@ -62,27 +62,27 @@ namespace ALIBVR_NAMESPACE_ADC {
    * 
    * See irqs for a more detailed description of all irqs.
    **/
-  //«ADC_MODES[^ *,]»
+  //«ADC_MODES[^  ,]»
   enum class Mode {
-    SingleConversion     = 0xFF,
-    FreeRunning          = 0b000,
-    TriggerAnalogComp    = 0b001,
-    TriggerPCInt0       = 0b010,
-    TriggerTimer0CompA   = 0b011,
-    TriggerTimer0OvF     = 0b100,
-    TriggerTimer1CompB   = 0b101,
-    TriggerTimer1OvF     = 0b110,
-    TriggerTimer1Capt = 0b111
+    SingleConversion   = 0xFF,
+    FreeRunning        = 0b000,
+    TriggerAnalogComp  = 0b001,
+    TriggerPCInt0      = 0b010,
+    TriggerTimer0CompA = 0b011,
+    TriggerTimer0OvF   = 0b100,
+    TriggerTimer1CompB = 0b101,
+    TriggerTimer1OvF   = 0b110,
+    TriggerTimer1Capt  = 0b111
   };
-  //¤
+  /*¤*/
   
-  //«ADC_REFS[^ *,]»
+  //«ADC_REFS[^  ,]»
   enum class Ref {
     ARef = 0b00,
     AVcc = 0b01,
     V1_1 = 0b11
   };
-  //¤
+  /*¤*/
   
   /**
    * @brief In addition to the ADC-pins the adc subsystem can also use

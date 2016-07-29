@@ -113,7 +113,8 @@ uint8_t x1 = get_8_byte<IOReg::DDRx,
 // 0b11010000 if called after the previous set_8_byte.
 
 // Specify which bit should be assigned to which pin:
-set_8_bits<IOReg::DDRx, PIN_D7, 1, // extract bit 1 and assign to PIN_D7
+set_8_bits<IOReg::DDRx,
+           PIN_D7, 1, // extract bit 1 and assign to PIN_D7
            PIN_D3, 2, // extract bit 2 and assign to PIN_D3
            PIN_B1, 7,
            PIN_D2, 6,
@@ -185,7 +186,7 @@ __attribute__ ((OS_main)) int main(void) {
   
   for (;;);
   return 0;
-}//
+}
 ```
 
 Note that the compiler is able to optimize the `Led::xxx` assignments
@@ -201,7 +202,7 @@ When doing adc you have to specify
 
 ### Input selection
 
-In addition to input pins (see ADC* typedefs above)  
+In addition to input pins (see `PIN_ADC*` typedefs above)  
 `Input::Temperature`, `Input::V1_1` and `Input::Gnd` are allowed inputs.
 
 ### Reference voltages
@@ -209,11 +210,10 @@ In addition to input pins (see ADC* typedefs above)
 Possible references are defined in:
 ```C++
 enum class Ref {
-ARef = 0b00,
-AVcc = 0b01,
-V1_1 = 0b11
+  ARef = 0b00,
+  AVcc = 0b01,
+  V1_1 = 0b11
 };
-//
 ```
 
 ### ADC modes
@@ -221,19 +221,69 @@ V1_1 = 0b11
 Possible modes are defined in:
 ```C++
 enum class Mode {
-SingleConversion     = 0xFF,
-FreeRunning          = 0b000,
-TriggerAnalogComp    = 0b001,
-TriggerPCInt0       = 0b010,
-TriggerTimer0CompA   = 0b011,
-TriggerTimer0OvF     = 0b100,
-TriggerTimer1CompB   = 0b101,
-TriggerTimer1OvF     = 0b110,
-TriggerTimer1Capt = 0b111
+  SingleConversion   = 0xFF,
+  FreeRunning        = 0b000,
+  TriggerAnalogComp  = 0b001,
+  TriggerPCInt0      = 0b010,
+  TriggerTimer0CompA = 0b011,
+  TriggerTimer0OvF   = 0b100,
+  TriggerTimer1CompB = 0b101,
+  TriggerTimer1OvF   = 0b110,
+  TriggerTimer1Capt  = 0b111
 };
-//
 ```
 
-See the doxygen doc for short summaries of those enum values.
+See the
+[doxygen doc](http://close2.github.io/alibvr/doxygen/html/de/d26/namespaceadc.html#a8094fa55ea1a7729bb35c230163c0f8f)
+for short descriptions of those enum values.
 
 
+### Using different inputs, reference voltages or modes
+
+The Adc class itself allows you to specify input, reference voltage and
+mode as template arguments.  It is however possible to override those
+values when calling `init()`.
+
+If you want to change the input, reference voltage or mode, simply call
+`init()` with the new values as template arguments.
+
+To make your intentions clearer in this case, you can use `Input::Unset`
+as template argument for the Adc class, and only pass a real input when
+calling `init()`.  This is however not necessary.  The generated code
+will be either equal or very similar.
+
+Using another Adc class with different template arguments is another
+possibility.  Remember however, that the adc subsystem is shared.
+
+Here one class (`typedef`) is used to sample two inputs.
+```C++
+typedef Adc<Ref::V1_1, Input::Unset> Adc1_1;
+Adc1_1::init<PIN_ADC3>();
+adc3 = Adc1_1::adc_8bit();
+Adc1_1::init<PIN_ADC4>();
+adc4 = Adc1_1::adc_8bit();
+```
+
+The same result using two classes:
+```C++
+typedef Adc<Ref::V1_1, PIN_ADC3> AdcAdc3;
+typedef Adc<Ref::V1_1, PIN_ADC4> AdcAdc4;
+AdcAdc3::init();
+adc3 = AdcAdc3::adc_8bit();
+AdcAdc4::init();
+adc4 = AdcAdc4::adc_8bit();
+```
+
+Remember, the subsystem is shared:
+```C++
+AdcAdc3::init();
+AdcAdc4::init();
+// !!! THIS WON'T WORK !!!
+// AdcAdc3::adc_8bit() will use PIN_ADC4 as input!
+// AdcAdc4::init() switched the adc subsystem to input PIN_ADC4.
+adc3 = AdcAdc3::adc_8bit();
+adc4 = AdcAdc4::adc_8bit();
+```
+
+It is possible to register multiple `Task`s, but _all_ `Task`s will
+be executed instead of only the one where the conversion was started!
