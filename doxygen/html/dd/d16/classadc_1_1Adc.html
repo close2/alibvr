@@ -162,8 +162,9 @@ class adc::Adc&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;</h3>
 <pre class="fragment">typedef Adc&lt;Ref::V1_1, Input::Unset, Mode::SingleConversion, f&gt; MyAdc;
 #define NEW_ADC MyAdc
 #include REGISTER_ADC
+#undef NEW_ADC
 
-typedef Adc&lt;Ref::V1_1, Input::Unset, Mode::SingleConversion, f&gt; MyAdc2;
+typedef Adc&lt;Ref::V1_1, Input::Unset, Mode::SingleConversion, f2&gt; MyAdc2;
 #define NEW_ADC MyAdc2
 #include REGISTER_ADC</pre> <dl><dt><b>Examples: </b></dt><dd><a class="el" href="../../d3/dc2/adc_2_irqs_8cpp-example.html#_a1">adc_2_irqs.cpp</a>.</dd>
 </dl></div><h2 class="groupheader">Member Function Documentation</h2>
