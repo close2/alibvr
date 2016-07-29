@@ -169,7 +169,7 @@ A non-zero template argument to `adc_*bit()` will put the cpu into idle
 sleep, which reduces noise and improves conversion results.
 
 You have to register an ADC-irq handler if you want to use noise
-reduction.  (The default handler would reset the cpu and `adc_*bit`
+reduction.  (The default handler would reset the cpu and `adc_*bit()`
 must enable irqs, so that the cpu leaves sleep mode after a
 conversion.)
 
@@ -186,7 +186,7 @@ register a handler.
 
 ### Background conversions
 
-### Using different inputs, reference voltages or modes
+### Switching between different inputs, reference voltages or modes
 
 The Adc class itself allows you to specify input, reference voltage and
 mode as template arguments.  It is however possible to override those
