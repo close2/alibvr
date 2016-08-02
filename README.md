@@ -59,8 +59,8 @@ register DDR!  Macros would not be able to do so.)
 
 The pin layout is compatible to arduino / arduino lite.
 
-Prefix names in the following graph with `Pin_` to get
-provided `typedef`s.  Example: `B5` becomes `Pin_B5`, `8` becomes `Pin_8`
+Prefix names in the following graph with `PIN_` to get
+provided `typedef`s.  Example: `B5` becomes `PIN_B5`, `8` becomes `PIN_8`
 
 
 ```
