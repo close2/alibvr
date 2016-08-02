@@ -267,13 +267,66 @@ typedef Adc<Ref::V1_1> NoiseRedAdc; // use the default do_nothing irq-task
 #define NEW_ADC NoiseRedAdc
 #include REGISTER_ADC
 // main { ...
-NoiseRedAdc::init<PIN_ADC3>();
-uint16_t adcNoiseRed = NoiseRedAdc::adc_10bit<1>();
+  NoiseRedAdc::init<PIN_ADC3>();
+  uint16_t adcNoiseRed = NoiseRedAdc::adc_10bit<1>();
 // ... }  // end of main
 #include REGISTER_IRQS
 ```
 
 ### Background conversions
+
+While the adc-subsystem performs a conversion the cpu is free to do
+other stuff.
+
+Everything mentioned in the previous synchronous section applies to
+the background conversions as well.
+
+To start a conversion simply call `start_adc_*bit()`.  To find out if
+the conversion is still running, use `is_adc_finished()`.
+
+`busy_wait_adc_finished()` will loop until `is_adc_finished()` returns
+true.
+
+`get_adc_*bit_result()` will return the result.
+
+```C++
+AdcWTask::init();
+AdcWTask::start_adc_8bit();
+```
+
+
+### Adc Tasks and Adc Irq handler
+
+When a `Task` (except for the `do_nothing_task`) is provided as
+template argument to `Adc` then `init()` will enable the Adc irq and
+the `Task` will be called every time an Adc irq is raised (i.e. every
+time a conversion finishes).
+
+`init()` will not change the global irq flag!  If you register a task,
+don't forget to enable irqs.
+
+The type of `Task` is `typedef void(* task)(const uint16_t&)`.  A
+function, which takes a 16bit result as argument.  Even if you only use
+8bit conversions compiler optimizations should generate (near) optimal
+code.
+
+The irq handler must be registered and all irq handlers enabled by
+including the corresponding header files:
+
+```C++
+void f(const uint16_t& result) {
+  PIN_B4::PORT = result > 0x0F;
+}
+
+typedef Adc<Ref::V1_1, PIN_ADC5, Mode::FreeRunning, f> AdcWTask; // use the default do_nothing irq-task
+#define NEW_ADC AdcWTask
+#include REGISTER_ADC
+// main { ...
++++ADC_TASK2[^,  ]+++
+// ... }  // end of main
+#include REGISTER_IRQS
+```
+
 
 ### Switching between different inputs, reference voltages or modes
 

@@ -6,9 +6,18 @@
 
 using namespace adc;
 
+// «ADC_TASK1»
 void f(const uint16_t& result) {
   PIN_B4::PORT = result > 0x0F;
 }
+
+typedef Adc<Ref::V1_1, PIN_ADC5, Mode::FreeRunning, f> AdcWTask; // use the default do_nothing irq-task
+#define NEW_ADC AdcWTask
+#include REGISTER_ADC
+/*¤*/
+
+#undef NEW_ADC
+
 
 void f2(const uint16_t& result) {
   PIN_B5::PORT = result > 0x0F;
@@ -86,10 +95,25 @@ int main() {
   if (adc1 == adc2) PIN_ADC3::DDR = 1;
   if (adcNoiseRed == 0x0F) PIN_ADC3::PORT = 1;
   
+  // «ADC_BACKGROUND[^  ,]»
+  MyAdc::init<PIN_ADC0>();
+  MyAdc::start_adc_8bit();
+  while (!MyAdc::is_adc_finished()) { /* do some other stuff */ }
+  adc1 = MyAdc::get_adc_8bit_result();
+  /*¤*/
+  
+  // Use variables to avoid warnings.
+  if (adc1 == adc2) PIN_ADC3::DDR = 1;
+  
+  // «ADC_BACKGROUND[^  ,]»
+  AdcWTask::init();
+  AdcWTask::start_adc_8bit();
+  /*¤*/
+  
   for(;;);
 }
 
 
-// «ADC_NOISE_RED3»
+// «REGISTER_IRQS»
 #include REGISTER_IRQS
 /*¤*/

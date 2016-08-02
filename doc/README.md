@@ -179,12 +179,58 @@ register a handler.
 ```C++
 +++ADC_NOISE_RED1+++
 // main { ...
-+++ADC_NOISE_RED2+++
++++ADC_NOISE_RED2[^,  ]+++
 // ... }  // end of main
-+++ADC_NOISE_RED3+++
++++REGISTER_IRQS+++
 ```
 
 ### Background conversions
+
+While the adc-subsystem performs a conversion the cpu is free to do
+other stuff.
+
+Everything mentioned in the previous synchronous section applies to
+the background conversions as well.
+
+To start a conversion simply call `start_adc_*bit()`.  To find out if
+the conversion is still running, use `is_adc_finished()`.
+
+`busy_wait_adc_finished()` will loop until `is_adc_finished()` returns
+true.
+
+`get_adc_*bit_result()` will return the result.
+
+```C++
++++ADC_BACKGROUND+++
+```
+
+
+### Adc Tasks and Adc Irq handler
+
+When a `Task` (except for the `do_nothing_task`) is provided as
+template argument to `Adc` then `init()` will enable the Adc irq and
+the `Task` will be called every time an Adc irq is raised (i.e. every
+time a conversion finishes).
+
+`init()` will not change the global irq flag!  If you register a task,
+don't forget to enable irqs.
+
+The type of `Task` is `typedef void(* task)(const uint16_t&)`.  A
+function, which takes a 16bit result as argument.  Even if you only use
+8bit conversions compiler optimizations should generate (near) optimal
+code.
+
+The irq handler must be registered and all irq handlers enabled by
+including the corresponding header files:
+
+```C++
++++ADC_TASK1+++
+// main { ...
++++ADC_TASK2[^,  ]+++
+// ... }  // end of main
++++REGISTER_IRQS+++
+```
+
 
 ### Switching between different inputs, reference voltages or modes
 
