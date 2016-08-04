@@ -24,7 +24,13 @@ main() {
   const src = 'src';
   List<String> readmes = () {
     var globReadmes = new Glob('README*.md');
-    return globReadmes.listSync(root: 'doc').map((fse) => fse.path);
+    var currentDir = Directory.current;
+    // change current working directory to doc
+    Directory.current = 'doc';
+    var readmes = globReadmes.listSync().map((fse) => fse.path);
+    // cd back
+    Directory.current = '..';
+    return readmes;
   }();
 
   const makes = const ['doc/code'];
