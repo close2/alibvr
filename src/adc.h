@@ -174,16 +174,6 @@ namespace ALIBVR_NAMESPACE_ADC {
   typedef void(* task)(const uint16_t&);
   
   /**
-   * @brief This function does nothing and is the default template
-   * argument for the irq task.
-   * 
-   * The Adc template argument function is compared against this
-   * function, and if they are different Adc irqs are enabled in the
-   * init function.
-   **/
-  static void do_nothing(const uint16_t& result) {}
-
-  /**
    * @example adc_2_irqs.cpp.
    **/
   
@@ -219,7 +209,7 @@ namespace ALIBVR_NAMESPACE_ADC {
   template <Ref DefaultRef        = Ref::AVcc,
             typename DefaultInput = Input::Unset,
             Mode DefaultMode      = Mode::SingleConversion,
-            task Task             = do_nothing>
+            task Task             = nullptr>
   class Adc {
   private:
     constexpr static uint8_t _calc_prescaler() {
@@ -293,7 +283,7 @@ namespace ALIBVR_NAMESPACE_ADC {
       ADCSRA = _BV(ADEN) // turn ADC power on
                | _calc_prescaler() << ADPS0; // set prescaler
                
-      const uint8_t is_do_nothing_task = do_nothing == Task;
+      const uint8_t is_do_nothing_task = nullptr == Task;
       if (!is_do_nothing_task) ADCSRA |= _BV(ADIE);
     }
     
@@ -403,7 +393,7 @@ namespace ALIBVR_NAMESPACE_ADC {
      *         conversion and set back to the previous value
      *         afterwards.  \n
      *         You have to register an irq handler!  Even if it is the
-     *         do_nothing function.  (See the documentation for the Adc
+     *         nullptr task.  (See the documentation for the Adc
      *         template argument Task)
      **/
     template<uint8_t goto_sleep_for_noise_reduction = 0>
@@ -442,6 +432,9 @@ namespace ALIBVR_NAMESPACE_ADC {
      * Probably only useful internally.
      **/
     static inline void handle(const enum _irqs::Irq i) {
+      const uint8_t is_do_nothing_task = nullptr == Task;
+      if (is_do_nothing_task) return;
+      
       // instead of having a separate flag to remember if a 10bit or 8bit adc
       // had been requested, we simply look at the left/right adjusted flag
       if (ADMUX & _BV(ADLAR)) {

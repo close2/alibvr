@@ -25,7 +25,7 @@ efficiently assign multiple values.
 
 ## Doxygen documentation
 
-The ports subsystem is documented in the :
+The ports subsystem is documented in the:
 [namespace ports](http://close2.github.io/alibvr/doxygen/html/d4/d49/namespaceports.html)
 
 

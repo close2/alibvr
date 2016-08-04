@@ -11,7 +11,8 @@ void f(const uint16_t& result) {
   PIN_B4::PORT = result > 0x0F;
 }
 
-typedef Adc<Ref::V1_1, PIN_ADC5, Mode::FreeRunning, f> AdcWTask; // use the default do_nothing irq-task
+// use the default nullptr (do_nothing) irq-task
+typedef Adc<Ref::V1_1, PIN_ADC5, Mode::FreeRunning, f> AdcWTask;
 #define NEW_ADC AdcWTask
 #include REGISTER_ADC
 /*¤*/
@@ -36,7 +37,8 @@ typedef Adc<Ref::V1_1, Input::Unset, Mode::SingleConversion, f2> MyAdc2;
 #undef NEW_ADC
 
 // «ADC_NOISE_RED1»
-typedef Adc<Ref::V1_1> NoiseRedAdc; // use the default do_nothing irq-task
+// use the default nullptr (do_nothing) irq-task
+typedef Adc<Ref::V1_1> NoiseRedAdc;
 #define NEW_ADC NoiseRedAdc
 #include REGISTER_ADC
 /*¤*/

@@ -13,7 +13,7 @@ arguments differ!
 
 ## Doxygen documentation
 
-The Adc subsystem is documented in the :
+The Adc subsystem is documented in the:
 [namespace adc](http://close2.github.io/alibvr/doxygen/html/de/d26/namespaceadc.html)
 
 
@@ -27,8 +27,9 @@ When doing adc you have to specify
 
 ## Input selection
 
-In addition to input pins (see `PIN_ADC*` typedefs above)  
-`Input::Temperature`, `Input::V1_1` and `Input::Gnd` are allowed inputs.
+In addition to input pins (see `PIN_ADC*` typedefs in
+[README_PORTS.md](README_PORTS.md]) `Input::Temperature`, `Input::V1_1`
+and `Input::Gnd` are allowed inputs.
 
 
 ## Reference voltages
