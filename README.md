@@ -40,7 +40,7 @@ are covered through examples in the READMEs.
 
 [Ports](README_PORTS.md)
 
-[Analog to digital conversion](README_ADC)
+[Analog to digital conversion](README_ADC.md)
 
 
 ## Examples:
