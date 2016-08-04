@@ -5,3 +5,4 @@ dependencies:
   logging: any
   test: any
   args: '^0.13.4'
+  glob: '^1.1.3'

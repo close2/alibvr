@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:logging/logging.dart';
+import 'package:glob/glob.dart';
 
 const String snippetsProg = 'doc-code-collector/bin/snippets.dart';
 
@@ -21,13 +22,16 @@ main() {
   }
 
   const src = 'src';
-  const readme = 'README.md';
+  List<String> readmes = () {
+    var globReadmes = new Glob('README*.md');
+    return globReadmes.listSync(root: 'doc').map((fse) => fse.path);
+  }();
 
   const makes = const ['doc/code'];
 
   const dst = 'doc/build';
   const codes = const [src, 'doc/code'];
-  const docs = const [src, 'doc/$readme'];
+  var docs = [src]..addAll(readmes.map((r) => 'doc/$r'));
 
   // relative from dst
   const doxygenOutRel = '../../gh-pages/doxygen';
@@ -100,12 +104,14 @@ main() {
     exit(100 + exitCodeDoxygen);
   }
 
-  // Copy README.md
-  var readmeF = new File('$dst/$readme');
-  if (!readmeF.existsSync()) {
-    print('Can\'t find $dst/$readme.  This shouldn\'t happen.');
-    exit(4);
-  }
-  log.finer('Copying $dst/$readme to $readme');
-  readmeF.copySync(readme);
+  // Copy readmes
+  readmes.forEach((readme) {
+    var readmeF = new File('$dst/$readme');
+    if (!readmeF.existsSync()) {
+      print('Can\'t find $dst/$readme.  This shouldn\'t happen.');
+      exit(4);
+    }
+    log.finer('Copying $dst/$readme to $readme');
+    readmeF.copySync(readme);
+  });
 }
