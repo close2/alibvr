@@ -20,6 +20,8 @@ int main() {
   PIN_B4::DDR = ports::DataDirection::Output;
   
   MyAdc::init<PIN_ADC0>();
+  sei();
+  
   MyAdc::start_adc_10bit();
   
   for(;;);

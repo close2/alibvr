@@ -18,7 +18,7 @@ For instance pin definitions are passed around as template arguments.
 
 This class _never_ creates objects!  Everything is static and resolved
 during compile time, making the generated code very compact and
-efficient.  *This is not a typical `C++` library!*
+efficient.  *This is not a typical C++ library!*
 
 Ony very few features are implemented using C-macros.
 
@@ -39,10 +39,12 @@ Every subsystem has its own README_*.  I've tried to show the complete
 functionality in those READMEs.
 
 If you still need more detailed information use the
-[doxygen](http://close2.github.io/alibvr/doxygen/html/) documentation.
+[doxygen](http://close2.github.io/alibvr/doxygen/html/) documentation
+or simply read the comments in the code itself.
 
 I find doxygen documentations hard to read and hope that most use cases
-are covered through examples in the READMEs.
+are covered through examples in the READMEs, but the doxygen comments
+are _far_ more detailed.
 
 
 # Subsystems:
@@ -54,6 +56,15 @@ are covered through examples in the READMEs.
 
 # Examples:
 
-Examples may be found in my other github-repository:
-[alibvr-examples](https://www.github.com/close2/alibvr-examples)
+The following code snippets are extracted from `example*.cpp` files in
+[doc/code/src](doc/code/src).
 
+## [Turn on an led](doc/code/src/example_led.cpp)
+```C++
++++LED_EX+++
+```
+
+## [Turn on an led if analog input is below a treshhold](doc/code/src/example_adc.cpp)
+```C++
++++ADC_EX+++
+```

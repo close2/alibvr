@@ -109,6 +109,7 @@ int main() {
   
   // «ADC_BACKGROUND[^  ,]»
   AdcWTask::init();
+  sei();
   AdcWTask::start_adc_8bit();
   /*¤*/
   
