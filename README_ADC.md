@@ -20,6 +20,7 @@ The Adc subsystem is documented in the:
 ## Settings
 
 When doing adc you have to specify
+
 * an input
 * a reference voltage
 * a mode
@@ -27,7 +28,7 @@ When doing adc you have to specify
 
 ## Input selection
 
-In addition to input pins (see `PIN_ADC*` typedefs in
+In addition to input pins (see `PIN_ADC*` `typedef`s in
 [README_PORTS.md](README_PORTS.md]) `Input::Temperature`, `Input::V1_1`
 and `Input::Gnd` are allowed inputs.
 
@@ -87,11 +88,9 @@ reduction.  (The default handler would reset the cpu and `adc_*bit()`
 must enable irqs, so that the cpu leaves sleep mode after a
 conversion.)
 
-Your code will not compile (with a semi-useful error) if you don't
-register a handler.
-
 ```C++
-typedef Adc<Ref::V1_1> NoiseRedAdc; // use the default do_nothing irq-task
+// use the default nullptr (do_nothing) irq-task
+typedef Adc<Ref::V1_1> NoiseRedAdc;
 #define NEW_ADC NoiseRedAdc
 #include REGISTER_ADC
 // main { ...
@@ -100,6 +99,9 @@ typedef Adc<Ref::V1_1> NoiseRedAdc; // use the default do_nothing irq-task
 // ... }  // end of main
 #include REGISTER_IRQS
 ```
+
+Your code will not compile (with a semi-useful error) if you don't
+register a handler.
 
 
 ## Background conversions
@@ -126,9 +128,9 @@ AdcWTask::start_adc_8bit();
 
 ## Adc Tasks and Adc Irq handler
 
-When a `Task` (except for the `do_nothing_task`) is provided as
-template argument to `Adc` then `init()` will enable the Adc irq and
-the `Task` will be called every time an Adc irq is raised (i.e. every
+When a `Task` (except for the `nullptr`) is provided as template
+argument to `Adc` then `init()` will enable the Adc irq and the
+`Task` will be called every time an Adc irq is raised (i.e. every
 time a conversion finishes).
 
 `init()` will not change the global irq flag!  If you register a task,
@@ -147,7 +149,8 @@ void f(const uint16_t& result) {
   PIN_B4::PORT = result > 0x0F;
 }
 
-typedef Adc<Ref::V1_1, PIN_ADC5, Mode::FreeRunning, f> AdcWTask; // use the default do_nothing irq-task
+// use the default nullptr (do_nothing) irq-task
+typedef Adc<Ref::V1_1, PIN_ADC5, Mode::FreeRunning, f> AdcWTask;
 #define NEW_ADC AdcWTask
 #include REGISTER_ADC
 // main { ...

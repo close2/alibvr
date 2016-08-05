@@ -150,7 +150,7 @@ enum class IOReg {
 ```
 
 
-## Examples:
+## Complete examples:
 
 Turn on an Led on pin C2.
 

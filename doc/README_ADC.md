@@ -20,6 +20,7 @@ The Adc subsystem is documented in the:
 ## Settings
 
 When doing adc you have to specify
+
 * an input
 * a reference voltage
 * a mode
@@ -27,7 +28,7 @@ When doing adc you have to specify
 
 ## Input selection
 
-In addition to input pins (see `PIN_ADC*` typedefs in
+In addition to input pins (see `PIN_ADC*` `typedef`s in
 [README_PORTS.md](README_PORTS.md]) `Input::Temperature`, `Input::V1_1`
 and `Input::Gnd` are allowed inputs.
 
@@ -69,9 +70,6 @@ reduction.  (The default handler would reset the cpu and `adc_*bit()`
 must enable irqs, so that the cpu leaves sleep mode after a
 conversion.)
 
-Your code will not compile (with a semi-useful error) if you don't
-register a handler.
-
 ```C++
 +++ADC_NOISE_RED1+++
 // main { ...
@@ -79,6 +77,9 @@ register a handler.
 // ... }  // end of main
 +++REGISTER_IRQS+++
 ```
+
+Your code will not compile (with a semi-useful error) if you don't
+register a handler.
 
 
 ## Background conversions
