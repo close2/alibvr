@@ -18,7 +18,7 @@ For instance pin definitions are passed around as template arguments.
 
 This class _never_ creates objects!  Everything is static and resolved
 during compile time, making the generated code very compact and
-efficient.  *This is not a typical `C++` library!*
+efficient.  *This is not a typical C++ library!*
 
 Ony very few features are implemented using C-macros.
 
@@ -39,10 +39,12 @@ Every subsystem has its own README_*.  I've tried to show the complete
 functionality in those READMEs.
 
 If you still need more detailed information use the
-[doxygen](http://close2.github.io/alibvr/doxygen/html/) documentation.
+[doxygen](http://close2.github.io/alibvr/doxygen/html/) documentation
+or simply read the comments in the code itself.
 
 I find doxygen documentations hard to read and hope that most use cases
-are covered through examples in the READMEs.
+are covered through examples in the READMEs, but the doxygen comments
+are _far_ more detailed.
 
 
 # Subsystems:
@@ -54,6 +56,52 @@ are covered through examples in the READMEs.
 
 # Examples:
 
-Examples may be found in my other github-repository:
-[alibvr-examples](https://www.github.com/close2/alibvr-examples)
+The following code snippets are extracted from `example*.cpp` files in
+[doc/code/src](doc/code/src).
 
+## [Turn on an led](doc/code/src/example_led.cpp)
+```C++
+#include "ports.h"
+
+typedef PIN_C2 Led;
+
+__attribute__ ((OS_main)) int main(void) {
+  Led::DDR = ports::DataDirection::Output;   // Put Led pin into output mode.
+  Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
+  
+  for (;;);
+  return 0;
+}
+```
+
+## [Turn on an led if analog input is below a treshhold](doc/code/src/example_adc.cpp)
+```C++
+#define F_CPU 8000000
+#include "ports.h"
+#include "irqs.h"
+#include "adc.h"
+
+typedef PIN_C2 Led;
+typedef PIN_ADC0 AnalogIn;
+
+void f(const uint16_t& result) {
+  Led::PORT = ((uint8_t)result) > 0x0F;
+}
+
+typedef adc::Adc<adc::Ref::V1_1, AnalogIn, adc::Mode::FreeRunning, f> MyAdc;
+#define NEW_ADC MyAdc
+#include REGISTER_ADC
+
+__attribute__ ((OS_main)) int main(void) {
+  Led::DDR = ports::DataDirection::Output;   // Put Led pin into output mode.
+  Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
+  
+  MyAdc::init();
+  MyAdc::start_adc_8bit();
+  
+  
+  for (;;);
+  return 0;
+}
+#include REGISTER_IRQS
+```

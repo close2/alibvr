@@ -167,11 +167,32 @@ namespace ALIBVR_NAMESPACE_ADC {
     loop_until_bit_is_clear(ADCSRA, ADSC);
   }
   
-  // forward declaration which will be defined when irq handler is registered.
-  // (in header file)
+  // forward declaration which will be defined when irq handler is
+  // registered. (in header file)
   void irq_handler_for_adc_must_be_registered_for_noise_reduction();
   
+  /**
+   * @brief The signature of a `Task` which may be passed as template
+   * argument.  See the `Task` template argument for `Adc`.
+   **/
   typedef void(* task)(const uint16_t&);
+  
+  /**
+   * @brief This enum is passed to the `init()` function and controls
+   * if global irqs should be turned on with `sei()`.
+   **/
+  enum class GlobalIrq {
+    /// @brief If a `Task` is passed to `Adc`, global irqs are turned
+    /// on.  Otherwise equivalent to `NoChange`.
+    Auto,
+    /// @brief Global irqs will be turned on.
+    TurnOn,
+    /// @brief Global irqs will be turned off.
+    TurnOff,
+    /// @brief Global irqs will not be changed.
+    NoChange
+  };
+  
   
   /**
    * @example adc_2_irqs.cpp.
@@ -202,14 +223,17 @@ namespace ALIBVR_NAMESPACE_ADC {
    *         To register the irq handler assign your typedef to the
    *         macro `NEW_ADC` and `#include REGISTER_ADC`.
    *         Then, after your main, `#include REGISTER_IRQS`
+   * @tparam DefaultGlobalIrq specifies if and when global irqs should
+   *         be turned on in `init()`.  See GlobalIrq.
    *
    *      
 +++ADC_IRQ_REG[^,   *     ]+++
    **/
-  template <Ref DefaultRef        = Ref::AVcc,
-            typename DefaultInput = Input::Unset,
-            Mode DefaultMode      = Mode::SingleConversion,
-            task Task             = nullptr>
+  template <Ref DefaultRef             = Ref::AVcc,
+            typename DefaultInput      = Input::Unset,
+            Mode DefaultMode           = Mode::SingleConversion,
+            task Task                  = nullptr,
+            GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto>
   class Adc {
   private:
     constexpr static uint8_t _calc_prescaler() {
@@ -248,10 +272,13 @@ namespace ALIBVR_NAMESPACE_ADC {
      *         This template argument overrides the Adc argument.
      * @tparam M sets the mode.  See Mode for possible values.
      *         This template argument overrides the Adc argument.
+     * @tparam GI specifies if and when global irqs should be turned
+     *         on or off.  See the GlobalIrq enum for possible values.
      **/
-    template <typename I = DefaultInput,
-              Ref R      = DefaultRef,
-              Mode M     = DefaultMode>
+    template <typename I   = DefaultInput,
+              Ref R        = DefaultRef,
+              Mode M       = DefaultMode,
+              GlobalIrq GI = DefaultGlobalIrq>
     static void init() {
       static_assert(I::port == ALIBVR_NAMESPACE_PORTS::_Port::C &&
                                (I::bit == 0 ||
@@ -282,9 +309,16 @@ namespace ALIBVR_NAMESPACE_ADC {
       
       ADCSRA = _BV(ADEN) // turn ADC power on
                | _calc_prescaler() << ADPS0; // set prescaler
-               
+
+#     pragma GCC diagnostic push
+#     pragma GCC diagnostic ignored "-Waddress"
       const uint8_t is_do_nothing_task = nullptr == Task;
       if (!is_do_nothing_task) ADCSRA |= _BV(ADIE);
+#     pragma GCC diagnostic pop
+      
+      if (GI == GlobalIrq::TurnOn ||
+          (GI == GlobalIrq::Auto && !is_do_nothing_task)) sei();
+      if (GI == GlobalIrq::TurnOff) cli();
     }
     
     /**
@@ -432,8 +466,11 @@ namespace ALIBVR_NAMESPACE_ADC {
      * Probably only useful internally.
      **/
     static inline void handle(const enum _irqs::Irq i) {
+#     pragma GCC diagnostic push
+#     pragma GCC diagnostic ignored "-Waddress"
       const uint8_t is_do_nothing_task = nullptr == Task;
       if (is_do_nothing_task) return;
+#     pragma GCC diagnostic pop
       
       // instead of having a separate flag to remember if a 10bit or 8bit adc
       // had been requested, we simply look at the left/right adjusted flag

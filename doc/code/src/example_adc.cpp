@@ -8,7 +8,7 @@ typedef PIN_C2 Led;
 typedef PIN_ADC0 AnalogIn;
 
 void f(const uint16_t& result) {
-  Led::PORT = result > 0x0F;
+  Led::PORT = ((uint8_t)result) > 0x0F;
 }
 
 typedef adc::Adc<adc::Ref::V1_1, AnalogIn, adc::Mode::FreeRunning, f> MyAdc;
@@ -22,7 +22,6 @@ __attribute__ ((OS_main)) int main(void) {
   MyAdc::init();
   MyAdc::start_adc_8bit();
   
-  sei();
   
   for (;;);
   return 0;

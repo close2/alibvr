@@ -110,8 +110,9 @@ argument to `Adc` then `init()` will enable the Adc irq and the
 `Task` will be called every time an Adc irq is raised (i.e. every
 time a conversion finishes).
 
-`init()` will not change the global irq flag!  If you register a task,
-don't forget to enable irqs.
+`init()` will enable the global irq flag if a `Task` is registered!
+This behaviour can be changed by passing a `GlobalIrq::` enum to
+`init()`.
 
 The type of `Task` is `typedef void(* task)(const uint16_t&)`.  A
 function, which takes a 16bit result as argument.  Even if you only use

@@ -37,6 +37,8 @@ CXXFLAGS_COMMON += -gdwarf-2
 CXXFLAGS_COMMON += -Wall -Wno-unused-function
 CXXFLAGS_COMMON += -mcall-prologues -mmcu=$(ATMEGA)
 CXXFLAGS_COMMON += -fno-threadsafe-statics -std=c++11 -fwhole-program
+CXXFLAGS_COMMON += -Werror
+
 
 CXXFLAGS_DEBUG   = -g3 $(CXXFLAGS_COMMON)
 CXXFLAGS_RELEASE = -g -Os $(CXXFLAGS_COMMON)
