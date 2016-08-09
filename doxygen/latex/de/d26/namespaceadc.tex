@@ -13,9 +13,9 @@ class \hyperlink{classadc_1_1Adc}{Adc}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ {\bfseries task}) (const uint16\+\_\+t \&)\hypertarget{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae}{}\label{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae}
+typedef void($\ast$ \hyperlink{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae}{task}) (const uint16\+\_\+t \&)\hypertarget{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae}{}\label{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The signature of a {\ttfamily Task} which may be passed as template argument. See the {\ttfamily Task} template argument for {\ttfamily \hyperlink{classadc_1_1Adc}{Adc}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -47,6 +47,16 @@ enum {\bfseries Ref} \{ \\*
 {\bfseries V1\+\_\+1} = 0b11
  \}\hypertarget{namespaceadc_adcbc814e47ddcec8104b574b02228d97}{}\label{namespaceadc_adcbc814e47ddcec8104b574b02228d97}
 
+\item 
+enum \hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bb}{Global\+Irq} \{ \\*
+\hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bba06b9281e396db002010bde1de57262eb}{Global\+Irq\+::\+Auto}, 
+\\*
+\hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bbace5a9f99f26d20a3bb29810a8716ae11}{Global\+Irq\+::\+Turn\+On}, 
+\\*
+\hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bbaf0635e226d94e6a8339e6f237c2b6f1b}{Global\+Irq\+::\+Turn\+Off}, 
+\\*
+\hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bba4bac8cdf0a968472b519b3b295d0d48b}{Global\+Irq\+::\+No\+Change}
+ \}\begin{DoxyCompactList}\small\item\em This enum is passed to the {\ttfamily init()} function and controls if global irqs should be turned on with {\ttfamily sei()}. \end{DoxyCompactList}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -59,8 +69,6 @@ void \hyperlink{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{busy\+\_\+wait\+
 void {\bfseries irq\+\_\+handler\+\_\+for\+\_\+adc\+\_\+must\+\_\+be\+\_\+registered\+\_\+for\+\_\+noise\+\_\+reduction} ()\hypertarget{namespaceadc_a0f2e8fa37ba3e91fc9e7a58e3543eaaa}{}\label{namespaceadc_a0f2e8fa37ba3e91fc9e7a58e3543eaaa}
 
 \item 
-static void \hyperlink{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}{do\+\_\+nothing} (const uint16\+\_\+t \&result)
-\begin{DoxyCompactList}\small\item\em This function does nothing and is the default template argument for the irq task. \end{DoxyCompactList}\item 
 {\footnotesize template$<$$>$ }\\void \hyperlink{namespaceadc_a6e0b185b550424440d92bc2b129f6128}{\+\_\+do\+\_\+adc$<$ 0 $>$} ()
 \begin{DoxyCompactList}\small\item\em Simply starts a conversion and then waits for the conversion to finish. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -69,6 +77,26 @@ static void \hyperlink{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}{do\+\_\+n
 By default adc related classes, enums,... are defined inside the {\ttfamily adc} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+A\+DC or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. 
 
 \subsection{Enumeration Type Documentation}
+\index{adc@{adc}!Global\+Irq@{Global\+Irq}}
+\index{Global\+Irq@{Global\+Irq}!adc@{adc}}
+\subsubsection[{\texorpdfstring{Global\+Irq}{GlobalIrq}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf adc\+::\+Global\+Irq}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{namespaceadc_a92c3b192926a98ab7106f26c73bf85bb}{}\label{namespaceadc_a92c3b192926a98ab7106f26c73bf85bb}
+
+
+This enum is passed to the {\ttfamily init()} function and controls if global irqs should be turned on with {\ttfamily sei()}. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Auto@{Auto}!adc@{adc}}\index{adc@{adc}!Auto@{Auto}}\item[{\em 
+Auto\hypertarget{namespaceadc_a92c3b192926a98ab7106f26c73bf85bba06b9281e396db002010bde1de57262eb}{}\label{namespaceadc_a92c3b192926a98ab7106f26c73bf85bba06b9281e396db002010bde1de57262eb}
+}]If a {\ttfamily Task} is passed to {\ttfamily \hyperlink{classadc_1_1Adc}{Adc}}, global irqs are turned on. Otherwise equivalent to {\ttfamily No\+Change}. \index{Turn\+On@{Turn\+On}!adc@{adc}}\index{adc@{adc}!Turn\+On@{Turn\+On}}\item[{\em 
+Turn\+On\hypertarget{namespaceadc_a92c3b192926a98ab7106f26c73bf85bbace5a9f99f26d20a3bb29810a8716ae11}{}\label{namespaceadc_a92c3b192926a98ab7106f26c73bf85bbace5a9f99f26d20a3bb29810a8716ae11}
+}]Global irqs will be turned on. \index{Turn\+Off@{Turn\+Off}!adc@{adc}}\index{adc@{adc}!Turn\+Off@{Turn\+Off}}\item[{\em 
+Turn\+Off\hypertarget{namespaceadc_a92c3b192926a98ab7106f26c73bf85bbaf0635e226d94e6a8339e6f237c2b6f1b}{}\label{namespaceadc_a92c3b192926a98ab7106f26c73bf85bbaf0635e226d94e6a8339e6f237c2b6f1b}
+}]Global irqs will be turned off. \index{No\+Change@{No\+Change}!adc@{adc}}\index{adc@{adc}!No\+Change@{No\+Change}}\item[{\em 
+No\+Change\hypertarget{namespaceadc_a92c3b192926a98ab7106f26c73bf85bba4bac8cdf0a968472b519b3b295d0d48b}{}\label{namespaceadc_a92c3b192926a98ab7106f26c73bf85bba4bac8cdf0a968472b519b3b295d0d48b}
+}]Global irqs will not be changed. \end{description}
+\end{Desc}
 \index{adc@{adc}!Mode@{Mode}}
 \index{Mode@{Mode}!adc@{adc}}
 \subsubsection[{\texorpdfstring{Mode}{Mode}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf adc\+::\+Mode}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}{}\label{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}
@@ -111,15 +139,4 @@ There is another specialized \+\_\+do\+\_\+adc which does not goto sleep. \index
 
 Simply starts a conversion and then waits for the conversion to finish. 
 
-This is the much simpler specialized version of \+\_\+do\+\_\+adc when going to sleep is not requested. \index{adc@{adc}!do\+\_\+nothing@{do\+\_\+nothing}}
-\index{do\+\_\+nothing@{do\+\_\+nothing}!adc@{adc}}
-\subsubsection[{\texorpdfstring{do\+\_\+nothing(const uint16\+\_\+t \&result)}{do_nothing(const uint16_t &result)}}]{\setlength{\rightskip}{0pt plus 5cm}static void adc\+::do\+\_\+nothing (
-\begin{DoxyParamCaption}
-\item[{const uint16\+\_\+t \&}]{result}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}{}\label{namespaceadc_a4d20cd58db88b2e3099aa5689e33235d}
-
-
-This function does nothing and is the default template argument for the irq task. 
-
-The \hyperlink{classadc_1_1Adc}{Adc} template argument function is compared against this function, and if they are different \hyperlink{classadc_1_1Adc}{Adc} irqs are enabled in the init function. 
+This is the much simpler specialized version of \+\_\+do\+\_\+adc when going to sleep is not requested. 

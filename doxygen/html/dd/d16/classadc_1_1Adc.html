@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>alibvr: adc::Adc&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt; Class Template Reference</title>
+<title>alibvr: adc::Adc&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt; Class Template Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -94,7 +94,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="../../df/d6e/classadc_1_1Adc-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">adc::Adc&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt; Class Template Reference</div>  </div>
+<div class="title">adc::Adc&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -105,74 +105,70 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae453bb940554c62082776bd41a9053a3"><td class="memTemplParams" colspan="2">template&lt;typename I  = DefaultInput, Ref R = DefaultRef, Mode M = DefaultMode&gt; </td></tr>
-<tr class="memitem:ae453bb940554c62082776bd41a9053a3"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae453bb940554c62082776bd41a9053a3">init</a> ()</td></tr>
-<tr class="memdesc:ae453bb940554c62082776bd41a9053a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the adc sub system.  <a href="#ae453bb940554c62082776bd41a9053a3">More...</a><br /></td></tr>
-<tr class="separator:ae453bb940554c62082776bd41a9053a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adae69593a7798da99be0fa8ffaf09f06"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#adae69593a7798da99be0fa8ffaf09f06">turn_off</a> ()</td></tr>
-<tr class="memdesc:adae69593a7798da99be0fa8ffaf09f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns the adc subsystem off reducing power consumption.  <a href="#adae69593a7798da99be0fa8ffaf09f06">More...</a><br /></td></tr>
-<tr class="separator:adae69593a7798da99be0fa8ffaf09f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acca97e4a4c6141505348f0bbfe6c1148"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#acca97e4a4c6141505348f0bbfe6c1148">start_adc_8bit</a> ()</td></tr>
-<tr class="memdesc:acca97e4a4c6141505348f0bbfe6c1148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busywaits for current conversion to finish, then starts a new one with an 8bit resolution.  <a href="#acca97e4a4c6141505348f0bbfe6c1148">More...</a><br /></td></tr>
-<tr class="separator:acca97e4a4c6141505348f0bbfe6c1148"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeab3739f2f541da1f3687f5d97b6f8c2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#aeab3739f2f541da1f3687f5d97b6f8c2">start_adc_10bit</a> ()</td></tr>
-<tr class="memdesc:aeab3739f2f541da1f3687f5d97b6f8c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busywaits for current conversion to finish, then starts a new one with an 10bit resolution.  <a href="#aeab3739f2f541da1f3687f5d97b6f8c2">More...</a><br /></td></tr>
-<tr class="separator:aeab3739f2f541da1f3687f5d97b6f8c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac469d58cc8c55dd3974d80d1445a4db7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac469d58cc8c55dd3974d80d1445a4db7"></a>
-static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#ac469d58cc8c55dd3974d80d1445a4db7">is_adc_finished</a> ()</td></tr>
-<tr class="memdesc:ac469d58cc8c55dd3974d80d1445a4db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if no conversion is currently running. <br /></td></tr>
-<tr class="separator:ac469d58cc8c55dd3974d80d1445a4db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0974180ce659bd3bff9499666e653eeb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0974180ce659bd3bff9499666e653eeb"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a0974180ce659bd3bff9499666e653eeb">busy_wait_adc_finished</a> ()</td></tr>
-<tr class="memdesc:a0974180ce659bd3bff9499666e653eeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busywaits for current conversion to finish. Returns immediatly if no conversion is running. <br /></td></tr>
-<tr class="separator:a0974180ce659bd3bff9499666e653eeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1044fe51b95416b2030454b3869ec195"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a1044fe51b95416b2030454b3869ec195">get_adc_8bit_result</a> ()</td></tr>
-<tr class="memdesc:a1044fe51b95416b2030454b3869ec195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the result of a previous conversion.  <a href="#a1044fe51b95416b2030454b3869ec195">More...</a><br /></td></tr>
-<tr class="separator:a1044fe51b95416b2030454b3869ec195"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75998163e7a038560cdc29344208ba15"><td class="memItemLeft" align="right" valign="top">static uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a75998163e7a038560cdc29344208ba15">get_adc_10bit_result</a> ()</td></tr>
-<tr class="memdesc:a75998163e7a038560cdc29344208ba15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the result of a previous conversion.  <a href="#a75998163e7a038560cdc29344208ba15">More...</a><br /></td></tr>
-<tr class="separator:a75998163e7a038560cdc29344208ba15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b2e98b10cfa98a34ac491150304f58e"><td class="memTemplParams" colspan="2">template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </td></tr>
-<tr class="memitem:a2b2e98b10cfa98a34ac491150304f58e"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a2b2e98b10cfa98a34ac491150304f58e">adc_8bit</a> ()</td></tr>
-<tr class="memdesc:a2b2e98b10cfa98a34ac491150304f58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for current conversions to finish, then performs an 8bit conversion and returns the result.  <a href="#a2b2e98b10cfa98a34ac491150304f58e">More...</a><br /></td></tr>
-<tr class="separator:a2b2e98b10cfa98a34ac491150304f58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae90131099182fa17167766def8065138"><td class="memTemplParams" colspan="2">template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </td></tr>
-<tr class="memitem:ae90131099182fa17167766def8065138"><td class="memTemplItemLeft" align="right" valign="top">static uint16_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae90131099182fa17167766def8065138">adc_10bit</a> ()</td></tr>
-<tr class="memdesc:ae90131099182fa17167766def8065138"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for current conversions to finish, then performs an 10bit conversion and returns the result.  <a href="#ae90131099182fa17167766def8065138">More...</a><br /></td></tr>
-<tr class="separator:ae90131099182fa17167766def8065138"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29553e78481cc637a6dbc5e59da0c3ba"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a29553e78481cc637a6dbc5e59da0c3ba">handle</a> (const enum _irqs::Irq i)</td></tr>
-<tr class="memdesc:a29553e78481cc637a6dbc5e59da0c3ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the irq handler which will be registered through <code>#include REGISTER_ADC</code>.  <a href="#a29553e78481cc637a6dbc5e59da0c3ba">More...</a><br /></td></tr>
-<tr class="separator:a29553e78481cc637a6dbc5e59da0c3ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a146fe898e16915e9b344019c59cdcfa3"><td class="memTemplParams" colspan="2">template&lt;typename I  = DefaultInput, Ref R = DefaultRef, Mode M = DefaultMode, GlobalIrq GI = DefaultGlobalIrq&gt; </td></tr>
+<tr class="memitem:a146fe898e16915e9b344019c59cdcfa3"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a146fe898e16915e9b344019c59cdcfa3">init</a> ()</td></tr>
+<tr class="memdesc:a146fe898e16915e9b344019c59cdcfa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the adc sub system.  <a href="#a146fe898e16915e9b344019c59cdcfa3">More...</a><br /></td></tr>
+<tr class="separator:a146fe898e16915e9b344019c59cdcfa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c1266c2f27fefea08595aaf26762f26"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a0c1266c2f27fefea08595aaf26762f26">turn_off</a> ()</td></tr>
+<tr class="memdesc:a0c1266c2f27fefea08595aaf26762f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns the adc subsystem off reducing power consumption.  <a href="#a0c1266c2f27fefea08595aaf26762f26">More...</a><br /></td></tr>
+<tr class="separator:a0c1266c2f27fefea08595aaf26762f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e5ec858366e50739d7e1beef02d729"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#ad9e5ec858366e50739d7e1beef02d729">start_adc_8bit</a> ()</td></tr>
+<tr class="memdesc:ad9e5ec858366e50739d7e1beef02d729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busywaits for current conversion to finish, then starts a new one with an 8bit resolution.  <a href="#ad9e5ec858366e50739d7e1beef02d729">More...</a><br /></td></tr>
+<tr class="separator:ad9e5ec858366e50739d7e1beef02d729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81899906398fa2ec02b5aefcbe5f67e8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a81899906398fa2ec02b5aefcbe5f67e8">start_adc_10bit</a> ()</td></tr>
+<tr class="memdesc:a81899906398fa2ec02b5aefcbe5f67e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busywaits for current conversion to finish, then starts a new one with an 10bit resolution.  <a href="#a81899906398fa2ec02b5aefcbe5f67e8">More...</a><br /></td></tr>
+<tr class="separator:a81899906398fa2ec02b5aefcbe5f67e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76738f38cfbc9380c244867c754e1e62"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76738f38cfbc9380c244867c754e1e62"></a>
+static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a76738f38cfbc9380c244867c754e1e62">is_adc_finished</a> ()</td></tr>
+<tr class="memdesc:a76738f38cfbc9380c244867c754e1e62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if no conversion is currently running. <br /></td></tr>
+<tr class="separator:a76738f38cfbc9380c244867c754e1e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6cc9bed836cdd097f89edbc28cfdfcf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6cc9bed836cdd097f89edbc28cfdfcf"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#af6cc9bed836cdd097f89edbc28cfdfcf">busy_wait_adc_finished</a> ()</td></tr>
+<tr class="memdesc:af6cc9bed836cdd097f89edbc28cfdfcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busywaits for current conversion to finish. Returns immediatly if no conversion is running. <br /></td></tr>
+<tr class="separator:af6cc9bed836cdd097f89edbc28cfdfcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a780877e68b2f2d61596e594db04179ed"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a780877e68b2f2d61596e594db04179ed">get_adc_8bit_result</a> ()</td></tr>
+<tr class="memdesc:a780877e68b2f2d61596e594db04179ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the result of a previous conversion.  <a href="#a780877e68b2f2d61596e594db04179ed">More...</a><br /></td></tr>
+<tr class="separator:a780877e68b2f2d61596e594db04179ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b6ffdcd526be74e01f39329a5f25d20"><td class="memItemLeft" align="right" valign="top">static uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a4b6ffdcd526be74e01f39329a5f25d20">get_adc_10bit_result</a> ()</td></tr>
+<tr class="memdesc:a4b6ffdcd526be74e01f39329a5f25d20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the result of a previous conversion.  <a href="#a4b6ffdcd526be74e01f39329a5f25d20">More...</a><br /></td></tr>
+<tr class="separator:a4b6ffdcd526be74e01f39329a5f25d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae289bfed72b4cfab79dae680cc4d9ab4"><td class="memTemplParams" colspan="2">template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </td></tr>
+<tr class="memitem:ae289bfed72b4cfab79dae680cc4d9ab4"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae289bfed72b4cfab79dae680cc4d9ab4">adc_8bit</a> ()</td></tr>
+<tr class="memdesc:ae289bfed72b4cfab79dae680cc4d9ab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for current conversions to finish, then performs an 8bit conversion and returns the result.  <a href="#ae289bfed72b4cfab79dae680cc4d9ab4">More...</a><br /></td></tr>
+<tr class="separator:ae289bfed72b4cfab79dae680cc4d9ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d9614e14e56b6f7209040710ef6f022"><td class="memTemplParams" colspan="2">template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </td></tr>
+<tr class="memitem:a3d9614e14e56b6f7209040710ef6f022"><td class="memTemplItemLeft" align="right" valign="top">static uint16_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a3d9614e14e56b6f7209040710ef6f022">adc_10bit</a> ()</td></tr>
+<tr class="memdesc:a3d9614e14e56b6f7209040710ef6f022"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for current conversions to finish, then performs an 10bit conversion and returns the result.  <a href="#a3d9614e14e56b6f7209040710ef6f022">More...</a><br /></td></tr>
+<tr class="separator:a3d9614e14e56b6f7209040710ef6f022"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77d477385a502139b26c2f0ca83c2482"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a77d477385a502139b26c2f0ca83c2482">handle</a> (const enum _irqs::Irq i)</td></tr>
+<tr class="memdesc:a77d477385a502139b26c2f0ca83c2482"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the irq handler which will be registered through <code>#include REGISTER_ADC</code>.  <a href="#a77d477385a502139b26c2f0ca83c2482">More...</a><br /></td></tr>
+<tr class="separator:a77d477385a502139b26c2f0ca83c2482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt;<br />
-class adc::Adc&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;</h3>
+<div class="textblock"><h3>template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt;<br />
+class adc::Adc&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;</h3>
 
 <p>Static functions for initialization, adc controls and irqs. </p>
-<p>If you use different instances of the <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> class the adc subsystem is shared. Calling <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae453bb940554c62082776bd41a9053a3" title="Initialize the adc sub system. ">init()</a> sets the input, mode or reference for all following conversions. It is possible to register more than one <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> irq task but <em>all</em> tasks are executed whenever a conversion finishes.</p>
+<p>If you use different instances of the <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> class the adc subsystem is shared. Calling <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a146fe898e16915e9b344019c59cdcfa3" title="Initialize the adc sub system. ">init()</a> sets the input, mode or reference for all following conversions. It is possible to register more than one <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> irq task but <em>all</em> tasks are executed whenever a conversion finishes.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">DefaultRef</td><td>sets the default reference voltage for conversions. See Ref for possible values. The reference voltage can be changed by passing a different Ref as template argument to the <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae453bb940554c62082776bd41a9053a3" title="Initialize the adc sub system. ">init()</a> function. </td></tr>
-    <tr><td class="paramname">DefaultInput</td><td>sets the default input. In addition to the ADC-pins the classes in the <a class="el" href="../../dc/d37/namespaceadc_1_1Input.html" title="In addition to the ADC-pins the adc subsystem can also use an internal temperature sensor...">Input</a> namespace can be used. The input can be changed by passing a different input as template argument to the <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae453bb940554c62082776bd41a9053a3" title="Initialize the adc sub system. ">init()</a> function. </td></tr>
-    <tr><td class="paramname">DefaultMode</td><td>sets the default mode. See Mode for possible values. The mode can be changed by passing a different mode as template argument to the <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae453bb940554c62082776bd41a9053a3" title="Initialize the adc sub system. ">init()</a> function. </td></tr>
-    <tr><td class="paramname">Task</td><td>is a function which is executed in the irq handler. To register the irq handler assign your typedef to the macro <code>NEW_ADC</code> and <code>#include REGISTER_ADC</code>. Then, after your main, <code>#include REGISTER_IRQS</code></td></tr>
+    <tr><td class="paramname">DefaultRef</td><td>sets the default reference voltage for conversions. See Ref for possible values. The reference voltage can be changed by passing a different Ref as template argument to the <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a146fe898e16915e9b344019c59cdcfa3" title="Initialize the adc sub system. ">init()</a> function. </td></tr>
+    <tr><td class="paramname">DefaultInput</td><td>sets the default input. In addition to the ADC-pins the classes in the <a class="el" href="../../dc/d37/namespaceadc_1_1Input.html" title="In addition to the ADC-pins the adc subsystem can also use an internal temperature sensor...">Input</a> namespace can be used. The input can be changed by passing a different input as template argument to the <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a146fe898e16915e9b344019c59cdcfa3" title="Initialize the adc sub system. ">init()</a> function. </td></tr>
+    <tr><td class="paramname">DefaultMode</td><td>sets the default mode. See Mode for possible values. The mode can be changed by passing a different mode as template argument to the <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a146fe898e16915e9b344019c59cdcfa3" title="Initialize the adc sub system. ">init()</a> function. </td></tr>
+    <tr><td class="paramname">Task</td><td>is a function which is executed in the irq handler. To register the irq handler assign your typedef to the macro <code>NEW_ADC</code> and <code>#include REGISTER_ADC</code>. Then, after your main, <code>#include REGISTER_IRQS</code> </td></tr>
+    <tr><td class="paramname">DefaultGlobalIrq</td><td>specifies if and when global irqs should be turned on in <code><a class="el" href="../../dd/d16/classadc_1_1Adc.html#a146fe898e16915e9b344019c59cdcfa3" title="Initialize the adc sub system. ">init()</a></code>. See GlobalIrq.</td></tr>
   </table>
   </dd>
 </dl>
 <pre class="fragment">typedef Adc&lt;Ref::V1_1, Input::Unset, Mode::SingleConversion, f&gt; MyAdc;
 #define NEW_ADC MyAdc
-#include REGISTER_ADC
-#undef NEW_ADC
-
-typedef Adc&lt;Ref::V1_1, Input::Unset, Mode::SingleConversion, f2&gt; MyAdc2;
-#define NEW_ADC MyAdc2
 #include REGISTER_ADC</pre> <dl><dt><b>Examples: </b></dt><dd><a class="el" href="../../d3/dc2/adc_2_irqs_8cpp-example.html#_a1">adc_2_irqs.cpp</a>.</dd>
 </dl></div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ae90131099182fa17167766def8065138"></a>
+<a class="anchor" id="a3d9614e14e56b6f7209040710ef6f022"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt; </div>
+template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt; </div>
 <div class="memtemplate">
 template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </div>
 <table class="mlabels">
@@ -180,7 +176,7 @@ template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static uint16_t <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;::adc_10bit </td>
+          <td class="memname">static uint16_t <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;::adc_10bit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -194,15 +190,15 @@ template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </div>
 </div><div class="memdoc">
 
 <p>Waits for current conversions to finish, then performs an 10bit conversion and returns the result. </p>
-<p>See <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a2b2e98b10cfa98a34ac491150304f58e" title="Waits for current conversions to finish, then performs an 8bit conversion and returns the result...">adc_8bit()</a>. </p>
+<p>See <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae289bfed72b4cfab79dae680cc4d9ab4" title="Waits for current conversions to finish, then performs an 8bit conversion and returns the result...">adc_8bit()</a>. </p>
 
 </div>
 </div>
-<a class="anchor" id="a2b2e98b10cfa98a34ac491150304f58e"></a>
+<a class="anchor" id="ae289bfed72b4cfab79dae680cc4d9ab4"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt; </div>
+template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt; </div>
 <div class="memtemplate">
 template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </div>
 <table class="mlabels">
@@ -210,7 +206,7 @@ template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static uint8_t <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;::adc_8bit </td>
+          <td class="memname">static uint8_t <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;::adc_8bit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -229,24 +225,24 @@ template&lt;uint8_t goto_sleep_for_noise_reduction = 0&gt; </div>
   <table class="tparams">
     <tr><td class="paramname">goto_sleep_for_noise_reduction</td><td>If set to 1 will put the cpu to sleep (idle). In this sleep mode only the cpu-clock and flash-clock are turned off, which means that other irqs (timer,...) might wake the cpu during a conversion. This case is ignored by this function. (Your result will not be as precise as possible.) <br />
  Irq handling will be globally turned on before a conversion and set back to the previous value afterwards. <br />
- You have to register an irq handler! Even if it is the do_nothing function. (See the documentation for the <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> template argument Task) </td></tr>
+ You have to register an irq handler! Even if it is the nullptr task. (See the documentation for the <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> template argument Task) </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="a75998163e7a038560cdc29344208ba15"></a>
+<a class="anchor" id="a4b6ffdcd526be74e01f39329a5f25d20"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt; </div>
+template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static uint16_t <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;::get_adc_10bit_result </td>
+          <td class="memname">static uint16_t <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;::get_adc_10bit_result </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -265,17 +261,17 @@ template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, M
 
 </div>
 </div>
-<a class="anchor" id="a1044fe51b95416b2030454b3869ec195"></a>
+<a class="anchor" id="a780877e68b2f2d61596e594db04179ed"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt; </div>
+template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static uint8_t <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;::get_adc_8bit_result </td>
+          <td class="memname">static uint8_t <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;::get_adc_8bit_result </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -294,17 +290,17 @@ template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, M
 
 </div>
 </div>
-<a class="anchor" id="a29553e78481cc637a6dbc5e59da0c3ba"></a>
+<a class="anchor" id="a77d477385a502139b26c2f0ca83c2482"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt; </div>
+template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;::handle </td>
+          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;::handle </td>
           <td>(</td>
           <td class="paramtype">const enum _irqs::Irq&#160;</td>
           <td class="paramname"><em>i</em></td><td>)</td>
@@ -323,19 +319,19 @@ template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, M
 
 </div>
 </div>
-<a class="anchor" id="ae453bb940554c62082776bd41a9053a3"></a>
+<a class="anchor" id="a146fe898e16915e9b344019c59cdcfa3"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt; </div>
+template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt; </div>
 <div class="memtemplate">
-template&lt;typename I  = DefaultInput, Ref R = DefaultRef, Mode M = DefaultMode&gt; </div>
+template&lt;typename I  = DefaultInput, Ref R = DefaultRef, Mode M = DefaultMode, GlobalIrq GI = DefaultGlobalIrq&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;::init </td>
+          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;::init </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -350,31 +346,32 @@ template&lt;typename I  = DefaultInput, Ref R = DefaultRef, Mode M = DefaultMode
 
 <p>Initialize the adc sub system. </p>
 <p>Note that the order of the template arguments is different to the order of the template arguments of Adc!</p>
-<p>If power consumption is a concern you have to turn the adc subsystem off after having used it. See <a class="el" href="../../dd/d16/classadc_1_1Adc.html#adae69593a7798da99be0fa8ffaf09f06" title="Turns the adc subsystem off reducing power consumption. ">turn_off()</a>.</p>
-<p>Simply call <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae453bb940554c62082776bd41a9053a3" title="Initialize the adc sub system. ">init()</a> another time to turn it on again.</p>
-<p>The first conversion after <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae453bb940554c62082776bd41a9053a3" title="Initialize the adc sub system. ">init()</a> is not guaranteed to have a meaningful value!</p>
+<p>If power consumption is a concern you have to turn the adc subsystem off after having used it. See <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a0c1266c2f27fefea08595aaf26762f26" title="Turns the adc subsystem off reducing power consumption. ">turn_off()</a>.</p>
+<p>Simply call <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a146fe898e16915e9b344019c59cdcfa3" title="Initialize the adc sub system. ">init()</a> another time to turn it on again.</p>
+<p>The first conversion after <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a146fe898e16915e9b344019c59cdcfa3" title="Initialize the adc sub system. ">init()</a> is not guaranteed to have a meaningful value!</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">I</td><td>sets the input. In addition to the ADC-pins the classes in the <a class="el" href="../../dc/d37/namespaceadc_1_1Input.html" title="In addition to the ADC-pins the adc subsystem can also use an internal temperature sensor...">Input</a> namespace can be used. This template argument overrides the <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> argument. </td></tr>
     <tr><td class="paramname">R</td><td>sets the reference voltage for conversions. See Ref for possible values. This template argument overrides the <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> argument. </td></tr>
     <tr><td class="paramname">M</td><td>sets the mode. See Mode for possible values. This template argument overrides the <a class="el" href="../../dd/d16/classadc_1_1Adc.html" title="Static functions for initialization, adc controls and irqs. ">Adc</a> argument. </td></tr>
+    <tr><td class="paramname">GI</td><td>specifies if and when global irqs should be turned on or off. See the GlobalIrq enum for possible values. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="aeab3739f2f541da1f3687f5d97b6f8c2"></a>
+<a class="anchor" id="a81899906398fa2ec02b5aefcbe5f67e8"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt; </div>
+template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;::start_adc_10bit </td>
+          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;::start_adc_10bit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -388,21 +385,21 @@ template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, M
 </div><div class="memdoc">
 
 <p>Busywaits for current conversion to finish, then starts a new one with an 10bit resolution. </p>
-<p>See <a class="el" href="../../dd/d16/classadc_1_1Adc.html#acca97e4a4c6141505348f0bbfe6c1148" title="Busywaits for current conversion to finish, then starts a new one with an 8bit resolution. ">start_adc_8bit()</a> for more information. All <em>8bit</em> functions have <em>10bit</em> equivalents. </p>
+<p>See <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ad9e5ec858366e50739d7e1beef02d729" title="Busywaits for current conversion to finish, then starts a new one with an 8bit resolution. ">start_adc_8bit()</a> for more information. All <em>8bit</em> functions have <em>10bit</em> equivalents. </p>
 
 </div>
 </div>
-<a class="anchor" id="acca97e4a4c6141505348f0bbfe6c1148"></a>
+<a class="anchor" id="ad9e5ec858366e50739d7e1beef02d729"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt; </div>
+template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;::start_adc_8bit </td>
+          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;::start_adc_8bit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -416,22 +413,22 @@ template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, M
 </div><div class="memdoc">
 
 <p>Busywaits for current conversion to finish, then starts a new one with an 8bit resolution. </p>
-<p>This function will not wait for the conversion to finish! Use <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a2b2e98b10cfa98a34ac491150304f58e" title="Waits for current conversions to finish, then performs an 8bit conversion and returns the result...">adc_8bit()</a> instead if this is what you want.</p>
-<p>To find out if the conversion has finished call <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ac469d58cc8c55dd3974d80d1445a4db7" title="Returns true if no conversion is currently running. ">is_adc_finished()</a>. To get the result call <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a1044fe51b95416b2030454b3869ec195" title="Returns the result of a previous conversion. ">get_adc_8bit_result()</a>. </p>
+<p>This function will not wait for the conversion to finish! Use <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae289bfed72b4cfab79dae680cc4d9ab4" title="Waits for current conversions to finish, then performs an 8bit conversion and returns the result...">adc_8bit()</a> instead if this is what you want.</p>
+<p>To find out if the conversion has finished call <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a76738f38cfbc9380c244867c754e1e62" title="Returns true if no conversion is currently running. ">is_adc_finished()</a>. To get the result call <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a780877e68b2f2d61596e594db04179ed" title="Returns the result of a previous conversion. ">get_adc_8bit_result()</a>. </p>
 
 </div>
 </div>
-<a class="anchor" id="adae69593a7798da99be0fa8ffaf09f06"></a>
+<a class="anchor" id="a0c1266c2f27fefea08595aaf26762f26"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = do_nothing&gt; </div>
+template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, Mode DefaultMode = Mode::SingleConversion, task Task = nullptr, GlobalIrq DefaultGlobalIrq = GlobalIrq::Auto&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task &gt;::turn_off </td>
+          <td class="memname">static void <a class="el" href="../../dd/d16/classadc_1_1Adc.html">adc::Adc</a>&lt; DefaultRef, DefaultInput, DefaultMode, Task, DefaultGlobalIrq &gt;::turn_off </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -445,7 +442,7 @@ template&lt;Ref DefaultRef = Ref::AVcc, typename DefaultInput  = Input::Unset, M
 </div><div class="memdoc">
 
 <p>Turns the adc subsystem off reducing power consumption. </p>
-<p>To turn the system on again, simply call <a class="el" href="../../dd/d16/classadc_1_1Adc.html#ae453bb940554c62082776bd41a9053a3" title="Initialize the adc sub system. ">init()</a> again. </p>
+<p>To turn the system on again, simply call <a class="el" href="../../dd/d16/classadc_1_1Adc.html#a146fe898e16915e9b344019c59cdcfa3" title="Initialize the adc sub system. ">init()</a> again. </p>
 
 </div>
 </div>

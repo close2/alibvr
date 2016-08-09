@@ -4,9 +4,11 @@ var indexSectionsWithContent =
   1: "_abcdgilmnpstuv",
   2: "_ap",
   3: "t",
-  4: "_abdghist",
+  4: "_abghist",
   5: "bdp",
-  6: "_dimp"
+  6: "t",
+  7: "_dgimp",
+  8: "ant"
 };
 
 var indexSectionNames =
@@ -17,7 +19,9 @@ var indexSectionNames =
   3: "files",
   4: "functions",
   5: "variables",
-  6: "enums"
+  6: "typedefs",
+  7: "enums",
+  8: "enumvalues"
 };
 
 var indexSectionLabels =
@@ -28,6 +32,8 @@ var indexSectionLabels =
   3: "Files",
   4: "Functions",
   5: "Variables",
-  6: "Enumerations"
+  6: "Typedefs",
+  7: "Enumerations",
+  8: "Enumerator"
 };
 
