@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script has been used to create part of internal/tasks.h
+# It is no longer needed and could be removed.
+ 
 declare -i counter
 counter=$1
 

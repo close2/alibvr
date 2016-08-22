@@ -39,12 +39,12 @@ namespace _irqs {
   
 
   typedef void (*handler_f)(enum Irq);
-  template <handler_f T, enum Irq I>
+  template <handler_f F, enum Irq I>
   struct IrqTaskWrapper {
     static const enum Irq irq = I;
     
     static inline void handle(enum Irq i) {
-      T(i);
+      F(i);
     }
   };
 

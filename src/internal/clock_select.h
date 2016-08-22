@@ -1,6 +1,6 @@
 #pragma once
 
-namespace _clock_select {
+namespace _alibvr_clock_select {
 
   enum class ClockSelect {
     ClockOff = 0,

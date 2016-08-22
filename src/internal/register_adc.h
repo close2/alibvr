@@ -12,9 +12,7 @@
   // By defining the function here (even though it doesn't do anything)
   // the compiler will make sure that this header has been included
   // or otherwise display a "meaningful" error.
-namespace ALIBVR_NAMESPACE_ADC {
-  void irq_handler_for_adc_must_be_registered_for_noise_reduction() {}
-}
+  void ALIBVR_NAMESPACE_ADC::irq_handler_for_adc_must_be_registered_for_noise_reduction() {}
 #endif
 
 #pragma pop_macro("NEW_IRQ_TASK")

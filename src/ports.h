@@ -9,8 +9,6 @@
 #  else
 #    define ALIBVR_NAMESPACE_PORTS ports
 #  endif
-#else
-#  define ALIBVR_NAMESPACE_PORTS ALIBVR_NAMESPACE_PORTS
 #endif
 
 

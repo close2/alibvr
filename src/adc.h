@@ -16,18 +16,18 @@
 #  else
 #    define ALIBVR_NAMESPACE_ADC adc
 #  endif
-#else
-#  define ALIBVR_NAMESPACE_ADC ALIBVR_NAMESPACE_ADC
 #endif
 
+#pragma push_macro("F_CPU")
+#ifndef F_CPU
+#  include "internal/default_f_cpu.h"
+#endif
 
 /**
- * 
  * By default adc related classes, enums,... are defined
  * inside the `adc` namespace.  If this creates a name clash with your
  * code you may modify the namespace name by setting
  * ALIBVR_NAMESPACE_ADC or ALIBVR_NAMESPACE_PREFIX.
- * 
  **/
 
 namespace ALIBVR_NAMESPACE_ADC {
@@ -537,3 +537,5 @@ namespace ALIBVR_NAMESPACE_ADC {
 }
 
 #define REGISTER_ADC "internal/register_adc.h"
+
+#pragma pop_macro("F_CPU")

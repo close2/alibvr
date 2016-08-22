@@ -1,5 +1,17 @@
 #pragma once
 
+/**
+ * @brief This file contains `typedef`s which make it easier to access
+ * specific bytes of multi-byte values.
+ * 
+ * An `uint16_t` for instance may be cast to `union bits16_s` which
+ * makes it possible to access to less significant byte with:
+ * `v.avr.lo`.
+ * 
+ * All `union` `typedef`s provide an `avr` member, with `lo` and `hi`
+ * members.  `avr` / gcc is little-endian!
+ **/
+
 // -----------------------------------------------------------------------
 // Types for easier byte-word-dword conversions
 // -----------------------------------------------------------------------
