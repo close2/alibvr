@@ -7,10 +7,12 @@ typedef PIN_C2 Led;
 __attribute__ ((OS_main)) int main(void) {
   Led::DDR = ports::DataDirection::Output;   // Put Led pin into output mode.
   
-  uint16_t previous = clock::Clock;
-  uint16_t target = clock::ms_to_units(clock::units_to_ms(previous) + 5000);
-  uint16_t now = previous;
+  // «CLOCK_BASIC[^  ,]»
+  uint16_t now = clock::Clock;
+  uint16_t previous = now;
+  uint16_t target = previous + clock::ms_to_units(5000);
   for (; !clock::clock_reached(now, previous, target); now = clock::Clock);
+  /*¤*/
   
   Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
   
