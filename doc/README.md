@@ -53,6 +53,8 @@ are _far_ more detailed.
 
 [Analog to digital conversion](README_ADC.md)
 
+[System clock](README_CLOCK.md)
+
 
 # Examples:
 

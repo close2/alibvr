@@ -60,7 +60,6 @@ namespace _irqs {
   // to State<1>.
   // Otherwise the specialisation for no Task left will call the resetVector.
   // (I.e. reset the avr)
-  // FIXME move this to internal, so that register_irqs can include it.
   //template <typename Handled, typename I, template <typename ...> class List, typename T, typename ...Tasks>
   //static void execIrqTasks();
   

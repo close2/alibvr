@@ -32,36 +32,139 @@
 
 
 /**
- * @brief This header file uses `timer0` to provide a system clock.
+ * @brief This file uses `Timer0` to provide a system clock.
  * 
- * _Global irqs are enabled unless the macro: `CLOCK_NO_GLOBAL_IRQ` is
- * defined!_  Because `__attribute__((constructor))` is used including
- * this header file is enough to enable irqs globally!
+ * The system clock is derived from the IO-clock and must be converted
+ * to seconds.
+ * 
+ * Conversion functions are provided.  Try to stay with the template
+ * versions, which can be calculated during compile time.  Conversion
+ * of variables (with values unknown during compile time) will
+ * probably include division code, which is both big and slow.
+ * 
+ * It is usually possible to compare the difference of 2 time instances
+ * with a converted interval value:
+ * 
+ * Instead of (both examples in pseudocode):
+ * 
+ * ```C++
+ * uint8_t clock1 = Clock;
+ * // do something
+ * uint8_t duration = Clock - clock1;
+ * if (units_to_ms(duration) > 5) // work took more than 5 ms
+ * 
+ * ```
+ * 
+ * write
+ * 
+ * ```C++
+ * uint8_t clock1 = Clock;
+ * // do something
+ * uint8_t duration = Clock - clock1;
+ * if (duration > ms_to_units<5>()) // work took more than 5 ms
+ * ```
+ * 
+ * _Global irqs are enabled unless the macro:
+ * `ALIBVR_CLOCK_NO_GLOBAL_IRQ` or `ALIBVR_NO_GLOBAL_IRQ` is
+ * defined!_  By including this header directly or indirectly global
+ * irqs are enabled because of a static constructor in this file!
+ * 
+ * The clock is incremented inside the `Timer0` overflow irq handler.
+ * To activate the registered irq handler add `#include REGISTER_IRQS`
+ * after your `main` section.
  **/
-
-
 namespace ALIBVR_NAMESPACE_CLOCK {
+  
+  /**
+   * @brief This is the system clock.
+   * 
+   * This variable is changed inside the `Timer0` overflow irq handler.
+   * `bits64_t` is a union type providing easy access to all bytes.
+   * 
+   * The prescaler is by default set to 1/64.
+   * - At 8MHz _clock is incremented every  2'048ns.
+   * - At 1MHz _clock is incremented every 16'384ns.
+   * 
+   * When retrieving the system clock the current `Timer0` counter is
+   * added.  The precision of the system clock is therefore always
+   * cpu clock / prescaler.
+   **/
   static volatile bits64_t _clock;
   
+  /**
+   * @brief Initialization code and access to the _clock variable.
+   * 
+   * This class doesn't have any private members and its constructor is
+   * only used once for a static variable.  The compiler will treat
+   * the methods like static variables.
+   * 
+   * The cast converters allow us to use different optimized assembler
+   * code for different types.
+   * 
+   * _You should never instantiate _Clock yourself!_
+   **/
   class _Clock {
   public:
     
+    /**
+     * @brief Initializes `Timer0`.
+     * 
+     * Prescale is set to clkIO/64 and overflow irq is enabled.
+     * 
+     * Global irqs are then enabled unless `ALIBVR_CLOCK_NO_GLOBAL_IRQ`
+     * or `ALIBVR_NO_GLOBAL_IRQ` is defined.
+     * 
+     * This constructor is only used once for the static `Clock`
+     * variable.
+     **/
     _Clock() {
-      // we use timer0 (8bit)
+      static_assert(_alibvr_clock_prescale::Prescale == _alibvr_clock_select::ClockSelect::Clock64,
+                    "Clock assumes prescale is 1/64 but internal/clock_prescale is different.");
+      // We use timer0 (8bit).
       TCCR0B |= _BV(CS01) | _BV(CS00); // set prescaler to clkIO/64
       // if you change the prescaler here, don't forget to change internal/clock_prescale.h::NS::Prescale
       TCNT0 = 0;
       TIMSK0 |= _BV(TOIE0); // enable Timer-overflow interrupt
       
-#     ifndef CLOCK_NO_GLOBAL_IRQ
+#     if !defined ALIBVR_CLOCK_NO_GLOBAL_IRQ && !defined ALIBVR_NO_GLOBAL_IRQ
         sei();
 #     endif
     };
     
+    /**
+     * @brief Converts the system clock to `uint8_t`.
+     * 
+     * Assuming a prescale of 1/64 `uint8_t` will overflow every
+     * 2'048µs at 8MHz and every 16'384µs at 1MHz.
+     * 
+     * It is therefore not guaranteed that the returned value increases
+     * when calling this function multiple times.
+     * 
+     * However.  If you stay below the mentioned overflow duration
+     * substracting an earlier return value from a later return value
+     * will give you a correct time difference (in "units").
+     * 
+     * This converter simply returns `TCNT0`.
+     **/
     operator uint8_t() {
       return TCNT0;
     }
     
+    /**
+     * @brief Converts the system clock to `uint16_t`.
+     * 
+     * Assuming a prescale of 1/64 `uint16_t` will overflow every
+     * 524'288µs at 8MHz and every 4'194'304µs at 1MHz.
+     * 
+     * It is therefore not guaranteed that the returned value increases
+     * when calling this function multiple times.
+     * 
+     * However.  If you stay below the mentioned overflow duration
+     * substracting an earlier return value from a later return value
+     * will give you a correct time difference (in "units").
+     * 
+     * This converter returns the lowest byte of _clock << 8 && `TCNT0`.
+     **/
     // The best documentation about inline asm in avr I've found:
     // http://www.nongnu.org/avr-libc/user-manual/inline_asm.html
     inline operator uint16_t() {
@@ -84,6 +187,24 @@ namespace ALIBVR_NAMESPACE_CLOCK {
       return clock.uint16;
     }
     
+    /**
+     * @brief Converts the system clock to `uint32_t`.
+     * 
+     * Assuming a prescale of 1/64 `uint32_t` will overflow every
+     * 9.5 hours at 8MHz and every 76 hours at 1MHz.
+     * 
+     * It is therefore not guaranteed that the returned value increases
+     * when calling this function multiple times.
+     * 
+     * However.  If you stay below the mentioned overflow duration
+     * substracting an earlier return value from a later return value
+     * will give you a correct time difference (in "units").
+     * 
+     * This converter returns the lowest 3 bytes of _clock << 8 &&
+     * `TCNT0`.
+     **/
+    // The best documentation about inline asm in avr I've found:
+    // http://www.nongnu.org/avr-libc/user-manual/inline_asm.html
     inline operator uint32_t() {
       bits32_t clock;
       asm volatile(
@@ -110,6 +231,17 @@ namespace ALIBVR_NAMESPACE_CLOCK {
       return clock.uint32;
     }
     
+    /**
+     * @brief Converts the system clock to `uint64_t`.
+     * 
+     * Assuming a prescale of 1/64 `uint64_t` will overflow every
+     * 4'654'596 years at 8MHz and every 37'410'690 years at 1MHz.
+     * 
+     * This converter returns the lowest 7 bytes of _clock << 8 &&
+     * `TCNT0`.
+     **/
+    // The best documentation about inline asm in avr I've found:
+    // http://www.nongnu.org/avr-libc/user-manual/inline_asm.html
     inline operator uint64_t() {
       bits64_t clock;
       asm volatile(
@@ -118,6 +250,10 @@ namespace ALIBVR_NAMESPACE_CLOCK {
         "lds %[c1], %[clock1]\n\t"
         "lds %[c2], %[clock2]\n\t"
         "lds %[c3], %[clock3]\n\t"
+        "lds %[c4], %[clock4]\n\t"
+        "lds %[c5], %[clock5]\n\t"
+        "lds %[c6], %[clock6]\n\t"
+        "lds %[c7], %[clock7]\n\t"
         "in %[c0], %[tcnt]\n\t"
         // Reread clock0 again.  If it has changed timer0 had an.
         // overflow.  Easily fixed by rereading everything again.
@@ -151,10 +287,17 @@ namespace ALIBVR_NAMESPACE_CLOCK {
 }
 
 #define NEW_IRQ_TASK ALIBVR_NAMESPACE_CLOCK::ClockIrqTask
-void NEW_IRQ_TASK(_irqs::Irq I) {
+/**
+ * @brief This is the Timer0 Overflow handler, which increments the
+ * system clock.
+ * 
+ * The compiler would generate less code, but execute more commands
+ * on average than this assembler version.
+ **/
+void NEW_IRQ_TASK(_irqs::Irq __attribute__((unused)) I) {
   uint8_t tmp;
   // for the common case the following code is a faster version of
-  // Clock::_clock.uint64++;
+  // clock.uint64++;
   // The best documentation about inline asm in avr I've found:
   // http://www.nongnu.org/avr-libc/user-manual/inline_asm.html
   asm volatile(
@@ -216,110 +359,327 @@ void NEW_IRQ_TASK(_irqs::Irq I) {
 
 namespace ALIBVR_NAMESPACE_CLOCK {
   
-  constexpr static uint32_t _cpu(uint32_t factor) {
-    return F_CPU / factor;
+  /**
+   * @brief Convert "units" to real time units.
+   * 
+   * All inputs are template arguments.  This makes sure that the
+   * compiler will be able to calculate everything during compile
+   * time.
+   * 
+   * This is also possible with `constexpr` functions.  However as
+   * a `constexpr` will work with dynamic values as well and not give
+   * any warning I prefer the template version as it makes sure that
+   * the inputs are known during compile time.
+   * 
+   * See units_to_ms and units_to_us for functions with simplified
+   * input.
+   * 
+   * @tparam Units The system clock units, which should be converted.
+   * @tparam Factor Use 1 second / Factor as return unit.  1'000 for ms
+   *                1'000'000 for µs.
+   * @tparam Prescale The prescale for `Timer0`.
+   **/
+  template <uint32_t Units,
+            uint32_t Factor,
+            uint32_t Prescale>
+  uint32_t units_to_time() {
+    // Promote all inputs.
+    // This will be calculated during compile time.
+    // By promoting, we avoid overflow problems.
+    const uint64_t units = Units;
+    const uint64_t factor = Factor;
+    const uint64_t prescale = Prescale;
+    
+    const uint32_t cpu = F_CPU / factor;
+    return (units * prescale) / cpu;
   }
   
-  template <uint32_t Factor, uint32_t P = _alibvr_clock_prescale::Prescale, typename M = uint16_t, typename T>
-  constexpr static inline T time_to_units(const M& n) {
-    /*
-    const uint32_t cpu = F_CPU / Factor;
-    if (cpu > 0) {
-      if (cpu > P) {
-        return n * (cpu / P);
-      } else {
-        return n / (P / cpu);
-      }
-    } else {
-      static_assert(cpu > 0, "This division would cost, remove this assert if you are sure you want to do this");
-      return n * (F_CPU / P) / Factor;
-    }
-    */
-    static_assert(_cpu(Factor) > 0, "This division would cost, remove this assert if you are sure you want to do this");
-    return (_cpu(Factor) > 0) 
-      ? ((_cpu(Factor) > P)
-        ? n * (_cpu(Factor) / P)
-        : n / (P / _cpu(Factor)))
-      : n * (F_CPU / P) / Factor;
+  /**
+   * @brief Convert real time units to "units".
+   * 
+   * See units_to_time for an explaination why inputs are template
+   * arguments and why this isn't a constexpr function.
+   * 
+   * See ms_to_units and us_to_units for functions with simplified
+   * input.
+   * 
+   * @tparam Time The time duration, which should be converted.
+   * @tparam Factor Use 1 second / Factor as input unit.  1'000 for ms
+   *                1'000'000 for µs.
+   * @tparam Prescale The prescale for `Timer0`.
+   **/
+  template <uint32_t Time,
+            uint32_t Factor,
+            uint32_t Prescale>
+  uint32_t time_to_units() {
+    // Promote all inputs.
+    // This will be calculated during compile time.
+    // By promoting, we avoid overflow problems.
+    const uint64_t time = Time;
+    const uint64_t factor = Factor;
+    const uint64_t prescale = Prescale;
+    
+    const uint32_t cpu = F_CPU / factor;
+    return (time * cpu) / prescale;
   }
   
-  template <uint32_t Factor, uint32_t P = _alibvr_clock_prescale::Prescale, typename T = uint16_t, typename M>
-  constexpr static inline T units_to_time(const M& units) {
-    /*
+  
+  /**
+   * @brief Convert "units" to real time units.
+   * 
+   * @deprecated Use template versions if possible.
+   * 
+   * See units_to_ms and units_to_us for functions with simplified
+   * input.
+   * 
+   * @param units The system clock units, which should be converted.
+   * @tparam Factor Use 1 second / Factor as return unit.  1'000 for ms
+   *                1'000'000 for µs.
+   * @tparam Prescale The prescale for `Timer0`.
+   * @tparam T The type of units (automatically determined).
+   **/
+  template <uint32_t Factor,
+            uint32_t Prescale = (uint32_t) _alibvr_clock_prescale::Prescale,
+            typename T = uint16_t>
+  __attribute__ ((deprecated("If possible use the template version.  "
+    "This function probably bloats your code and might be very slow")))
+  static inline uint32_t units_to_time(const T& units) {
     const uint32_t cpu = F_CPU / Factor;
     if (cpu > 0) {
-      if (cpu > P) {
-        return units / (cpu / P);
+      if (cpu > Prescale) {
+        return units / (cpu / Prescale);
       } else {
         uint32_t units_32b = units;
-        return (units_32b * P) / cpu;
+        return (units_32b * Prescale) / cpu;
       }
     } else {
-      static_assert(cpu > 0, "This division would cost, remove this assert if you are sure you want to do this");
-      return units / (cpu / P);
+      return units / (cpu / Prescale);
     }
-    */
-    static_assert(_cpu(Factor) > 0, "This division would cost, remove this assert if you are sure you want to do this");
-    return (_cpu(Factor) > 0) 
-      ? ((_cpu(Factor) > P)
-        ? units / (_cpu(Factor) / P)
-        : (((uint32_t) units) * P) / _cpu(Factor))
-      : units / (_cpu(Factor) / P);
   }
   
-  // export clock select:
+  /**
+   * @brief Convert real time units to "units".
+   * 
+   * @deprecated Use template versions if possible.
+   * 
+   * See units_to_ms and units_to_us for functions with simplified
+   * input.
+   * 
+   * @param n The time duration, which should be converted.
+   * @tparam Factor Use 1 second / Factor as input unit.  1'000 for ms
+   *                1'000'000 for µs.
+   * @tparam Prescale The prescale for `Timer0`.
+   * @tparam T The type of units (automatically determined).
+   **/
+  template <uint32_t Factor,
+            uint32_t Prescale = (uint32_t) _alibvr_clock_prescale::Prescale,
+            typename T = uint16_t>
+  __attribute__ ((deprecated("If possible use the template version.  "
+    "This function probably bloats your code and might be very slow")))
+  static inline uint32_t time_to_units(const T& n) {
+    const uint32_t cpu = F_CPU / Factor;
+    if (cpu > 0) {
+      if (cpu > Prescale) {
+        return n * (cpu / Prescale);
+      } else {
+        return n / (Prescale / cpu);
+      }
+    } else {
+      return n * (F_CPU / Prescale) / Factor;
+    }
+  }
+  
+  /**
+   * @brief Export of `_alibvr_clock_select::ClockSelect`
+   **/
   typedef _alibvr_clock_select::ClockSelect ClockSelect;
   
-  template <ClockSelect P = _alibvr_clock_prescale::Prescale, typename M = uint16_t, typename T = M>
-  constexpr static inline T ms_to_units(const M& n) {
-    return time_to_units<1000, (uint32_t) P, M, T>(n);
-  }
   
-  template <ClockSelect P = _alibvr_clock_prescale::Prescale, typename M = uint16_t, typename T = M>
-  constexpr static inline T us_to_units(const M& n) {
-    return time_to_units<1000000, (uint32_t) P, M, T>(n);
-  }
-  
-  template <ClockSelect P = _alibvr_clock_prescale::Prescale, typename T = uint16_t, typename M = T>
-  constexpr static inline M units_to_ms(const T& units) {
-    return units_to_time<1000, (uint32_t) P, T, M>(units);
-  }
-  
-  template <ClockSelect P = _alibvr_clock_prescale::Prescale, typename T = uint16_t, typename M = T>
-  constexpr static inline M units_to_us(const T& units) {
-    return units_to_time<1000000, (uint32_t) P, T, M>(units);
-  }
-  
-  
-  /*
-   * There are 3 cases when we have reached the clock:
-   * (1) --p--t--c-- (i.e. prev smaller than target, target smaller than clock)
-   * current clock is higher than target.  As prev is smaller than target, we
-   * passed the target.
+  /**
+   * @brief Convert ms to "units".
    * 
-   * (2) -t-c-----p-
-   * Same analysis as prev. case.  Except that we have wrapped.
+   * @deprecated Use template versions if possible.
    * 
-   * (3) -c-----p-t-
-   * In this case only clock has wrapped.
-   * 
-   */
-  template<typename T>
-  static inline uint8_t clock_reached(const T& clock, const T& previous_clock, const T& target_clock) {
-    uint8_t ret; // this variable makes debugging easier
-    if (target_clock <= clock) {
-      ret = previous_clock <= target_clock || clock < previous_clock; // (1) & (2)
-    } else {
-      ret = previous_clock <= target_clock && previous_clock > clock; // (3)
-    }
-    return ret;
+   * @param n The time duration in ms, which should be converted.
+   * @tparam P The prescale for `Timer0`.
+   * @tparam T The type of units (automatically determined).
+   **/
+  template <ClockSelect P = _alibvr_clock_prescale::Prescale,
+            typename T = uint16_t>
+  __attribute__ ((deprecated("If possible use the template version.  "
+    "This function probably bloats your code and might be very slow")))
+  static inline T ms_to_units(const T& n) {
+#   pragma GCC diagnostic push
+#   pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+    return time_to_units<1000, (uint32_t) P, T>(n);
+#   pragma GCC diagnostic pop
   }
   
-  template<typename T>
-  static inline uint8_t clock_reached(const T& previous_clock, const T& target_clock) {
-    return clock_reached((T) Clock, previous_clock, target_clock);
+  /**
+   * @brief Convert µs to "units".
+   * 
+   * @deprecated Use template versions if possible.
+   * 
+   * @param n The time duration in µs, which should be converted.
+   * @tparam P The prescale for `Timer0`.
+   * @tparam T The type of units (automatically determined).
+   **/
+  template <ClockSelect P = _alibvr_clock_prescale::Prescale,
+            typename T = uint16_t>
+  __attribute__ ((deprecated("If possible use the template version.  "
+    "This function probably bloats your code and might be very slow")))
+  static inline uint32_t us_to_units(const T& n) {
+#   pragma GCC diagnostic push
+#   pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+    return time_to_units<1000000, (uint32_t) P, T>(n);
+#   pragma GCC diagnostic pop
   }
   
+  /**
+   * @brief Convert "units" to ms.
+   * 
+   * @deprecated Use template versions if possible.
+   * 
+   * @param units The time duration in units, which should be converted.
+   * @tparam P The prescale for `Timer0`.
+   * @tparam T The type of units (automatically determined).
+   **/
+  template <ClockSelect P = _alibvr_clock_prescale::Prescale,
+            typename T = uint16_t>
+  __attribute__ ((deprecated("If possible use the template version.  "
+    "This function probably bloats your code and might be very slow")))
+  static inline uint32_t units_to_ms(const T& units) {
+#   pragma GCC diagnostic push
+#   pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+    return units_to_time<1000, (uint32_t) P, T>(units);
+#   pragma GCC diagnostic pop
+  }
+  
+  /**
+   * @brief Convert "units" to µs.
+   * 
+   * @deprecated Use template versions if possible.
+   * 
+   * @param units The time duration in units, which should be converted.
+   * @tparam P The prescale for `Timer0`.
+   * @tparam T The type of units (automatically determined).
+   **/
+  template <ClockSelect P = _alibvr_clock_prescale::Prescale,
+            typename T = uint16_t>
+  __attribute__ ((deprecated("If possible use the template version.  "
+    "This function probably bloats your code and might be very slow")))
+  static inline uint32_t units_to_us(const T& units) {
+#   pragma GCC diagnostic push
+#   pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+    return units_to_time<1000000, (uint32_t) P, T>(units);
+#   pragma GCC diagnostic pop
+  }
+  
+  /**
+   * @brief Convert ms to "units".
+   * 
+   * See units_to_time for an explaination why inputs are template
+   * arguments and why this isn't a constexpr function.
+   * 
+   * 
+   * @tparam Time The time duration in ms, which should be converted.
+   * @tparam P The prescale for `Timer0`.
+   **/
+  template <uint32_t Time,
+            ClockSelect P = _alibvr_clock_prescale::Prescale>
+  static inline uint32_t ms_to_units() {
+    return time_to_units<Time, 1000, (uint32_t) P>();
+  }
+  
+  /**
+   * @brief Convert µs to "units".
+   * 
+   * See units_to_time for an explaination why inputs are template
+   * arguments and why this isn't a constexpr function.
+   * 
+   * @tparam Time The time duration in µ, which should be converted.
+   * @tparam P The prescale for `Timer0`.
+   **/
+  template <uint32_t Time,
+            ClockSelect P = _alibvr_clock_prescale::Prescale>
+  static inline uint32_t us_to_units() {
+    return time_to_units<Time, 1000000, (uint32_t) P>();
+  }
+  
+  /**
+   * @brief Convert "units" to ms.
+   * 
+   * See units_to_time for an explaination why inputs are template
+   * arguments and why this isn't a constexpr function.
+   * 
+   * @tparam Units The units which should be converted.
+   * @tparam P The prescale for `Timer0`.
+   **/
+  template <uint32_t Units,
+            ClockSelect P = _alibvr_clock_prescale::Prescale>
+  static inline uint32_t units_to_ms() {
+    return units_to_time<Units, 1000, (uint32_t) P>();
+  }
+  
+  /**
+   * @brief Convert "units" to µs.
+   * 
+   * See units_to_time for an explaination why inputs are template
+   * arguments and why this isn't a constexpr function.
+   * 
+   * @tparam Units The units which should be converted.
+   * @tparam P The prescale for `Timer0`.
+   **/
+  template <uint32_t Units,
+            ClockSelect P = _alibvr_clock_prescale::Prescale>
+  static inline uint32_t units_to_us() {
+    return units_to_time<Units, 1000000, (uint32_t) P>();
+  }
+  
+  
+  /**
+   * @brief Calculate if the difference between previous_clock and
+   *   current_clock is bigger than duration.
+   * 
+   * This function will return a correct result, even if Clock has
+   * wrapped around.  It is however up to the caller to make sure that
+   * the clock type T is big enough.
+   * 
+   * Unless you have multiple comparisons with different durations,
+   * use the simpler duration_passed function, which only requires
+   * previous_clock.
+   * 
+   * @param previous_clock The clock value (in "units") to which
+   *   duration is added.  It is ok if previous_clock equals
+   *   current_clock.
+   * @param current_clock The clock value (in "units") which should be
+   *   farther in the future than previous_clock + duration for this
+   *   function to return true.
+   * @param duration The duration in "units" which should pass since
+   *   previous_clock.  See ms_to_units and us_to_units.
+   **/
+  template<typename T, typename U>
+  static inline uint8_t duration_passed(const T& previous_clock, const T& current_clock, const U& duration) {
+    return (current_clock - previous_clock) > duration;
+  }
+  
+  /**
+   * @brief Calculate if duration has passed since previous_clock.
+   * 
+   * This function will return a correct result, even if Clock has
+   * wrapped around.  It is however up to the caller to make sure that
+   * the clock type T is big enough.
+   * 
+   * @param previous_clock The clock value (in "units") to which
+   *   duration is added.  It is ok if previous_clock is the current
+   *   Clock: `uint16_t prev = Clock; while (!duration_passed(prev, duration)) prev = Clock;`
+   * @param duration The duration in "units" which should pass since
+   *   previous_clock.  See ms_to_units and us_to_units.
+   **/
+  template<typename T, typename U>
+  static inline uint8_t duration_passed(const T& previous_clock, const U& duration) {
+    return duration_passed(previous_clock, (T) Clock, duration);
+  }
 }
 #define _CLOCK_IN_USE _CLOCK_IN_USE
 
