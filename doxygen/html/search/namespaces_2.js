@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ports',['ports',['../d4/d49/namespaceports.html',1,'']]]
+  ['clock',['clock',['../d9/d1f/namespaceclock.html',1,'']]]
 ];

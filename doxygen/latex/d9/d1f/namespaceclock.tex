@@ -1,0 +1,422 @@
+\hypertarget{namespaceclock}{}\section{clock Namespace Reference}
+\label{namespaceclock}\index{clock@{clock}}
+
+
+This file uses {\ttfamily Timer0} to provide a system clock.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classclock_1_1__Clock}{\+\_\+\+Clock}
+\begin{DoxyCompactList}\small\item\em Initialization code and access to the \+\_\+clock variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \+\_\+alibvr\+\_\+clock\+\_\+select\+::\+Clock\+Select \hyperlink{namespaceclock_ac435d838e47eaebdb967aebfeab78eae}{Clock\+Select}\hypertarget{namespaceclock_ac435d838e47eaebdb967aebfeab78eae}{}\label{namespaceclock_ac435d838e47eaebdb967aebfeab78eae}
+
+\begin{DoxyCompactList}\small\item\em Export of {\ttfamily \+\_\+alibvr\+\_\+clock\+\_\+select\+::\+Clock\+Select} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Clock\+Irq\+Task} (\+\_\+irqs\+::\+Irq I)\hypertarget{namespaceclock_aa67adb0b2215c44a4a770b6c36cfe8a7}{}\label{namespaceclock_aa67adb0b2215c44a4a770b6c36cfe8a7}
+
+\item 
+{\footnotesize template$<$uint32\+\_\+t Units, uint32\+\_\+t Factor, uint32\+\_\+t Prescale$>$ }\\uint32\+\_\+t \hyperlink{namespaceclock_a59983c7016f94be64afeef3fcf9ecbae}{units\+\_\+to\+\_\+time} ()
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to real time units. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Time, uint32\+\_\+t Factor, uint32\+\_\+t Prescale$>$ }\\uint32\+\_\+t \hyperlink{namespaceclock_a9ce676facac779fb2216999149135442}{time\+\_\+to\+\_\+units} ()
+\begin{DoxyCompactList}\small\item\em Convert real time units to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Factor, uint32\+\_\+t Prescale = (uint32\+\_\+t) \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ }\\\hyperlink{namespaceclock_abc1ca865d088a006d44b38313be09f48}{\+\_\+\+\_\+attribute\+\_\+\+\_\+} ((deprecated(\char`\"{}If possible use the template version.  \char`\"{}\char`\"{}This function probably bloats your code and might be very slow\char`\"{}))) static inline uint32\+\_\+t \hyperlink{namespaceclock_a59983c7016f94be64afeef3fcf9ecbae}{units\+\_\+to\+\_\+time}(const T \&units)
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to real time units. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ }\\\hyperlink{namespaceclock_a0c02ffd1be19c752062fa0f8b8785cec}{\+\_\+\+\_\+attribute\+\_\+\+\_\+} ((deprecated(\char`\"{}If possible use the template version.  \char`\"{}\char`\"{}This function probably bloats your code and might be very slow\char`\"{}))) static inline T \hyperlink{namespaceclock_a07c3289d478f0b0d10f336d863757f08}{ms\+\_\+to\+\_\+units}(const T \&n)
+\begin{DoxyCompactList}\small\item\em Convert ms to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Time, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ }\\static uint32\+\_\+t \hyperlink{namespaceclock_a07c3289d478f0b0d10f336d863757f08}{ms\+\_\+to\+\_\+units} ()
+\begin{DoxyCompactList}\small\item\em Convert ms to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Time, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ }\\static uint32\+\_\+t \hyperlink{namespaceclock_aa4c5b29041788b9162d9ce44ec0777fb}{us\+\_\+to\+\_\+units} ()
+\begin{DoxyCompactList}\small\item\em Convert µs to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Units, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ }\\static uint32\+\_\+t \hyperlink{namespaceclock_a47af3a8ffbea7eb40a79905155e751d3}{units\+\_\+to\+\_\+ms} ()
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to ms. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Units, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ }\\static uint32\+\_\+t \hyperlink{namespaceclock_af359b2b647bef46d5b5afa640817ce80}{units\+\_\+to\+\_\+us} ()
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to µs. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename U $>$ }\\static uint8\+\_\+t \hyperlink{namespaceclock_ab9b794523b696e33f46f8d7b98cfee0d}{duration\+\_\+passed} (const T \&previous\+\_\+clock, const T \&current\+\_\+clock, const U \&duration)
+\begin{DoxyCompactList}\small\item\em Calculate if the difference between previous\+\_\+clock and current\+\_\+clock is bigger than duration. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename U $>$ }\\static uint8\+\_\+t \hyperlink{namespaceclock_aafd8b2bf08806cd40128eac84ea82e8e}{duration\+\_\+passed} (const T \&previous\+\_\+clock, const U \&duration)
+\begin{DoxyCompactList}\small\item\em Calculate if duration has passed since previous\+\_\+clock. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static volatile \hyperlink{unionbits64__s}{bits64\+\_\+t} \hyperlink{namespaceclock_a0cfce972d3684eddb3dd61bb0baaf225}{\+\_\+clock}
+\begin{DoxyCompactList}\small\item\em This is the system clock. \end{DoxyCompactList}\item 
+static \hyperlink{classclock_1_1__Clock}{\+\_\+\+Clock} {\bfseries Clock}\hypertarget{namespaceclock_a8414359d2fd2b9f75143850c0e3bb4b5}{}\label{namespaceclock_a8414359d2fd2b9f75143850c0e3bb4b5}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file uses {\ttfamily Timer0} to provide a system clock. 
+
+By default class related classes, enums,... are defined inside the {\ttfamily clock} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+C\+L\+O\+CK or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. The system clock is derived from the I\+O-\/clock and must be converted to seconds.
+
+Conversion functions are provided. Try to stay with the template versions, which can be calculated during compile time. Conversion of variables (with values unknown during compile time) will probably include division code, which is both big and slow.
+
+It is usually possible to compare the difference of 2 time instances with a converted interval value\+:
+
+Instead of (both examples in pseudocode)\+:
+
+
+\begin{DoxyCode}
+\{C++\}
+uint8\_t clock1 = Clock;
+\textcolor{comment}{// do something}
+uint8\_t duration = Clock - clock1;
+\textcolor{keywordflow}{if} (\hyperlink{namespaceclock_a47af3a8ffbea7eb40a79905155e751d3}{units\_to\_ms}(duration) > 5) \textcolor{comment}{// work took more than 5 ms}
+\end{DoxyCode}
+
+
+write
+
+
+\begin{DoxyCode}
+\{C++\}
+uint8\_t clock1 = Clock;
+\textcolor{comment}{// do something}
+uint8\_t duration = Clock - clock1;
+\textcolor{keywordflow}{if} (duration > ms\_to\_units<5>()) \textcolor{comment}{// work took more than 5 ms}
+\end{DoxyCode}
+
+
+{\itshape Global irqs are enabled unless the macro\+: {\ttfamily A\+L\+I\+B\+V\+R\+\_\+\+C\+L\+O\+C\+K\+\_\+\+N\+O\+\_\+\+G\+L\+O\+B\+A\+L\+\_\+\+I\+RQ} or {\ttfamily A\+L\+I\+B\+V\+R\+\_\+\+N\+O\+\_\+\+G\+L\+O\+B\+A\+L\+\_\+\+I\+RQ} is defined!} By including this header directly or indirectly global irqs are enabled because of a static constructor in this file!
+
+The clock is incremented inside the {\ttfamily Timer0} overflow irq handler. To activate the registered irq handler add {\ttfamily \#include R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+I\+R\+QS} after your {\ttfamily main} section. 
+
+\subsection{Function Documentation}
+\index{clock@{clock}!\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}!clock@{clock}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+attribute\+\_\+\+\_\+((deprecated(""If possible use the template version.  """"This function probably bloats your code and might be very slow""))) static inline uint32\+\_\+t units\+\_\+to\+\_\+time(const T \&units)}{__attribute__((deprecated("If possible use the template version.  ""This function probably bloats your code and might be very slow"))) static inline uint32_t units_to_time(const T &units)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$uint32\+\_\+t Factor, uint32\+\_\+t Prescale = (uint32\+\_\+t) \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ clock\+::\+\_\+\+\_\+attribute\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{(deprecated(\char`\"{}If possible use the template version.  \char`\"{}\char`\"{}This function probably bloats your code and might be very slow\char`\"{}))}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{namespaceclock_abc1ca865d088a006d44b38313be09f48}{}\label{namespaceclock_abc1ca865d088a006d44b38313be09f48}
+
+
+Convert \char`\"{}units\char`\"{} to real time units. 
+
+Convert real time units to \char`\"{}units\char`\"{}.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000001}{Deprecated}]Use template versions if possible.\end{DoxyRefDesc}
+
+
+See units\+\_\+to\+\_\+ms and units\+\_\+to\+\_\+us for functions with simplified input.
+
+
+\begin{DoxyParams}{Parameters}
+{\em units} & The system clock units, which should be converted. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Factor} & Use 1 second / Factor as return unit. 1\textquotesingle{}000 for ms 1\textquotesingle{}000\textquotesingle{}000 for µs. \\
+\hline
+{\em Prescale} & The prescale for {\ttfamily Timer0}. \\
+\hline
+{\em T} & The type of units (automatically determined).\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000002}{Deprecated}]Use template versions if possible.\end{DoxyRefDesc}
+
+
+See units\+\_\+to\+\_\+ms and units\+\_\+to\+\_\+us for functions with simplified input.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The time duration, which should be converted. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Factor} & Use 1 second / Factor as input unit. 1\textquotesingle{}000 for ms 1\textquotesingle{}000\textquotesingle{}000 for µs. \\
+\hline
+{\em Prescale} & The prescale for {\ttfamily Timer0}. \\
+\hline
+{\em T} & The type of units (automatically determined). \\
+\hline
+\end{DoxyTemplParams}
+\index{clock@{clock}!\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}!clock@{clock}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+attribute\+\_\+\+\_\+((deprecated(""If possible use the template version.  """"This function probably bloats your code and might be very slow""))) static inline T ms\+\_\+to\+\_\+units(const T \&n)}{__attribute__((deprecated("If possible use the template version.  ""This function probably bloats your code and might be very slow"))) static inline T ms_to_units(const T &n)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ clock\+::\+\_\+\+\_\+attribute\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{(deprecated(\char`\"{}If possible use the template version.  \char`\"{}\char`\"{}This function probably bloats your code and might be very slow\char`\"{}))}]{}
+\end{DoxyParamCaption}
+) const}\hypertarget{namespaceclock_a0c02ffd1be19c752062fa0f8b8785cec}{}\label{namespaceclock_a0c02ffd1be19c752062fa0f8b8785cec}
+
+
+Convert ms to \char`\"{}units\char`\"{}. 
+
+Convert \char`\"{}units\char`\"{} to µs.
+
+Convert \char`\"{}units\char`\"{} to ms.
+
+Convert µs to \char`\"{}units\char`\"{}.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000003}{Deprecated}]Use template versions if possible.\end{DoxyRefDesc}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The time duration in ms, which should be converted. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em P} & The prescale for {\ttfamily Timer0}. \\
+\hline
+{\em T} & The type of units (automatically determined).\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000004}{Deprecated}]Use template versions if possible.\end{DoxyRefDesc}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The time duration in µs, which should be converted. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em P} & The prescale for {\ttfamily Timer0}. \\
+\hline
+{\em T} & The type of units (automatically determined).\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000005}{Deprecated}]Use template versions if possible.\end{DoxyRefDesc}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em units} & The time duration in units, which should be converted. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em P} & The prescale for {\ttfamily Timer0}. \\
+\hline
+{\em T} & The type of units (automatically determined).\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000006}{Deprecated}]Use template versions if possible.\end{DoxyRefDesc}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em units} & The time duration in units, which should be converted. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em P} & The prescale for {\ttfamily Timer0}. \\
+\hline
+{\em T} & The type of units (automatically determined). \\
+\hline
+\end{DoxyTemplParams}
+\index{clock@{clock}!duration\+\_\+passed@{duration\+\_\+passed}}
+\index{duration\+\_\+passed@{duration\+\_\+passed}!clock@{clock}}
+\subsubsection[{\texorpdfstring{duration\+\_\+passed(const T \&previous\+\_\+clock, const T \&current\+\_\+clock, const U \&duration)}{duration_passed(const T &previous_clock, const T &current_clock, const U &duration)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename U $>$ static uint8\+\_\+t clock\+::duration\+\_\+passed (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{previous\+\_\+clock, }
+\item[{const T \&}]{current\+\_\+clock, }
+\item[{const U \&}]{duration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceclock_ab9b794523b696e33f46f8d7b98cfee0d}{}\label{namespaceclock_ab9b794523b696e33f46f8d7b98cfee0d}
+
+
+Calculate if the difference between previous\+\_\+clock and current\+\_\+clock is bigger than duration. 
+
+This function will return a correct result, even if Clock has wrapped around. It is however up to the caller to make sure that the clock type T is big enough.
+
+Unless you have multiple comparisons with different durations, use the simpler duration\+\_\+passed function, which only requires previous\+\_\+clock.
+
+
+\begin{DoxyParams}{Parameters}
+{\em previous\+\_\+clock} & The clock value (in \char`\"{}units\char`\"{}) to which duration is added. It is ok if previous\+\_\+clock equals current\+\_\+clock. \\
+\hline
+{\em current\+\_\+clock} & The clock value (in \char`\"{}units\char`\"{}) which should be farther in the future than previous\+\_\+clock + duration for this function to return true. \\
+\hline
+{\em duration} & The duration in \char`\"{}units\char`\"{} which should pass since previous\+\_\+clock. See ms\+\_\+to\+\_\+units and us\+\_\+to\+\_\+units. \\
+\hline
+\end{DoxyParams}
+\index{clock@{clock}!duration\+\_\+passed@{duration\+\_\+passed}}
+\index{duration\+\_\+passed@{duration\+\_\+passed}!clock@{clock}}
+\subsubsection[{\texorpdfstring{duration\+\_\+passed(const T \&previous\+\_\+clock, const U \&duration)}{duration_passed(const T &previous_clock, const U &duration)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename U $>$ static uint8\+\_\+t clock\+::duration\+\_\+passed (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{previous\+\_\+clock, }
+\item[{const U \&}]{duration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceclock_aafd8b2bf08806cd40128eac84ea82e8e}{}\label{namespaceclock_aafd8b2bf08806cd40128eac84ea82e8e}
+
+
+Calculate if duration has passed since previous\+\_\+clock. 
+
+This function will return a correct result, even if Clock has wrapped around. It is however up to the caller to make sure that the clock type T is big enough.
+
+
+\begin{DoxyParams}{Parameters}
+{\em previous\+\_\+clock} & The clock value (in \char`\"{}units\char`\"{}) to which duration is added. It is ok if previous\+\_\+clock is the current Clock\+: {\ttfamily uint16\+\_\+t prev = Clock; while (!duration\+\_\+passed(prev, duration)) prev = Clock;} \\
+\hline
+{\em duration} & The duration in \char`\"{}units\char`\"{} which should pass since previous\+\_\+clock. See ms\+\_\+to\+\_\+units and us\+\_\+to\+\_\+units. \\
+\hline
+\end{DoxyParams}
+\index{clock@{clock}!ms\+\_\+to\+\_\+units@{ms\+\_\+to\+\_\+units}}
+\index{ms\+\_\+to\+\_\+units@{ms\+\_\+to\+\_\+units}!clock@{clock}}
+\subsubsection[{\texorpdfstring{ms\+\_\+to\+\_\+units()}{ms_to_units()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$uint32\+\_\+t Time, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ static uint32\+\_\+t clock\+::ms\+\_\+to\+\_\+units (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceclock_a07c3289d478f0b0d10f336d863757f08}{}\label{namespaceclock_a07c3289d478f0b0d10f336d863757f08}
+
+
+Convert ms to \char`\"{}units\char`\"{}. 
+
+See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Time} & The time duration in ms, which should be converted. \\
+\hline
+{\em P} & The prescale for {\ttfamily Timer0}. \\
+\hline
+\end{DoxyTemplParams}
+\index{clock@{clock}!time\+\_\+to\+\_\+units@{time\+\_\+to\+\_\+units}}
+\index{time\+\_\+to\+\_\+units@{time\+\_\+to\+\_\+units}!clock@{clock}}
+\subsubsection[{\texorpdfstring{time\+\_\+to\+\_\+units()}{time_to_units()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$uint32\+\_\+t Time, uint32\+\_\+t Factor, uint32\+\_\+t Prescale$>$ uint32\+\_\+t clock\+::time\+\_\+to\+\_\+units (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceclock_a9ce676facac779fb2216999149135442}{}\label{namespaceclock_a9ce676facac779fb2216999149135442}
+
+
+Convert real time units to \char`\"{}units\char`\"{}. 
+
+See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+
+See ms\+\_\+to\+\_\+units and us\+\_\+to\+\_\+units for functions with simplified input.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Time} & The time duration, which should be converted. \\
+\hline
+{\em Factor} & Use 1 second / Factor as input unit. 1\textquotesingle{}000 for ms 1\textquotesingle{}000\textquotesingle{}000 for µs. \\
+\hline
+{\em Prescale} & The prescale for {\ttfamily Timer0}. \\
+\hline
+\end{DoxyTemplParams}
+\index{clock@{clock}!units\+\_\+to\+\_\+ms@{units\+\_\+to\+\_\+ms}}
+\index{units\+\_\+to\+\_\+ms@{units\+\_\+to\+\_\+ms}!clock@{clock}}
+\subsubsection[{\texorpdfstring{units\+\_\+to\+\_\+ms()}{units_to_ms()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$uint32\+\_\+t Units, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ static uint32\+\_\+t clock\+::units\+\_\+to\+\_\+ms (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceclock_a47af3a8ffbea7eb40a79905155e751d3}{}\label{namespaceclock_a47af3a8ffbea7eb40a79905155e751d3}
+
+
+Convert \char`\"{}units\char`\"{} to ms. 
+
+See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Units} & The units which should be converted. \\
+\hline
+{\em P} & The prescale for {\ttfamily Timer0}. \\
+\hline
+\end{DoxyTemplParams}
+\index{clock@{clock}!units\+\_\+to\+\_\+time@{units\+\_\+to\+\_\+time}}
+\index{units\+\_\+to\+\_\+time@{units\+\_\+to\+\_\+time}!clock@{clock}}
+\subsubsection[{\texorpdfstring{units\+\_\+to\+\_\+time()}{units_to_time()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$uint32\+\_\+t Units, uint32\+\_\+t Factor, uint32\+\_\+t Prescale$>$ uint32\+\_\+t clock\+::units\+\_\+to\+\_\+time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceclock_a59983c7016f94be64afeef3fcf9ecbae}{}\label{namespaceclock_a59983c7016f94be64afeef3fcf9ecbae}
+
+
+Convert \char`\"{}units\char`\"{} to real time units. 
+
+All inputs are template arguments. This makes sure that the compiler will be able to calculate everything during compile time.
+
+This is also possible with {\ttfamily constexpr} functions. However as a {\ttfamily constexpr} will work with dynamic values as well and not give any warning I prefer the template version as it makes sure that the inputs are known during compile time.
+
+See units\+\_\+to\+\_\+ms and units\+\_\+to\+\_\+us for functions with simplified input.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Units} & The system clock units, which should be converted. \\
+\hline
+{\em Factor} & Use 1 second / Factor as return unit. 1\textquotesingle{}000 for ms 1\textquotesingle{}000\textquotesingle{}000 for µs. \\
+\hline
+{\em Prescale} & The prescale for {\ttfamily Timer0}. \\
+\hline
+\end{DoxyTemplParams}
+\index{clock@{clock}!units\+\_\+to\+\_\+us@{units\+\_\+to\+\_\+us}}
+\index{units\+\_\+to\+\_\+us@{units\+\_\+to\+\_\+us}!clock@{clock}}
+\subsubsection[{\texorpdfstring{units\+\_\+to\+\_\+us()}{units_to_us()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$uint32\+\_\+t Units, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ static uint32\+\_\+t clock\+::units\+\_\+to\+\_\+us (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceclock_af359b2b647bef46d5b5afa640817ce80}{}\label{namespaceclock_af359b2b647bef46d5b5afa640817ce80}
+
+
+Convert \char`\"{}units\char`\"{} to µs. 
+
+See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Units} & The units which should be converted. \\
+\hline
+{\em P} & The prescale for {\ttfamily Timer0}. \\
+\hline
+\end{DoxyTemplParams}
+\index{clock@{clock}!us\+\_\+to\+\_\+units@{us\+\_\+to\+\_\+units}}
+\index{us\+\_\+to\+\_\+units@{us\+\_\+to\+\_\+units}!clock@{clock}}
+\subsubsection[{\texorpdfstring{us\+\_\+to\+\_\+units()}{us_to_units()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$uint32\+\_\+t Time, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ static uint32\+\_\+t clock\+::us\+\_\+to\+\_\+units (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{namespaceclock_aa4c5b29041788b9162d9ce44ec0777fb}{}\label{namespaceclock_aa4c5b29041788b9162d9ce44ec0777fb}
+
+
+Convert µs to \char`\"{}units\char`\"{}. 
+
+See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Time} & The time duration in µ, which should be converted. \\
+\hline
+{\em P} & The prescale for {\ttfamily Timer0}. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Variable Documentation}
+\index{clock@{clock}!\+\_\+clock@{\+\_\+clock}}
+\index{\+\_\+clock@{\+\_\+clock}!clock@{clock}}
+\subsubsection[{\texorpdfstring{\+\_\+clock}{_clock}}]{\setlength{\rightskip}{0pt plus 5cm}volatile {\bf bits64\+\_\+t} clock\+::\+\_\+clock\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{namespaceclock_a0cfce972d3684eddb3dd61bb0baaf225}{}\label{namespaceclock_a0cfce972d3684eddb3dd61bb0baaf225}
+
+
+This is the system clock. 
+
+This variable is changed inside the {\ttfamily Timer0} overflow irq handler. {\ttfamily bits64\+\_\+t} is a union type providing easy access to all bytes.
+
+The prescaler is by default set to 1/64.
+\begin{DoxyItemize}
+\item At 8\+M\+Hz \+\_\+clock is incremented every 2\textquotesingle{}048ns.
+\item At 1\+M\+Hz \+\_\+clock is incremented every 16\textquotesingle{}384ns.
+\end{DoxyItemize}
+
+When retrieving the system clock the current {\ttfamily Timer0} counter is added. The precision of the system clock is therefore always cpu clock / prescaler. 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ddr',['DDR',['../d8/dc3/structports_1_1Pin.html#aaebb4d6cb5db0635fe8e7d6e7d315c7f',1,'ports::Pin']]]
+  ['bit',['bit',['../d8/dc3/structports_1_1Pin.html#aea726b85cfe5e49822dd2517da5c860f',1,'ports::Pin']]]
 ];

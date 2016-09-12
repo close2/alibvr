@@ -1,0 +1,123 @@
+\hypertarget{classclock_1_1__Clock}{}\section{clock\+:\+:\+\_\+\+Clock Class Reference}
+\label{classclock_1_1__Clock}\index{clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}}
+
+
+Initialization code and access to the \+\_\+clock variable.  
+
+
+
+
+{\ttfamily \#include $<$clock.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classclock_1_1__Clock_a6b87c9f7ce1d1b0de9a5e728a62342ce}{\+\_\+\+Clock} ()
+\begin{DoxyCompactList}\small\item\em Initializes {\ttfamily Timer0}. \end{DoxyCompactList}\item 
+\hyperlink{classclock_1_1__Clock_ab095ca7d0ca8668e5904afb9998133f7}{operator uint8\+\_\+t} ()
+\begin{DoxyCompactList}\small\item\em Converts the system clock to {\ttfamily uint8\+\_\+t}. \end{DoxyCompactList}\item 
+\hyperlink{classclock_1_1__Clock_adaacf5c86adc29d0e0758197d1727d2e}{operator uint16\+\_\+t} ()
+\begin{DoxyCompactList}\small\item\em Converts the system clock to {\ttfamily uint16\+\_\+t}. \end{DoxyCompactList}\item 
+\hyperlink{classclock_1_1__Clock_a9eb2b6bbd2a98818df1d379125fd525c}{operator uint32\+\_\+t} ()
+\begin{DoxyCompactList}\small\item\em Converts the system clock to {\ttfamily uint32\+\_\+t}. \end{DoxyCompactList}\item 
+\hyperlink{classclock_1_1__Clock_a2be32ac8c4e823da6dd966f5d19c7032}{operator uint64\+\_\+t} ()
+\begin{DoxyCompactList}\small\item\em Converts the system clock to {\ttfamily uint64\+\_\+t}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Initialization code and access to the \+\_\+clock variable. 
+
+This class doesn\textquotesingle{}t have any private members and its constructor is only used once for a static variable. The compiler will treat the methods like static variables.
+
+The cast converters allow us to use different optimized assembler code for different types.
+
+{\itshape You should never instantiate \hyperlink{classclock_1_1__Clock}{\+\_\+\+Clock} yourself!} 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}!\+\_\+\+Clock@{\+\_\+\+Clock}}
+\index{\+\_\+\+Clock@{\+\_\+\+Clock}!clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}}
+\subsubsection[{\texorpdfstring{\+\_\+\+Clock()}{_Clock()}}]{\setlength{\rightskip}{0pt plus 5cm}clock\+::\+\_\+\+Clock\+::\+\_\+\+Clock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classclock_1_1__Clock_a6b87c9f7ce1d1b0de9a5e728a62342ce}{}\label{classclock_1_1__Clock_a6b87c9f7ce1d1b0de9a5e728a62342ce}
+
+
+Initializes {\ttfamily Timer0}. 
+
+Prescale is set to clk\+I\+O/64 and overflow irq is enabled.
+
+Global irqs are then enabled unless {\ttfamily A\+L\+I\+B\+V\+R\+\_\+\+C\+L\+O\+C\+K\+\_\+\+N\+O\+\_\+\+G\+L\+O\+B\+A\+L\+\_\+\+I\+RQ} or {\ttfamily A\+L\+I\+B\+V\+R\+\_\+\+N\+O\+\_\+\+G\+L\+O\+B\+A\+L\+\_\+\+I\+RQ} is defined.
+
+This constructor is only used once for the static {\ttfamily Clock} variable. 
+
+\subsection{Member Function Documentation}
+\index{clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}!operator uint16\+\_\+t@{operator uint16\+\_\+t}}
+\index{operator uint16\+\_\+t@{operator uint16\+\_\+t}!clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}}
+\subsubsection[{\texorpdfstring{operator uint16\+\_\+t()}{operator uint16_t()}}]{\setlength{\rightskip}{0pt plus 5cm}clock\+::\+\_\+\+Clock\+::operator uint16\+\_\+t (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classclock_1_1__Clock_adaacf5c86adc29d0e0758197d1727d2e}{}\label{classclock_1_1__Clock_adaacf5c86adc29d0e0758197d1727d2e}
+
+
+Converts the system clock to {\ttfamily uint16\+\_\+t}. 
+
+Assuming a prescale of 1/64 {\ttfamily uint16\+\_\+t} will overflow every 524\textquotesingle{}288µs at 8\+M\+Hz and every 4\textquotesingle{}194\textquotesingle{}304µs at 1\+M\+Hz.
+
+It is therefore not guaranteed that the returned value increases when calling this function multiple times.
+
+However. If you stay below the mentioned overflow duration substracting an earlier return value from a later return value will give you a correct time difference (in \char`\"{}units\char`\"{}).
+
+This converter returns the lowest byte of \+\_\+clock $<$$<$ 8 \&\& {\ttfamily T\+C\+N\+T0}. \index{clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}!operator uint32\+\_\+t@{operator uint32\+\_\+t}}
+\index{operator uint32\+\_\+t@{operator uint32\+\_\+t}!clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}}
+\subsubsection[{\texorpdfstring{operator uint32\+\_\+t()}{operator uint32_t()}}]{\setlength{\rightskip}{0pt plus 5cm}clock\+::\+\_\+\+Clock\+::operator uint32\+\_\+t (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classclock_1_1__Clock_a9eb2b6bbd2a98818df1d379125fd525c}{}\label{classclock_1_1__Clock_a9eb2b6bbd2a98818df1d379125fd525c}
+
+
+Converts the system clock to {\ttfamily uint32\+\_\+t}. 
+
+Assuming a prescale of 1/64 {\ttfamily uint32\+\_\+t} will overflow every 9.\+5 hours at 8\+M\+Hz and every 76 hours at 1\+M\+Hz.
+
+It is therefore not guaranteed that the returned value increases when calling this function multiple times.
+
+However. If you stay below the mentioned overflow duration substracting an earlier return value from a later return value will give you a correct time difference (in \char`\"{}units\char`\"{}).
+
+This converter returns the lowest 3 bytes of \+\_\+clock $<$$<$ 8 \&\& {\ttfamily T\+C\+N\+T0}. \index{clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}!operator uint64\+\_\+t@{operator uint64\+\_\+t}}
+\index{operator uint64\+\_\+t@{operator uint64\+\_\+t}!clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}}
+\subsubsection[{\texorpdfstring{operator uint64\+\_\+t()}{operator uint64_t()}}]{\setlength{\rightskip}{0pt plus 5cm}clock\+::\+\_\+\+Clock\+::operator uint64\+\_\+t (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classclock_1_1__Clock_a2be32ac8c4e823da6dd966f5d19c7032}{}\label{classclock_1_1__Clock_a2be32ac8c4e823da6dd966f5d19c7032}
+
+
+Converts the system clock to {\ttfamily uint64\+\_\+t}. 
+
+Assuming a prescale of 1/64 {\ttfamily uint64\+\_\+t} will overflow every 4\textquotesingle{}654\textquotesingle{}596 years at 8\+M\+Hz and every 37\textquotesingle{}410\textquotesingle{}690 years at 1\+M\+Hz.
+
+This converter returns the lowest 7 bytes of \+\_\+clock $<$$<$ 8 \&\& {\ttfamily T\+C\+N\+T0}. \index{clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}!operator uint8\+\_\+t@{operator uint8\+\_\+t}}
+\index{operator uint8\+\_\+t@{operator uint8\+\_\+t}!clock\+::\+\_\+\+Clock@{clock\+::\+\_\+\+Clock}}
+\subsubsection[{\texorpdfstring{operator uint8\+\_\+t()}{operator uint8_t()}}]{\setlength{\rightskip}{0pt plus 5cm}clock\+::\+\_\+\+Clock\+::operator uint8\+\_\+t (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classclock_1_1__Clock_ab095ca7d0ca8668e5904afb9998133f7}{}\label{classclock_1_1__Clock_ab095ca7d0ca8668e5904afb9998133f7}
+
+
+Converts the system clock to {\ttfamily uint8\+\_\+t}. 
+
+Assuming a prescale of 1/64 {\ttfamily uint8\+\_\+t} will overflow every 2\textquotesingle{}048µs at 8\+M\+Hz and every 16\textquotesingle{}384µs at 1\+M\+Hz.
+
+It is therefore not guaranteed that the returned value increases when calling this function multiple times.
+
+However. If you stay below the mentioned overflow duration substracting an earlier return value from a later return value will give you a correct time difference (in \char`\"{}units\char`\"{}).
+
+This converter simply returns {\ttfamily T\+C\+N\+T0}. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/clock.\+h\end{DoxyCompactItemize}

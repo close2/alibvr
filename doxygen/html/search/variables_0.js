@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bit',['bit',['../d8/dc3/structports_1_1Pin.html#aea726b85cfe5e49822dd2517da5c860f',1,'ports::Pin']]]
+  ['_5fclock',['_clock',['../d9/d1f/namespaceclock.html#a0cfce972d3684eddb3dd61bb0baaf225',1,'clock']]]
 ];
