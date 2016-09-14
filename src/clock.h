@@ -47,7 +47,7 @@
  * 
  * Instead of (both examples in pseudocode):
  * 
- * ```C++
+ * ```
  * uint8_t clock1 = Clock;
  * // do something
  * uint8_t duration = Clock - clock1;
@@ -57,7 +57,7 @@
  * 
  * write
  * 
- * ```C++
+ * ```
  * uint8_t clock1 = Clock;
  * // do something
  * uint8_t duration = Clock - clock1;
