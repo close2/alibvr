@@ -21,7 +21,7 @@ This class _never_ creates objects!  Everything is static and resolved
 during compile time, making the generated code very compact and
 efficient.  *This is not a typical C++ library!*
 
-Ony very few features are implemented using C-macros.
+Only very few features are implemented using C-macros.
 
 I still hope that the described type-stack in
 [b.atch.se](http://b.atch.se/) will at some point replace the
