@@ -422,8 +422,9 @@ namespace ALIBVR_NAMESPACE_CLOCK {
     const uint32_t cpu = F_CPU / factor;
     return (time * cpu) / prescale;
   }
-  
-  
+
+
+  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert "units" to real time units.
    * 
@@ -443,7 +444,8 @@ namespace ALIBVR_NAMESPACE_CLOCK {
             typename T = uint16_t>
   __attribute__ ((deprecated("If possible use the template version.  "
     "This function probably bloats your code and might be very slow")))
-  static inline uint32_t units_to_time(const T& units) {
+  static inline uint32_t units_to_time(const T& units)
+  {
     const uint32_t cpu = F_CPU / Factor;
     if (cpu > 0) {
       if (cpu > Prescale) {
@@ -457,6 +459,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
     }
   }
   
+  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert real time units to "units".
    * 
@@ -495,6 +498,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   typedef _alibvr_clock_select::ClockSelect ClockSelect;
   
   
+  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert ms to "units".
    * 
@@ -515,6 +519,8 @@ namespace ALIBVR_NAMESPACE_CLOCK {
 #   pragma GCC diagnostic pop
   }
   
+  
+  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert µs to "units".
    * 
@@ -535,6 +541,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
 #   pragma GCC diagnostic pop
   }
   
+  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert "units" to ms.
    * 
@@ -555,6 +562,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
 #   pragma GCC diagnostic pop
   }
   
+  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert "units" to µs.
    * 

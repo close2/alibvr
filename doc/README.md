@@ -1,6 +1,7 @@
 # INCOMPLETE
 
-Adc, ports access and irqs are starting to become somehow stable.
+Adc, ports access, system clock and irqs are starting to become somehow
+stable.
 
 The API is still not fixed and very little has been actually tested.
 
@@ -69,4 +70,9 @@ The following code snippets are extracted from `example*.cpp` files in
 ## [Turn on an led if analog input is below a treshhold](doc/code/src/example_adc.cpp)
 ```C++
 +++ADC_EX+++
+```
+
+## [Use the system clock to measure your reaction speed](doc/code/src/example_clock_reaction.cpp)
+```C++
++++CLOCK_REACT+++
 ```
