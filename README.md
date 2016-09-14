@@ -1,6 +1,7 @@
 # INCOMPLETE
 
-Adc, ports access and irqs are starting to become somehow stable.
+Adc, ports access, system clock and irqs are starting to become somehow
+stable.
 
 The API is still not fixed and very little has been actually tested.
 
@@ -106,4 +107,15 @@ __attribute__ ((OS_main)) int main(void) {
   return 0;
 }
 #include REGISTER_IRQS
+```
+
+## [Use the system clock to measure your reaction speed](doc/code/src/example_clock_reaction.cpp)
+```C++
+uint16_t startTimer = Clock;
+Led::PORT = 1;
+while (Button::PIN != 1);
+uint16_t stopTimer = Clock;
+if ((stopTimer - startTimer) < fastDuration) {
+  FastLed::PORT = 1;
+}
 ```
