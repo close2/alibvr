@@ -159,7 +159,7 @@ Turn on an Led on pin C2.
 
 typedef PIN_C2 Led;
 
-__attribute__ ((OS_main)) int main(void) {
+int main(void) {
   Led::DDR = ports::DataDirection::Output;   // Put Led pin into output mode.
   Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
   
