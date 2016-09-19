@@ -49,12 +49,6 @@ namespace _irqs {
   };
 
   
-  template <uint8_t B>
-  struct State {
-    static const uint8_t state = B;
-  };
-  
-  
   // Whenever an IRQ is received all Irq-tasks are considered (see execIrqTasks).
   // If at least one Taks is registered for this IRQ (T::I::irq) Handled changes
   // to State<1>.
@@ -63,13 +57,13 @@ namespace _irqs {
   //template <typename Handled, typename I, template <typename ...> class List, typename T, typename ...Tasks>
   //static void execIrqTasks();
   
-  template <typename Handled, Irq I, typename T>
+  template <uint8_t Handled, Irq I, typename T>
   inline static void execIrqTasks(_task_list::TaskList<T>) {
     if (T::irq == I) {
       T::handle(I);
       return;
     }
-    if (!Handled::state) {
+    if (!Handled) {
       // call the resetVector
       ((void (*)(void))0x00)();
       for (;;) {}
@@ -77,11 +71,11 @@ namespace _irqs {
   }
 
   
-  template <typename Handled, Irq I, typename T, typename ...Tasks>
+  template <uint8_t Handled, Irq I, typename T, typename ...Tasks>
   inline static void execIrqTasks(_task_list::TaskList<T, Tasks...>) {
     if (T::irq == I) {
       T::handle(I);
-      execIrqTasks<State<1>, I>(_task_list::TaskList<Tasks...>());
+      execIrqTasks<1, I>(_task_list::TaskList<Tasks...>());
     } else {
       execIrqTasks<Handled, I>(_task_list::TaskList<Tasks...>());
     }

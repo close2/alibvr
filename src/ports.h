@@ -154,7 +154,7 @@ namespace ALIBVR_NAMESPACE_PORTS {
    * change the output!  You would need to switch to input first
    * (`DDR = DataDirection::Input;`).
    **/
-  template <enum _Port p, uint8_t b>
+  template <enum _Port p, int8_t b>
   struct Pin {
     
     /// @brief The port name (enum _Port) of this pin.
@@ -166,7 +166,7 @@ namespace ALIBVR_NAMESPACE_PORTS {
     /// register.
     ///
     /// Simply exposes the template argument.
-    static const uint8_t   bit = b;
+    static const int8_t     bit = b;
     
     
     typedef _Io<p, b, IOReg::DDRx>  _DDR;
@@ -259,9 +259,9 @@ namespace ALIBVR_NAMESPACE_PORTS {
   // When using optimizations these definitions aren't even necessary.
   // In debug mode (i.e. with no optimizations) gcc will however complain
   // if we don't add them here.
-  template <enum _Port p, uint8_t b> typename Pin<p, b>::_DDR Pin<p, b>::DDR;
-  template <enum _Port p, uint8_t b> typename Pin<p, b>::_PORT Pin<p, b>::PORT;
-  template <enum _Port p, uint8_t b> typename Pin<p, b>::_PIN Pin<p, b>::PIN;
+  template <enum _Port p, int8_t b> typename Pin<p, b>::_DDR  Pin<p, b>::DDR;
+  template <enum _Port p, int8_t b> typename Pin<p, b>::_PORT Pin<p, b>::PORT;
+  template <enum _Port p, int8_t b> typename Pin<p, b>::_PIN  Pin<p, b>::PIN;
 }
 
 
@@ -730,34 +730,33 @@ namespace ALIBVR_NAMESPACE_PORTS {
    * is used more than once.  Earlier template arguments take precedence.  
    * Don't rely on this behaviour, I might change this at some point!
    * 
-   * @tparam Dd data direction
    * @tparam D7 `D7::port` and `D7::pin` specify a bit position in @p rB,
    *             @p rC or @p rD.
    * @tparam B7 a bit position in @p val.
    **/
   template <class D7, uint8_t B7,
-            class D6 = PIN_UNUSED, uint8_t B6 = -1,
-            class D5 = PIN_UNUSED, uint8_t B5 = -1,
-            class D4 = PIN_UNUSED, uint8_t B4 = -1,
-            class D3 = PIN_UNUSED, uint8_t B3 = -1,
-            class D2 = PIN_UNUSED, uint8_t B2 = -1,
-            class D1 = PIN_UNUSED, uint8_t B1 = -1,
-            class D0 = PIN_UNUSED, uint8_t B0 = -1,
-            typename R = uint8_t,
-            typename V = uint8_t>
+            class D6 = PIN_UNUSED, int8_t B6 = -1,
+            class D5 = PIN_UNUSED, int8_t B5 = -1,
+            class D4 = PIN_UNUSED, int8_t B4 = -1,
+            class D3 = PIN_UNUSED, int8_t B3 = -1,
+            class D2 = PIN_UNUSED, int8_t B2 = -1,
+            class D1 = PIN_UNUSED, int8_t B1 = -1,
+            class D0 = PIN_UNUSED, int8_t B0 = -1,
+            typename R = int8_t,
+            typename V = int8_t>
   inline static void set_8_bits(R& rB,
                                 R& rC,
                                 R& rD,
                                 const V& val) {
     ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Write,
-    D7, B7,
-    D6, B6,
-    D5, B5,
-    D4, B4,
-    D3, B3,
-    D2, B2,
-    D1, B1,
-    D0, B0>(rB, rC, rD, val);
+                                               D7, B7,
+                                               D6, B6,
+                                               D5, B5,
+                                               D4, B4,
+                                               D3, B3,
+                                               D2, B2,
+                                               D1, B1,
+                                               D0, B0>(rB, rC, rD, val);
   }
 
 
@@ -798,24 +797,31 @@ namespace ALIBVR_NAMESPACE_PORTS {
    * is used more than once.  Earlier template arguments take precedence.  
    * Don't rely on this behaviour, I might change this at some point!
    * 
-   * @tparam Dd data direction
    * @tparam D7 `D7::port` and `D7::pin` specify a bit position in @p rB,
    *            @p rC or @p rD.
    * @tparam B7 a bit position in @p val.
    **/
   template <class D7, uint8_t B7,
-            class D6 = PIN_UNUSED, uint8_t B6 = -1,
-            class D5 = PIN_UNUSED, uint8_t B5 = -1,
-            class D4 = PIN_UNUSED, uint8_t B4 = -1,
-            class D3 = PIN_UNUSED, uint8_t B3 = -1,
-            class D2 = PIN_UNUSED, uint8_t B2 = -1,
-            class D1 = PIN_UNUSED, uint8_t B1 = -1,
-            class D0 = PIN_UNUSED, uint8_t B0 = -1,
+            class D6 = PIN_UNUSED, int8_t B6 = -1,
+            class D5 = PIN_UNUSED, int8_t B5 = -1,
+            class D4 = PIN_UNUSED, int8_t B4 = -1,
+            class D3 = PIN_UNUSED, int8_t B3 = -1,
+            class D2 = PIN_UNUSED, int8_t B2 = -1,
+            class D1 = PIN_UNUSED, int8_t B1 = -1,
+            class D0 = PIN_UNUSED, int8_t B0 = -1,
             typename R = uint8_t>
   inline static uint8_t get_8_bits(R& rB,
                                    R& rC,
                                    R& rD) {
-    return ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Read, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(rB, rC, rD, 0);
+    return ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Read,
+                                                      D7, B7,
+                                                      D6, B6,
+                                                      D5, B5,
+                                                      D4, B4,
+                                                      D3, B3,
+                                                      D2, B2,
+                                                      D1, B1,
+                                                      D0, B0>(rB, rC, rD, 0);
   }
 
 
@@ -836,7 +842,14 @@ namespace ALIBVR_NAMESPACE_PORTS {
             typename R = uint8_t,
             typename V = uint8_t>
   inline static void set_8_byte(R& rB, R& rC, R& rD, const V& val) {
-    set_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, val);
+    set_8_bits<D7, 7,
+               D6, 6,
+               D5, 5,
+               D4, 4,
+               D3, 3,
+               D2, 2,
+               D1, 1,
+               D0, 0>(rB, rC, rD, val);
   }
 
 
@@ -856,7 +869,14 @@ namespace ALIBVR_NAMESPACE_PORTS {
             class D0 = PIN_UNUSED,
             typename R = uint8_t>
   inline static uint8_t get_8_byte(R& rB, R& rC, R& rD) {
-    return get_8_bits<D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(rB, rC, rD, 0);
+    return get_8_bits<D7, 7,
+                      D6, 6,
+                      D5, 5,
+                      D4, 4,
+                      D3, 3,
+                      D2, 2,
+                      D1, 1,
+                      D0, 0>(rB, rC, rD, 0);
   }
 
 
@@ -867,16 +887,25 @@ namespace ALIBVR_NAMESPACE_PORTS {
    **/
   template <enum ALIBVR_NAMESPACE_PORTS::IOReg IOReg,
             class D7, uint8_t B7,
-            class D6 = PIN_UNUSED, uint8_t B6 = -1,
-            class D5 = PIN_UNUSED, uint8_t B5 = -1,
-            class D4 = PIN_UNUSED, uint8_t B4 = -1,
-            class D3 = PIN_UNUSED, uint8_t B3 = -1,
-            class D2 = PIN_UNUSED, uint8_t B2 = -1,
-            class D1 = PIN_UNUSED, uint8_t B1 = -1,
-            class D0 = PIN_UNUSED, uint8_t B0 = -1,
+            class D6 = PIN_UNUSED, int8_t B6 = -1,
+            class D5 = PIN_UNUSED, int8_t B5 = -1,
+            class D4 = PIN_UNUSED, int8_t B4 = -1,
+            class D3 = PIN_UNUSED, int8_t B3 = -1,
+            class D2 = PIN_UNUSED, int8_t B2 = -1,
+            class D1 = PIN_UNUSED, int8_t B1 = -1,
+            class D0 = PIN_UNUSED, int8_t B0 = -1,
             typename V = uint8_t>
   inline static void set_8_bits(const V& val) {
-    ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Write, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(val);
+    ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Write,
+                                               IOReg,
+                                               D7, B7,
+                                               D6, B6,
+                                               D5, B5,
+                                               D4, B4,
+                                               D3, B3,
+                                               D2, B2,
+                                               D1, B1,
+                                               D0, B0>(val);
   }
   
   /**
@@ -886,15 +915,24 @@ namespace ALIBVR_NAMESPACE_PORTS {
    **/
   template <enum ALIBVR_NAMESPACE_PORTS::IOReg IOReg,
             class D7, uint8_t B7,
-            class D6 = PIN_UNUSED, uint8_t B6 = -1,
-            class D5 = PIN_UNUSED, uint8_t B5 = -1,
-            class D4 = PIN_UNUSED, uint8_t B4 = -1,
-            class D3 = PIN_UNUSED, uint8_t B3 = -1,
-            class D2 = PIN_UNUSED, uint8_t B2 = -1,
-            class D1 = PIN_UNUSED, uint8_t B1 = -1,
-            class D0 = PIN_UNUSED, uint8_t B0 = -1>
+            class D6 = PIN_UNUSED, int8_t B6 = -1,
+            class D5 = PIN_UNUSED, int8_t B5 = -1,
+            class D4 = PIN_UNUSED, int8_t B4 = -1,
+            class D3 = PIN_UNUSED, int8_t B3 = -1,
+            class D2 = PIN_UNUSED, int8_t B2 = -1,
+            class D1 = PIN_UNUSED, int8_t B1 = -1,
+            class D0 = PIN_UNUSED, int8_t B0 = -1>
   inline static uint8_t get_8_bits() {
-    return ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Read, IOReg, D7, B7, D6, B6, D5, B5, D4, B4, D3, B3, D2, B2, D1, B1, D0, B0>(0);
+    return ALIBVR_NAMESPACE_PORTS::_set_or_get_8_bits<ALIBVR_NAMESPACE_PORTS::DataDirection::Read,
+                                                      IOReg,
+                                                      D7, B7,
+                                                      D6, B6,
+                                                      D5, B5,
+                                                      D4, B4,
+                                                      D3, B3,
+                                                      D2, B2,
+                                                      D1, B1,
+                                                      D0, B0>(0);
   }
   
   /**
@@ -912,7 +950,15 @@ namespace ALIBVR_NAMESPACE_PORTS {
             class D1 = PIN_UNUSED,
             class D0 = PIN_UNUSED>
   inline static uint8_t get_8_byte() {
-    return get_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>();
+    return get_8_bits<IOReg,
+                      D7, 7,
+                      D6, 6,
+                      D5, 5,
+                      D4, 4,
+                      D3, 3,
+                      D2, 2,
+                      D1, 1,
+                      D0, 0>();
   }
   
   /**
@@ -931,7 +977,15 @@ namespace ALIBVR_NAMESPACE_PORTS {
             class D0 = PIN_UNUSED,
             typename V = uint8_t>
   inline static void set_8_byte(const V& val) {
-    set_8_bits<IOReg, D7, 7, D6, 6, D5, 5, D4, 4, D3, 3, D2, 2, D1, 1, D0, 0>(val);
+    set_8_bits<IOReg,
+               D7, 7,
+               D6, 6,
+               D5, 5,
+               D4, 4,
+               D3, 3,
+               D2, 2,
+               D1, 1,
+               D0, 0>(val);
   }
   
   
@@ -966,6 +1020,14 @@ namespace ALIBVR_NAMESPACE_PORTS {
             uint8_t offset = 0,
             typename V = const uint8_t>
   inline static void set_4_nibble(const V& val) {
-    set_8_bits<IOReg, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, PIN_UNUSED, -1, D3, 3 + offset, D2, 2 + offset, D1, 1 + offset, D0, 0 + offset>(val);
+    set_8_bits<IOReg,
+               PIN_UNUSED, -1,
+               PIN_UNUSED, -1,
+               PIN_UNUSED, -1,
+               PIN_UNUSED, -1,
+               D3, 3 + offset,
+               D2, 2 + offset,
+               D1, 1 + offset,
+               D0, 0 + offset>(val);
   }
 }

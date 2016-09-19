@@ -15,7 +15,7 @@ typedef adc::Adc<adc::Ref::V1_1, AnalogIn, adc::Mode::FreeRunning, f> MyAdc;
 #define NEW_ADC MyAdc
 #include REGISTER_ADC
 
-__attribute__ ((OS_main)) int main(void) {
+int main(void) {
   Led::DDR = ports::DataDirection::Output;   // Put Led pin into output mode.
   Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
   

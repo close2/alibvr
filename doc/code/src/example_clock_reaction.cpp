@@ -12,7 +12,7 @@ typedef PIN_C5 Button;
 using namespace ports;
 using namespace clock;
 
-__attribute__ ((OS_main)) int main(void) {
+int main(void) {
   Led::DDR = DataDirection::Out;
   Led::PORT = 0;
   FastLed::DDR = DataDirection::Out;

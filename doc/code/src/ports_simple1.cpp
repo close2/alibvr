@@ -2,7 +2,7 @@
 
 using namespace ports;
 
-__attribute__ ((OS_main)) int main(void) {
+int main(void) {
   // «PORTS_DDR_PORT_PIN[^ *,]»
   typedef PIN_C2 Pin_In;   // Give PIN_C2 a meaningful name.
 

@@ -2,7 +2,7 @@
 
 using namespace ports;
 
-__attribute__ ((OS_main)) int main(void) {
+int main(void) {
   
   // «PORTS_ASSIGNMENT[^  ,]»
   // Set the DDR bit on different pins:

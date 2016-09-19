@@ -7,7 +7,7 @@
 
 typedef PIN_C2 Led;
 
-__attribute__ ((OS_main)) int main(void) {
+int main(void) {
   Led::DDR = ports::DataDirection::Output;   // Put Led pin into output mode.
   
   {
