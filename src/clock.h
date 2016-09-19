@@ -424,7 +424,6 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   }
 
 
-  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert "units" to real time units.
    * 
@@ -459,7 +458,6 @@ namespace ALIBVR_NAMESPACE_CLOCK {
     }
   }
   
-  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert real time units to "units".
    * 
@@ -498,7 +496,6 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   typedef _alibvr_clock_select::ClockSelect ClockSelect;
   
   
-  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert ms to "units".
    * 
@@ -520,7 +517,6 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   }
   
   
-  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert µs to "units".
    * 
@@ -541,7 +537,6 @@ namespace ALIBVR_NAMESPACE_CLOCK {
 #   pragma GCC diagnostic pop
   }
   
-  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert "units" to ms.
    * 
@@ -562,7 +557,6 @@ namespace ALIBVR_NAMESPACE_CLOCK {
 #   pragma GCC diagnostic pop
   }
   
-  // don't know why the depcreated attribute is ignored
   /**
    * @brief Convert "units" to µs.
    * 
