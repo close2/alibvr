@@ -592,42 +592,42 @@ namespace ALIBVR_NAMESPACE_PORTS {
       // avoid warning: left shift count >= width of type
       // even if not used.  (if compiled without optimization)
       if (D0::bit < 8 && B0 < 8) {
-        const uint8_t shift0 = (D0::bit >= 8) ? 0 : D0::bit;
+        const uint8_t shift0 = (D0::bit < 0 || D0::bit >= 8) ? 0 : D0::bit;
         mask0 |= 1 << shift0;
         if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v0 |= val & _BV(B0);
       }
       if (D1::bit < 8 && B1 < 8) {
-        const uint8_t shift1 = (D1::bit >= 8) ? 0 : D1::bit;
+        const uint8_t shift1 = (D1::bit < 0 || D1::bit >= 8) ? 0 : D1::bit;
         mask1 |= 1 << shift1;
         if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v1 |= val & _BV(B1);
       }
       if (D2::bit < 8 && B2 < 8) {
-        const uint8_t shift2 = (D2::bit >= 8) ? 0 : D2::bit;
+        const uint8_t shift2 = (D2::bit < 0 || D2::bit >= 8) ? 0 : D2::bit;
         mask2 |= 1 << shift2;
         if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v2 |= val & _BV(B2);
       }
       if (D3::bit < 8 && B3 < 8) {
-        const uint8_t shift3 = (D3::bit >= 8) ? 0 : D3::bit;
+        const uint8_t shift3 = (D3::bit < 0 || D3::bit >= 8) ? 0 : D3::bit;
         mask3 |= 1 << shift3;
         if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v3 |= val & _BV(B3);
       }
       if (D4::bit < 8 && B4 < 8) {
-        const uint8_t shift4 = (D4::bit >= 8) ? 0 : D4::bit;
+        const uint8_t shift4 = (D4::bit < 0 || D4::bit >= 8) ? 0 : D4::bit;
         mask4 |= 1 << shift4;
         if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v4 |= val & _BV(B4);
       }
       if (D5::bit < 8 && B5 < 8) {
-        const uint8_t shift5 = (D5::bit >= 8) ? 0 : D5::bit;
+        const uint8_t shift5 = (D5::bit < 0 || D5::bit >= 8) ? 0 : D5::bit;
         mask5 |= 1 << shift5;
         if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v5 |= val & _BV(B5);
       }
       if (D6::bit < 8 && B6 < 8) {
-        const uint8_t shift6 = (D6::bit >= 8) ? 0 : D6::bit;
+        const uint8_t shift6 = (D6::bit < 0 || D6::bit >= 8) ? 0 : D6::bit;
         mask6 |= 1 << shift6;
         if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v6 |= val & _BV(B6);
       }
       if (D7::bit < 8 && B7 < 8) {
-        const uint8_t shift7 = (D7::bit >= 8) ? 0 : D7::bit;
+        const uint8_t shift7 = (D7::bit < 0 || D7::bit >= 8) ? 0 : D7::bit;
         mask7 |= 1 << shift7;
         if (Dd == ALIBVR_NAMESPACE_PORTS::DataDirection::Write) v7 |= val & _BV(B7);
       }
