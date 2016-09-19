@@ -11,11 +11,11 @@
 
 
 \textcolor{keywordtype}{void} f(\textcolor{keyword}{const} uint16\_t& result) \{
-  \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{PIN\_B4::PORT} = result > 0x0F;
+  PIN\_B4::PORT = result > 0x0F;
 \}
 
 \textcolor{keywordtype}{void} f2(\textcolor{keyword}{const} uint16\_t& result) \{
-  \hyperlink{structports_1_1Pin_aaa08f0eb17ef31d9f46d65d50c8a093e}{PIN\_B3::PORT} = result < 0x0F;
+  PIN\_B3::PORT = result < 0x0F;
 \}
 
 
@@ -39,8 +39,8 @@
 \textcolor{preprocessor}{#include REGISTER\_ADC}
 
 \textcolor{keywordtype}{int} main() \{
-  \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{PIN\_B3::DDR} = ports::DataDirection::Output;
-  \hyperlink{structports_1_1Pin_aaebb4d6cb5db0635fe8e7d6e7d315c7f}{PIN\_B4::DDR} = ports::DataDirection::Output;
+  PIN\_B3::DDR = ports::DataDirection::Output;
+  PIN\_B4::DDR = ports::DataDirection::Output;
   
   
   \textcolor{comment}{// If there was only one Adc we could move the init outside the loop,}

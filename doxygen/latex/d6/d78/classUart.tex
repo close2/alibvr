@@ -3,44 +3,44 @@
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef \hyperlink{classUart}{Uart}$<$ baud, \+\_\+tx\+\_\+buffer\+\_\+size, rx\+\_\+buffer\+\_\+size, use\+\_\+irqs, Irq\+Task, stop\+\_\+bits, parity\+\_\+bit, data\+\_\+bits, baud\+\_\+tol $>$ {\bfseries \+\_\+\+Uart}\hypertarget{classUart_a6a4ba865a0631578cdeb39a73672db7a}{}\label{classUart_a6a4ba865a0631578cdeb39a73672db7a}
-
+\hypertarget{classUart_a6a4ba865a0631578cdeb39a73672db7a}{}\label{classUart_a6a4ba865a0631578cdeb39a73672db7a} 
+typedef \hyperlink{classUart}{Uart}$<$ baud, \+\_\+tx\+\_\+buffer\+\_\+size, rx\+\_\+buffer\+\_\+size, use\+\_\+irqs, Irq\+Task, stop\+\_\+bits, parity\+\_\+bit, data\+\_\+bits, baud\+\_\+tol $>$ {\bfseries \+\_\+\+Uart}
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classUart}{\+\_\+\+Uart} \& {\bfseries operator$>$$>$} (uint8\+\_\+t \&c)\hypertarget{classUart_afc331ecc0055d7a548f8c3287fa7dd42}{}\label{classUart_afc331ecc0055d7a548f8c3287fa7dd42}
-
+\hypertarget{classUart_afc331ecc0055d7a548f8c3287fa7dd42}{}\label{classUart_afc331ecc0055d7a548f8c3287fa7dd42} 
+\hyperlink{classUart}{\+\_\+\+Uart} \& {\bfseries operator$>$$>$} (uint8\+\_\+t \&c)
 \item 
-{\footnotesize template$<$typename T $>$ }\\\hyperlink{classUart}{\+\_\+\+Uart} \& {\bfseries operator$<$$<$} (const T \&t)\hypertarget{classUart_a9c37572450828368197a6f3b9e105d37}{}\label{classUart_a9c37572450828368197a6f3b9e105d37}
-
+\hypertarget{classUart_a9c37572450828368197a6f3b9e105d37}{}\label{classUart_a9c37572450828368197a6f3b9e105d37} 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{classUart}{\+\_\+\+Uart} \& {\bfseries operator$<$$<$} (const T \&t)
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static uint8\+\_\+t {\bfseries can\+\_\+rx} ()\hypertarget{classUart_a6c161d1f3756de42bd7e71db62499c55}{}\label{classUart_a6c161d1f3756de42bd7e71db62499c55}
-
+\hypertarget{classUart_a6c161d1f3756de42bd7e71db62499c55}{}\label{classUart_a6c161d1f3756de42bd7e71db62499c55} 
+static uint8\+\_\+t {\bfseries can\+\_\+rx} ()
 \item 
-static uint8\+\_\+t {\bfseries can\+\_\+tx} ()\hypertarget{classUart_a44aa3c55760475395e3a45af6498b9b4}{}\label{classUart_a44aa3c55760475395e3a45af6498b9b4}
-
+\hypertarget{classUart_a44aa3c55760475395e3a45af6498b9b4}{}\label{classUart_a44aa3c55760475395e3a45af6498b9b4} 
+static uint8\+\_\+t {\bfseries can\+\_\+tx} ()
 \item 
-static void {\bfseries tx\+\_\+irq} ()\hypertarget{classUart_ab95b2a2c36012e3e34d200e720f14402}{}\label{classUart_ab95b2a2c36012e3e34d200e720f14402}
-
+\hypertarget{classUart_ab95b2a2c36012e3e34d200e720f14402}{}\label{classUart_ab95b2a2c36012e3e34d200e720f14402} 
+static void {\bfseries tx\+\_\+irq} ()
 \item 
-static void {\bfseries init} ()\hypertarget{classUart_a402fb771b97c6086339ef5ed1e796dbb}{}\label{classUart_a402fb771b97c6086339ef5ed1e796dbb}
-
+\hypertarget{classUart_a402fb771b97c6086339ef5ed1e796dbb}{}\label{classUart_a402fb771b97c6086339ef5ed1e796dbb} 
+static void {\bfseries init} ()
 \item 
-{\footnotesize template$<$class I $>$ }\\static void {\bfseries handle} (I)\hypertarget{classUart_a978f2e11bdccc2cc64efe9efbb3c4111}{}\label{classUart_a978f2e11bdccc2cc64efe9efbb3c4111}
-
+\hypertarget{classUart_a978f2e11bdccc2cc64efe9efbb3c4111}{}\label{classUart_a978f2e11bdccc2cc64efe9efbb3c4111} 
+{\footnotesize template$<$class I $>$ }\\static void {\bfseries handle} (I)
 \item 
-static void {\bfseries sleep\+\_\+until\+\_\+data\+\_\+available} ()\hypertarget{classUart_abf6d7c3471e104a4a211ca57425096c3}{}\label{classUart_abf6d7c3471e104a4a211ca57425096c3}
-
+\hypertarget{classUart_abf6d7c3471e104a4a211ca57425096c3}{}\label{classUart_abf6d7c3471e104a4a211ca57425096c3} 
+static void {\bfseries sleep\+\_\+until\+\_\+data\+\_\+available} ()
 \item 
-static void {\bfseries rx} (uint8\+\_\+t \&c)\hypertarget{classUart_af5ac57cdb25773aebfe644b080e0da3a}{}\label{classUart_af5ac57cdb25773aebfe644b080e0da3a}
-
+\hypertarget{classUart_af5ac57cdb25773aebfe644b080e0da3a}{}\label{classUart_af5ac57cdb25773aebfe644b080e0da3a} 
+static void {\bfseries rx} (uint8\+\_\+t \&c)
 \item 
-{\footnotesize template$<$typename T $>$ }\\static void {\bfseries tx} (const T \&t)\hypertarget{classUart_af1b3b331220c1c2871ea3f7844736e85}{}\label{classUart_af1b3b331220c1c2871ea3f7844736e85}
-
+\hypertarget{classUart_af1b3b331220c1c2871ea3f7844736e85}{}\label{classUart_af1b3b331220c1c2871ea3f7844736e85} 
+{\footnotesize template$<$typename T $>$ }\\static void {\bfseries tx} (const T \&t)
 \end{DoxyCompactItemize}
 
 

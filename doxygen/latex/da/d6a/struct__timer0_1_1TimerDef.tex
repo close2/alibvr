@@ -3,59 +3,59 @@
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef uint8\+\_\+t {\bfseries size\+\_\+t}\hypertarget{struct__timer0_1_1TimerDef_ac97e10949ae7dd8703568e7accb4346c}{}\label{struct__timer0_1_1TimerDef_ac97e10949ae7dd8703568e7accb4346c}
-
+\hypertarget{struct__timer0_1_1TimerDef_ac97e10949ae7dd8703568e7accb4346c}{}\label{struct__timer0_1_1TimerDef_ac97e10949ae7dd8703568e7accb4346c} 
+typedef uint8\+\_\+t {\bfseries size\+\_\+t}
 \item 
-typedef \hyperlink{structports_1_1Pin}{P\+I\+N\+\_\+6} {\bfseries P\+I\+N\+\_\+A}\hypertarget{struct__timer0_1_1TimerDef_ab4f68d388e3b8fdd3e07032692c793a4}{}\label{struct__timer0_1_1TimerDef_ab4f68d388e3b8fdd3e07032692c793a4}
-
+\hypertarget{struct__timer0_1_1TimerDef_ab4f68d388e3b8fdd3e07032692c793a4}{}\label{struct__timer0_1_1TimerDef_ab4f68d388e3b8fdd3e07032692c793a4} 
+typedef P\+I\+N\+\_\+6 {\bfseries P\+I\+N\+\_\+A}
 \item 
-typedef \hyperlink{structports_1_1Pin}{P\+I\+N\+\_\+5} {\bfseries P\+I\+N\+\_\+B}\hypertarget{struct__timer0_1_1TimerDef_acb1e52236e26a885f377ab78b88cfc9c}{}\label{struct__timer0_1_1TimerDef_acb1e52236e26a885f377ab78b88cfc9c}
-
+\hypertarget{struct__timer0_1_1TimerDef_acb1e52236e26a885f377ab78b88cfc9c}{}\label{struct__timer0_1_1TimerDef_acb1e52236e26a885f377ab78b88cfc9c} 
+typedef P\+I\+N\+\_\+5 {\bfseries P\+I\+N\+\_\+B}
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T $>$ }\\static void {\bfseries init} (uint8\+\_\+t \&tcnt, uint8\+\_\+t \&timsk, uint8\+\_\+t \&tccra, uint8\+\_\+t \&tccrb, uint8\+\_\+t \&ocr\+\_\+A, uint8\+\_\+t \&ocr\+\_\+B, const uint8\+\_\+t \&initial\+\_\+ocr\+\_\+A, const uint8\+\_\+t \&initial\+\_\+ocr\+\_\+B)\hypertarget{struct__timer0_1_1TimerDef_ae9a4cef5f307fcb249d041ea410a0745}{}\label{struct__timer0_1_1TimerDef_ae9a4cef5f307fcb249d041ea410a0745}
-
+\hypertarget{struct__timer0_1_1TimerDef_ae9a4cef5f307fcb249d041ea410a0745}{}\label{struct__timer0_1_1TimerDef_ae9a4cef5f307fcb249d041ea410a0745} 
+{\footnotesize template$<$typename T $>$ }\\static void {\bfseries init} (uint8\+\_\+t \&tcnt, uint8\+\_\+t \&timsk, uint8\+\_\+t \&tccra, uint8\+\_\+t \&tccrb, uint8\+\_\+t \&ocr\+\_\+A, uint8\+\_\+t \&ocr\+\_\+B, const uint8\+\_\+t \&initial\+\_\+ocr\+\_\+A, const uint8\+\_\+t \&initial\+\_\+ocr\+\_\+B)
 \item 
-{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static decltype(O\+C\+R0A)\& {\bfseries ocr} ()\hypertarget{struct__timer0_1_1TimerDef_af731f20e2caa0c4f94d31377d4a43ab5}{}\label{struct__timer0_1_1TimerDef_af731f20e2caa0c4f94d31377d4a43ab5}
-
+\hypertarget{struct__timer0_1_1TimerDef_af731f20e2caa0c4f94d31377d4a43ab5}{}\label{struct__timer0_1_1TimerDef_af731f20e2caa0c4f94d31377d4a43ab5} 
+{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static decltype(O\+C\+R0A) \& {\bfseries ocr} ()
 \item 
-static auto {\bfseries tcnt} () -\/$>$ decltype(T\+C\+N\+T0)\&\hypertarget{struct__timer0_1_1TimerDef_ad74073fc118a69a4c02769b7fe56402d}{}\label{struct__timer0_1_1TimerDef_ad74073fc118a69a4c02769b7fe56402d}
-
+\hypertarget{struct__timer0_1_1TimerDef_ad74073fc118a69a4c02769b7fe56402d}{}\label{struct__timer0_1_1TimerDef_ad74073fc118a69a4c02769b7fe56402d} 
+static auto {\bfseries tcnt} () -\/$>$ decltype(T\+C\+N\+T0)\&
 \item 
-static auto {\bfseries timsk} () -\/$>$ decltype(T\+I\+M\+S\+K0)\&\hypertarget{struct__timer0_1_1TimerDef_a30f1f4a5888376608e0b729e2614ba63}{}\label{struct__timer0_1_1TimerDef_a30f1f4a5888376608e0b729e2614ba63}
-
+\hypertarget{struct__timer0_1_1TimerDef_a30f1f4a5888376608e0b729e2614ba63}{}\label{struct__timer0_1_1TimerDef_a30f1f4a5888376608e0b729e2614ba63} 
+static auto {\bfseries timsk} () -\/$>$ decltype(T\+I\+M\+S\+K0)\&
 \item 
-static auto {\bfseries tccra} () -\/$>$ decltype(T\+C\+C\+R0A)\&\hypertarget{struct__timer0_1_1TimerDef_a644edd603ceab7970c7398f6fe5b95a9}{}\label{struct__timer0_1_1TimerDef_a644edd603ceab7970c7398f6fe5b95a9}
-
+\hypertarget{struct__timer0_1_1TimerDef_a644edd603ceab7970c7398f6fe5b95a9}{}\label{struct__timer0_1_1TimerDef_a644edd603ceab7970c7398f6fe5b95a9} 
+static auto {\bfseries tccra} () -\/$>$ decltype(T\+C\+C\+R0A)\&
 \item 
-static auto {\bfseries tccrb} () -\/$>$ decltype(T\+C\+C\+R0B)\&\hypertarget{struct__timer0_1_1TimerDef_a85d21a64199315e126c6218c536952eb}{}\label{struct__timer0_1_1TimerDef_a85d21a64199315e126c6218c536952eb}
-
+\hypertarget{struct__timer0_1_1TimerDef_a85d21a64199315e126c6218c536952eb}{}\label{struct__timer0_1_1TimerDef_a85d21a64199315e126c6218c536952eb} 
+static auto {\bfseries tccrb} () -\/$>$ decltype(T\+C\+C\+R0B)\&
 \item 
-{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static constexpr uint8\+\_\+t {\bfseries \+\_\+com\+\_\+0} ()\hypertarget{struct__timer0_1_1TimerDef_aa142ef4342ace48bc1f56662a758fff4}{}\label{struct__timer0_1_1TimerDef_aa142ef4342ace48bc1f56662a758fff4}
-
+\hypertarget{struct__timer0_1_1TimerDef_aa142ef4342ace48bc1f56662a758fff4}{}\label{struct__timer0_1_1TimerDef_aa142ef4342ace48bc1f56662a758fff4} 
+{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static constexpr uint8\+\_\+t {\bfseries \+\_\+com\+\_\+0} ()
 \item 
-{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static constexpr uint8\+\_\+t {\bfseries \+\_\+com\+\_\+1} ()\hypertarget{struct__timer0_1_1TimerDef_ae72314a7783b7d541042ccef9c9253b5}{}\label{struct__timer0_1_1TimerDef_ae72314a7783b7d541042ccef9c9253b5}
-
+\hypertarget{struct__timer0_1_1TimerDef_ae72314a7783b7d541042ccef9c9253b5}{}\label{struct__timer0_1_1TimerDef_ae72314a7783b7d541042ccef9c9253b5} 
+{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static constexpr uint8\+\_\+t {\bfseries \+\_\+com\+\_\+1} ()
 \item 
-{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static constexpr uint8\+\_\+t {\bfseries \+\_\+ocie} ()\hypertarget{struct__timer0_1_1TimerDef_a402e897dbe98439fb2697ab1c548f466}{}\label{struct__timer0_1_1TimerDef_a402e897dbe98439fb2697ab1c548f466}
-
+\hypertarget{struct__timer0_1_1TimerDef_a402e897dbe98439fb2697ab1c548f466}{}\label{struct__timer0_1_1TimerDef_a402e897dbe98439fb2697ab1c548f466} 
+{\footnotesize template$<$\+\_\+timer\+::\+Unit U$>$ }\\static constexpr uint8\+\_\+t {\bfseries \+\_\+ocie} ()
 \item 
-static constexpr uint8\+\_\+t {\bfseries \+\_\+toie} ()\hypertarget{struct__timer0_1_1TimerDef_af0fae9725deecc5eba56c7fcbcee3d4e}{}\label{struct__timer0_1_1TimerDef_af0fae9725deecc5eba56c7fcbcee3d4e}
-
+\hypertarget{struct__timer0_1_1TimerDef_af0fae9725deecc5eba56c7fcbcee3d4e}{}\label{struct__timer0_1_1TimerDef_af0fae9725deecc5eba56c7fcbcee3d4e} 
+static constexpr uint8\+\_\+t {\bfseries \+\_\+toie} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const auto {\bfseries I\+R\+Q\+\_\+A} = \+\_\+irqs\+::\+I\+R\+Q\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+C\+O\+M\+PA\hypertarget{struct__timer0_1_1TimerDef_a6a025f30a176807a46e9a53e3ab81edb}{}\label{struct__timer0_1_1TimerDef_a6a025f30a176807a46e9a53e3ab81edb}
-
+\hypertarget{struct__timer0_1_1TimerDef_a6a025f30a176807a46e9a53e3ab81edb}{}\label{struct__timer0_1_1TimerDef_a6a025f30a176807a46e9a53e3ab81edb} 
+static const auto {\bfseries I\+R\+Q\+\_\+A} = \+\_\+irqs\+::\+I\+R\+Q\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+C\+O\+M\+PA
 \item 
-static const auto {\bfseries I\+R\+Q\+\_\+B} = \+\_\+irqs\+::\+I\+R\+Q\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+C\+O\+M\+PB\hypertarget{struct__timer0_1_1TimerDef_adab020411a7f59b24e3d534bd8c58493}{}\label{struct__timer0_1_1TimerDef_adab020411a7f59b24e3d534bd8c58493}
-
+\hypertarget{struct__timer0_1_1TimerDef_adab020411a7f59b24e3d534bd8c58493}{}\label{struct__timer0_1_1TimerDef_adab020411a7f59b24e3d534bd8c58493} 
+static const auto {\bfseries I\+R\+Q\+\_\+B} = \+\_\+irqs\+::\+I\+R\+Q\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+C\+O\+M\+PB
 \item 
-static const auto {\bfseries I\+R\+Q\+\_\+\+O\+VF} = \+\_\+irqs\+::\+I\+R\+Q\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+O\+VF\hypertarget{struct__timer0_1_1TimerDef_a482092f3baf313478d0fecb10c358e28}{}\label{struct__timer0_1_1TimerDef_a482092f3baf313478d0fecb10c358e28}
-
+\hypertarget{struct__timer0_1_1TimerDef_a482092f3baf313478d0fecb10c358e28}{}\label{struct__timer0_1_1TimerDef_a482092f3baf313478d0fecb10c358e28} 
+static const auto {\bfseries I\+R\+Q\+\_\+\+O\+VF} = \+\_\+irqs\+::\+I\+R\+Q\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+O\+VF
 \end{DoxyCompactItemize}
 
 
