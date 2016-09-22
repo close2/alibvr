@@ -68,8 +68,9 @@ int main(void) {
   
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-  uint8_t measureTimeInMs = units_to_ms(measured);
-  uint8_t measureTimeInUs = units_to_us(measured);
+  uint8_t measuredTimeInMs = units_to_ms(measured);
+  uint8_t measuredTimeInUs = units_to_us(measured);
+  
   // userMs and userUs might come from rs232.
   // If code size and calculation speed doesn't matter to you
   // using the deprecated function is perfectly fine.
@@ -80,11 +81,11 @@ int main(void) {
   
   static_assert(duration2InUnits < durationInUnits, "1.5 ms should be smaller than 300ms");
   static_assert(durationConvToMs < durationConvToUs, "10000 units in µs must be > than 50 units in ms");
-  if (measureTimeInMs > 3) {
+  if (measuredTimeInMs > 3) {
     // Operation took longer than 3 ms.
     Led::PORT = 1;
   }
-  auto diff = measureTimeInMs * 1000 - measureTimeInUs;
+  auto diff = measuredTimeInMs * 1000 - measuredTimeInUs;
   if (diff > 1000) {
     // The calculated difference is bigger than 1ms.
     WarnLed::PORT = 1;

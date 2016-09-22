@@ -39,8 +39,9 @@ auto measured = clockEnd - clockStart;
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-uint8_t measureTimeInMs = units_to_ms(measured);
-uint8_t measureTimeInUs = units_to_us(measured);
+uint8_t measuredTimeInMs = units_to_ms(measured);
+uint8_t measuredTimeInUs = units_to_us(measured);
+
 // userMs and userUs might come from rs232.
 // If code size and calculation speed doesn't matter to you
 // using the deprecated function is perfectly fine.
