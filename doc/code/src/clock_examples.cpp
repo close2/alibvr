@@ -103,17 +103,18 @@ int main(void) {
   previous = Clock;
   while(!duration_passed(previous, ms_to_units<5000>()));
   
-  uint16_t duration1 = ms_to_units<150>();
-  uint16_t duration2 = ms_to_units<220>();
-  uint16_t duration3 = ms_to_units<270>();
+  // The simpler version above is equivalent to
+  // duration_passed(previous, Clock, ...);
+  
   previous = Clock;
   for (;;) {
-    uint16_t newClock = Clock;
-    if (duration_passed(previous, newClock, duration1)) Led1::PORT = 1;
-    if (duration_passed(previous, newClock, duration2)) Led2::PORT = 1;
-    if (duration_passed(previous, newClock, duration3)) {
-      Led1::PORT = 0;
-      Led2::PORT = 0;
+    uint16_t now = Clock;
+    if (duration_passed(previous, now, ms_to_units<150>())) Led1::PORT = 1;
+    if (duration_passed(previous, now, ms_to_units<220>())) Led2::PORT = 1;
+    if (duration_passed(previous, now, ms_to_units<270>())) {
+      Led1::PORT = 0;   // Led1 has been on for 270-150 = 120ms
+      Led2::PORT = 0;   // Led2 has been on for 270-220 =  50ms
+      // Start again: Led1 will turn on again in 150ms; Led2 in 220ms.
       previous = Clock;
     }
   }
