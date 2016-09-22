@@ -89,7 +89,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    * added.  The precision of the system clock is therefore always
    * cpu clock / prescaler.
    **/
-  static volatile bits64_t _clock;
+  volatile bits64_t _clock;
   
   /**
    * @brief Initialization code and access to the _clock variable.
@@ -359,6 +359,11 @@ void NEW_IRQ_TASK(_irqs::Irq __attribute__((unused)) I) {
 
 namespace ALIBVR_NAMESPACE_CLOCK {
   
+  template <typename T>
+  constexpr uint64_t _to64bit(T v) {
+    return (uint64_t) v;
+  }
+  
   /**
    * @brief Convert "units" to real time units.
    * 
@@ -382,16 +387,11 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   template <uint32_t Units,
             uint32_t Factor,
             uint32_t Prescale>
-  uint32_t units_to_time() {
+  constexpr uint32_t units_to_time() {
     // Promote all inputs.
     // This will be calculated during compile time.
     // By promoting, we avoid overflow problems.
-    const uint64_t units = Units;
-    const uint64_t factor = Factor;
-    const uint64_t prescale = Prescale;
-    
-    const uint32_t cpu = F_CPU / factor;
-    return (units * prescale) / cpu;
+    return (_to64bit(Units) * _to64bit(Prescale)) / (F_CPU / _to64bit(Factor));
   }
   
   /**
@@ -411,16 +411,11 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   template <uint32_t Time,
             uint32_t Factor,
             uint32_t Prescale>
-  uint32_t time_to_units() {
+  constexpr uint32_t time_to_units() {
     // Promote all inputs.
     // This will be calculated during compile time.
     // By promoting, we avoid overflow problems.
-    const uint64_t time = Time;
-    const uint64_t factor = Factor;
-    const uint64_t prescale = Prescale;
-    
-    const uint32_t cpu = F_CPU / factor;
-    return (time * cpu) / prescale;
+    return (_to64bit(Time) * (F_CPU / _to64bit(Factor))) / _to64bit(Prescale);
   }
 
 
@@ -443,7 +438,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
             typename T = uint16_t>
   __attribute__ ((deprecated("If possible use the template version.  "
     "This function probably bloats your code and might be very slow")))
-  static inline uint32_t units_to_time(const T& units)
+  inline uint32_t units_to_time(const T& units)
   {
     const uint32_t cpu = F_CPU / Factor;
     if (cpu > 0) {
@@ -477,7 +472,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
             typename T = uint16_t>
   __attribute__ ((deprecated("If possible use the template version.  "
     "This function probably bloats your code and might be very slow")))
-  static inline uint32_t time_to_units(const T& n) {
+  inline uint32_t time_to_units(const T& n) {
     const uint32_t cpu = F_CPU / Factor;
     if (cpu > 0) {
       if (cpu > Prescale) {
@@ -509,7 +504,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
             typename T = uint16_t>
   __attribute__ ((deprecated("If possible use the template version.  "
     "This function probably bloats your code and might be very slow")))
-  static inline T ms_to_units(const T& n) {
+  inline T ms_to_units(const T& n) {
 #   pragma GCC diagnostic push
 #   pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     return time_to_units<1000, (uint32_t) P, T>(n);
@@ -530,7 +525,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
             typename T = uint16_t>
   __attribute__ ((deprecated("If possible use the template version.  "
     "This function probably bloats your code and might be very slow")))
-  static inline uint32_t us_to_units(const T& n) {
+  inline uint32_t us_to_units(const T& n) {
 #   pragma GCC diagnostic push
 #   pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     return time_to_units<1000000, (uint32_t) P, T>(n);
@@ -550,7 +545,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
             typename T = uint16_t>
   __attribute__ ((deprecated("If possible use the template version.  "
     "This function probably bloats your code and might be very slow")))
-  static inline uint32_t units_to_ms(const T& units) {
+  inline uint32_t units_to_ms(const T& units) {
 #   pragma GCC diagnostic push
 #   pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     return units_to_time<1000, (uint32_t) P, T>(units);
@@ -570,7 +565,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
             typename T = uint16_t>
   __attribute__ ((deprecated("If possible use the template version.  "
     "This function probably bloats your code and might be very slow")))
-  static inline uint32_t units_to_us(const T& units) {
+  inline uint32_t units_to_us(const T& units) {
 #   pragma GCC diagnostic push
 #   pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     return units_to_time<1000000, (uint32_t) P, T>(units);
@@ -589,7 +584,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    **/
   template <uint32_t Time,
             ClockSelect P = _alibvr_clock_prescale::Prescale>
-  static inline uint32_t ms_to_units() {
+  inline constexpr uint32_t ms_to_units() {
     return time_to_units<Time, 1000, (uint32_t) P>();
   }
   
@@ -604,7 +599,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    **/
   template <uint32_t Time,
             ClockSelect P = _alibvr_clock_prescale::Prescale>
-  static inline uint32_t us_to_units() {
+  inline constexpr uint32_t us_to_units() {
     return time_to_units<Time, 1000000, (uint32_t) P>();
   }
   
@@ -619,7 +614,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    **/
   template <uint32_t Units,
             ClockSelect P = _alibvr_clock_prescale::Prescale>
-  static inline uint32_t units_to_ms() {
+  inline constexpr uint32_t units_to_ms() {
     return units_to_time<Units, 1000, (uint32_t) P>();
   }
   
@@ -634,7 +629,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    **/
   template <uint32_t Units,
             ClockSelect P = _alibvr_clock_prescale::Prescale>
-  static inline uint32_t units_to_us() {
+  inline constexpr uint32_t units_to_us() {
     return units_to_time<Units, 1000000, (uint32_t) P>();
   }
   
@@ -661,7 +656,9 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    *   previous_clock.  See ms_to_units and us_to_units.
    **/
   template<typename T, typename U>
-  static inline uint8_t duration_passed(const T& previous_clock, const T& current_clock, const U& duration) {
+  inline constexpr uint8_t duration_passed(const T& previous_clock,
+                                           const T& current_clock,
+                                           const U& duration) {
     return (current_clock - previous_clock) > duration;
   }
   
@@ -679,7 +676,8 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    *   previous_clock.  See ms_to_units and us_to_units.
    **/
   template<typename T, typename U>
-  static inline uint8_t duration_passed(const T& previous_clock, const U& duration) {
+  inline constexpr uint8_t duration_passed(const T& previous_clock,
+                                                  const U& duration) {
     return duration_passed(previous_clock, (T) Clock, duration);
   }
 }

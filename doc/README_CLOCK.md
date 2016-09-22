@@ -2,8 +2,8 @@
 
 When `clock.h` is included `Timer0` is used as system clock.
 
-This system clock is also used in some other parts of this library,
-where `clock.h` is automatically included.
+This system clock is also used in some other parts of `alibvr`,
+where `clock.h` is then automatically included.
 
 The `Timer0` prescaler is set to clkIO/64.
 
@@ -13,11 +13,40 @@ The `Timer0` prescaler is set to clkIO/64.
 The static instance `clock::Clock` has cast operators to `uint8_t`,
 `uint16_t` and `uint32_t`.
 
-The returned value is the clkIO ticks divided by 64 since the avr has
-been started.
+The returned values are the clkIO ticks divided by 64 since the avr has
+been started and are named "units" in `alibvr`.
 
 ```C++
 +++CLOCK_BASIC+++
 ```
 
 
+### Conversion to and from ms or µs
+
+Functions to convert "units" to and from ms or µs are provided:
+```C++
++++CLOCK_CONVERSION+++
+```
+
+Versions accepting variable input are deprecated as they usually need
+divisions.  As the avr doesn't provide hardware division the compiled
+code is slow and big.
+
+The dreprecation does not mean that I will remove the code in a future
+version!
+
+The template versions obviously calculate the conversions during
+compile time.
+
+
+### Calculate if duration has passed
+
+To find out if a time duration has passed two functions are provided:
+
+```C++
++++CLOCK_DURATION+++
+```
+
+The simpler version will always use the current system clock.  By
+getting the system clock once and passing it to the more complex
+version, you may be a little faster.
