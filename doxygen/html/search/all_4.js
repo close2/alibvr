@@ -11,5 +11,5 @@ var searchData=
   ['donothing',['DoNothing',['../d5/d37/struct__timer_1_1DoNothing.html',1,'_timer']]],
   ['donothing',['DoNothing',['../d2/d39/class__pulse__uart_1_1DoNothing.html',1,'_pulse_uart']]],
   ['donothingmatrixlistener',['DoNothingMatrixListener',['../d2/def/struct__buttons_1_1DoNothingMatrixListener.html',1,'_buttons']]],
-  ['duration_5fpassed',['duration_passed',['../d9/d1f/namespaceclock.html#ab9b794523b696e33f46f8d7b98cfee0d',1,'clock::duration_passed(const T &amp;previous_clock, const T &amp;current_clock, const U &amp;duration)'],['../d9/d1f/namespaceclock.html#aafd8b2bf08806cd40128eac84ea82e8e',1,'clock::duration_passed(const T &amp;previous_clock, const U &amp;duration)']]]
+  ['duration_5fpassed',['duration_passed',['../d9/d1f/namespaceclock.html#a2818f7b058e27771426f39c7aa0365cd',1,'clock::duration_passed(const T &amp;previous_clock, const T &amp;current_clock, const U &amp;duration)'],['../d9/d1f/namespaceclock.html#a4db26a90b5c001f2bb46af7a2069d63d',1,'clock::duration_passed(const T &amp;previous_clock, const U &amp;duration)']]]
 ];
