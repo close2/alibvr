@@ -54,7 +54,7 @@ int main(void) {
   uint8_t userMs = 8 + Led::PIN;
   uint8_t userUs = 8 + WarnLed::PIN;
   
-  // «CLOCK_DURATION[^  ,]»
+  // «CLOCK_CONVERSION[^  ,]»
   // If the type is too small the compiler will warn us.
   const uint16_t durationInUnits = ms_to_units<300>();
   const uint8_t duration2InUnits = us_to_units<1500>();
@@ -66,8 +66,8 @@ int main(void) {
   uint16_t clockEnd = Clock;
   auto measured = clockEnd - clockStart;
   
-# pragma GCC diagnostic push
-# pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   uint8_t measureTimeInMs = units_to_ms(measured);
   uint8_t measureTimeInUs = units_to_us(measured);
   // userMs and userUs might come from rs232.
@@ -75,8 +75,7 @@ int main(void) {
   // using the deprecated function is perfectly fine.
   uint32_t userMsToUnits = ms_to_units(userMs); // userMs might come from rs232
   uint32_t userUsToUnits = us_to_units(userUs); // userUs might come from rs232
-# pragma GCC diagnostic pop
-  
+#pragma GCC diagnostic pop
   /*¤*/
   
   static_assert(duration2InUnits < durationInUnits, "1.5 ms should be smaller than 300ms");
