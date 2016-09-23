@@ -1,4 +1,3 @@
-//«ADC_EX»
 #define F_CPU 8000000
 #include "ports.h"
 #include "irqs.h"
@@ -7,6 +6,7 @@
 typedef PIN_C2 Led;
 typedef PIN_ADC0 AnalogIn;
 
+//«ADC_EX»
 void f(const uint16_t& result) {
   Led::PORT = ((uint8_t)result) > 0x0F;
 }
@@ -21,10 +21,10 @@ int main(void) {
   
   MyAdc::init();
   MyAdc::start_adc_8bit();
+/*¤*/
   
   
   for (;;);
   return 0;
 }
 #include REGISTER_IRQS
-/*¤*/

@@ -21,15 +21,14 @@ int main(void) {
   
   _delay_ms(100);
   
-  const uint16_t fastDuration = ms_to_units<100>();
 
-  
   // «CLOCK_REACT[^  ,]»
+  const uint16_t fastReaction = ms_to_units<100>();
   uint16_t startTimer = Clock;
   Led::PORT = 1;
   while (Button::PIN != 1);
   uint16_t stopTimer = Clock;
-  if ((stopTimer - startTimer) < fastDuration) {
+  if ((stopTimer - startTimer) < fastReaction) {
     FastLed::PORT = 1;
   }
   /*¤*/

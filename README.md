@@ -64,29 +64,14 @@ The following code snippets are extracted from `example*.cpp` files in
 
 ## [Turn on an led](doc/code/src/example_led.cpp)
 ```C++
-#include "ports.h"
-
 typedef PIN_C2 Led;
 
-int main(void) {
-  Led::DDR = ports::DataDirection::Output;   // Put Led pin into output mode.
-  Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
-  
-  for (;;);
-  return 0;
-}
+Led::DDR = ports::DataDirection::Output;   // Put Led pin into output mode.
+Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
 ```
 
 ## [Turn on an led if analog input is below a treshhold](doc/code/src/example_adc.cpp)
 ```C++
-#define F_CPU 8000000
-#include "ports.h"
-#include "irqs.h"
-#include "adc.h"
-
-typedef PIN_C2 Led;
-typedef PIN_ADC0 AnalogIn;
-
 void f(const uint16_t& result) {
   Led::PORT = ((uint8_t)result) > 0x0F;
 }
@@ -101,21 +86,16 @@ int main(void) {
   
   MyAdc::init();
   MyAdc::start_adc_8bit();
-  
-  
-  for (;;);
-  return 0;
-}
-#include REGISTER_IRQS
 ```
 
 ## [Use the system clock to measure your reaction speed](doc/code/src/example_clock_reaction.cpp)
 ```C++
+const uint16_t fastReaction = ms_to_units<100>();
 uint16_t startTimer = Clock;
 Led::PORT = 1;
 while (Button::PIN != 1);
 uint16_t stopTimer = Clock;
-if ((stopTimer - startTimer) < fastDuration) {
+if ((stopTimer - startTimer) < fastReaction) {
   FastLed::PORT = 1;
 }
 ```

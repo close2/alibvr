@@ -5,7 +5,10 @@ When `clock.h` is included `Timer0` is used as system clock.
 This system clock is also used in some other parts of `alibvr`,
 where `clock.h` is then automatically included.
 
-The `Timer0` prescaler is set to clkIO/64.
+The `Timer0` prescaler is set to clkIO/64 and global irqs are enabled.
+
+See the [doxygen](http://close2.github.io/alibvr/doxygen/html/d9/d1f/namespaceclock.html)
+documentation for more details.
 
 
 ## Usage
