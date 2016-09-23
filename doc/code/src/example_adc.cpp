@@ -3,10 +3,10 @@
 #include "irqs.h"
 #include "adc.h"
 
+//«ADC_EX»
 typedef PIN_C2 Led;
 typedef PIN_ADC0 AnalogIn;
 
-//«ADC_EX»
 void f(const uint16_t& result) {
   Led::PORT = ((uint8_t)result) > 0x0F;
 }

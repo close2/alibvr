@@ -72,6 +72,9 @@ Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
 
 ## [Turn on an led if analog input is below a treshhold](doc/code/src/example_adc.cpp)
 ```C++
+typedef PIN_C2 Led;
+typedef PIN_ADC0 AnalogIn;
+
 void f(const uint16_t& result) {
   Led::PORT = ((uint8_t)result) > 0x0F;
 }
