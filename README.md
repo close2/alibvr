@@ -75,6 +75,7 @@ Led::PORT = 1;  // Set Led pin output to high. (I.e. turn it on.)
 typedef PIN_C2 Led;
 typedef PIN_ADC0 AnalogIn;
 
+// Only one byte is pushed onto the stack because of the uint8_t cast.
 void f(const uint16_t& result) {
   Led::PORT = ((uint8_t)result) > 0x0F;
 }
