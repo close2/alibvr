@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['duration_5fpassed',['duration_passed',['../d9/d1f/namespaceclock.html#a2818f7b058e27771426f39c7aa0365cd',1,'clock::duration_passed(const T &amp;previous_clock, const T &amp;current_clock, const U &amp;duration)'],['../d9/d1f/namespaceclock.html#a4db26a90b5c001f2bb46af7a2069d63d',1,'clock::duration_passed(const T &amp;previous_clock, const U &amp;duration)']]]
+  ['clock_5freached',['clock_reached',['../d9/d1f/namespaceclock.html#a107ad02a77763be28bf63d43c566cf75',1,'clock::clock_reached(const T &amp;clock, const T &amp;previous_clock, const T &amp;target_clock)'],['../d9/d1f/namespaceclock.html#aae7a34ec30a2420b2b51e717ab02c400',1,'clock::clock_reached(const T &amp;previous_clock, const T &amp;target_clock)'],['../d9/d1f/namespaceclock.html#a240d81de9119f92701aa5f26555972c4',1,'clock::clock_reached(const T &amp;target_clock)']]]
 ];

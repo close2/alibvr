@@ -44,7 +44,13 @@ void {\bfseries Clock\+Irq\+Task} (\+\_\+irqs\+::\+Irq I)
 {\footnotesize template$<$typename T , typename U $>$ }\\constexpr uint8\+\_\+t \hyperlink{namespaceclock_a2818f7b058e27771426f39c7aa0365cd}{duration\+\_\+passed} (const T \&previous\+\_\+clock, const T \&current\+\_\+clock, const U \&duration)
 \begin{DoxyCompactList}\small\item\em Calculate if the difference between previous\+\_\+clock and current\+\_\+clock is bigger than duration. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T , typename U $>$ }\\constexpr uint8\+\_\+t \hyperlink{namespaceclock_a4db26a90b5c001f2bb46af7a2069d63d}{duration\+\_\+passed} (const T \&previous\+\_\+clock, const U \&duration)
-\begin{DoxyCompactList}\small\item\em Calculate if duration has passed since previous\+\_\+clock. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Calculate if duration has passed since previous\+\_\+clock. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\static uint8\+\_\+t \hyperlink{namespaceclock_a107ad02a77763be28bf63d43c566cf75}{clock\+\_\+reached} (const T \&clock, const T \&previous\+\_\+clock, const T \&target\+\_\+clock)
+\begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\static uint8\+\_\+t \hyperlink{namespaceclock_aae7a34ec30a2420b2b51e717ab02c400}{clock\+\_\+reached} (const T \&previous\+\_\+clock, const T \&target\+\_\+clock)
+\begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\static uint8\+\_\+t \hyperlink{namespaceclock_a240d81de9119f92701aa5f26555972c4}{clock\+\_\+reached} (const T \&target\+\_\+clock)
+\begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -225,6 +231,135 @@ Convert µs to \char`\"{}units\char`\"{}.
 {\em T} & The type of units (automatically determined). \\
 \hline
 \end{DoxyTemplParams}
+\hypertarget{namespaceclock_a107ad02a77763be28bf63d43c566cf75}{}\label{namespaceclock_a107ad02a77763be28bf63d43c566cf75} 
+\index{clock@{clock}!clock\+\_\+reached@{clock\+\_\+reached}}
+\index{clock\+\_\+reached@{clock\+\_\+reached}!clock@{clock}}
+\subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static uint8\+\_\+t clock\+::clock\+\_\+reached (\begin{DoxyParamCaption}\item[{const T \&}]{clock,  }\item[{const T \&}]{previous\+\_\+clock,  }\item[{const T \&}]{target\+\_\+clock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculate if target system clock has been reached. 
+
+In order for this function to work correctly the type of target\+\_\+clock (which is a template argument) must be big enough\+:
+
+{\itshape the type of target\+\_\+clock must be big enough to represent {\ttfamily previous\+\_\+clock -\/ clock}.}
+
+The previous\+\_\+clock is necessary because all clock operations assume that the system clock may wrap.
+
+clock\+\_\+reached uses the same type for the system clock as the type of target\+\_\+clock (which is a template argument).
+
+The previous\+\_\+clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous\+\_\+clock wrapping has occured.
+
+Notice that target\+\_\+clock may also be a wrapped value. This means that target\+\_\+clock may be smaller than previous\+\_\+clock.
+
+Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target\+\_\+clock type.
+
+For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_\+t would result in {\ttfamily 300 \% 256}, which is 44.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type size used for clock comparisons. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em clock} & The system clock value we should compare target to. \\
+\hline
+{\em previous\+\_\+clock} & Used to disambiguate wrapped clock values. (See function description.) \\
+\hline
+{\em target\+\_\+clock} & The target system clock value. \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespaceclock_aae7a34ec30a2420b2b51e717ab02c400}{}\label{namespaceclock_aae7a34ec30a2420b2b51e717ab02c400} 
+\index{clock@{clock}!clock\+\_\+reached@{clock\+\_\+reached}}
+\index{clock\+\_\+reached@{clock\+\_\+reached}!clock@{clock}}
+\subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static uint8\+\_\+t clock\+::clock\+\_\+reached (\begin{DoxyParamCaption}\item[{const T \&}]{previous\+\_\+clock,  }\item[{const T \&}]{target\+\_\+clock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculate if target system clock has been reached. 
+
+This function uses the current system clock as clock value.
+
+
+\begin{DoxyItemize}
+\item In order for this function to work correctly the type of target\+\_\+clock (which is a template argument) must be big enough\+:
+\end{DoxyItemize}
+
+{\itshape the type of target\+\_\+clock must be big enough to represent {\ttfamily previous\+\_\+clock -\/ clock}.}
+
+The previous\+\_\+clock is necessary because all clock operations assume that the system clock may wrap.
+
+clock\+\_\+reached uses the same type for the system clock as the type of target\+\_\+clock (which is a template argument).
+
+The previous\+\_\+clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous\+\_\+clock wrapping has occured.
+
+Notice that target\+\_\+clock may also be a wrapped value. This means that target\+\_\+clock may be smaller than previous\+\_\+clock.
+
+Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target\+\_\+clock type.
+
+For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_\+t would result in {\ttfamily 300 \% 256}, which is 44.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type size used for clock comparisons. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em previous\+\_\+clock} & Used to disambiguate wrapped clock values. (See function description.) \\
+\hline
+{\em target\+\_\+clock} & The target system clock value. \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespaceclock_a240d81de9119f92701aa5f26555972c4}{}\label{namespaceclock_a240d81de9119f92701aa5f26555972c4} 
+\index{clock@{clock}!clock\+\_\+reached@{clock\+\_\+reached}}
+\index{clock\+\_\+reached@{clock\+\_\+reached}!clock@{clock}}
+\subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static uint8\+\_\+t clock\+::clock\+\_\+reached (\begin{DoxyParamCaption}\item[{const T \&}]{target\+\_\+clock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculate if target system clock has been reached. 
+
+This function uses the current system clock as clock value and the current clock minus half the size of T as previous\+\_\+clock.
+
+E.\+g. if T is uint8\+\_\+t the current system clock minus 128 is used as previous clock.
+
+
+\begin{DoxyItemize}
+\item In order for this function to work correctly the type of target\+\_\+clock (which is a template argument) must be big enough\+:
+\end{DoxyItemize}
+
+{\itshape the type of target\+\_\+clock must be big enough to represent {\ttfamily previous\+\_\+clock -\/ clock}.}
+
+The previous\+\_\+clock is necessary because all clock operations assume that the system clock may wrap.
+
+clock\+\_\+reached uses the same type for the system clock as the type of target\+\_\+clock (which is a template argument).
+
+The previous\+\_\+clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous\+\_\+clock wrapping has occured.
+
+Notice that target\+\_\+clock may also be a wrapped value. This means that target\+\_\+clock may be smaller than previous\+\_\+clock.
+
+Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target\+\_\+clock type.
+
+For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_\+t would result in {\ttfamily 300 \% 256}, which is 44.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type size used for clock comparisons. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+clock} & The target system clock value. \\
+\hline
+\end{DoxyParams}
 \hypertarget{namespaceclock_a2818f7b058e27771426f39c7aa0365cd}{}\label{namespaceclock_a2818f7b058e27771426f39c7aa0365cd} 
 \index{clock@{clock}!duration\+\_\+passed@{duration\+\_\+passed}}
 \index{duration\+\_\+passed@{duration\+\_\+passed}!clock@{clock}}

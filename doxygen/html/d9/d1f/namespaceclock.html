@@ -134,6 +134,18 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a4db26a90b5c001f2bb46af7a2069d63d"><td class="memTemplItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a4db26a90b5c001f2bb46af7a2069d63d">duration_passed</a> (const T &amp;previous_clock, const U &amp;duration)</td></tr>
 <tr class="memdesc:a4db26a90b5c001f2bb46af7a2069d63d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate if duration has passed since previous_clock.  <a href="#a4db26a90b5c001f2bb46af7a2069d63d">More...</a><br /></td></tr>
 <tr class="separator:a4db26a90b5c001f2bb46af7a2069d63d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a107ad02a77763be28bf63d43c566cf75"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a107ad02a77763be28bf63d43c566cf75"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a107ad02a77763be28bf63d43c566cf75">clock_reached</a> (const T &amp;clock, const T &amp;previous_clock, const T &amp;target_clock)</td></tr>
+<tr class="memdesc:a107ad02a77763be28bf63d43c566cf75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate if target system clock has been reached.  <a href="#a107ad02a77763be28bf63d43c566cf75">More...</a><br /></td></tr>
+<tr class="separator:a107ad02a77763be28bf63d43c566cf75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7a34ec30a2420b2b51e717ab02c400"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aae7a34ec30a2420b2b51e717ab02c400"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#aae7a34ec30a2420b2b51e717ab02c400">clock_reached</a> (const T &amp;previous_clock, const T &amp;target_clock)</td></tr>
+<tr class="memdesc:aae7a34ec30a2420b2b51e717ab02c400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate if target system clock has been reached.  <a href="#aae7a34ec30a2420b2b51e717ab02c400">More...</a><br /></td></tr>
+<tr class="separator:aae7a34ec30a2420b2b51e717ab02c400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a240d81de9119f92701aa5f26555972c4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a240d81de9119f92701aa5f26555972c4"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a240d81de9119f92701aa5f26555972c4">clock_reached</a> (const T &amp;target_clock)</td></tr>
+<tr class="memdesc:a240d81de9119f92701aa5f26555972c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate if target system clock has been reached.  <a href="#a240d81de9119f92701aa5f26555972c4">More...</a><br /></td></tr>
+<tr class="separator:a240d81de9119f92701aa5f26555972c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -284,6 +296,192 @@ template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint
   <table class="tparams">
     <tr><td class="paramname">P</td><td>The prescale for <code>Timer0</code>. </td></tr>
     <tr><td class="paramname">T</td><td>The type of units (automatically determined). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a107ad02a77763be28bf63d43c566cf75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a107ad02a77763be28bf63d43c566cf75">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t clock::clock_reached </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>clock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>previous_clock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>target_clock</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate if target system clock has been reached. </p>
+<p>In order for this function to work correctly the type of target_clock (which is a template argument) must be big enough:</p>
+<p><em>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
+<p>The previous_clock is necessary because all clock operations assume that the system clock may wrap.</p>
+<p>clock_reached uses the same type for the system clock as the type of target_clock (which is a template argument).</p>
+<p>The previous_clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous_clock wrapping has occured.</p>
+<p>Notice that target_clock may also be a wrapped value. This means that target_clock may be smaller than previous_clock.</p>
+<p>Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target_clock type.</p>
+<p>For instance the system clock value 300 and the target_clock type uint8_t would result in <code>300 % 256</code>, which is 44.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type size used for clock comparisons. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clock</td><td>The system clock value we should compare target to. </td></tr>
+    <tr><td class="paramname">previous_clock</td><td>Used to disambiguate wrapped clock values. (See function description.) </td></tr>
+    <tr><td class="paramname">target_clock</td><td>The target system clock value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aae7a34ec30a2420b2b51e717ab02c400"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae7a34ec30a2420b2b51e717ab02c400">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t clock::clock_reached </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>previous_clock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>target_clock</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate if target system clock has been reached. </p>
+<p>This function uses the current system clock as clock value.</p>
+<ul>
+<li>In order for this function to work correctly the type of target_clock (which is a template argument) must be big enough:</li>
+</ul>
+<p><em>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
+<p>The previous_clock is necessary because all clock operations assume that the system clock may wrap.</p>
+<p>clock_reached uses the same type for the system clock as the type of target_clock (which is a template argument).</p>
+<p>The previous_clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous_clock wrapping has occured.</p>
+<p>Notice that target_clock may also be a wrapped value. This means that target_clock may be smaller than previous_clock.</p>
+<p>Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target_clock type.</p>
+<p>For instance the system clock value 300 and the target_clock type uint8_t would result in <code>300 % 256</code>, which is 44.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type size used for clock comparisons. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">previous_clock</td><td>Used to disambiguate wrapped clock values. (See function description.) </td></tr>
+    <tr><td class="paramname">target_clock</td><td>The target system clock value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a240d81de9119f92701aa5f26555972c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a240d81de9119f92701aa5f26555972c4">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t clock::clock_reached </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>target_clock</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate if target system clock has been reached. </p>
+<p>This function uses the current system clock as clock value and the current clock minus half the size of T as previous_clock.</p>
+<p>E.g. if T is uint8_t the current system clock minus 128 is used as previous clock.</p>
+<ul>
+<li>In order for this function to work correctly the type of target_clock (which is a template argument) must be big enough:</li>
+</ul>
+<p><em>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
+<p>The previous_clock is necessary because all clock operations assume that the system clock may wrap.</p>
+<p>clock_reached uses the same type for the system clock as the type of target_clock (which is a template argument).</p>
+<p>The previous_clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous_clock wrapping has occured.</p>
+<p>Notice that target_clock may also be a wrapped value. This means that target_clock may be smaller than previous_clock.</p>
+<p>Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target_clock type.</p>
+<p>For instance the system clock value 300 and the target_clock type uint8_t would result in <code>300 % 256</code>, which is 44.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type size used for clock comparisons. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target_clock</td><td>The target system clock value. </td></tr>
   </table>
   </dd>
 </dl>
