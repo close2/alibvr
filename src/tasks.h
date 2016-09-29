@@ -73,7 +73,7 @@ namespace _tasks {
 template <typename time_type_t, typename TaskList>
 static inline void execTasks(time_type_t& clock, time_type_t& previous) {
   previous = clock;
-  clock = get_clock<time_type_t>();
+  clock = (time_type_t) clock::Clock;
   _tasks::execTasks<>(clock, previous, TaskList());
 }
 

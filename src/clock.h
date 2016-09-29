@@ -7,6 +7,7 @@
 
 #include "bytes.h"
 #include "irqs.h"
+#include "limits.h"
 #include "internal/clock_prescale.h"
 
 #ifndef ALIBVR_NAMESPACE_CLOCK
@@ -677,8 +678,106 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    **/
   template<typename T, typename U>
   inline constexpr uint8_t duration_passed(const T& previous_clock,
-                                                  const U& duration) {
+                                           const U& duration) {
     return duration_passed(previous_clock, (T) Clock, duration);
+  }
+  
+  /**
+   * @brief Calculate if target system clock has been reached.
+   * 
+   * «CLOCK_REACHED_DOC[^  . ,]»
+   * In order for this function to work correctly the type of
+   * target_clock (which is a template argument) must be big enough:
+   * 
+   * *the type of target_clock must be big enough to represent
+   * `previous_clock - clock`.*
+   * 
+   * The previous_clock is necessary because all clock operations
+   * assume that the system clock may wrap.
+   * 
+   * clock_reached uses the same type for the system clock as the type
+   * of target_clock (which is a template argument).
+   * 
+   * The previous_clock argument allows us to determine if the system
+   * clock has wrapped.  If the system clock is smaller than
+   * previous_clock wrapping has occured.
+   * 
+   * Notice that target_clock may also be a wrapped value.  This means
+   * that target_clock may be smaller than previous_clock.
+   * 
+   * Simply imagine an infinite time line.
+   * To get a specific time instance, take the value modulo the size of
+   * the target_clock type.
+   * 
+   * For instance the system clock value 300 and the target_clock
+   * type uint8_t would result in `300 % 256`, which is 44.
+   * ¤
+   * 
+   * @tparam T The type size used for clock comparisons.
+   * @param clock The system clock value we should compare target to.
+   * @param previous_clock Used to disambiguate wrapped clock values.
+   *                       (See function description.)
+   * @param target_clock The target system clock value.
+   **/
+  /*
+   * There are 3 cases when we have reached the clock:
+   * (1) --p--t--c-- (i.e. prev smaller than target, target smaller than clock)
+   * current clock is higher than target.  As prev is smaller than target, we
+   * passed the target.
+   * 
+   * (2) -t-c-----p-
+   * Same analysis as prev. case.  Except that we have wrapped.
+   * 
+   * (3) -c-----p-t-
+   * In this case only clock has wrapped.
+   */
+  template<typename T>
+  static inline uint8_t clock_reached(const T& clock, const T& previous_clock, const T& target_clock) {
+    uint8_t ret; // this variable makes debugging easier
+    if (target_clock <= clock) {
+      ret = previous_clock <= target_clock || clock < previous_clock; // (1) & (2)
+    } else {
+      ret = previous_clock <= target_clock && previous_clock > clock; // (3)
+    }
+    return ret; 
+  }
+  
+  /**
+   * @brief Calculate if target system clock has been reached.
+   * 
+   * This function uses the current system clock as clock value.
+   * 
+   * +++CLOCK_REACHED_DOC+++
+   * 
+   * @tparam T The type size used for clock comparisons.
+   * @param previous_clock Used to disambiguate wrapped clock values.
+   *                       (See function description.)
+   * @param target_clock The target system clock value.
+   */
+  template<typename T>
+  static inline uint8_t clock_reached(const T& previous_clock, const T& target_clock) {
+    return clock_reached((T) Clock, previous_clock, target_clock);
+  }
+  
+  /**
+   * @brief Calculate if target system clock has been reached.
+   * 
+   * This function uses the current system clock as clock value and
+   * the current clock minus half the size of T as previous_clock.
+   * 
+   * E.g. if T is uint8_t the current system clock minus 128 is used
+   * as previous clock.
+   * 
+   * +++CLOCK_REACHED_DOC+++
+   * 
+   * @tparam T The type size used for clock comparisons.
+   * @param target_clock The target system clock value.
+   */
+  template<typename T>
+  static inline uint8_t clock_reached(const T& target_clock) {
+    T current = Clock;
+    T previous = current - (std::numeric_limits<T>::max / 2);
+    return clock_reached(current, previous, target_clock);
   }
 }
 #define _CLOCK_IN_USE _CLOCK_IN_USE
