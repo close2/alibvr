@@ -226,7 +226,7 @@ template&lt;typename T &gt; </div>
 
 <p>Calculate if target system clock has been reached. </p>
 <p>In order for this function to work correctly the type of target_clock (which is a template argument) must be big enough:</p>
-<p><em>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
+<p><em>The type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
 <p>The previous_clock is necessary because all clock operations assume that the system clock may wrap.</p>
 <p>clock_reached uses the same type for the system clock as the type of target_clock (which is a template argument).</p>
 <p>The previous_clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous_clock wrapping has occured.</p>
@@ -289,7 +289,7 @@ template&lt;typename T &gt; </div>
 <p>Calculate if target system clock has been reached. </p>
 <p>This function uses the current system clock as clock value.</p>
 <p>In order for this function to work correctly the type of target_clock (which is a template argument) must be big enough:</p>
-<p><em>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
+<p><em>The type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
 <p>The previous_clock is necessary because all clock operations assume that the system clock may wrap.</p>
 <p>clock_reached uses the same type for the system clock as the type of target_clock (which is a template argument).</p>
 <p>The previous_clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous_clock wrapping has occured.</p>
@@ -342,7 +342,7 @@ template&lt;typename T &gt; </div>
 <p>This function uses the current system clock as clock value and the current clock minus half the size of T as previous_clock.</p>
 <p>E.g. if T is uint8_t the current system clock minus 128 is used as previous clock.</p>
 <p>In order for this function to work correctly the type of target_clock (which is a template argument) must be big enough:</p>
-<p><em>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
+<p><em>The type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
 <p>The previous_clock is necessary because all clock operations assume that the system clock may wrap.</p>
 <p>clock_reached uses the same type for the system clock as the type of target_clock (which is a template argument).</p>
 <p>The previous_clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous_clock wrapping has occured.</p>
