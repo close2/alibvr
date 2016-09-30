@@ -287,7 +287,7 @@ This function uses the current system clock as clock value.
 
 In order for this function to work correctly the type of target\+\_\+clock (which is a template argument) must be big enough\+:
 
-the type of target\+\_\+clock must be big enough to represent {\ttfamily previous\+\_\+clock -\/ clock}.$\ast$
+{\itshape the type of target\+\_\+clock must be big enough to represent {\ttfamily previous\+\_\+clock -\/ clock}.}
 
 The previous\+\_\+clock is necessary because all clock operations assume that the system clock may wrap.
 
@@ -299,11 +299,21 @@ Notice that target\+\_\+clock may also be a wrapped value. This means that targe
 
 Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target\+\_\+clock type.
 
-For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_\+t would result in {\ttfamily 300 \% 256}, which is 44. \begin{DoxyVerb} @tparam T The type size used for clock comparisons.
- @param previous_clock Used to disambiguate wrapped clock values.
-                       (See function description.)
- @param target_clock The target system clock value.\end{DoxyVerb}
- \hypertarget{namespaceclock_a240d81de9119f92701aa5f26555972c4}{}\label{namespaceclock_a240d81de9119f92701aa5f26555972c4} 
+For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_\+t would result in {\ttfamily 300 \% 256}, which is 44.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type size used for clock comparisons. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em previous\+\_\+clock} & Used to disambiguate wrapped clock values. (See function description.) \\
+\hline
+{\em target\+\_\+clock} & The target system clock value. \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespaceclock_a240d81de9119f92701aa5f26555972c4}{}\label{namespaceclock_a240d81de9119f92701aa5f26555972c4} 
 \index{clock@{clock}!clock\+\_\+reached@{clock\+\_\+reached}}
 \index{clock\+\_\+reached@{clock\+\_\+reached}!clock@{clock}}
 \subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
@@ -320,7 +330,7 @@ E.\+g. if T is uint8\+\_\+t the current system clock minus 128 is used as previo
 
 In order for this function to work correctly the type of target\+\_\+clock (which is a template argument) must be big enough\+:
 
-the type of target\+\_\+clock must be big enough to represent {\ttfamily previous\+\_\+clock -\/ clock}.$\ast$
+{\itshape the type of target\+\_\+clock must be big enough to represent {\ttfamily previous\+\_\+clock -\/ clock}.}
 
 The previous\+\_\+clock is necessary because all clock operations assume that the system clock may wrap.
 
@@ -332,9 +342,19 @@ Notice that target\+\_\+clock may also be a wrapped value. This means that targe
 
 Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target\+\_\+clock type.
 
-For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_\+t would result in {\ttfamily 300 \% 256}, which is 44. \begin{DoxyVerb} @tparam T The type size used for clock comparisons.
- @param target_clock The target system clock value.\end{DoxyVerb}
- \hypertarget{namespaceclock_a2818f7b058e27771426f39c7aa0365cd}{}\label{namespaceclock_a2818f7b058e27771426f39c7aa0365cd} 
+For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_\+t would result in {\ttfamily 300 \% 256}, which is 44.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type size used for clock comparisons. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+clock} & The target system clock value. \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespaceclock_a2818f7b058e27771426f39c7aa0365cd}{}\label{namespaceclock_a2818f7b058e27771426f39c7aa0365cd} 
 \index{clock@{clock}!duration\+\_\+passed@{duration\+\_\+passed}}
 \index{duration\+\_\+passed@{duration\+\_\+passed}!clock@{clock}}
 \subsubsection{\texorpdfstring{duration\+\_\+passed()}{duration\_passed()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}

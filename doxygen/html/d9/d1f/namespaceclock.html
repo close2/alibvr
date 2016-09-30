@@ -409,16 +409,27 @@ template&lt;typename T &gt; </div>
 <p>Calculate if target system clock has been reached. </p>
 <p>This function uses the current system clock as clock value.</p>
 <p>In order for this function to work correctly the type of target_clock (which is a template argument) must be big enough:</p>
-<p>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.*</p>
+<p><em>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
 <p>The previous_clock is necessary because all clock operations assume that the system clock may wrap.</p>
 <p>clock_reached uses the same type for the system clock as the type of target_clock (which is a template argument).</p>
 <p>The previous_clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous_clock wrapping has occured.</p>
 <p>Notice that target_clock may also be a wrapped value. This means that target_clock may be smaller than previous_clock.</p>
 <p>Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target_clock type.</p>
-<p>For instance the system clock value 300 and the target_clock type uint8_t would result in <code>300 % 256</code>, which is 44. </p><pre class="fragment"> @tparam T The type size used for clock comparisons.
- @param previous_clock Used to disambiguate wrapped clock values.
-                       (See function description.)
- @param target_clock The target system clock value.</pre> 
+<p>For instance the system clock value 300 and the target_clock type uint8_t would result in <code>300 % 256</code>, which is 44.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type size used for clock comparisons. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">previous_clock</td><td>Used to disambiguate wrapped clock values. (See function description.) </td></tr>
+    <tr><td class="paramname">target_clock</td><td>The target system clock value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a240d81de9119f92701aa5f26555972c4"></a>
@@ -451,14 +462,26 @@ template&lt;typename T &gt; </div>
 <p>This function uses the current system clock as clock value and the current clock minus half the size of T as previous_clock.</p>
 <p>E.g. if T is uint8_t the current system clock minus 128 is used as previous clock.</p>
 <p>In order for this function to work correctly the type of target_clock (which is a template argument) must be big enough:</p>
-<p>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.*</p>
+<p><em>the type of target_clock must be big enough to represent <code>previous_clock - clock</code>.</em></p>
 <p>The previous_clock is necessary because all clock operations assume that the system clock may wrap.</p>
 <p>clock_reached uses the same type for the system clock as the type of target_clock (which is a template argument).</p>
 <p>The previous_clock argument allows us to determine if the system clock has wrapped. If the system clock is smaller than previous_clock wrapping has occured.</p>
 <p>Notice that target_clock may also be a wrapped value. This means that target_clock may be smaller than previous_clock.</p>
 <p>Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target_clock type.</p>
-<p>For instance the system clock value 300 and the target_clock type uint8_t would result in <code>300 % 256</code>, which is 44. </p><pre class="fragment"> @tparam T The type size used for clock comparisons.
- @param target_clock The target system clock value.</pre> 
+<p>For instance the system clock value 300 and the target_clock type uint8_t would result in <code>300 % 256</code>, which is 44.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type size used for clock comparisons. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target_clock</td><td>The target system clock value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a2818f7b058e27771426f39c7aa0365cd"></a>
