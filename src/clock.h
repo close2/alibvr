@@ -25,15 +25,12 @@
 
 
 /**
+ * @brief This file uses `Timer0` to provide a system clock.
+ * 
  * By default class related classes, enums,... are defined
  * inside the `clock` namespace.  If this creates a name clash with your
  * code you may modify the namespace name by setting
  * ALIBVR_NAMESPACE_CLOCK or ALIBVR_NAMESPACE_PREFIX.
- **/
-
-
-/**
- * @brief This file uses `Timer0` to provide a system clock.
  * 
  * The system clock is derived from the IO-clock and must be converted
  * to seconds.
