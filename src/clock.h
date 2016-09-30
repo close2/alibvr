@@ -747,7 +747,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    * 
    * This function uses the current system clock as clock value.
    * 
-   * +++CLOCK_REACHED_DOC+++
++++CLOCK_REACHED_DOC[^,   * ]+++
    * 
    * @tparam T The type size used for clock comparisons.
    * @param previous_clock Used to disambiguate wrapped clock values.
@@ -768,7 +768,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    * E.g. if T is uint8_t the current system clock minus 128 is used
    * as previous clock.
    * 
-   * +++CLOCK_REACHED_DOC+++
++++CLOCK_REACHED_DOC[^,   * ]+++
    * 
    * @tparam T The type size used for clock comparisons.
    * @param target_clock The target system clock value.
