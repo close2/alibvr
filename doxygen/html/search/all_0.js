@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['_5f_5fattribute_5f_5f',['__attribute__',['../d9/d1f/namespaceclock.html#aaadef4e91948a79985a42ebbd57fe2d1',1,'clock::__attribute__((deprecated(&quot;If possible use the template version.  &quot; &quot;This function probably bloats your code and might be very slow&quot;))) inline uint32_t units_to_time(const T &amp;units)'],['../d9/d1f/namespaceclock.html#ad835387e001884a66a0c3538ab172505',1,'clock::__attribute__((deprecated(&quot;If possible use the template version.  &quot; &quot;This function probably bloats your code and might be very slow&quot;))) inline T ms_to_units(const T &amp;n)']]],
   ['_5fbitrateconfig',['_BitRateConfig',['../dd/df5/struct__twi_1_1__BitRateConfig.html',1,'_twi']]],
   ['_5fclock',['_Clock',['../d8/de9/classclock_1_1__Clock.html',1,'clock']]],
   ['_5fclock',['_Clock',['../d8/de9/classclock_1_1__Clock.html#a6b87c9f7ce1d1b0de9a5e728a62342ce',1,'clock::_Clock::_Clock()'],['../d9/d1f/namespaceclock.html#a0cfce972d3684eddb3dd61bb0baaf225',1,'clock::_clock()']]],

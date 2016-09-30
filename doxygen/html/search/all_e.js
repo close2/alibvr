@@ -3,7 +3,7 @@ var searchData=
   ['task',['task',['../de/d26/namespaceadc.html#a0e6e6773a0ed848acb0887f1ed3c76ae',1,'adc']]],
   ['temperature',['Temperature',['../dd/d64/structadc_1_1Input_1_1Temperature.html',1,'adc::Input']]],
   ['test_5fio_2eh',['test_io.h',['../d2/d0a/test__io_8h.html',1,'']]],
-  ['time_5fto_5funits',['time_to_units',['../d9/d1f/namespaceclock.html#ac6b5f264784ea96fd8629fec0c0f7131',1,'clock']]],
+  ['time_5fto_5funits',['time_to_units',['../d9/d1f/namespaceclock.html#ac6b5f264784ea96fd8629fec0c0f7131',1,'clock::time_to_units()'],['../d9/d1f/namespaceclock.html#a46fd6e3a91d0b307eeea0500d03d12fb',1,'clock::time_to_units(const T &amp;n)']]],
   ['timer0',['Timer0',['../d4/d3b/struct__timer_1_1Timer0.html',1,'_timer']]],
   ['timerdef',['TimerDef',['../df/dbc/struct__timer1_1_1TimerDef.html',1,'_timer1']]],
   ['timerdef',['TimerDef',['../da/d6a/struct__timer0_1_1TimerDef.html',1,'_timer0']]],

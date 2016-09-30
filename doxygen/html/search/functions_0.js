@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['_5f_5fattribute_5f_5f',['__attribute__',['../d9/d1f/namespaceclock.html#aaadef4e91948a79985a42ebbd57fe2d1',1,'clock::__attribute__((deprecated(&quot;If possible use the template version.  &quot; &quot;This function probably bloats your code and might be very slow&quot;))) inline uint32_t units_to_time(const T &amp;units)'],['../d9/d1f/namespaceclock.html#ad835387e001884a66a0c3538ab172505',1,'clock::__attribute__((deprecated(&quot;If possible use the template version.  &quot; &quot;This function probably bloats your code and might be very slow&quot;))) inline T ms_to_units(const T &amp;n)']]],
   ['_5fclock',['_Clock',['../d8/de9/classclock_1_1__Clock.html#a6b87c9f7ce1d1b0de9a5e728a62342ce',1,'clock::_Clock']]],
   ['_5fdo_5fadc',['_do_adc',['../de/d26/namespaceadc.html#ab569dff590b3bb745fb012aa29ec5723',1,'adc']]],
   ['_5fdo_5fadc_3c_200_20_3e',['_do_adc&lt; 0 &gt;',['../de/d26/namespaceadc.html#a6e0b185b550424440d92bc2b129f6128',1,'adc']]],

@@ -87,8 +87,8 @@ typedef _alibvr_clock_select::ClockSelect&#160;</td><td class="memItemRight" val
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa67adb0b2215c44a4a770b6c36cfe8a7"><td class="memItemLeft" align="right" valign="top"><a id="aa67adb0b2215c44a4a770b6c36cfe8a7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ClockIrqTask</b> (_irqs::Irq I)</td></tr>
+<tr class="memitem:aa67adb0b2215c44a4a770b6c36cfe8a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#aa67adb0b2215c44a4a770b6c36cfe8a7">ClockIrqTask</a> (_irqs::Irq I)</td></tr>
+<tr class="memdesc:aa67adb0b2215c44a4a770b6c36cfe8a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the Timer0 Overflow handler, which increments the system clock.  <a href="#aa67adb0b2215c44a4a770b6c36cfe8a7">More...</a><br /></td></tr>
 <tr class="separator:aa67adb0b2215c44a4a770b6c36cfe8a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac68f79977567f2ffe11ea30631653dd8"><td class="memTemplParams" colspan="2"><a id="ac68f79977567f2ffe11ea30631653dd8"></a>
 template&lt;typename T &gt; </td></tr>
@@ -102,14 +102,30 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac6b5f264784ea96fd8629fec0c0f7131"><td class="memTemplItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#ac6b5f264784ea96fd8629fec0c0f7131">time_to_units</a> ()</td></tr>
 <tr class="memdesc:ac6b5f264784ea96fd8629fec0c0f7131"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert real time units to "units".  <a href="#ac6b5f264784ea96fd8629fec0c0f7131">More...</a><br /></td></tr>
 <tr class="separator:ac6b5f264784ea96fd8629fec0c0f7131"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaadef4e91948a79985a42ebbd57fe2d1"><td class="memTemplParams" colspan="2">template&lt;uint32_t Factor, uint32_t Prescale = (uint32_t) _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </td></tr>
-<tr class="memitem:aaadef4e91948a79985a42ebbd57fe2d1"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#aaadef4e91948a79985a42ebbd57fe2d1">__attribute__</a> ((deprecated(&quot;If possible use the template version.  &quot; &quot;This function probably bloats your code and might be very slow&quot;))) inline uint32_t <a class="el" href="../../d9/d1f/namespaceclock.html#ae4ee0d04356b216b1d04046c0e1b2d38">units_to_time</a>(const T &amp;units)</td></tr>
-<tr class="memdesc:aaadef4e91948a79985a42ebbd57fe2d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert "units" to real time units.  <a href="#aaadef4e91948a79985a42ebbd57fe2d1">More...</a><br /></td></tr>
-<tr class="separator:aaadef4e91948a79985a42ebbd57fe2d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad835387e001884a66a0c3538ab172505"><td class="memTemplParams" colspan="2">template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </td></tr>
-<tr class="memitem:ad835387e001884a66a0c3538ab172505"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#ad835387e001884a66a0c3538ab172505">__attribute__</a> ((deprecated(&quot;If possible use the template version.  &quot; &quot;This function probably bloats your code and might be very slow&quot;))) inline T <a class="el" href="../../d9/d1f/namespaceclock.html#ae159a2e83f7b30eeafe3d5be8a3f5ef6">ms_to_units</a>(const T &amp;n)</td></tr>
-<tr class="memdesc:ad835387e001884a66a0c3538ab172505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert ms to "units".  <a href="#ad835387e001884a66a0c3538ab172505">More...</a><br /></td></tr>
-<tr class="separator:ad835387e001884a66a0c3538ab172505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afadc978b0b25983f61b85b53ae468a51"><td class="memTemplParams" colspan="2">template&lt;uint32_t Factor, uint32_t Prescale = (uint32_t) _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </td></tr>
+<tr class="memitem:afadc978b0b25983f61b85b53ae468a51"><td class="memTemplItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#afadc978b0b25983f61b85b53ae468a51">units_to_time</a> (const T &amp;units)</td></tr>
+<tr class="memdesc:afadc978b0b25983f61b85b53ae468a51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert "units" to real time units.  <a href="#afadc978b0b25983f61b85b53ae468a51">More...</a><br /></td></tr>
+<tr class="separator:afadc978b0b25983f61b85b53ae468a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46fd6e3a91d0b307eeea0500d03d12fb"><td class="memTemplParams" colspan="2">template&lt;uint32_t Factor, uint32_t Prescale = (uint32_t) _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </td></tr>
+<tr class="memitem:a46fd6e3a91d0b307eeea0500d03d12fb"><td class="memTemplItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a46fd6e3a91d0b307eeea0500d03d12fb">time_to_units</a> (const T &amp;n)</td></tr>
+<tr class="memdesc:a46fd6e3a91d0b307eeea0500d03d12fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert real time units to "units".  <a href="#a46fd6e3a91d0b307eeea0500d03d12fb">More...</a><br /></td></tr>
+<tr class="separator:a46fd6e3a91d0b307eeea0500d03d12fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e5ca91b796d0c96b8094ba1441daedc"><td class="memTemplParams" colspan="2">template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </td></tr>
+<tr class="memitem:a2e5ca91b796d0c96b8094ba1441daedc"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a2e5ca91b796d0c96b8094ba1441daedc">ms_to_units</a> (const T &amp;n)</td></tr>
+<tr class="memdesc:a2e5ca91b796d0c96b8094ba1441daedc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert ms to "units".  <a href="#a2e5ca91b796d0c96b8094ba1441daedc">More...</a><br /></td></tr>
+<tr class="separator:a2e5ca91b796d0c96b8094ba1441daedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac07c7dca2d34cd417aa968fa2ccab83b"><td class="memTemplParams" colspan="2">template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </td></tr>
+<tr class="memitem:ac07c7dca2d34cd417aa968fa2ccab83b"><td class="memTemplItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#ac07c7dca2d34cd417aa968fa2ccab83b">us_to_units</a> (const T &amp;n)</td></tr>
+<tr class="memdesc:ac07c7dca2d34cd417aa968fa2ccab83b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert µs to "units".  <a href="#ac07c7dca2d34cd417aa968fa2ccab83b">More...</a><br /></td></tr>
+<tr class="separator:ac07c7dca2d34cd417aa968fa2ccab83b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64b11929624655a5ac990b12829c8606"><td class="memTemplParams" colspan="2">template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </td></tr>
+<tr class="memitem:a64b11929624655a5ac990b12829c8606"><td class="memTemplItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a64b11929624655a5ac990b12829c8606">units_to_ms</a> (const T &amp;units)</td></tr>
+<tr class="memdesc:a64b11929624655a5ac990b12829c8606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert "units" to ms.  <a href="#a64b11929624655a5ac990b12829c8606">More...</a><br /></td></tr>
+<tr class="separator:a64b11929624655a5ac990b12829c8606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad223db3a13e650f8e16585cde9ff08ac"><td class="memTemplParams" colspan="2">template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </td></tr>
+<tr class="memitem:ad223db3a13e650f8e16585cde9ff08ac"><td class="memTemplItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#ad223db3a13e650f8e16585cde9ff08ac">units_to_us</a> (const T &amp;units)</td></tr>
+<tr class="memdesc:ad223db3a13e650f8e16585cde9ff08ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert "units" to µs.  <a href="#ad223db3a13e650f8e16585cde9ff08ac">More...</a><br /></td></tr>
+<tr class="separator:ad223db3a13e650f8e16585cde9ff08ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae159a2e83f7b30eeafe3d5be8a3f5ef6"><td class="memTemplParams" colspan="2">template&lt;uint32_t Time, ClockSelect P = _alibvr_clock_prescale::Prescale&gt; </td></tr>
 <tr class="memitem:ae159a2e83f7b30eeafe3d5be8a3f5ef6"><td class="memTemplItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#ae159a2e83f7b30eeafe3d5be8a3f5ef6">ms_to_units</a> ()</td></tr>
 <tr class="memdesc:ae159a2e83f7b30eeafe3d5be8a3f5ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert ms to "units".  <a href="#ae159a2e83f7b30eeafe3d5be8a3f5ef6">More...</a><br /></td></tr>
@@ -162,146 +178,10 @@ static <a class="el" href="../../d8/de9/classclock_1_1__Clock.html">_Clock</a>&#
 <p>Conversion functions are provided. Try to stay with the template versions, which can be calculated during compile time. Conversion of variables (with values unknown during compile time) will probably include division code, which is both big and slow.</p>
 <p>It is usually possible to compare the difference of 2 time instances with a converted interval value:</p>
 <p>Instead of (both examples in pseudocode):</p>
-<div class="fragment"><div class="line">uint8_t clock1 = Clock;</div><div class="line"><span class="comment">// do something</span></div><div class="line">uint8_t duration = Clock - clock1;</div><div class="line"><span class="keywordflow">if</span> (<a class="code" href="../../d9/d1f/namespaceclock.html#a475b3551d89e7a345492a61f70830bd8">units_to_ms</a>(duration) &gt; 5) <span class="comment">// work took more than 5 ms</span></div></div><!-- fragment --><p>write</p>
+<div class="fragment"><div class="line">uint8_t clock1 = Clock;</div><div class="line"><span class="comment">// do something</span></div><div class="line">uint8_t duration = Clock - clock1;</div><div class="line"><span class="keywordflow">if</span> (<a class="code" href="../../d9/d1f/namespaceclock.html#a64b11929624655a5ac990b12829c8606">units_to_ms</a>(duration) &gt; 5) <span class="comment">// work took more than 5 ms</span></div></div><!-- fragment --><p>write</p>
 <div class="fragment"><div class="line">uint8_t clock1 = Clock;</div><div class="line"><span class="comment">// do something</span></div><div class="line">uint8_t duration = Clock - clock1;</div><div class="line"><span class="keywordflow">if</span> (duration &gt; ms_to_units&lt;5&gt;()) <span class="comment">// work took more than 5 ms</span></div></div><!-- fragment --><p><em>Global irqs are enabled unless the macro: <code>ALIBVR_CLOCK_NO_GLOBAL_IRQ</code> or <code>ALIBVR_NO_GLOBAL_IRQ</code> is defined!</em> By including this header directly or indirectly global irqs are enabled because of a static constructor in this file!</p>
 <p>The clock is incremented inside the <code>Timer0</code> overflow irq handler. To activate the registered irq handler add <code>#include REGISTER_IRQS</code> after your <code>main</code> section. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aaadef4e91948a79985a42ebbd57fe2d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaadef4e91948a79985a42ebbd57fe2d1">&sect;&nbsp;</a></span>__attribute__() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;uint32_t Factor, uint32_t Prescale = (uint32_t) _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">clock::__attribute__ </td>
-          <td>(</td>
-          <td class="paramtype">(deprecated(&quot;If possible use the template version.  &quot; &quot;This function probably bloats your code and might be very slow&quot;))&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Convert "units" to real time units. </p>
-<p>Convert real time units to "units".</p>
-<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
-<p>See units_to_ms and units_to_us for functions with simplified input.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">units</td><td>The system clock units, which should be converted. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Factor</td><td>Use 1 second / Factor as return unit. 1'000 for ms 1'000'000 for µs. </td></tr>
-    <tr><td class="paramname">Prescale</td><td>The prescale for <code>Timer0</code>. </td></tr>
-    <tr><td class="paramname">T</td><td>The type of units (automatically determined).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
-<p>See units_to_ms and units_to_us for functions with simplified input.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n</td><td>The time duration, which should be converted. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Factor</td><td>Use 1 second / Factor as input unit. 1'000 for ms 1'000'000 for µs. </td></tr>
-    <tr><td class="paramname">Prescale</td><td>The prescale for <code>Timer0</code>. </td></tr>
-    <tr><td class="paramname">T</td><td>The type of units (automatically determined). </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad835387e001884a66a0c3538ab172505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad835387e001884a66a0c3538ab172505">&sect;&nbsp;</a></span>__attribute__() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">clock::__attribute__ </td>
-          <td>(</td>
-          <td class="paramtype">(deprecated(&quot;If possible use the template version.  &quot; &quot;This function probably bloats your code and might be very slow&quot;))&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Convert ms to "units". </p>
-<p>Convert "units" to µs.</p>
-<p>Convert "units" to ms.</p>
-<p>Convert µs to "units".</p>
-<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n</td><td>The time duration in ms, which should be converted. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">P</td><td>The prescale for <code>Timer0</code>. </td></tr>
-    <tr><td class="paramname">T</td><td>The type of units (automatically determined).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000004">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n</td><td>The time duration in µs, which should be converted. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">P</td><td>The prescale for <code>Timer0</code>. </td></tr>
-    <tr><td class="paramname">T</td><td>The type of units (automatically determined).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000005">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">units</td><td>The time duration in units, which should be converted. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">P</td><td>The prescale for <code>Timer0</code>. </td></tr>
-    <tr><td class="paramname">T</td><td>The type of units (automatically determined).</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000006">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">units</td><td>The time duration in units, which should be converted. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">P</td><td>The prescale for <code>Timer0</code>. </td></tr>
-    <tr><td class="paramname">T</td><td>The type of units (automatically determined). </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a107ad02a77763be28bf63d43c566cf75"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a107ad02a77763be28bf63d43c566cf75">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[1/3]</span></h2>
 
@@ -484,6 +364,27 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="aa67adb0b2215c44a4a770b6c36cfe8a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa67adb0b2215c44a4a770b6c36cfe8a7">&sect;&nbsp;</a></span>ClockIrqTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clock::ClockIrqTask </td>
+          <td>(</td>
+          <td class="paramtype">_irqs::Irq&#160;</td>
+          <td class="paramname"><em>I</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This is the Timer0 Overflow handler, which increments the system clock. </p>
+<p>The compiler would generate less code, but execute more commands on average than this assembler version. </p>
+
+</div>
+</div>
 <a id="a2818f7b058e27771426f39c7aa0365cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2818f7b058e27771426f39c7aa0365cd">&sect;&nbsp;</a></span>duration_passed() <span class="overload">[1/2]</span></h2>
 
@@ -588,8 +489,52 @@ template&lt;typename T , typename U &gt; </div>
 
 </div>
 </div>
+<a id="a2e5ca91b796d0c96b8094ba1441daedc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e5ca91b796d0c96b8094ba1441daedc">&sect;&nbsp;</a></span>ms_to_units() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T clock::ms_to_units </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert ms to "units". </p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>The time duration in ms, which should be converted. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">P</td><td>The prescale for <code>Timer0</code>. </td></tr>
+    <tr><td class="paramname">T</td><td>The type of units (automatically determined). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae159a2e83f7b30eeafe3d5be8a3f5ef6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae159a2e83f7b30eeafe3d5be8a3f5ef6">&sect;&nbsp;</a></span>ms_to_units()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae159a2e83f7b30eeafe3d5be8a3f5ef6">&sect;&nbsp;</a></span>ms_to_units() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -626,7 +571,7 @@ template&lt;uint32_t Time, ClockSelect P = _alibvr_clock_prescale::Prescale&gt; 
 </div>
 </div>
 <a id="ac6b5f264784ea96fd8629fec0c0f7131"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6b5f264784ea96fd8629fec0c0f7131">&sect;&nbsp;</a></span>time_to_units()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6b5f264784ea96fd8629fec0c0f7131">&sect;&nbsp;</a></span>time_to_units() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -656,8 +601,98 @@ template&lt;uint32_t Time, uint32_t Factor, uint32_t Prescale&gt; </div>
 
 </div>
 </div>
+<a id="a46fd6e3a91d0b307eeea0500d03d12fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46fd6e3a91d0b307eeea0500d03d12fb">&sect;&nbsp;</a></span>time_to_units() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint32_t Factor, uint32_t Prescale = (uint32_t) _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t clock::time_to_units </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert real time units to "units". </p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
+<p>See units_to_ms and units_to_us for functions with simplified input.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>The time duration, which should be converted. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Factor</td><td>Use 1 second / Factor as input unit. 1'000 for ms 1'000'000 for µs. </td></tr>
+    <tr><td class="paramname">Prescale</td><td>The prescale for <code>Timer0</code>. </td></tr>
+    <tr><td class="paramname">T</td><td>The type of units (automatically determined). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a64b11929624655a5ac990b12829c8606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64b11929624655a5ac990b12829c8606">&sect;&nbsp;</a></span>units_to_ms() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t clock::units_to_ms </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>units</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert "units" to ms. </p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000005">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">units</td><td>The time duration in units, which should be converted. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">P</td><td>The prescale for <code>Timer0</code>. </td></tr>
+    <tr><td class="paramname">T</td><td>The type of units (automatically determined). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a475b3551d89e7a345492a61f70830bd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a475b3551d89e7a345492a61f70830bd8">&sect;&nbsp;</a></span>units_to_ms()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a475b3551d89e7a345492a61f70830bd8">&sect;&nbsp;</a></span>units_to_ms() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -694,7 +729,7 @@ template&lt;uint32_t Units, ClockSelect P = _alibvr_clock_prescale::Prescale&gt;
 </div>
 </div>
 <a id="ae4ee0d04356b216b1d04046c0e1b2d38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4ee0d04356b216b1d04046c0e1b2d38">&sect;&nbsp;</a></span>units_to_time()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4ee0d04356b216b1d04046c0e1b2d38">&sect;&nbsp;</a></span>units_to_time() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -725,8 +760,98 @@ template&lt;uint32_t Units, uint32_t Factor, uint32_t Prescale&gt; </div>
 
 </div>
 </div>
+<a id="afadc978b0b25983f61b85b53ae468a51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afadc978b0b25983f61b85b53ae468a51">&sect;&nbsp;</a></span>units_to_time() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint32_t Factor, uint32_t Prescale = (uint32_t) _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t clock::units_to_time </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>units</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert "units" to real time units. </p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
+<p>See units_to_ms and units_to_us for functions with simplified input.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">units</td><td>The system clock units, which should be converted. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Factor</td><td>Use 1 second / Factor as return unit. 1'000 for ms 1'000'000 for µs. </td></tr>
+    <tr><td class="paramname">Prescale</td><td>The prescale for <code>Timer0</code>. </td></tr>
+    <tr><td class="paramname">T</td><td>The type of units (automatically determined). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad223db3a13e650f8e16585cde9ff08ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad223db3a13e650f8e16585cde9ff08ac">&sect;&nbsp;</a></span>units_to_us() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t clock::units_to_us </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>units</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert "units" to µs. </p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000006">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">units</td><td>The time duration in units, which should be converted. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">P</td><td>The prescale for <code>Timer0</code>. </td></tr>
+    <tr><td class="paramname">T</td><td>The type of units (automatically determined). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a320b3614df868e901b2f022f70a3d8ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a320b3614df868e901b2f022f70a3d8ae">&sect;&nbsp;</a></span>units_to_us()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a320b3614df868e901b2f022f70a3d8ae">&sect;&nbsp;</a></span>units_to_us() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -762,8 +887,52 @@ template&lt;uint32_t Units, ClockSelect P = _alibvr_clock_prescale::Prescale&gt;
 
 </div>
 </div>
+<a id="ac07c7dca2d34cd417aa968fa2ccab83b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac07c7dca2d34cd417aa968fa2ccab83b">&sect;&nbsp;</a></span>us_to_units() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;ClockSelect P = _alibvr_clock_prescale::Prescale, typename T  = uint16_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t clock::us_to_units </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert µs to "units". </p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000004">Deprecated:</a></b></dt><dd>Use template versions if possible.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>The time duration in µs, which should be converted. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">P</td><td>The prescale for <code>Timer0</code>. </td></tr>
+    <tr><td class="paramname">T</td><td>The type of units (automatically determined). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a058555acfdfbc406daf1cb9331b0bc6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a058555acfdfbc406daf1cb9331b0bc6f">&sect;&nbsp;</a></span>us_to_units()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a058555acfdfbc406daf1cb9331b0bc6f">&sect;&nbsp;</a></span>us_to_units() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
