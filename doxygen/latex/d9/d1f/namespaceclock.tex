@@ -71,7 +71,9 @@ static \hyperlink{classclock_1_1__Clock}{\+\_\+\+Clock} {\bfseries Clock}
 \subsection{Detailed Description}
 This file uses {\ttfamily Timer0} to provide a system clock. 
 
-By default class related classes, enums,... are defined inside the {\ttfamily clock} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+C\+L\+O\+CK or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. The system clock is derived from the I\+O-\/clock and must be converted to seconds.
+By default class related classes, enums,... are defined inside the {\ttfamily clock} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+C\+L\+O\+CK or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX.
+
+The system clock is derived from the I\+O-\/clock and must be converted to seconds.
 
 Conversion functions are provided. Try to stay with the template versions, which can be calculated during compile time. Conversion of variables (with values unknown during compile time) will probably include division code, which is both big and slow.
 

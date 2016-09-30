@@ -174,7 +174,8 @@ static <a class="el" href="../../d8/de9/classclock_1_1__Clock.html">_Clock</a>&#
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file uses <code>Timer0</code> to provide a system clock. </p>
-<p>By default class related classes, enums,... are defined inside the <code>clock</code> namespace. If this creates a name clash with your code you may modify the namespace name by setting ALIBVR_NAMESPACE_CLOCK or ALIBVR_NAMESPACE_PREFIX. The system clock is derived from the IO-clock and must be converted to seconds.</p>
+<p>By default class related classes, enums,... are defined inside the <code>clock</code> namespace. If this creates a name clash with your code you may modify the namespace name by setting ALIBVR_NAMESPACE_CLOCK or ALIBVR_NAMESPACE_PREFIX.</p>
+<p>The system clock is derived from the IO-clock and must be converted to seconds.</p>
 <p>Conversion functions are provided. Try to stay with the template versions, which can be calculated during compile time. Conversion of variables (with values unknown during compile time) will probably include division code, which is both big and slow.</p>
 <p>It is usually possible to compare the difference of 2 time instances with a converted interval value:</p>
 <p>Instead of (both examples in pseudocode):</p>
