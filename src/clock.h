@@ -685,7 +685,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   /**
    * @brief Calculate if target system clock has been reached.
    * 
-   * «CLOCK_REACHED_DOC[^  . ,]»
+   * «CLOCK_REACHED_DOC[^   . ,]»
    * In order for this function to work correctly the type of
    * target_clock (which is a template argument) must be big enough:
    * 
