@@ -753,7 +753,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    * @param previous_clock Used to disambiguate wrapped clock values.
    *                       (See function description.)
    * @param target_clock The target system clock value.
-   */
+   **/
   template<typename T>
   static inline uint8_t clock_reached(const T& previous_clock, const T& target_clock) {
     return clock_reached((T) Clock, previous_clock, target_clock);
@@ -772,7 +772,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    * 
    * @tparam T The type size used for clock comparisons.
    * @param target_clock The target system clock value.
-   */
+   **/
   template<typename T>
   static inline uint8_t clock_reached(const T& target_clock) {
     T current = Clock;
