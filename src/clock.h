@@ -689,7 +689,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    * In order for this function to work correctly the type of
    * target_clock (which is a template argument) must be big enough:
    * 
-   * *the type of target_clock must be big enough to represent
+   * *The type of target_clock must be big enough to represent
    * `previous_clock - clock`.*
    * 
    * The previous_clock is necessary because all clock operations
