@@ -98,6 +98,22 @@ int main(void) {
   previous = Clock;
   while(!duration_passed(previous, userUsToUnits));
   
+  // «CLOCK_REACHED1[^  ,]»
+  uint16_t now = Clock;
+  uint16_t target_clock = now + ms_to_units<1000>();
+  while (!clock_reached(target_clock)) {}
+  /*¤*/
+  
+  // «CLOCK_REACHED2[^  ,]»
+  uint16_t previous_clock = Clock;
+  uint16_t next_clock = previous_clock + ms_to_units<3000>();
+  while (!clock_reached((uint16_t) Clock, previous_clock, next_clock)) {}
+  /*¤*/
+  
+  /*«CLOCK_REACHED_UINT16»*/uint16_t target = (uint16_t) Clock + ms_to_units<1800>();/*¤*/
+  
+  // use target
+  if (target == std::numeric_limits<uint16_t>::max()) target = 0;
   
   // «CLOCK_DURATION[^  ,]»
   previous = Clock;

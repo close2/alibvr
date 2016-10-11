@@ -80,8 +80,8 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    * `bits64_t` is a union type providing easy access to all bytes.
    * 
    * The prescaler is by default set to 1/64.
-   * - At 8MHz _clock is incremented every  2'048ns.
-   * - At 1MHz _clock is incremented every 16'384ns.
+   * - At 8MHz _clock is incremented every  2'048µs.
+   * - At 1MHz _clock is incremented every 16'384µs.
    * 
    * When retrieving the system clock the current `Timer0` counter is
    * added.  The precision of the system clock is therefore always
@@ -689,6 +689,21 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    * *The type of target_clock must be big enough to represent
    * `previous_clock - clock`.*
    * 
+   * The maximum values uint8_t, uint16_t, uint32_t and uint64_t can
+   * represent are:
+   * 
+   * At 1 MHz:
+   * * uint8_t: 16.384 ms
+   * * uint16_t: 4.194304 s
+   * * uint32_t: ~76 hours
+   * * uint64_t: ~37'410'690 years
+   * 
+   * At 8 MHz:
+   * * uint8_t: 2.048 ms
+   * * uint16_t: 0.524288 s
+   * * uint32_t: ~9.5 hours
+   * * uint64_t: ~4'654'596 years
+   * 
    * The previous_clock is necessary because all clock operations
    * assume that the system clock may wrap.
    * 
@@ -742,23 +757,6 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   /**
    * @brief Calculate if target system clock has been reached.
    * 
-   * This function uses the current system clock as clock value.
-   * 
-+++CLOCK_REACHED_DOC[^,   * ]+++
-   * 
-   * @tparam T The type size used for clock comparisons.
-   * @param previous_clock Used to disambiguate wrapped clock values.
-   *                       (See function description.)
-   * @param target_clock The target system clock value.
-   **/
-  template<typename T>
-  static inline uint8_t clock_reached(const T& previous_clock, const T& target_clock) {
-    return clock_reached((T) Clock, previous_clock, target_clock);
-  }
-  
-  /**
-   * @brief Calculate if target system clock has been reached.
-   * 
    * This function uses the current system clock as clock value and
    * the current clock minus half the size of T as previous_clock.
    * 
@@ -773,7 +771,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   template<typename T>
   static inline uint8_t clock_reached(const T& target_clock) {
     T current = Clock;
-    T previous = current - (std::numeric_limits<T>::max / 2);
+    T previous = current - (std::numeric_limits<T>::max() / 2);
     return clock_reached(current, previous, target_clock);
   }
 }
