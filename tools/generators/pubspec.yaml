@@ -1,0 +1,5 @@
+name: generators
+version: 0.0.1
+description: A simple console application.
+dependencies:
+  args: '^0.13.7'
