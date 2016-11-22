@@ -99,7 +99,8 @@ version, you may be a little faster.
 These functions are only necessary because system clock values may
 wrap.  Only when the clock types are big enough to never wrap
 (`uint64_t`) can we be sure that earlier clock values are also smaller
-clock values.
+clock values.  `uint64_t` versions are partially optimized and possibly
+ignore arguments as wrapping can not occur.
 
 These functions take wrapping into account.
 
