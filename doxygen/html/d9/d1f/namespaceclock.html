@@ -154,10 +154,16 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a107ad02a77763be28bf63d43c566cf75"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a107ad02a77763be28bf63d43c566cf75">clock_reached</a> (const T &amp;clock, const T &amp;previous_clock, const T &amp;target_clock)</td></tr>
 <tr class="memdesc:a107ad02a77763be28bf63d43c566cf75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate if target system clock has been reached.  <a href="#a107ad02a77763be28bf63d43c566cf75">More...</a><br /></td></tr>
 <tr class="separator:a107ad02a77763be28bf63d43c566cf75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9af9c9c3928a386721fa60473274f9f8"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a9af9c9c3928a386721fa60473274f9f8">clock_reached</a> (const uint64_t &amp;clock, const uint64_t &amp;, const uint64_t &amp;target_clock)</td></tr>
+<tr class="memdesc:a9af9c9c3928a386721fa60473274f9f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate if target system clock has been reached.  <a href="#a9af9c9c3928a386721fa60473274f9f8">More...</a><br /></td></tr>
+<tr class="separator:a9af9c9c3928a386721fa60473274f9f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a240d81de9119f92701aa5f26555972c4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a240d81de9119f92701aa5f26555972c4"><td class="memTemplItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a240d81de9119f92701aa5f26555972c4">clock_reached</a> (const T &amp;target_clock)</td></tr>
 <tr class="memdesc:a240d81de9119f92701aa5f26555972c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate if target system clock has been reached.  <a href="#a240d81de9119f92701aa5f26555972c4">More...</a><br /></td></tr>
 <tr class="separator:a240d81de9119f92701aa5f26555972c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48932048c086f3d07ef74d9194cbfe1d"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d1f/namespaceclock.html#a48932048c086f3d07ef74d9194cbfe1d">clock_reached</a> (const uint64_t &amp;target_clock)</td></tr>
+<tr class="memdesc:a48932048c086f3d07ef74d9194cbfe1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate if target system clock has been reached.  <a href="#a48932048c086f3d07ef74d9194cbfe1d">More...</a><br /></td></tr>
+<tr class="separator:a48932048c086f3d07ef74d9194cbfe1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -180,7 +186,7 @@ static <a class="el" href="../../d8/de9/classclock_1_1__Clock.html">_Clock</a>&#
 <p>The clock is incremented inside the <code>Timer0</code> overflow irq handler. To activate the registered irq handler add <code>#include REGISTER_IRQS</code> after your <code>main</code> section. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a107ad02a77763be28bf63d43c566cf75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a107ad02a77763be28bf63d43c566cf75">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a107ad02a77763be28bf63d43c566cf75">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -243,6 +249,7 @@ template&lt;typename T &gt; </div>
 <p>Notice that target_clock may also be a wrapped value. This means that target_clock may be smaller than previous_clock.</p>
 <p>Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target_clock type.</p>
 <p>For instance the system clock value 300 and the target_clock type uint8_t would result in <code>300 % 256</code>, which is 44.</p>
+<p>The 64bit version is optimized and ignores previous_clock.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The type size used for clock comparisons. </td></tr>
@@ -260,8 +267,53 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a9af9c9c3928a386721fa60473274f9f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9af9c9c3928a386721fa60473274f9f8">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t clock::clock_reached </td>
+          <td>(</td>
+          <td class="paramtype">const uint64_t &amp;&#160;</td>
+          <td class="paramname"><em>clock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint64_t &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint64_t &amp;&#160;</td>
+          <td class="paramname"><em>target_clock</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate if target system clock has been reached. </p>
+<p>This is the optimzed version of clock_reached for uint64_t. previous_clock is ignored! </p>
+
+</div>
+</div>
 <a id="a240d81de9119f92701aa5f26555972c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a240d81de9119f92701aa5f26555972c4">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a240d81de9119f92701aa5f26555972c4">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -310,6 +362,7 @@ template&lt;typename T &gt; </div>
 <p>Notice that target_clock may also be a wrapped value. This means that target_clock may be smaller than previous_clock.</p>
 <p>Simply imagine an infinite time line. To get a specific time instance, take the value modulo the size of the target_clock type.</p>
 <p>For instance the system clock value 300 and the target_clock type uint8_t would result in <code>300 % 256</code>, which is 44.</p>
+<p>The 64bit version is optimized and ignores previous_clock.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The type size used for clock comparisons. </td></tr>
@@ -322,6 +375,35 @@ template&lt;typename T &gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a48932048c086f3d07ef74d9194cbfe1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48932048c086f3d07ef74d9194cbfe1d">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t clock::clock_reached </td>
+          <td>(</td>
+          <td class="paramtype">const uint64_t &amp;&#160;</td>
+          <td class="paramname"><em>target_clock</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate if target system clock has been reached. </p>
+<p>This is the optimzed version of clock_reached for uint64_t. </p>
 
 </div>
 </div>
@@ -520,7 +602,7 @@ template&lt;uint32_t Time, ClockSelect P = _alibvr_clock_prescale::Prescale&gt; 
 </div><div class="memdoc">
 
 <p>Convert ms to "units". </p>
-<p>See units_to_time for an explaination why inputs are template arguments and why this isn't a constexpr function.</p>
+<p>See units_to_time for an explanation why inputs are template arguments and why this isn't a constexpr function.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Time</td><td>The time duration in ms, which should be converted. </td></tr>
@@ -549,7 +631,7 @@ template&lt;uint32_t Time, uint32_t Factor, uint32_t Prescale&gt; </div>
 </div><div class="memdoc">
 
 <p>Convert real time units to "units". </p>
-<p>See units_to_time for an explaination why inputs are template arguments and why this isn't a constexpr function.</p>
+<p>See units_to_time for an explanation why inputs are template arguments and why this isn't a constexpr function.</p>
 <p>See ms_to_units and us_to_units for functions with simplified input.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -678,7 +760,7 @@ template&lt;uint32_t Units, ClockSelect P = _alibvr_clock_prescale::Prescale&gt;
 </div><div class="memdoc">
 
 <p>Convert "units" to ms. </p>
-<p>See units_to_time for an explaination why inputs are template arguments and why this isn't a constexpr function.</p>
+<p>See units_to_time for an explanation why inputs are template arguments and why this isn't a constexpr function.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Units</td><td>The units which should be converted. </td></tr>
@@ -837,7 +919,7 @@ template&lt;uint32_t Units, ClockSelect P = _alibvr_clock_prescale::Prescale&gt;
 </div><div class="memdoc">
 
 <p>Convert "units" to µs. </p>
-<p>See units_to_time for an explaination why inputs are template arguments and why this isn't a constexpr function.</p>
+<p>See units_to_time for an explanation why inputs are template arguments and why this isn't a constexpr function.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Units</td><td>The units which should be converted. </td></tr>
@@ -918,7 +1000,7 @@ template&lt;uint32_t Time, ClockSelect P = _alibvr_clock_prescale::Prescale&gt; 
 </div><div class="memdoc">
 
 <p>Convert µs to "units". </p>
-<p>See units_to_time for an explaination why inputs are template arguments and why this isn't a constexpr function.</p>
+<p>See units_to_time for an explanation why inputs are template arguments and why this isn't a constexpr function.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Time</td><td>The time duration in µ, which should be converted. </td></tr>

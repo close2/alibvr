@@ -54,7 +54,11 @@ void \hyperlink{namespaceclock_aa67adb0b2215c44a4a770b6c36cfe8a7}{Clock\+Irq\+Ta
 \begin{DoxyCompactList}\small\item\em Calculate if duration has passed since previous\+\_\+clock. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\static uint8\+\_\+t \hyperlink{namespaceclock_a107ad02a77763be28bf63d43c566cf75}{clock\+\_\+reached} (const T \&clock, const T \&previous\+\_\+clock, const T \&target\+\_\+clock)
 \begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \hyperlink{namespaceclock_a9af9c9c3928a386721fa60473274f9f8}{clock\+\_\+reached} (const uint64\+\_\+t \&clock, const uint64\+\_\+t \&, const uint64\+\_\+t \&target\+\_\+clock)
+\begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\static uint8\+\_\+t \hyperlink{namespaceclock_a240d81de9119f92701aa5f26555972c4}{clock\+\_\+reached} (const T \&target\+\_\+clock)
+\begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \hyperlink{namespaceclock_a48932048c086f3d07ef74d9194cbfe1d}{clock\+\_\+reached} (const uint64\+\_\+t \&target\+\_\+clock)
 \begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -107,7 +111,7 @@ The clock is incremented inside the {\ttfamily Timer0} overflow irq handler. To 
 \hypertarget{namespaceclock_a107ad02a77763be28bf63d43c566cf75}{}\label{namespaceclock_a107ad02a77763be28bf63d43c566cf75} 
 \index{clock@{clock}!clock\+\_\+reached@{clock\+\_\+reached}}
 \index{clock\+\_\+reached@{clock\+\_\+reached}!clock@{clock}}
-\subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 static uint8\+\_\+t clock\+::clock\+\_\+reached (\begin{DoxyParamCaption}\item[{const T \&}]{clock,  }\item[{const T \&}]{previous\+\_\+clock,  }\item[{const T \&}]{target\+\_\+clock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
@@ -149,6 +153,8 @@ Simply imagine an infinite time line. To get a specific time instance, take the 
 
 For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_\+t would result in {\ttfamily 300 \% 256}, which is 44.
 
+The 64bit version is optimized and ignores previous\+\_\+clock.
+
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em T} & The type size used for clock comparisons. \\
@@ -163,10 +169,20 @@ For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_
 {\em target\+\_\+clock} & The target system clock value. \\
 \hline
 \end{DoxyParams}
-\hypertarget{namespaceclock_a240d81de9119f92701aa5f26555972c4}{}\label{namespaceclock_a240d81de9119f92701aa5f26555972c4} 
+\hypertarget{namespaceclock_a9af9c9c3928a386721fa60473274f9f8}{}\label{namespaceclock_a9af9c9c3928a386721fa60473274f9f8} 
 \index{clock@{clock}!clock\+\_\+reached@{clock\+\_\+reached}}
 \index{clock\+\_\+reached@{clock\+\_\+reached}!clock@{clock}}
-\subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily static uint8\+\_\+t clock\+::clock\+\_\+reached (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t \&}]{clock,  }\item[{const uint64\+\_\+t \&}]{,  }\item[{const uint64\+\_\+t \&}]{target\+\_\+clock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculate if target system clock has been reached. 
+
+This is the optimzed version of clock\+\_\+reached for uint64\+\_\+t. previous\+\_\+clock is ignored! \hypertarget{namespaceclock_a240d81de9119f92701aa5f26555972c4}{}\label{namespaceclock_a240d81de9119f92701aa5f26555972c4} 
+\index{clock@{clock}!clock\+\_\+reached@{clock\+\_\+reached}}
+\index{clock\+\_\+reached@{clock\+\_\+reached}!clock@{clock}}
+\subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 static uint8\+\_\+t clock\+::clock\+\_\+reached (\begin{DoxyParamCaption}\item[{const T \&}]{target\+\_\+clock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
@@ -212,6 +228,8 @@ Simply imagine an infinite time line. To get a specific time instance, take the 
 
 For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_\+t would result in {\ttfamily 300 \% 256}, which is 44.
 
+The 64bit version is optimized and ignores previous\+\_\+clock.
+
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em T} & The type size used for clock comparisons. \\
@@ -222,7 +240,17 @@ For instance the system clock value 300 and the target\+\_\+clock type uint8\+\_
 {\em target\+\_\+clock} & The target system clock value. \\
 \hline
 \end{DoxyParams}
-\hypertarget{namespaceclock_aa67adb0b2215c44a4a770b6c36cfe8a7}{}\label{namespaceclock_aa67adb0b2215c44a4a770b6c36cfe8a7} 
+\hypertarget{namespaceclock_a48932048c086f3d07ef74d9194cbfe1d}{}\label{namespaceclock_a48932048c086f3d07ef74d9194cbfe1d} 
+\index{clock@{clock}!clock\+\_\+reached@{clock\+\_\+reached}}
+\index{clock\+\_\+reached@{clock\+\_\+reached}!clock@{clock}}
+\subsubsection{\texorpdfstring{clock\+\_\+reached()}{clock\_reached()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily static uint8\+\_\+t clock\+::clock\+\_\+reached (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t \&}]{target\+\_\+clock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculate if target system clock has been reached. 
+
+This is the optimzed version of clock\+\_\+reached for uint64\+\_\+t. \hypertarget{namespaceclock_aa67adb0b2215c44a4a770b6c36cfe8a7}{}\label{namespaceclock_aa67adb0b2215c44a4a770b6c36cfe8a7} 
 \index{clock@{clock}!Clock\+Irq\+Task@{Clock\+Irq\+Task}}
 \index{Clock\+Irq\+Task@{Clock\+Irq\+Task}!clock@{clock}}
 \subsubsection{\texorpdfstring{Clock\+Irq\+Task()}{ClockIrqTask()}}
@@ -314,7 +342,7 @@ constexpr uint32\+\_\+t clock\+::ms\+\_\+to\+\_\+units (\begin{DoxyParamCaption}
 
 Convert ms to \char`\"{}units\char`\"{}. 
 
-See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+See units\+\_\+to\+\_\+time for an explanation why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -334,7 +362,7 @@ constexpr uint32\+\_\+t clock\+::time\+\_\+to\+\_\+units (\begin{DoxyParamCaptio
 
 Convert real time units to \char`\"{}units\char`\"{}. 
 
-See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+See units\+\_\+to\+\_\+time for an explanation why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
 
 See ms\+\_\+to\+\_\+units and us\+\_\+to\+\_\+units for functions with simplified input.
 
@@ -416,7 +444,7 @@ constexpr uint32\+\_\+t clock\+::units\+\_\+to\+\_\+ms (\begin{DoxyParamCaption}
 
 Convert \char`\"{}units\char`\"{} to ms. 
 
-See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+See units\+\_\+to\+\_\+time for an explanation why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -520,7 +548,7 @@ constexpr uint32\+\_\+t clock\+::units\+\_\+to\+\_\+us (\begin{DoxyParamCaption}
 
 Convert \char`\"{}units\char`\"{} to µs. 
 
-See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+See units\+\_\+to\+\_\+time for an explanation why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -567,7 +595,7 @@ constexpr uint32\+\_\+t clock\+::us\+\_\+to\+\_\+units (\begin{DoxyParamCaption}
 
 Convert µs to \char`\"{}units\char`\"{}. 
 
-See units\+\_\+to\+\_\+time for an explaination why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
+See units\+\_\+to\+\_\+time for an explanation why inputs are template arguments and why this isn\textquotesingle{}t a constexpr function.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
