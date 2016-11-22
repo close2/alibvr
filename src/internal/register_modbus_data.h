@@ -1,4 +1,6 @@
-// no guards!
+#ifndef FLAG_TO_SILENCE_COMPILER_WARNING // no guards!
+// do not define this flag!
+
 #pragma push_macro("MODBUS_DATA_LIST_NAME_GEN")
 #pragma push_macro("_MODBUS_DATA_LIST_NAME_GEN")
 #define _MODBUS_DATA_LIST_NAME_GEN(newTask) ModbusDataList##newTask
@@ -160,3 +162,5 @@ namespace _modbus_data {
 #pragma pop_macro("MODBUS_DATA_LIST_NAME_GEN")
 #pragma pop_macro("_MODBUS_DATA_LIST_NAME_GEN")
 #pragma pop_macro("TL")
+
+#endif

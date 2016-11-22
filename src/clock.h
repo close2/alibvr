@@ -395,7 +395,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   /**
    * @brief Convert real time units to "units".
    * 
-   * See units_to_time for an explaination why inputs are template
+   * See units_to_time for an explanation why inputs are template
    * arguments and why this isn't a constexpr function.
    * 
    * See ms_to_units and us_to_units for functions with simplified
@@ -573,7 +573,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   /**
    * @brief Convert ms to "units".
    * 
-   * See units_to_time for an explaination why inputs are template
+   * See units_to_time for an explanation why inputs are template
    * arguments and why this isn't a constexpr function.
    * 
    * 
@@ -589,7 +589,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   /**
    * @brief Convert µs to "units".
    * 
-   * See units_to_time for an explaination why inputs are template
+   * See units_to_time for an explanation why inputs are template
    * arguments and why this isn't a constexpr function.
    * 
    * @tparam Time The time duration in µ, which should be converted.
@@ -604,7 +604,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   /**
    * @brief Convert "units" to ms.
    * 
-   * See units_to_time for an explaination why inputs are template
+   * See units_to_time for an explanation why inputs are template
    * arguments and why this isn't a constexpr function.
    * 
    * @tparam Units The units which should be converted.
@@ -619,7 +619,7 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   /**
    * @brief Convert "units" to µs.
    * 
-   * See units_to_time for an explaination why inputs are template
+   * See units_to_time for an explanation why inputs are template
    * arguments and why this isn't a constexpr function.
    * 
    * @tparam Units The units which should be converted.
@@ -723,6 +723,8 @@ namespace ALIBVR_NAMESPACE_CLOCK {
    * 
    * For instance the system clock value 300 and the target_clock
    * type uint8_t would result in `300 % 256`, which is 44.
+   * 
+   * The 64bit version is optimized and ignores previous_clock.
    * ¤
    * 
    * @tparam T The type size used for clock comparisons.
@@ -757,6 +759,16 @@ namespace ALIBVR_NAMESPACE_CLOCK {
   /**
    * @brief Calculate if target system clock has been reached.
    * 
+   * This is the optimzed version of clock_reached for uint64_t.
+   * previous_clock is ignored!
+   **/
+  static inline uint8_t clock_reached(const uint64_t& clock, const uint64_t&, const uint64_t& target_clock) {
+    return target_clock <= clock;
+  }
+  
+  /**
+   * @brief Calculate if target system clock has been reached.
+   * 
    * This function uses the current system clock as clock value and
    * the current clock minus half the size of T as previous_clock.
    * 
@@ -773,6 +785,16 @@ namespace ALIBVR_NAMESPACE_CLOCK {
     T current = Clock;
     T previous = current - (std::numeric_limits<T>::max() / 2);
     return clock_reached(current, previous, target_clock);
+  }
+  
+  /**
+   * @brief Calculate if target system clock has been reached.
+   * 
+   * This is the optimzed version of clock_reached for uint64_t.
+   **/
+  static inline uint8_t clock_reached(const uint64_t& target_clock) {
+    uint64_t current = Clock;
+    return target_clock <= current;
   }
 }
 #define _CLOCK_IN_USE _CLOCK_IN_USE

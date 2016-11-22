@@ -1,3 +1,6 @@
+#ifndef FLAG_TO_SILENCE_COMPILER_WARNING // no guards!
+// do not define this flag!
+
 #pragma push_macro("NAME_GEN")
 #pragma push_macro("_NAME_GEN")
 #define _NAME_GEN(name, class) _##name##_##class
@@ -16,3 +19,5 @@ typedef NEW_SERIAL_MODBUS ::_Modbus NEW_MODBUS;
 
 #pragma pop_macro("NAME_GEN")
 #pragma pop_macro("_NAME_GEN")
+
+#endif

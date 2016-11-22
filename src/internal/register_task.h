@@ -1,11 +1,31 @@
-// no guards!
+#ifndef FLAG_TO_SILENCE_COMPILER_WARNING // no guards!
+// do not define this flag!
+
+// this include is not really necessary, as tasks.h already includes
+// task_list.h
+#include "task_list.h"
+
 #pragma push_macro("TASKLIST_NAME_GEN")
 #pragma push_macro("_TASKLIST_NAME_GEN")
+#pragma push_macro("TASK_NAME")
 #define _TASKLIST_NAME_GEN(newTask) TaskList##newTask
 #define TASKLIST_NAME_GEN(newTask) _TASKLIST_NAME_GEN(newTask)
 
+#ifdef TASK8
+# define NEW_TASK tasks::TaskWrapper8<TASK8>
+# define TASK_NAME TASK8
+#elif defined TASK16
+# define NEW_TASK tasks::TaskWrapper16<TASK16>
+# define TASK_NAME TASK16
+#elif defined TASK32
+# define NEW_TASK tasks::TaskWrapper32<TASK32>
+# define TASK_NAME TASK32
+#else
+# define TASK_NAME NEW_TASK
+#endif
+
 namespace _tasks {
-  typedef typename _task_list::concat<TASK_LIST, NEW_TASK>::task TASKLIST_NAME_GEN(NEW_TASK);
+  typedef typename _task_list::concat<TASK_LIST, NEW_TASK>::task TASKLIST_NAME_GEN(TASK_NAME);
 }
 
 #pragma push_macro("TL")
@@ -152,11 +172,26 @@ namespace _tasks {
 #endif
 
 namespace _tasks {
-  typedef TASKLIST_NAME_GEN(NEW_TASK) TL;
+  typedef TASKLIST_NAME_GEN(TASK_NAME) TL;
 }
 
 #undef NEW_TASK
 
+#ifdef TASK8
+#  undef TASK8
+#endif
+
+#if defined TASK16
+#  undef TASK16
+#endif
+
+#if defined TASK32
+#  undef TASK32
+#endif
+
+#pragma pop_macro("TASK_NAME")
 #pragma pop_macro("TASKLIST_NAME_GEN")
 #pragma pop_macro("_TASKLIST_NAME_GEN")
 #pragma pop_macro("TL")
+
+#endif
