@@ -12,14 +12,14 @@ uint16_t toggleLed1(uint16_t) {
   Led1::toggle();
   return clock::ms_to_units<300>();
 }
-#define TASK16 toggleLed1
+#define NEW_TASK16 toggleLed1
 #include REGISTER_TASK
 
 uint8_t toggleLed2(uint8_t) {
   Led2::toggle();
   return clock::us_to_units<700>();
 }
-#define TASK8 toggleLed2
+#define NEW_TASK WRAP_TASK(toggleLed2)
 #include REGISTER_TASK
 
 uint8_t isButtonPressed() {
@@ -36,7 +36,7 @@ typedef tasks::TaskWrapper32<toggleLed3, isButtonPressed> button_pressed_task;
 
 int main(void) {
   for(;;) {
-    tasks::execTasks(TASK_LIST());
+    EXEC_TASKS();
   }
   
 }

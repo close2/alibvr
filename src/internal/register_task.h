@@ -11,12 +11,12 @@
 // every time this file is included TASK_NAME is set to another value.
 #include "task_names.h"
 
-#ifdef TASK8
-# define NEW_TASK tasks::TaskWrapper8<TASK8>
-#elif defined TASK16
-# define NEW_TASK tasks::TaskWrapper16<TASK16>
-#elif defined TASK32
-# define NEW_TASK tasks::TaskWrapper32<TASK32>
+#ifdef NEW_TASK8
+# define NEW_TASK tasks::TaskWrapper8<NEW_TASK8>
+#elif defined NEW_TASK16
+# define NEW_TASK tasks::TaskWrapper16<NEW_TASK16>
+#elif defined NEW_TASK32
+# define NEW_TASK tasks::TaskWrapper32<NEW_TASK32>
 #endif
 
 namespace _tasks {
@@ -35,16 +35,16 @@ namespace _tasks {
 
 #undef NEW_TASK
 
-#ifdef TASK8
-#  undef TASK8
+#ifdef NEW_TASK8
+#  undef NEW_TASK8
 #endif
 
-#if defined TASK16
-#  undef TASK16
+#if defined NEW_TASK16
+#  undef NEW_TASK16
 #endif
 
-#if defined TASK32
-#  undef TASK32
+#if defined NEW_TASK32
+#  undef NEW_TASK32
 #endif
 
 #pragma pop_macro("TASK_NAME")
