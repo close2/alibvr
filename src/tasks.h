@@ -104,4 +104,4 @@ namespace ALIBVR_NAMESPACE_TASKS {
 }
 
 #define EXEC_TASKS() ALIBVR_NAMESPACE_TASKS::execTasks(TASK_LIST())
-#define WRAP_TASK(task) ALIBVR_NAMESPACE_TASKS::TaskWrapper<decltype(task(0)), task>
+#define TASK(task, ...) ALIBVR_NAMESPACE_TASKS::TaskWrapper<decltype(task(0)), task, ##__VA_ARGS__>

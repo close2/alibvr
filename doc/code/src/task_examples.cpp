@@ -19,7 +19,7 @@ uint8_t toggleLed2(uint8_t) {
   Led2::toggle();
   return clock::us_to_units<700>();
 }
-#define NEW_TASK WRAP_TASK(toggleLed2)
+#define NEW_TASK TASK(toggleLed2)
 #include REGISTER_TASK
 
 uint8_t isButtonPressed() {
@@ -29,8 +29,7 @@ uint32_t toggleLed3(uint32_t) {
   Led3::toggle();
   return clock::ms_to_units<10000>();
 }
-typedef tasks::TaskWrapper32<toggleLed3, isButtonPressed> button_pressed_task;
-#define NEW_TASK button_pressed_task
+#define NEW_TASK TASK(toggleLed3, isButtonPressed)
 #include REGISTER_TASK
 
 
