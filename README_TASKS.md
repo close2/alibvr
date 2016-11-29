@@ -19,7 +19,8 @@ uint32_t toggleLedButton(uint32_t) {
 #include REGISTER_TASK
 ```
 
-Probably in your main periodically execute all tasks which are due:
+Probably in your main periodically execute all tasks which are due
+by calling `EXEC_TASKS()`:
 ```C++
 for(;;) {
   EXEC_TASKS();

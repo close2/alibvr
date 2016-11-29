@@ -11,9 +11,12 @@ Create tasks and register them.
 +++TASK_WITH_ENABLE_F+++
 ```
 
-Probably in your main periodically execute all tasks which are due:
+Probably in your main periodically execute all tasks which are due
+by calling `+++TASK_EXEC_COMMAND+++`:
 ```C++
-+++TASK_EXEC+++
+for(;;) {
+  +++TASK_EXEC_COMMAND+++;
+}
 ```
 
 As the task subsystem uses the system clock, we need to register all

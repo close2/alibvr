@@ -1,7 +1,7 @@
 # INCOMPLETE
 
-Adc, ports access, system clock and irqs are starting to become somehow
-stable.
+Adc, ports access, system clock, irqs and tasks are starting to become
+somehow stable.
 
 The API is still not fixed and very little has been actually tested.
 
@@ -26,7 +26,7 @@ Only very few features are implemented using C-macros.
 I still hope that the described type-stack in
 [b.atch.se](http://b.atch.se/) will at some point replace the
 `#include` C-macro tricks, which are currently necessary to register
-irq handlers.
+irq handlers and tasks.
 
 This library is only tested with `gcc`!
 
@@ -56,6 +56,7 @@ are _far_ more detailed.
 
 [System clock](README_CLOCK.md)
 
+[Tasks](README_TASKS.md)
 
 # Examples:
 
@@ -75,4 +76,9 @@ The following code snippets are extracted from `example*.cpp` files in
 ## [Use the system clock to measure your reaction speed](doc/code/src/example_clock_reaction.cpp)
 ```C++
 +++CLOCK_REACT+++
+```
+
+## [Periodically toggle outputs](doc/code/src/example_tasks.cpp)
+```C++
++++TASK_EX+++
 ```

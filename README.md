@@ -1,7 +1,7 @@
 # INCOMPLETE
 
-Adc, ports access, system clock and irqs are starting to become somehow
-stable.
+Adc, ports access, system clock, irqs and tasks are starting to become
+somehow stable.
 
 The API is still not fixed and very little has been actually tested.
 
@@ -26,7 +26,7 @@ Only very few features are implemented using C-macros.
 I still hope that the described type-stack in
 [b.atch.se](http://b.atch.se/) will at some point replace the
 `#include` C-macro tricks, which are currently necessary to register
-irq handlers.
+irq handlers and tasks.
 
 This library is only tested with `gcc`!
 
@@ -56,6 +56,7 @@ are _far_ more detailed.
 
 [System clock](README_CLOCK.md)
 
+[Tasks](README_TASKS.md)
 
 # Examples:
 
@@ -102,4 +103,32 @@ uint16_t stopTimer = Clock;
 if ((stopTimer - startTimer) < fastReaction) {
   FastLed::PORT = 1;
 }
+```
+
+## [Periodically toggle outputs](doc/code/src/example_tasks.cpp)
+```C++
+uint16_t toggleLed1(uint16_t) {
+  Led1::toggle();
+  return clock::ms_to_units<300>();
+}
+#define NEW_TASK TASK(toggleLed1)
+#include REGISTER_TASK
+
+uint8_t runTaskOnlyWhenButtonIsPressed() {
+  return Button::PIN;
+}
+uint32_t toggleLedButton(uint32_t) {
+  LedButton::toggle();
+  return clock::ms_to_units<10000>();
+}
+#define NEW_TASK TASK(toggleLedButton, runTaskOnlyWhenButtonIsPressed)
+#include REGISTER_TASK
+
+int main(void) {
+  initPorts();
+  for(;;) {
+    EXEC_TASKS();
+  }
+}
+#include REGISTER_IRQS
 ```
