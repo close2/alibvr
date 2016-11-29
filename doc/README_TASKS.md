@@ -6,6 +6,22 @@ functions.
 The return value of a task specifies the requested pause until the
 task should be called again.
 
+Create tasks and register them.
+```C++
++++TASK_WITH_ENABLE_F+++
+```
+
+Probably in your main periodically execute all tasks which are due:
+```C++
++++TASK_EXEC+++
+```
+
+As the task subsystem uses the system clock, we need to register all
+irq tasks after our main:
+```C++
++++TASK_REGISTER_IRQS+++
+```
+
 
 
 

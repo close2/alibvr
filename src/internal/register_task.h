@@ -11,14 +11,6 @@
 // every time this file is included TASK_NAME is set to another value.
 #include "task_names.h"
 
-#ifdef NEW_TASK8
-# define NEW_TASK tasks::TaskWrapper8<NEW_TASK8>
-#elif defined NEW_TASK16
-# define NEW_TASK tasks::TaskWrapper16<NEW_TASK16>
-#elif defined NEW_TASK32
-# define NEW_TASK tasks::TaskWrapper32<NEW_TASK32>
-#endif
-
 namespace _tasks {
   typedef typename _task_list::concat<TASK_LIST, NEW_TASK>::task TASK_NAME;
 }
@@ -34,18 +26,6 @@ namespace _tasks {
 }
 
 #undef NEW_TASK
-
-#ifdef NEW_TASK8
-#  undef NEW_TASK8
-#endif
-
-#if defined NEW_TASK16
-#  undef NEW_TASK16
-#endif
-
-#if defined NEW_TASK32
-#  undef NEW_TASK32
-#endif
 
 #pragma pop_macro("TASK_NAME")
 #pragma pop_macro("TL")

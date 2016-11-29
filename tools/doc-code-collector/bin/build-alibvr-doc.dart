@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:logging/logging.dart';
 import 'package:glob/glob.dart';
 
-const String snippetsProg = 'doc-code-collector/bin/snippets.dart';
+const String snippetsProg = 'tools/doc-code-collector/bin/snippets.dart';
 
 Logger log = new Logger('build-alibvr-doc');
 

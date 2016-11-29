@@ -93,14 +93,6 @@ namespace ALIBVR_NAMESPACE_TASKS {
       return F(clock);
     }
   };
-  
-  
-  template <uint8_t (*F)(uint8_t), _is_enabled_f EF = _always_enabled>
-  using TaskWrapper8 = TaskWrapper<uint8_t, F, EF>;
-  template <uint16_t (*F)(uint16_t), _is_enabled_f EF = _always_enabled>
-  using TaskWrapper16 = TaskWrapper<uint16_t, F, EF>;
-  template <uint32_t (*F)(uint32_t), _is_enabled_f EF = _always_enabled>
-  using TaskWrapper32 = TaskWrapper<uint32_t, F, EF>;
 }
 
 #define EXEC_TASKS() ALIBVR_NAMESPACE_TASKS::execTasks(TASK_LIST())
