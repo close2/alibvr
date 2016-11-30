@@ -30,14 +30,10 @@ uint8_t toggleLed2(uint8_t) {
 #include REGISTER_TASK
 
 // «TASK_WITH_ENABLE_F»
-uint8_t runTaskOnlyWhenButtonIsPressed() {
-  return Button::PIN;
-}
-uint32_t toggleLedButton(uint32_t) {
+void toggleLedButton(uint32_t) {
   LedButton::toggle();
-  return clock::ms_to_units<10000>();
 }
-#define NEW_TASK TASK(toggleLedButton, runTaskOnlyWhenButtonIsPressed)
+#define NEW_TASK TASK(toggleLedButton)
 #include REGISTER_TASK
 /*¤*/
 

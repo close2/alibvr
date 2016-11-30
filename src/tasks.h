@@ -29,41 +29,50 @@
 
 namespace ALIBVR_NAMESPACE_TASKS {
   
+  // use the argument type as return type.
+  template <typename T1>
+  T1 _argType(T1 (*)(T1));
+  
+  template <typename T1>
+  T1 _argType(void (*)(T1));
+  
+  
   template <typename T, typename C>
-  inline static void _exec1Task(const C& clock, const C& previous) {
+  inline static C _exec1Task(C clock, C, void*) {
+    typedef decltype(_argType(T::run)) arg_t;
+    T::run((arg_t)clock);
+    return std::numeric_limits<C>::max();
+  }
+  
+  template <typename T, typename C, typename NotVoid>
+  inline static C _exec1Task(C clock, C previous, const NotVoid*) {
+    typedef decltype(_argType(T::run)) arg_t;
     static C next = 0;
-    if (T::is_enabled()) {
-      if (clock::clock_reached(clock, previous, next)) {
-        next = clock + T::run(clock);
-      }
-    } else {
-      next = clock;
+    if (clock::clock_reached(clock, previous, next)) {
+      next = clock + T::run((arg_t)clock);
     }
+    return next;
   }
   
   template <typename C>
-  inline static void _execTasks(const C&, const C&, _task_list::TaskList<>) {
-    return;
+  inline static C _execTasks(C, C, _task_list::TaskList<>) {
+    return std::numeric_limits<C>::max();
   }
   
   template <typename C, typename T, typename ...Tasks>
-  inline static void _execTasks(const C& clock, const C& previous, _task_list::TaskList<T, Tasks...>) {
-    _exec1Task<T>(clock, previous);
-    _execTasks(clock, previous, _task_list::TaskList<Tasks...>());
+  inline static C _execTasks(C clock, C previous, _task_list::TaskList<T, Tasks...>) {
+    typedef decltype(T::run(0)) ret_t;
+    C next = _exec1Task<T>(clock, previous, (ret_t*)0);
+    C other_nexts = _execTasks(clock, previous, _task_list::TaskList<Tasks...>());
+    return next < other_nexts ? next : other_nexts;
   }
   
   template <typename C, typename TaskList>
-  static inline void _execTasks(C& clock, C& previous) {
-    previous = clock;
-    clock = (C) clock::Clock;
-    _execTasks<>(clock, previous, TaskList());
-  }
-  
-  template <typename C, typename TaskList>
-  static inline void _execTasks() {
+  static inline C _execTasks() {
     static C clock = -1;
-    static C previous = -1;
-    _execTasks(clock, previous, TaskList());
+    C previous = clock;
+    clock = (C) clock::Clock;
+    return _execTasks(clock, previous, TaskList());
   }
   
   // If the taskList is empty return the smallest type possible: uint8_t
@@ -73,27 +82,27 @@ namespace ALIBVR_NAMESPACE_TASKS {
   // the current task with the return type of the remaining Tasks.
   template<typename Task, typename... Tasks>
   auto _time_t_builder(const _task_list::TaskList<Task, Tasks...>&)
-    -> decltype(decltype(Task::run(0))() +
+    -> decltype(decltype(_argType(Task::run))() +
                 decltype(_time_t_builder(_task_list::TaskList<Tasks...>()))());
   
   
-  template <typename... Tasks>
+  template <uint8_t goto_sleep, typename... Tasks>
   static inline void execTasks(const _task_list::TaskList<Tasks...>& taskList) {
-    _execTasks<decltype(_time_t_builder<Tasks...>(taskList)),
-               _task_list::TaskList<Tasks...>>();
+    typedef decltype(_time_t_builder<Tasks...>(taskList)) time_t;
+    time_t next = _execTasks<time_t, _task_list::TaskList<Tasks...>>();
+    if (goto_sleep) {
+      // ToDo
+      // set timer for next and goto sleep;
+    }
   }
   
-  typedef uint8_t _is_enabled_f();
-  uint8_t _always_enabled() { return 1; }
-  
-  template <typename T, T (*F)(T), _is_enabled_f EF = _always_enabled>
+  template <typename T, typename T2, T(*F)(T2)>
   struct TaskWrapper {
-    static inline uint8_t is_enabled() { return EF(); }
-    static inline T run(T clock) {
+    static inline T run(T2 clock) {
       return F(clock);
     }
   };
 }
 
-#define EXEC_TASKS() ALIBVR_NAMESPACE_TASKS::execTasks(TASK_LIST())
-#define TASK(task, ...) ALIBVR_NAMESPACE_TASKS::TaskWrapper<decltype(task(0)), task, ##__VA_ARGS__>
+#define EXEC_TASKS() ALIBVR_NAMESPACE_TASKS::execTasks<0>(TASK_LIST())
+#define TASK(task) ALIBVR_NAMESPACE_TASKS::TaskWrapper<decltype(task(0)), decltype(ALIBVR_NAMESPACE_TASKS::_argType(task)), task>
