@@ -8,7 +8,7 @@ task should be called again.
 
 Create tasks and register them.
 ```C++
-+++TASK_WITH_ENABLE_F+++
++++SIMPLE_TASK+++
 ```
 
 Probably in your main periodically execute all tasks which are due

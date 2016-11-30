@@ -8,14 +8,11 @@ task should be called again.
 
 Create tasks and register them.
 ```C++
-uint8_t runTaskOnlyWhenButtonIsPressed() {
-  return Button::PIN;
+uint8_t toggleLed2(uint8_t) {
+  Led2::toggle();
+  return clock::us_to_units<700>();
 }
-uint32_t toggleLedButton(uint32_t) {
-  LedButton::toggle();
-  return clock::ms_to_units<10000>();
-}
-#define NEW_TASK TASK(toggleLedButton, runTaskOnlyWhenButtonIsPressed)
+#define NEW_TASK TASK(toggleLed2)
 #include REGISTER_TASK
 ```
 

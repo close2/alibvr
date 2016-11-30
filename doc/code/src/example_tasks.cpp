@@ -13,6 +13,8 @@ void initPorts() {
   Button::DDR = ports::DataDirection::Input;
 }
 
+static volatile uint8_t button_pressed = 0;
+
 // «TASK_EX»
 uint16_t toggleLed1(uint16_t) {
   Led1::toggle();
@@ -21,8 +23,13 @@ uint16_t toggleLed1(uint16_t) {
 #define NEW_TASK TASK(toggleLed1)
 #include REGISTER_TASK
 
+// Think of toggleLedButton as the second part of an irq action.
+// The irq handler would only set the button_pressed flag.
 void toggleLedButton(uint32_t) {
-  LedButton::toggle();
+  if (button_pressed) {
+    LedButton::toggle();
+    button_pressed = 0;
+  }
 }
 #define NEW_TASK TASK(toggleLedButton)
 #include REGISTER_TASK

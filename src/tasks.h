@@ -86,14 +86,10 @@ namespace ALIBVR_NAMESPACE_TASKS {
                 decltype(_time_t_builder(_task_list::TaskList<Tasks...>()))());
   
   
-  template <uint8_t goto_sleep, typename... Tasks>
-  static inline void execTasks(const _task_list::TaskList<Tasks...>& taskList) {
+  template <typename... Tasks>
+  static inline decltype(_time_t_builder<Tasks...>(_task_list::TaskList<Tasks...>()))execTasks(const _task_list::TaskList<Tasks...>& taskList) {
     typedef decltype(_time_t_builder<Tasks...>(taskList)) time_t;
-    time_t next = _execTasks<time_t, _task_list::TaskList<Tasks...>>();
-    if (goto_sleep) {
-      // ToDo
-      // set timer for next and goto sleep;
-    }
+    return _execTasks<time_t, _task_list::TaskList<Tasks...>>();
   }
   
   template <typename T, typename T2, T(*F)(T2)>
@@ -104,5 +100,5 @@ namespace ALIBVR_NAMESPACE_TASKS {
   };
 }
 
-#define EXEC_TASKS() ALIBVR_NAMESPACE_TASKS::execTasks<0>(TASK_LIST())
+#define EXEC_TASKS() ALIBVR_NAMESPACE_TASKS::execTasks(TASK_LIST())
 #define TASK(task) ALIBVR_NAMESPACE_TASKS::TaskWrapper<decltype(task(0)), decltype(ALIBVR_NAMESPACE_TASKS::_argType(task)), task>
