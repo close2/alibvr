@@ -3,9 +3,9 @@
 \begin{DoxyCodeInclude}
 \textcolor{preprocessor}{#define F\_CPU 8000000}
 
-\textcolor{preprocessor}{#include "adc.h"}
+\textcolor{preprocessor}{#include "\hyperlink{adc_8h}{adc.h}"}
 \textcolor{preprocessor}{#include "irqs.h"}
-\textcolor{preprocessor}{#include "ports.h"}
+\textcolor{preprocessor}{#include "\hyperlink{ports_8h}{ports.h}"}
 
 \textcolor{keyword}{using namespace }\hyperlink{namespaceadc}{adc};
 
@@ -49,12 +49,12 @@
     MyAdc::init<PIN\_ADC0>();
     MyAdc::start\_adc\_10bit();
     
-    MyAdc::busy\_wait\_adc\_finished();
+    \hyperlink{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{MyAdc::busy\_wait\_adc\_finished}();
     \textcolor{comment}{// After the conversion has finished both! f and f2 will be executed.}
     
     MyAdc2::init();
     MyAdc2::start\_adc\_8bit();
-    MyAdc::busy\_wait\_adc\_finished();
+    \hyperlink{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{MyAdc::busy\_wait\_adc\_finished}();
     \textcolor{comment}{// After the conversion has finished both! f and f2 will be executed.}
   \}
 \}

@@ -67,7 +67,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This file provides an elegant way to register tasks and execute them in your main loop.  
+<p>Task subsystem related code is (usually) in this namespace.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -119,18 +119,7 @@ Functions</h2></td></tr>
 <tr class="separator:a6590d6a524b4aedb5d0dfef5e1b61bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file provides an elegant way to register tasks and execute them in your main loop. </p>
-<p>There is no central place where tasks have to be listed.</p>
-<p>The tasks subsystem may be consideres as a very rudimentary OS-replacement.</p>
-<p>AVRs commonly have to perform multiple tasks.</p>
-<p>Simply write a task and register it. It is even possible to register tasks in header files.</p>
-<p>A task is simply a function which accepts one argument: the current system clock.</p>
-<p>EXEC_TASKS (see below) will always call tasks (functions) which return void.</p>
-<p>Those void tasks should only be used for tasks which are executed after an irq event. (Think of those tasks as the second half of an irq handler.) This is important if you want the tasks subsystem to put the avr to sleep.</p>
-<p>If a tasks returns a number, the number is considers to be time units. The task is then ignored until this many time units have passed since the last <em>start</em> of the task.</p>
-<p>This means if you want your task/function to execute every second and your function is long and takes 200ms you should return ms_to_units&lt;1000&gt;() and not ms_to_units&lt;800&gt;()!</p>
-<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK TASK(toggleLed)</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --><p>The mechanism how tasks are stored is an adapted version from: <a href="http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609">http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609</a></p>
-<p>A tasks which always returns 0 will never be ignored by EXEC_TASKS and called every time. (Similar to void tasks.) It will also prevent the tasks subsystem to put the avr to sleep.</p>
+<div class="textblock"><p>Task subsystem related code is (usually) in this namespace. </p>
 <p>By default class related classes, enums,... are defined inside the <code>tasks</code> namespace. If this creates a name clash with your code you may modify the namespace name by setting ALIBVR_NAMESPACE_TASKS or ALIBVR_NAMESPACE_PREFIX. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ac4a797a86584958bef0b67616a38c8ae"></a>
@@ -470,7 +459,7 @@ template&lt;typename C , typename TaskList &gt; </div>
 
 <p>Determines the smallest usable type necessary for system clock values when exeuting tasks. </p>
 <p>This function is never implemented or executed.</p>
-<p>If the taskList is empty return the smallest type possible: uint8_t </p>
+<p>This is the version for an empty task list and "returns"" the smallest possible type: uint8_t. </p>
 
 </div>
 </div>
@@ -494,7 +483,8 @@ template&lt;typename Task , typename... Tasks&gt; </div>
 
 <p>Determines the smallest usable type necessary for system clock values when exeuting tasks. </p>
 <p>This function is never implemented or executed.</p>
-<p>If the task-list is not empty determine which of the 2 tasks has the bigger type for <code>clock</code> and use this as return value.</p>
+<p>This is the version when the task list is not empty.</p>
+<p>The return types of the task and the recursively called _time_t_builder return type are compared and the bigger of the 2 is used as return type.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="../../de/d04/namespacetasks.html#ac4a797a86584958bef0b67616a38c8ae" title="A small helper function, which extracts the argument type from the function provided as template argu...">_argType</a> which turns an argument type to a return type which is used with decltype.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

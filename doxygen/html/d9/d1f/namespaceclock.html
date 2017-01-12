@@ -69,7 +69,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This file uses <code>Timer0</code> to provide a system clock.  
+<p>System clock related code is in this namespace.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -175,15 +175,8 @@ static <a class="el" href="../../d8/de9/classclock_1_1__Clock.html">_Clock</a>&#
 <tr class="separator:a8414359d2fd2b9f75143850c0e3bb4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file uses <code>Timer0</code> to provide a system clock. </p>
-<p>By default class related classes, enums,... are defined inside the <code>clock</code> namespace. If this creates a name clash with your code you may modify the namespace name by setting ALIBVR_NAMESPACE_CLOCK or ALIBVR_NAMESPACE_PREFIX.</p>
-<p>The system clock is derived from the IO-clock and must be converted to seconds.</p>
-<p>Conversion functions are provided. Try to stay with the template versions, which can be calculated during compile time. Conversion of variables (with values unknown during compile time) will probably include division code, which is both big and slow.</p>
-<p>It is usually possible to compare the difference of 2 time instances with a converted interval value:</p>
-<p>Instead of (both examples in pseudocode):</p>
-<div class="fragment"><div class="line">uint8_t clock1 = Clock;</div><div class="line"><span class="comment">// do something</span></div><div class="line">uint8_t duration = Clock - clock1;</div><div class="line"><span class="keywordflow">if</span> (<a class="code" href="../../d9/d1f/namespaceclock.html#a64b11929624655a5ac990b12829c8606">units_to_ms</a>(duration) &gt; 5) <span class="comment">// work took more than 5 ms</span></div></div><!-- fragment --><p>write</p>
-<div class="fragment"><div class="line">uint8_t clock1 = Clock;</div><div class="line"><span class="comment">// do something</span></div><div class="line">uint8_t duration = Clock - clock1;</div><div class="line"><span class="keywordflow">if</span> (duration &gt; ms_to_units&lt;5&gt;()) <span class="comment">// work took more than 5 ms</span></div></div><!-- fragment --><p><em>Global irqs are enabled unless the macro: <code>ALIBVR_CLOCK_NO_GLOBAL_IRQ</code> or <code>ALIBVR_NO_GLOBAL_IRQ</code> is defined!</em> By including this header directly or indirectly global irqs are enabled because of a static constructor in this file!</p>
-<p>The clock is incremented inside the <code>Timer0</code> overflow irq handler. To activate the registered irq handler add <code>#include REGISTER_IRQS</code> after your <code>main</code> section. </p>
+<div class="textblock"><p>System clock related code is in this namespace. </p>
+<p>By default class related classes, enums,... are defined inside the <code>clock</code> namespace. If this creates a name clash with your code you may modify the namespace name by setting ALIBVR_NAMESPACE_CLOCK or ALIBVR_NAMESPACE_PREFIX. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a107ad02a77763be28bf63d43c566cf75"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a107ad02a77763be28bf63d43c566cf75">&sect;&nbsp;</a></span>clock_reached() <span class="overload">[1/4]</span></h2>

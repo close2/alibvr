@@ -1,0 +1,133 @@
+\hypertarget{clock_8h}{}\section{src/clock.h File Reference}
+\label{clock_8h}\index{src/clock.\+h@{src/clock.\+h}}
+
+
+This file uses {\ttfamily Timer0} to provide a system clock.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$util/atomic.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}bytes.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}irqs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}limits.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}internal/clock\+\_\+prescale.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}internal/default\+\_\+f\+\_\+cpu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}internal/register\+\_\+irq\+\_\+task\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+O\+V\+F.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classclock_1_1__Clock}{clock\+::\+\_\+\+Clock}
+\begin{DoxyCompactList}\small\item\em Initialization code and access to the \+\_\+clock variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceclock}{clock}
+\begin{DoxyCompactList}\small\item\em System clock related code is in this namespace. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{clock_8h_ac363021621997735a818d8fce57aa9d7}{}\label{clock_8h_ac363021621997735a818d8fce57aa9d7} 
+\#define {\bfseries A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+C\+L\+O\+CK}~clock
+\item 
+\hypertarget{clock_8h_ac6058a86535ae6ffcdc9129048db86bc}{}\label{clock_8h_ac6058a86535ae6ffcdc9129048db86bc} 
+\#define {\bfseries N\+E\+W\+\_\+\+I\+R\+Q\+\_\+\+T\+A\+SK}~A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+C\+L\+O\+C\+K\+::\+Clock\+Irq\+Task
+\item 
+\hypertarget{clock_8h_a97469a78e58c31e39c4cb8dd03a0b508}{}\label{clock_8h_a97469a78e58c31e39c4cb8dd03a0b508} 
+\#define {\bfseries \+\_\+\+C\+L\+O\+C\+K\+\_\+\+I\+N\+\_\+\+U\+SE}~\+\_\+\+C\+L\+O\+C\+K\+\_\+\+I\+N\+\_\+\+U\+SE
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceclock_ac435d838e47eaebdb967aebfeab78eae}{}\label{namespaceclock_ac435d838e47eaebdb967aebfeab78eae} 
+typedef \+\_\+alibvr\+\_\+clock\+\_\+select\+::\+Clock\+Select \hyperlink{namespaceclock_ac435d838e47eaebdb967aebfeab78eae}{clock\+::\+Clock\+Select}
+\begin{DoxyCompactList}\small\item\em Export of {\ttfamily \+\_\+alibvr\+\_\+clock\+\_\+select\+::\+Clock\+Select} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceclock_aa67adb0b2215c44a4a770b6c36cfe8a7}{clock\+::\+Clock\+Irq\+Task} (\+\_\+irqs\+::\+Irq I)
+\begin{DoxyCompactList}\small\item\em This is the Timer0 Overflow handler, which increments the system clock. \end{DoxyCompactList}\item 
+\hypertarget{namespaceclock_ac68f79977567f2ffe11ea30631653dd8}{}\label{namespaceclock_ac68f79977567f2ffe11ea30631653dd8} 
+{\footnotesize template$<$typename T $>$ }\\constexpr uint64\+\_\+t {\bfseries clock\+::\+\_\+to64bit} (T v)
+\item 
+{\footnotesize template$<$uint32\+\_\+t Units, uint32\+\_\+t Factor, uint32\+\_\+t Prescale$>$ }\\constexpr uint32\+\_\+t \hyperlink{namespaceclock_ae4ee0d04356b216b1d04046c0e1b2d38}{clock\+::units\+\_\+to\+\_\+time} ()
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to real time units. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Time, uint32\+\_\+t Factor, uint32\+\_\+t Prescale$>$ }\\constexpr uint32\+\_\+t \hyperlink{namespaceclock_ac6b5f264784ea96fd8629fec0c0f7131}{clock\+::time\+\_\+to\+\_\+units} ()
+\begin{DoxyCompactList}\small\item\em Convert real time units to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Factor, uint32\+\_\+t Prescale = (uint32\+\_\+t) \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ }\\uint32\+\_\+t \hyperlink{namespaceclock_afadc978b0b25983f61b85b53ae468a51}{clock\+::units\+\_\+to\+\_\+time} (const T \&units)
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to real time units. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Factor, uint32\+\_\+t Prescale = (uint32\+\_\+t) \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ }\\uint32\+\_\+t \hyperlink{namespaceclock_a46fd6e3a91d0b307eeea0500d03d12fb}{clock\+::time\+\_\+to\+\_\+units} (const T \&n)
+\begin{DoxyCompactList}\small\item\em Convert real time units to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ }\\T \hyperlink{namespaceclock_a2e5ca91b796d0c96b8094ba1441daedc}{clock\+::ms\+\_\+to\+\_\+units} (const T \&n)
+\begin{DoxyCompactList}\small\item\em Convert ms to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ }\\uint32\+\_\+t \hyperlink{namespaceclock_ac07c7dca2d34cd417aa968fa2ccab83b}{clock\+::us\+\_\+to\+\_\+units} (const T \&n)
+\begin{DoxyCompactList}\small\item\em Convert µs to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ }\\uint32\+\_\+t \hyperlink{namespaceclock_a64b11929624655a5ac990b12829c8606}{clock\+::units\+\_\+to\+\_\+ms} (const T \&units)
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to ms. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale, typename T  = uint16\+\_\+t$>$ }\\uint32\+\_\+t \hyperlink{namespaceclock_ad223db3a13e650f8e16585cde9ff08ac}{clock\+::units\+\_\+to\+\_\+us} (const T \&units)
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to µs. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Time, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ }\\constexpr uint32\+\_\+t \hyperlink{namespaceclock_ae159a2e83f7b30eeafe3d5be8a3f5ef6}{clock\+::ms\+\_\+to\+\_\+units} ()
+\begin{DoxyCompactList}\small\item\em Convert ms to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Time, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ }\\constexpr uint32\+\_\+t \hyperlink{namespaceclock_a058555acfdfbc406daf1cb9331b0bc6f}{clock\+::us\+\_\+to\+\_\+units} ()
+\begin{DoxyCompactList}\small\item\em Convert µs to \char`\"{}units\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Units, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ }\\constexpr uint32\+\_\+t \hyperlink{namespaceclock_a475b3551d89e7a345492a61f70830bd8}{clock\+::units\+\_\+to\+\_\+ms} ()
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to ms. \end{DoxyCompactList}\item 
+{\footnotesize template$<$uint32\+\_\+t Units, Clock\+Select P = \+\_\+alibvr\+\_\+clock\+\_\+prescale\+::\+Prescale$>$ }\\constexpr uint32\+\_\+t \hyperlink{namespaceclock_a320b3614df868e901b2f022f70a3d8ae}{clock\+::units\+\_\+to\+\_\+us} ()
+\begin{DoxyCompactList}\small\item\em Convert \char`\"{}units\char`\"{} to µs. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename U $>$ }\\constexpr uint8\+\_\+t \hyperlink{namespaceclock_a2818f7b058e27771426f39c7aa0365cd}{clock\+::duration\+\_\+passed} (const T \&previous\+\_\+clock, const T \&current\+\_\+clock, const U \&duration)
+\begin{DoxyCompactList}\small\item\em Calculate if the difference between previous\+\_\+clock and current\+\_\+clock is bigger than duration. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename U $>$ }\\constexpr uint8\+\_\+t \hyperlink{namespaceclock_a4db26a90b5c001f2bb46af7a2069d63d}{clock\+::duration\+\_\+passed} (const T \&previous\+\_\+clock, const U \&duration)
+\begin{DoxyCompactList}\small\item\em Calculate if duration has passed since previous\+\_\+clock. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\static uint8\+\_\+t \hyperlink{namespaceclock_a107ad02a77763be28bf63d43c566cf75}{clock\+::clock\+\_\+reached} (const T \&clock, const T \&previous\+\_\+clock, const T \&target\+\_\+clock)
+\begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \hyperlink{namespaceclock_a9af9c9c3928a386721fa60473274f9f8}{clock\+::clock\+\_\+reached} (const uint64\+\_\+t \&clock, const uint64\+\_\+t \&, const uint64\+\_\+t \&target\+\_\+clock)
+\begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\static uint8\+\_\+t \hyperlink{namespaceclock_a240d81de9119f92701aa5f26555972c4}{clock\+::clock\+\_\+reached} (const T \&target\+\_\+clock)
+\begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \hyperlink{namespaceclock_a48932048c086f3d07ef74d9194cbfe1d}{clock\+::clock\+\_\+reached} (const uint64\+\_\+t \&target\+\_\+clock)
+\begin{DoxyCompactList}\small\item\em Calculate if target system clock has been reached. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \hyperlink{unionbits64__s}{bits64\+\_\+t} \hyperlink{namespaceclock_a0cfce972d3684eddb3dd61bb0baaf225}{clock\+::\+\_\+clock}
+\begin{DoxyCompactList}\small\item\em This is the system clock. \end{DoxyCompactList}\item 
+\hypertarget{namespaceclock_a8414359d2fd2b9f75143850c0e3bb4b5}{}\label{namespaceclock_a8414359d2fd2b9f75143850c0e3bb4b5} 
+static \+\_\+\+Clock {\bfseries clock\+::\+Clock}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file uses {\ttfamily Timer0} to provide a system clock. 
+
+The system clock is derived from the I\+O-\/clock and must be converted to seconds.
+
+Conversion functions are provided. Try to stay with the template versions, which can be calculated during compile time. Conversion of variables (with values unknown during compile time) will probably include division code, which is both big and slow.
+
+It is usually possible to compare the difference of 2 time instances with a converted interval value\+:
+
+Instead of (both examples in pseudocode)\+:
+
+
+\begin{DoxyCode}
+uint8\_t clock1 = Clock;
+\textcolor{comment}{// do something}
+uint8\_t duration = Clock - clock1;
+\textcolor{keywordflow}{if} (\hyperlink{namespaceclock_a64b11929624655a5ac990b12829c8606}{units\_to\_ms}(duration) > 5) \textcolor{comment}{// work took more than 5 ms}
+\end{DoxyCode}
+
+
+write
+
+
+\begin{DoxyCode}
+uint8\_t clock1 = Clock;
+\textcolor{comment}{// do something}
+uint8\_t duration = Clock - clock1;
+\textcolor{keywordflow}{if} (duration > ms\_to\_units<5>()) \textcolor{comment}{// work took more than 5 ms}
+\end{DoxyCode}
+
+
+{\itshape Global irqs are enabled unless the macro\+: {\ttfamily A\+L\+I\+B\+V\+R\+\_\+\+C\+L\+O\+C\+K\+\_\+\+N\+O\+\_\+\+G\+L\+O\+B\+A\+L\+\_\+\+I\+RQ} or {\ttfamily A\+L\+I\+B\+V\+R\+\_\+\+N\+O\+\_\+\+G\+L\+O\+B\+A\+L\+\_\+\+I\+RQ} is defined!} By including this header directly or indirectly global irqs are enabled because of a static constructor in this file!
+
+The clock is incremented inside the {\ttfamily Timer0} overflow irq handler. To activate the registered irq handler add {\ttfamily \#include R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+I\+R\+QS} after your {\ttfamily main} section. 

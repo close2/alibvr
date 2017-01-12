@@ -1,0 +1,77 @@
+\hypertarget{uart_8h}{}\section{src/uart.h File Reference}
+\label{uart_8h}\index{src/uart.\+h@{src/uart.\+h}}
+{\ttfamily \#include \char`\"{}buffer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}irqs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tasks.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$avr/sleep.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}pgmspace.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}internal/adapter.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}transmission.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class__uart_1_1DoNothing}{\+\_\+uart\+::\+Do\+Nothing}
+\item 
+class \hyperlink{classUart}{Uart$<$ baud, \+\_\+tx\+\_\+buffer\+\_\+size, \+\_\+rx\+\_\+buffer\+\_\+size, use\+\_\+irqs, Irq\+Task, stop\+\_\+bits, parity\+\_\+bit, data\+\_\+bits, baud\+\_\+tol $>$}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace__uart}{\+\_\+uart}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{uart_8h_addaa61b72aca51ed4835978d500f8755}{B\+A\+U\+D\+\_\+\+T\+OL}~2
+\item 
+\#define \hyperlink{uart_8h_a83bc78e7158cb556b85f6916755d2ef3}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+U\+A\+RT}~\char`\"{}internal/register\+\_\+uart.\+h\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace__uart_a16fe308815ad69599c2bd38839d2a15b}{\+\_\+uart\+::\+Parity} \{ \newline
+\hyperlink{namespace__uart_a16fe308815ad69599c2bd38839d2a15badb87fa1750d9fa6ef5cbf65c458e2fcc}{\+\_\+uart\+::\+No} = 0, 
+\newline
+\hyperlink{namespace__uart_a16fe308815ad69599c2bd38839d2a15ba5ac120a618926612c85f8cc536c4bade}{\+\_\+uart\+::\+Odd} = (2 $<$$<$ U\+P\+M00), 
+\newline
+\hyperlink{namespace__uart_a16fe308815ad69599c2bd38839d2a15ba7af2d85ba5627507566d6bf052cc23f8}{\+\_\+uart\+::\+Even} = (3 $<$$<$ U\+P\+M00)
+ \}
+\item 
+enum \hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4}{\+\_\+uart\+::\+Character\+Size} \{ \newline
+\hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4ad0e5fdc14db088f34ae0511f3c24511f}{\+\_\+uart\+::\+Data\+Bits5} = 0, 
+\newline
+\hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4ab02d0c0307f5776a637e683612ed0951}{\+\_\+uart\+::\+Data\+Bits6} = (1 $<$$<$ U\+C\+S\+Z00), 
+\newline
+\hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4a3a8859990166e4b9ebd957596184af96}{\+\_\+uart\+::\+Data\+Bits7} = (2 $<$$<$ U\+C\+S\+Z00), 
+\newline
+\hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4a25c3003045d5ccd2888e70a0d86966aa}{\+\_\+uart\+::\+Data\+Bits8} = (3 $<$$<$ U\+C\+S\+Z00)
+ \}
+\item 
+enum \hyperlink{namespace__uart_a72885456b9704c3d7d1656d112a4077f}{\+\_\+uart\+::\+Stop\+Bits} \{ \newline
+\hyperlink{namespace__uart_a72885456b9704c3d7d1656d112a4077fa5dff65c0d465d5ca6ce8625cdf1a2bed}{\+\_\+uart\+::\+Stop\+Bits1} = 0, 
+\newline
+\hyperlink{namespace__uart_a72885456b9704c3d7d1656d112a4077fa7b11b05c6f148f5f42c6caf9049ecb2c}{\+\_\+uart\+::\+Stop\+Bits2} = (1 $<$$<$ U\+S\+B\+S0)
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint32\+\_\+t \hyperlink{namespace__uart_adc722494a8735d82dccb72158d1a4165}{\+\_\+uart\+::\+Cpu} = 1000000
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{uart_8h_addaa61b72aca51ed4835978d500f8755}{}\label{uart_8h_addaa61b72aca51ed4835978d500f8755} 
+\index{uart.\+h@{uart.\+h}!B\+A\+U\+D\+\_\+\+T\+OL@{B\+A\+U\+D\+\_\+\+T\+OL}}
+\index{B\+A\+U\+D\+\_\+\+T\+OL@{B\+A\+U\+D\+\_\+\+T\+OL}!uart.\+h@{uart.\+h}}
+\subsubsection{\texorpdfstring{B\+A\+U\+D\+\_\+\+T\+OL}{BAUD\_TOL}}
+{\footnotesize\ttfamily \#define B\+A\+U\+D\+\_\+\+T\+OL~2}
+
+\hypertarget{uart_8h_a83bc78e7158cb556b85f6916755d2ef3}{}\label{uart_8h_a83bc78e7158cb556b85f6916755d2ef3} 
+\index{uart.\+h@{uart.\+h}!R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+U\+A\+RT@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+U\+A\+RT}}
+\index{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+U\+A\+RT@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+U\+A\+RT}!uart.\+h@{uart.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+U\+A\+RT}{REGISTER\_UART}}
+{\footnotesize\ttfamily \#define R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+U\+A\+RT~\char`\"{}internal/register\+\_\+uart.\+h\char`\"{}}
+

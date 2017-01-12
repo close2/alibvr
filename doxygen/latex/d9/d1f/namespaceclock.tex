@@ -2,7 +2,7 @@
 \label{namespaceclock}\index{clock@{clock}}
 
 
-This file uses {\ttfamily Timer0} to provide a system clock.  
+System clock related code is in this namespace.  
 
 
 \subsection*{Classes}
@@ -71,41 +71,9 @@ static \hyperlink{classclock_1_1__Clock}{\+\_\+\+Clock} {\bfseries Clock}
 
 
 \subsection{Detailed Description}
-This file uses {\ttfamily Timer0} to provide a system clock. 
+System clock related code is in this namespace. 
 
-By default class related classes, enums,... are defined inside the {\ttfamily clock} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+C\+L\+O\+CK or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX.
-
-The system clock is derived from the I\+O-\/clock and must be converted to seconds.
-
-Conversion functions are provided. Try to stay with the template versions, which can be calculated during compile time. Conversion of variables (with values unknown during compile time) will probably include division code, which is both big and slow.
-
-It is usually possible to compare the difference of 2 time instances with a converted interval value\+:
-
-Instead of (both examples in pseudocode)\+:
-
-
-\begin{DoxyCode}
-uint8\_t clock1 = Clock;
-\textcolor{comment}{// do something}
-uint8\_t duration = Clock - clock1;
-\textcolor{keywordflow}{if} (\hyperlink{namespaceclock_a64b11929624655a5ac990b12829c8606}{units\_to\_ms}(duration) > 5) \textcolor{comment}{// work took more than 5 ms}
-\end{DoxyCode}
-
-
-write
-
-
-\begin{DoxyCode}
-uint8\_t clock1 = Clock;
-\textcolor{comment}{// do something}
-uint8\_t duration = Clock - clock1;
-\textcolor{keywordflow}{if} (duration > ms\_to\_units<5>()) \textcolor{comment}{// work took more than 5 ms}
-\end{DoxyCode}
-
-
-{\itshape Global irqs are enabled unless the macro\+: {\ttfamily A\+L\+I\+B\+V\+R\+\_\+\+C\+L\+O\+C\+K\+\_\+\+N\+O\+\_\+\+G\+L\+O\+B\+A\+L\+\_\+\+I\+RQ} or {\ttfamily A\+L\+I\+B\+V\+R\+\_\+\+N\+O\+\_\+\+G\+L\+O\+B\+A\+L\+\_\+\+I\+RQ} is defined!} By including this header directly or indirectly global irqs are enabled because of a static constructor in this file!
-
-The clock is incremented inside the {\ttfamily Timer0} overflow irq handler. To activate the registered irq handler add {\ttfamily \#include R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+I\+R\+QS} after your {\ttfamily main} section. 
+By default class related classes, enums,... are defined inside the {\ttfamily clock} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+C\+L\+O\+CK or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. 
 
 \subsection{Function Documentation}
 \hypertarget{namespaceclock_a107ad02a77763be28bf63d43c566cf75}{}\label{namespaceclock_a107ad02a77763be28bf63d43c566cf75} 

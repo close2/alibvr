@@ -1,0 +1,136 @@
+\hypertarget{namespace__buttons}{}\section{\+\_\+buttons Namespace Reference}
+\label{namespace__buttons}\index{\+\_\+buttons@{\+\_\+buttons}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__buttons_1_1DoNothingMatrixListener}{Do\+Nothing\+Matrix\+Listener}
+\item 
+class \hyperlink{class__buttons_1_1PinList}{Pin\+List}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8f}{State} \{ \newline
+\hyperlink{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8faed054b3f25a72e25e4e57b728e7e945e}{Released} = 0, 
+\newline
+\hyperlink{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8fa8b62633a3dd6e8d1f8f2826500ca4246}{Pressed} = 1, 
+\newline
+\hyperlink{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8fa54cc1d73806cf15b92264c885ee0c058}{Long\+Released} = (300 / ms\+\_\+per\+\_\+round) $\ast$ 2, 
+\newline
+\hyperlink{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8fa485d442a59ca4545b46eaa1dfcd263dc}{Long\+Pressed} = (300 / ms\+\_\+per\+\_\+round) $\ast$ 2 + 1
+ \}
+\item 
+enum \hyperlink{namespace__buttons_a36d15e3edce603f30900fff57fad10b2}{Type} \{ \newline
+\hyperlink{namespace__buttons_a36d15e3edce603f30900fff57fad10b2a8282c2db9155da75abb5a4c372acb9e6}{Pressed\+\_\+\+High}, 
+\newline
+\hyperlink{namespace__buttons_a36d15e3edce603f30900fff57fad10b2a3532786b871c50168bb852cd29643393}{Pressed\+\_\+\+Low}
+ \}
+\item 
+enum \hyperlink{namespace__buttons_ac0ca837263eab23747f0915e8d1e81ce}{Init\+Io} \{ \newline
+\hyperlink{namespace__buttons_ac0ca837263eab23747f0915e8d1e81ceab1b30311f390f0d2eaef42effe3af7e2}{No}, 
+\newline
+\hyperlink{namespace__buttons_ac0ca837263eab23747f0915e8d1e81cea951cb7626dd8fdee82727b709a3529ae}{HighZ}, 
+\newline
+\hyperlink{namespace__buttons_ac0ca837263eab23747f0915e8d1e81cea30ab6bfc88d6c78893ecf3a3bacc2d53}{Pullup}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Pin $>$ }\\static decltype(P\+C\+M\+S\+K0) \& \hyperlink{namespace__buttons_a0ed7077aa639e3ca9fb1ab787afcb77a}{\+\_\+pcmsk} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const uint8\+\_\+t \hyperlink{namespace__buttons_a6b48336b8f5ba167d870f9d6e6dd2125}{block\+\_\+rounds} = 10
+\item 
+static const uint8\+\_\+t \hyperlink{namespace__buttons_aef8eb0435c3dc3b3515745107a52ab68}{ms\+\_\+per\+\_\+round} = 5
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespace__buttons_ac0ca837263eab23747f0915e8d1e81ce}{}\label{namespace__buttons_ac0ca837263eab23747f0915e8d1e81ce} 
+\index{\+\_\+buttons@{\+\_\+buttons}!Init\+Io@{Init\+Io}}
+\index{Init\+Io@{Init\+Io}!\+\_\+buttons@{\+\_\+buttons}}
+\subsubsection{\texorpdfstring{Init\+Io}{InitIo}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__buttons_ac0ca837263eab23747f0915e8d1e81ce}{\+\_\+buttons\+::\+Init\+Io}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{No@{No}!\+\_\+buttons@{\+\_\+buttons}}\index{\+\_\+buttons@{\+\_\+buttons}!No@{No}}}\hypertarget{namespace__buttons_ac0ca837263eab23747f0915e8d1e81ceab1b30311f390f0d2eaef42effe3af7e2}{}\label{namespace__buttons_ac0ca837263eab23747f0915e8d1e81ceab1b30311f390f0d2eaef42effe3af7e2} 
+No&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HighZ@{HighZ}!\+\_\+buttons@{\+\_\+buttons}}\index{\+\_\+buttons@{\+\_\+buttons}!HighZ@{HighZ}}}\hypertarget{namespace__buttons_ac0ca837263eab23747f0915e8d1e81cea951cb7626dd8fdee82727b709a3529ae}{}\label{namespace__buttons_ac0ca837263eab23747f0915e8d1e81cea951cb7626dd8fdee82727b709a3529ae} 
+HighZ&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pullup@{Pullup}!\+\_\+buttons@{\+\_\+buttons}}\index{\+\_\+buttons@{\+\_\+buttons}!Pullup@{Pullup}}}\hypertarget{namespace__buttons_ac0ca837263eab23747f0915e8d1e81cea30ab6bfc88d6c78893ecf3a3bacc2d53}{}\label{namespace__buttons_ac0ca837263eab23747f0915e8d1e81cea30ab6bfc88d6c78893ecf3a3bacc2d53} 
+Pullup&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8f}{}\label{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8f} 
+\index{\+\_\+buttons@{\+\_\+buttons}!State@{State}}
+\index{State@{State}!\+\_\+buttons@{\+\_\+buttons}}
+\subsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8f}{\+\_\+buttons\+::\+State}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Released@{Released}!\+\_\+buttons@{\+\_\+buttons}}\index{\+\_\+buttons@{\+\_\+buttons}!Released@{Released}}}\hypertarget{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8faed054b3f25a72e25e4e57b728e7e945e}{}\label{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8faed054b3f25a72e25e4e57b728e7e945e} 
+Released&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pressed@{Pressed}!\+\_\+buttons@{\+\_\+buttons}}\index{\+\_\+buttons@{\+\_\+buttons}!Pressed@{Pressed}}}\hypertarget{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8fa8b62633a3dd6e8d1f8f2826500ca4246}{}\label{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8fa8b62633a3dd6e8d1f8f2826500ca4246} 
+Pressed&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Long\+Released@{Long\+Released}!\+\_\+buttons@{\+\_\+buttons}}\index{\+\_\+buttons@{\+\_\+buttons}!Long\+Released@{Long\+Released}}}\hypertarget{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8fa54cc1d73806cf15b92264c885ee0c058}{}\label{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8fa54cc1d73806cf15b92264c885ee0c058} 
+Long\+Released&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Long\+Pressed@{Long\+Pressed}!\+\_\+buttons@{\+\_\+buttons}}\index{\+\_\+buttons@{\+\_\+buttons}!Long\+Pressed@{Long\+Pressed}}}\hypertarget{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8fa485d442a59ca4545b46eaa1dfcd263dc}{}\label{namespace__buttons_ae0bcacc9ee73b99889cf151d77ae2b8fa485d442a59ca4545b46eaa1dfcd263dc} 
+Long\+Pressed&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__buttons_a36d15e3edce603f30900fff57fad10b2}{}\label{namespace__buttons_a36d15e3edce603f30900fff57fad10b2} 
+\index{\+\_\+buttons@{\+\_\+buttons}!Type@{Type}}
+\index{Type@{Type}!\+\_\+buttons@{\+\_\+buttons}}
+\subsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__buttons_a36d15e3edce603f30900fff57fad10b2}{\+\_\+buttons\+::\+Type}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pressed\+\_\+\+High@{Pressed\+\_\+\+High}!\+\_\+buttons@{\+\_\+buttons}}\index{\+\_\+buttons@{\+\_\+buttons}!Pressed\+\_\+\+High@{Pressed\+\_\+\+High}}}\hypertarget{namespace__buttons_a36d15e3edce603f30900fff57fad10b2a8282c2db9155da75abb5a4c372acb9e6}{}\label{namespace__buttons_a36d15e3edce603f30900fff57fad10b2a8282c2db9155da75abb5a4c372acb9e6} 
+Pressed\+\_\+\+High&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pressed\+\_\+\+Low@{Pressed\+\_\+\+Low}!\+\_\+buttons@{\+\_\+buttons}}\index{\+\_\+buttons@{\+\_\+buttons}!Pressed\+\_\+\+Low@{Pressed\+\_\+\+Low}}}\hypertarget{namespace__buttons_a36d15e3edce603f30900fff57fad10b2a3532786b871c50168bb852cd29643393}{}\label{namespace__buttons_a36d15e3edce603f30900fff57fad10b2a3532786b871c50168bb852cd29643393} 
+Pressed\+\_\+\+Low&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace__buttons_a0ed7077aa639e3ca9fb1ab787afcb77a}{}\label{namespace__buttons_a0ed7077aa639e3ca9fb1ab787afcb77a} 
+\index{\+\_\+buttons@{\+\_\+buttons}!\+\_\+pcmsk@{\+\_\+pcmsk}}
+\index{\+\_\+pcmsk@{\+\_\+pcmsk}!\+\_\+buttons@{\+\_\+buttons}}
+\subsubsection{\texorpdfstring{\+\_\+pcmsk()}{\_pcmsk()}}
+{\footnotesize\ttfamily template$<$typename Pin $>$ \\
+static decltype(P\+C\+M\+S\+K0) \& \+\_\+buttons\+::\+\_\+pcmsk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespace__buttons_a6b48336b8f5ba167d870f9d6e6dd2125}{}\label{namespace__buttons_a6b48336b8f5ba167d870f9d6e6dd2125} 
+\index{\+\_\+buttons@{\+\_\+buttons}!block\+\_\+rounds@{block\+\_\+rounds}}
+\index{block\+\_\+rounds@{block\+\_\+rounds}!\+\_\+buttons@{\+\_\+buttons}}
+\subsubsection{\texorpdfstring{block\+\_\+rounds}{block\_rounds}}
+{\footnotesize\ttfamily const uint8\+\_\+t \+\_\+buttons\+::block\+\_\+rounds = 10\hspace{0.3cm}{\ttfamily [static]}}
+
+\hypertarget{namespace__buttons_aef8eb0435c3dc3b3515745107a52ab68}{}\label{namespace__buttons_aef8eb0435c3dc3b3515745107a52ab68} 
+\index{\+\_\+buttons@{\+\_\+buttons}!ms\+\_\+per\+\_\+round@{ms\+\_\+per\+\_\+round}}
+\index{ms\+\_\+per\+\_\+round@{ms\+\_\+per\+\_\+round}!\+\_\+buttons@{\+\_\+buttons}}
+\subsubsection{\texorpdfstring{ms\+\_\+per\+\_\+round}{ms\_per\_round}}
+{\footnotesize\ttfamily const uint8\+\_\+t \+\_\+buttons\+::ms\+\_\+per\+\_\+round = 5\hspace{0.3cm}{\ttfamily [static]}}
+

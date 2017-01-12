@@ -1,0 +1,86 @@
+\hypertarget{timer0_8h}{}\section{src/timer0.h File Reference}
+\label{timer0_8h}\index{src/timer0.\+h@{src/timer0.\+h}}
+{\ttfamily \#include \char`\"{}type\+\_\+traits.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}irqs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}macros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}internal/timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}internal/clock\+\_\+prescale.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__timer0_1_1ModeSupport}{\+\_\+timer0\+::\+Mode\+Support$<$ Mode, Clock\+Select $>$}
+\item 
+struct \hyperlink{struct__timer0_1_1TimerDef}{\+\_\+timer0\+::\+Timer\+Def}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace__timer0}{\+\_\+timer0}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{timer0_8h_ad1b4473a27a2b8e83ee997b5b0b0ef12}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+P\+W\+M0}~\char`\"{}internal/register\+\_\+pwm0.\+h\char`\"{}
+\item 
+\#define \hyperlink{timer0_8h_aba2276ed74e2ce0837af71e67e2a1e2a}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+I\+M\+E\+R0}~\char`\"{}internal/register\+\_\+timer0.\+h\char`\"{}
+\item 
+\#define \hyperlink{timer0_8h_a969ee3cad406631ded79efc02eab5bb9}{\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+I\+N\+\_\+\+U\+SE}~\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+I\+N\+\_\+\+U\+SE
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\+\_\+timer\+::\+Mode \+\_\+\+Mode = \+\_\+timer\+::\+Mode\+::\+Fast\+Pwm, \+\_\+timer\+::\+Clock\+Select \+\_\+\+Clock\+Select = \+\_\+timer\+::\+Clock\+Prescale, \+\_\+timer\+::\+Output\+Mode \+\_\+\+Out\+ModeA = \+\_\+timer\+::\+Output\+Mode\+::\+Non\+Inverting, \+\_\+timer\+::\+Output\+Mode \+\_\+\+Out\+ModeB = \+\_\+timer\+::\+Output\+Mode\+::\+Disconnected, uint8\+\_\+t \+\_\+\+Set\+D\+D\+R\+\_\+A = 0, uint8\+\_\+t \+\_\+\+Set\+D\+D\+R\+\_\+B = 0, typename \+\_\+\+TaskA  = \+\_\+timer\+::\+Do\+Nothing, typename \+\_\+\+TaskB  = \+\_\+timer\+::\+Do\+Nothing, typename \+\_\+\+Task\+OvF  = \+\_\+timer\+::\+Do\+Nothing$>$ }\\using \hyperlink{namespace__timer0_a487a8b66274244234504d39d898e6b51}{\+\_\+timer0\+::\+Timer} = \+\_\+timer\+::\+Timer$<$ Timer\+Def, \+\_\+timer\+::\+User\+Def$<$ \+\_\+\+Mode, \+\_\+\+Clock\+Select, \+\_\+\+Out\+ModeA, \+\_\+\+Out\+ModeB, \+\_\+\+Set\+D\+D\+R\+\_\+A, \+\_\+\+Set\+D\+D\+R\+\_\+B, \+\_\+\+TaskA, \+\_\+\+TaskB, \+\_\+\+Task\+OvF $>$$>$
+\item 
+{\footnotesize template$<$\+\_\+timer\+::\+Clock\+Select Clock\+Select = \+\_\+timer\+::\+Clock\+Prescale, \+\_\+timer\+::\+Output\+Mode Out\+ModeA = \+\_\+timer\+::\+Output\+Mode\+::\+Toggle, \+\_\+timer\+::\+Output\+Mode Out\+ModeB = \+\_\+timer\+::\+Output\+Mode\+::\+Disconnected, uint8\+\_\+t Set\+D\+D\+R\+\_\+A = 0, uint8\+\_\+t Set\+D\+D\+R\+\_\+B = 0, typename TaskA  = \+\_\+timer\+::\+Do\+Nothing, typename TaskB  = \+\_\+timer\+::\+Do\+Nothing, typename Task\+OvF  = \+\_\+timer\+::\+Do\+Nothing$>$ }\\using \hyperlink{timer0_8h_a4371ae8ffe86ff039c27def234d7f94f}{Timer0} = \hyperlink{namespace__timer0_a487a8b66274244234504d39d898e6b51}{\+\_\+timer0\+::\+Timer}$<$ \+\_\+timer\+::\+Mode\+::\+Normal, Clock\+Select, Out\+ModeA, Out\+ModeB, Set\+D\+D\+R\+\_\+A, Set\+D\+D\+R\+\_\+B, TaskA, TaskB, Task\+OvF $>$
+\item 
+{\footnotesize template$<$\+\_\+timer\+::\+Clock\+Select Clock\+Select = \+\_\+timer\+::\+Clock\+Prescale, \+\_\+timer\+::\+Output\+Mode Out\+ModeA = \+\_\+timer\+::\+Output\+Mode\+::\+Toggle, \+\_\+timer\+::\+Output\+Mode Out\+ModeB = \+\_\+timer\+::\+Output\+Mode\+::\+Disconnected, uint8\+\_\+t Set\+D\+D\+R\+\_\+A = 0, uint8\+\_\+t Set\+D\+D\+R\+\_\+B = 0, typename TaskA  = \+\_\+timer\+::\+Do\+Nothing, typename TaskB  = \+\_\+timer\+::\+Do\+Nothing, typename Task\+OvF  = \+\_\+timer\+::\+Do\+Nothing$>$ }\\using \hyperlink{timer0_8h_a902e484949a287f2f63d6a7c4b6b3cf8}{Ctc0} = \hyperlink{namespace__timer0_a487a8b66274244234504d39d898e6b51}{\+\_\+timer0\+::\+Timer}$<$ \+\_\+timer\+::\+Mode\+::\+Ctc, Clock\+Select, Out\+ModeA, Out\+ModeB, Set\+D\+D\+R\+\_\+A, Set\+D\+D\+R\+\_\+B, TaskA, TaskB, Task\+OvF $>$
+\item 
+{\footnotesize template$<$\+\_\+timer\+::\+Clock\+Select Clock\+Select = \+\_\+timer\+::\+Clock\+Prescale, \+\_\+timer\+::\+Output\+Mode Out\+ModeA = \+\_\+timer\+::\+Output\+Mode\+::\+Non\+Inverting, \+\_\+timer\+::\+Output\+Mode Out\+ModeB = \+\_\+timer\+::\+Output\+Mode\+::\+Disconnected, uint8\+\_\+t Set\+D\+D\+R\+\_\+A = 1, uint8\+\_\+t Set\+D\+D\+R\+\_\+B = 1, typename TaskA  = \+\_\+timer\+::\+Do\+Nothing, typename TaskB  = \+\_\+timer\+::\+Do\+Nothing, typename Task\+OvF  = \+\_\+timer\+::\+Do\+Nothing$>$ }\\using \hyperlink{timer0_8h_ae3758eaeb2f0c72adf89fabf7bcc0146}{Fast\+Pwm0} = \hyperlink{namespace__timer0_a487a8b66274244234504d39d898e6b51}{\+\_\+timer0\+::\+Timer}$<$ \hyperlink{namespace__timer_a339855be81c58fee57af09f84fdf9618a6022cbb8adceede4cc04b8358f8b9a32}{\+\_\+timer\+::\+Mode\+::\+Fast\+Pwm}, Clock\+Select, Out\+ModeA, Out\+ModeB, Set\+D\+D\+R\+\_\+A, Set\+D\+D\+R\+\_\+B, TaskA, TaskB, Task\+OvF $>$
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{timer0_8h_a969ee3cad406631ded79efc02eab5bb9}{}\label{timer0_8h_a969ee3cad406631ded79efc02eab5bb9} 
+\index{timer0.\+h@{timer0.\+h}!\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+I\+N\+\_\+\+U\+SE@{\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+I\+N\+\_\+\+U\+SE}}
+\index{\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+I\+N\+\_\+\+U\+SE@{\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+I\+N\+\_\+\+U\+SE}!timer0.\+h@{timer0.\+h}}
+\subsubsection{\texorpdfstring{\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+I\+N\+\_\+\+U\+SE}{\_TIMER0\_IN\_USE}}
+{\footnotesize\ttfamily \#define \+\_\+\+T\+I\+M\+E\+R0\+\_\+\+I\+N\+\_\+\+U\+SE~\+\_\+\+T\+I\+M\+E\+R0\+\_\+\+I\+N\+\_\+\+U\+SE}
+
+\hypertarget{timer0_8h_ad1b4473a27a2b8e83ee997b5b0b0ef12}{}\label{timer0_8h_ad1b4473a27a2b8e83ee997b5b0b0ef12} 
+\index{timer0.\+h@{timer0.\+h}!R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+P\+W\+M0@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+P\+W\+M0}}
+\index{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+P\+W\+M0@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+P\+W\+M0}!timer0.\+h@{timer0.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+P\+W\+M0}{REGISTER\_PWM0}}
+{\footnotesize\ttfamily \#define R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+P\+W\+M0~\char`\"{}internal/register\+\_\+pwm0.\+h\char`\"{}}
+
+\hypertarget{timer0_8h_aba2276ed74e2ce0837af71e67e2a1e2a}{}\label{timer0_8h_aba2276ed74e2ce0837af71e67e2a1e2a} 
+\index{timer0.\+h@{timer0.\+h}!R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+I\+M\+E\+R0@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+I\+M\+E\+R0}}
+\index{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+I\+M\+E\+R0@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+I\+M\+E\+R0}!timer0.\+h@{timer0.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+I\+M\+E\+R0}{REGISTER\_TIMER0}}
+{\footnotesize\ttfamily \#define R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+I\+M\+E\+R0~\char`\"{}internal/register\+\_\+timer0.\+h\char`\"{}}
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{timer0_8h_a902e484949a287f2f63d6a7c4b6b3cf8}{}\label{timer0_8h_a902e484949a287f2f63d6a7c4b6b3cf8} 
+\index{timer0.\+h@{timer0.\+h}!Ctc0@{Ctc0}}
+\index{Ctc0@{Ctc0}!timer0.\+h@{timer0.\+h}}
+\subsubsection{\texorpdfstring{Ctc0}{Ctc0}}
+{\footnotesize\ttfamily template$<$\+\_\+timer\+::\+Clock\+Select Clock\+Select = \+\_\+timer\+::\+Clock\+Prescale, \+\_\+timer\+::\+Output\+Mode Out\+ModeA = \+\_\+timer\+::\+Output\+Mode\+::\+Toggle, \+\_\+timer\+::\+Output\+Mode Out\+ModeB = \+\_\+timer\+::\+Output\+Mode\+::\+Disconnected, uint8\+\_\+t Set\+D\+D\+R\+\_\+A = 0, uint8\+\_\+t Set\+D\+D\+R\+\_\+B = 0, typename TaskA  = \+\_\+timer\+::\+Do\+Nothing, typename TaskB  = \+\_\+timer\+::\+Do\+Nothing, typename Task\+OvF  = \+\_\+timer\+::\+Do\+Nothing$>$ \\
+using \hyperlink{timer0_8h_a902e484949a287f2f63d6a7c4b6b3cf8}{Ctc0} =  \hyperlink{namespace__timer0_a487a8b66274244234504d39d898e6b51}{\+\_\+timer0\+::\+Timer}$<$\+\_\+timer\+::\+Mode\+::\+Ctc, Clock\+Select, Out\+ModeA, Out\+ModeB, Set\+D\+D\+R\+\_\+A, Set\+D\+D\+R\+\_\+B, TaskA, TaskB, Task\+OvF$>$}
+
+\hypertarget{timer0_8h_ae3758eaeb2f0c72adf89fabf7bcc0146}{}\label{timer0_8h_ae3758eaeb2f0c72adf89fabf7bcc0146} 
+\index{timer0.\+h@{timer0.\+h}!Fast\+Pwm0@{Fast\+Pwm0}}
+\index{Fast\+Pwm0@{Fast\+Pwm0}!timer0.\+h@{timer0.\+h}}
+\subsubsection{\texorpdfstring{Fast\+Pwm0}{FastPwm0}}
+{\footnotesize\ttfamily template$<$\+\_\+timer\+::\+Clock\+Select Clock\+Select = \+\_\+timer\+::\+Clock\+Prescale, \+\_\+timer\+::\+Output\+Mode Out\+ModeA = \+\_\+timer\+::\+Output\+Mode\+::\+Non\+Inverting, \+\_\+timer\+::\+Output\+Mode Out\+ModeB = \+\_\+timer\+::\+Output\+Mode\+::\+Disconnected, uint8\+\_\+t Set\+D\+D\+R\+\_\+A = 1, uint8\+\_\+t Set\+D\+D\+R\+\_\+B = 1, typename TaskA  = \+\_\+timer\+::\+Do\+Nothing, typename TaskB  = \+\_\+timer\+::\+Do\+Nothing, typename Task\+OvF  = \+\_\+timer\+::\+Do\+Nothing$>$ \\
+using \hyperlink{timer0_8h_ae3758eaeb2f0c72adf89fabf7bcc0146}{Fast\+Pwm0} =  \hyperlink{namespace__timer0_a487a8b66274244234504d39d898e6b51}{\+\_\+timer0\+::\+Timer}$<$\hyperlink{namespace__timer_a339855be81c58fee57af09f84fdf9618a6022cbb8adceede4cc04b8358f8b9a32}{\+\_\+timer\+::\+Mode\+::\+Fast\+Pwm}, Clock\+Select, Out\+ModeA, Out\+ModeB, Set\+D\+D\+R\+\_\+A, Set\+D\+D\+R\+\_\+B, TaskA, TaskB, Task\+OvF$>$}
+
+\hypertarget{timer0_8h_a4371ae8ffe86ff039c27def234d7f94f}{}\label{timer0_8h_a4371ae8ffe86ff039c27def234d7f94f} 
+\index{timer0.\+h@{timer0.\+h}!Timer0@{Timer0}}
+\index{Timer0@{Timer0}!timer0.\+h@{timer0.\+h}}
+\subsubsection{\texorpdfstring{Timer0}{Timer0}}
+{\footnotesize\ttfamily template$<$\+\_\+timer\+::\+Clock\+Select Clock\+Select = \+\_\+timer\+::\+Clock\+Prescale, \+\_\+timer\+::\+Output\+Mode Out\+ModeA = \+\_\+timer\+::\+Output\+Mode\+::\+Toggle, \+\_\+timer\+::\+Output\+Mode Out\+ModeB = \+\_\+timer\+::\+Output\+Mode\+::\+Disconnected, uint8\+\_\+t Set\+D\+D\+R\+\_\+A = 0, uint8\+\_\+t Set\+D\+D\+R\+\_\+B = 0, typename TaskA  = \+\_\+timer\+::\+Do\+Nothing, typename TaskB  = \+\_\+timer\+::\+Do\+Nothing, typename Task\+OvF  = \+\_\+timer\+::\+Do\+Nothing$>$ \\
+using \hyperlink{timer0_8h_a4371ae8ffe86ff039c27def234d7f94f}{Timer0} =  \hyperlink{namespace__timer0_a487a8b66274244234504d39d898e6b51}{\+\_\+timer0\+::\+Timer}$<$\+\_\+timer\+::\+Mode\+::\+Normal, Clock\+Select, Out\+ModeA, Out\+ModeB, Set\+D\+D\+R\+\_\+A, Set\+D\+D\+R\+\_\+B, TaskA, TaskB, Task\+OvF$>$}
+

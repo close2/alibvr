@@ -1,0 +1,90 @@
+\hypertarget{mini__task__b_8h}{}\section{src/mini\+\_\+task\+\_\+b.h File Reference}
+\label{mini__task__b_8h}\index{src/mini\+\_\+task\+\_\+b.\+h@{src/mini\+\_\+task\+\_\+b.\+h}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}clock.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tasks.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{mini__task__b_8h_a55794397f773c8c8c28c3bd6c7aeaa3b}{\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK}(name,  n,  enabled)
+\item 
+\#define \hyperlink{mini__task__b_8h_a7d7b4c1bcfdaf73373ad5d83eb2888bc}{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+A}(name,  enabled)~\hyperlink{mini__task__b_8h_a55794397f773c8c8c28c3bd6c7aeaa3b}{\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK}(name, A, enabled)
+\item 
+\#define \hyperlink{mini__task__b_8h_aa5e0bcae450c2b198c8ef7b10195a26b}{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+B}(name,  enabled)~\hyperlink{mini__task__b_8h_a55794397f773c8c8c28c3bd6c7aeaa3b}{\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK}(name, B, enabled)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{mini__task__b_8h_a110f22e5b1f3682920c78fcd29af05d1}{start\+\_\+mini\+\_\+task\+\_\+A} ()
+\item 
+static void \hyperlink{mini__task__b_8h_a647afe17d55b3c36f228093ed9053f0b}{stop\+\_\+mini\+\_\+task\+\_\+A} ()
+\item 
+static void \hyperlink{mini__task__b_8h_a32ee220e0c98489e9f5eec6e68fa5d8a}{start\+\_\+mini\+\_\+task\+\_\+B} ()
+\item 
+static void \hyperlink{mini__task__b_8h_a750fab5c94caab67b47913d753a12244}{stop\+\_\+mini\+\_\+task\+\_\+B} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{mini__task__b_8h_a55794397f773c8c8c28c3bd6c7aeaa3b}{}\label{mini__task__b_8h_a55794397f773c8c8c28c3bd6c7aeaa3b} 
+\index{mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}!\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK@{\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK}}
+\index{\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK@{\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK}!mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}}
+\subsubsection{\texorpdfstring{\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK}{\_MINI\_TASK}}
+{\footnotesize\ttfamily \#define \+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{n,  }\item[{}]{enabled }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\(\backslash\)
+ISR(TIMER0\_COMP##n##\_vect) \{ \(\backslash\)
+  const uint8\_t \hyperlink{namespaceclock}{clock} = get\_clock<uint8\_t>(); \(\backslash\)
+ \(\backslash\)
+  OCR0##n = clock + name::run(clock); \(\backslash\)
+\} \(\backslash\)
+namespace \_mini\_tasks \{ \(\backslash\)
+  \_\_attribute\_\_((constructor)) \(\backslash\)
+  static \textcolor{keywordtype}{void} \_maybe\_enable\_task\_##n() \{ \(\backslash\)
+    if (enabled) \{ \(\backslash\)
+      start\_mini\_task\_##n(); \(\backslash\)
+    \}  \(\backslash\)
+  \} \(\backslash\)
+\}
+\end{DoxyCode}
+\hypertarget{mini__task__b_8h_a7d7b4c1bcfdaf73373ad5d83eb2888bc}{}\label{mini__task__b_8h_a7d7b4c1bcfdaf73373ad5d83eb2888bc} 
+\index{mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}!M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+A@{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+A}}
+\index{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+A@{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+A}!mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}}
+\subsubsection{\texorpdfstring{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+A}{MINI\_TASK\_A}}
+{\footnotesize\ttfamily \#define M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+A(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{enabled }\end{DoxyParamCaption})~\hyperlink{mini__task__b_8h_a55794397f773c8c8c28c3bd6c7aeaa3b}{\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK}(name, A, enabled)}
+
+\hypertarget{mini__task__b_8h_aa5e0bcae450c2b198c8ef7b10195a26b}{}\label{mini__task__b_8h_aa5e0bcae450c2b198c8ef7b10195a26b} 
+\index{mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}!M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+B@{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+B}}
+\index{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+B@{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+B}!mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}}
+\subsubsection{\texorpdfstring{M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+B}{MINI\_TASK\_B}}
+{\footnotesize\ttfamily \#define M\+I\+N\+I\+\_\+\+T\+A\+S\+K\+\_\+B(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{enabled }\end{DoxyParamCaption})~\hyperlink{mini__task__b_8h_a55794397f773c8c8c28c3bd6c7aeaa3b}{\+\_\+\+M\+I\+N\+I\+\_\+\+T\+A\+SK}(name, B, enabled)}
+
+
+
+\subsection{Function Documentation}
+\hypertarget{mini__task__b_8h_a110f22e5b1f3682920c78fcd29af05d1}{}\label{mini__task__b_8h_a110f22e5b1f3682920c78fcd29af05d1} 
+\index{mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}!start\+\_\+mini\+\_\+task\+\_\+A@{start\+\_\+mini\+\_\+task\+\_\+A}}
+\index{start\+\_\+mini\+\_\+task\+\_\+A@{start\+\_\+mini\+\_\+task\+\_\+A}!mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}}
+\subsubsection{\texorpdfstring{start\+\_\+mini\+\_\+task\+\_\+\+A()}{start\_mini\_task\_A()}}
+{\footnotesize\ttfamily static void start\+\_\+mini\+\_\+task\+\_\+A (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\hypertarget{mini__task__b_8h_a32ee220e0c98489e9f5eec6e68fa5d8a}{}\label{mini__task__b_8h_a32ee220e0c98489e9f5eec6e68fa5d8a} 
+\index{mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}!start\+\_\+mini\+\_\+task\+\_\+B@{start\+\_\+mini\+\_\+task\+\_\+B}}
+\index{start\+\_\+mini\+\_\+task\+\_\+B@{start\+\_\+mini\+\_\+task\+\_\+B}!mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}}
+\subsubsection{\texorpdfstring{start\+\_\+mini\+\_\+task\+\_\+\+B()}{start\_mini\_task\_B()}}
+{\footnotesize\ttfamily static void start\+\_\+mini\+\_\+task\+\_\+B (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\hypertarget{mini__task__b_8h_a647afe17d55b3c36f228093ed9053f0b}{}\label{mini__task__b_8h_a647afe17d55b3c36f228093ed9053f0b} 
+\index{mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}!stop\+\_\+mini\+\_\+task\+\_\+A@{stop\+\_\+mini\+\_\+task\+\_\+A}}
+\index{stop\+\_\+mini\+\_\+task\+\_\+A@{stop\+\_\+mini\+\_\+task\+\_\+A}!mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}}
+\subsubsection{\texorpdfstring{stop\+\_\+mini\+\_\+task\+\_\+\+A()}{stop\_mini\_task\_A()}}
+{\footnotesize\ttfamily static void stop\+\_\+mini\+\_\+task\+\_\+A (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\hypertarget{mini__task__b_8h_a750fab5c94caab67b47913d753a12244}{}\label{mini__task__b_8h_a750fab5c94caab67b47913d753a12244} 
+\index{mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}!stop\+\_\+mini\+\_\+task\+\_\+B@{stop\+\_\+mini\+\_\+task\+\_\+B}}
+\index{stop\+\_\+mini\+\_\+task\+\_\+B@{stop\+\_\+mini\+\_\+task\+\_\+B}!mini\+\_\+task\+\_\+b.\+h@{mini\+\_\+task\+\_\+b.\+h}}
+\subsubsection{\texorpdfstring{stop\+\_\+mini\+\_\+task\+\_\+\+B()}{stop\_mini\_task\_B()}}
+{\footnotesize\ttfamily static void stop\+\_\+mini\+\_\+task\+\_\+B (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+

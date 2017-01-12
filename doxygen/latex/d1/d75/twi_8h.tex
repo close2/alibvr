@@ -1,0 +1,72 @@
+\hypertarget{twi_8h}{}\section{src/twi.h File Reference}
+\label{twi_8h}\index{src/twi.\+h@{src/twi.\+h}}
+{\ttfamily \#include \char`\"{}macros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}buffer.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$avr/sleep.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}internal/adapter.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}clock\+\_\+select.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}transmission.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}type\+\_\+traits.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__twi_1_1__BitRateConfig}{\+\_\+twi\+::\+\_\+\+Bit\+Rate\+Config}
+\item 
+class \hyperlink{class__twi_1_1DoNothing}{\+\_\+twi\+::\+Do\+Nothing}
+\item 
+class \hyperlink{classSpiSync}{Spi\+Sync$<$ Clock\+Select, Mode, \+\_\+\+S\+S, Data\+Order, Data\+Mode $>$}
+\item 
+class \hyperlink{classTwiMaster}{Twi\+Master$<$ tx\+\_\+buffer\+\_\+size, rx\+\_\+buffer\+\_\+size, Irq\+Task, address, general\+Call, max\+Speed, pull\+\_\+up $>$}
+\item 
+class \hyperlink{classSpiSlave}{Spi\+Slave$<$ tx\+\_\+buffer\+\_\+size, rx\+\_\+buffer\+\_\+size, Irq\+Task, default\+\_\+char, Data\+Order, Data\+Mode $>$}
+\item 
+class \hyperlink{class__twi_1_1DataProviderTask}{\+\_\+twi\+::\+Data\+Provider\+Task}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace__twi}{\+\_\+twi}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{twi_8h_ab705a68c1420c2be77c168f3035c99ca}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI}~\char`\"{}internal/register\+\_\+spi.\+h\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{namespace__transmission_a49a33659d7c6abcf7f0180cd7e34fa0e}{\+\_\+transmission\+::\+Data\+Direction} \hyperlink{namespace__twi_a98f74649c4d80fc9488d6d800f594f1a}{\+\_\+twi\+::\+Data\+Direction}
+\item 
+typedef \hyperlink{namespace__transmission_aea6508744dac6029815eb3aac4affda8}{\+\_\+transmission\+::\+Error\+Check} \hyperlink{namespace__twi_a0352adedf1acccfb9bc17c262397da0a}{\+\_\+twi\+::\+Error\+Check}
+\item 
+typedef \hyperlink{namespace__transmission_a43fedd4787676a3bbd1a35dbfa138f06}{\+\_\+transmission\+::\+To\+Buffer} \hyperlink{namespace__twi_ad3ca29587a3e7dda67fc93c9be2a275d}{\+\_\+twi\+::\+To\+Buffer}
+\item 
+typedef \hyperlink{class__transmission_1_1ClearErrors}{\+\_\+transmission\+::\+Clear\+Errors} \hyperlink{namespace__twi_aa8eb8d45cab75978982349de4e9780f9}{\+\_\+twi\+::\+Clear\+Errors}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \+\_\+\+Bit\+Rate\+Config \hyperlink{namespace__twi_ac0eaf0acb1c59c94a82785cebf218fa4}{\+\_\+twi\+::calculate\+Bit\+Rate\+Config} (uint32\+\_\+t max\+\_\+speed)
+\item 
+{\footnotesize template$<$uint8\+\_\+t address, uint32\+\_\+t max\+Speed = \+\_\+twi\+::\+F\+A\+S\+T\+\_\+\+M\+O\+D\+E\+\_\+\+S\+P\+E\+ED, int8\+\_\+t use\+Irqs = 0, int8\+\_\+t general\+Call = 0, uint8\+\_\+t address\+Mask = 0x00$>$ }\\static void \hyperlink{namespace__twi_aa8cdb79f8922f74622428ff54a50b568}{\+\_\+twi\+::\+\_\+init} ()
+\item 
+void \hyperlink{namespace__twi_a94dc1b0e503371a6986c795e510c6d46}{\+\_\+twi\+::usage\+Example1} ()
+\item 
+void \hyperlink{namespace__twi_a5456b34a1718df6a3be53c87a3067aea}{\+\_\+twi\+::usage\+Example2} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint32\+\_\+t \hyperlink{namespace__twi_aab54acbb0fdd75e47c23e8dc3344f02e}{\+\_\+twi\+::\+F\+A\+S\+T\+\_\+\+M\+O\+D\+E\+\_\+\+S\+P\+E\+ED} = 400000
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{twi_8h_ab705a68c1420c2be77c168f3035c99ca}{}\label{twi_8h_ab705a68c1420c2be77c168f3035c99ca} 
+\index{twi.\+h@{twi.\+h}!R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI}}
+\index{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI}!twi.\+h@{twi.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI}{REGISTER\_SPI}}
+{\footnotesize\ttfamily \#define R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI~\char`\"{}internal/register\+\_\+spi.\+h\char`\"{}}
+

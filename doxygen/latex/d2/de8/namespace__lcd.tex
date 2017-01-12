@@ -1,0 +1,158 @@
+\hypertarget{namespace__lcd}{}\section{\+\_\+lcd Namespace Reference}
+\label{namespace__lcd}\index{\+\_\+lcd@{\+\_\+lcd}}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3}{Command\+\_\+\+Data} \{ \newline
+\hyperlink{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3ad12d5ab1f7869bcedb4765e9ab842899}{Command} = 0, 
+\newline
+\hyperlink{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3a56b1d3a17b45a9d1398078bf65e59dc9}{Data} = 1
+ \}
+\item 
+enum \hyperlink{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5c}{Command} \{ \newline
+\hyperlink{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca3b3de96221abcb1c3d3ef1f78bb9264a}{Reset} = 0b0011, 
+\newline
+\hyperlink{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca110bfb8eb206eb5256d5e82e299df73d}{Four\+Bit\+Mode} = 0b0010, 
+\newline
+\hyperlink{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca93b3fc2b92ce6b332d401abfb699be7e}{Two\+Line\+Mode} = 0b00101000, 
+\newline
+\hyperlink{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca82ccf463d69663da5ccb3cbf20f3a7d6}{Clr} = 0x01, 
+\newline
+\hyperlink{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca2d47da9dda986ed8b8b236f4cd1de30b}{Display\+On} = 0b00001100, 
+\newline
+\hyperlink{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5cae30487a6b61d39b93aeb113c8682c892}{Set\+Display\+Address} = 0b10000000
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT $>$ }\\constexpr uint8\+\_\+t \hyperlink{namespace__lcd_ac6da9e91093b96ef074c72665e6dc649}{\+\_\+reg\+\_\+select\+\_\+bit} ()
+\item 
+{\footnotesize template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT , enum \+\_\+lcd\+::\+Command\+\_\+\+Data Command\+\_\+\+Or\+\_\+\+Data$>$ }\\static void \hyperlink{namespace__lcd_abcab50fa1305ce523c7bc2ecfc10dd4b}{\+\_\+lcd\+\_\+send\+\_\+nibble} (const uint8\+\_\+t \&data\+\_\+4\+\_\+bit)
+\item 
+{\footnotesize template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT , enum \+\_\+lcd\+::\+Command\+\_\+\+Data Command\+\_\+\+Or\+\_\+\+Data$>$ }\\static void \hyperlink{namespace__lcd_ac9078fbd15fff6154396f468df3801a9}{\+\_\+lcd\+\_\+send\+\_\+nibbles} (const uint8\+\_\+t \&to\+\_\+lcd)
+\item 
+{\footnotesize template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT $>$ }\\static void \hyperlink{namespace__lcd_a19b7494e20f4704c3272876e70acf095}{lcd\+\_\+send\+\_\+command\+\_\+nibbles} (const uint8\+\_\+t \&to\+\_\+lcd)
+\item 
+{\footnotesize template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT $>$ }\\static void \hyperlink{namespace__lcd_aee51ff72fcb02d50a39e33820a950a45}{lcd\+\_\+send\+\_\+data\+\_\+nibbles} (const uint8\+\_\+t \&to\+\_\+lcd)
+\item 
+{\footnotesize template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT $>$ }\\static void \hyperlink{namespace__lcd_adb3976e2d3fb582565fe36a693df65d1}{lcd\+\_\+io\+\_\+init} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const uint8\+\_\+t \hyperlink{namespace__lcd_a7b5c01ba44bccac5ddabf03bb93f96a2}{enable\+\_\+bit} = 5
+\item 
+static const uint8\+\_\+t \hyperlink{namespace__lcd_a190af2ac38800a5d174d5ff7194542bf}{default\+\_\+reg\+\_\+select\+\_\+bit} = 4
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5c}{}\label{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5c} 
+\index{\+\_\+lcd@{\+\_\+lcd}!Command@{Command}}
+\index{Command@{Command}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{Command}{Command}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5c}{\+\_\+lcd\+::\+Command}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Reset@{Reset}!\+\_\+lcd@{\+\_\+lcd}}\index{\+\_\+lcd@{\+\_\+lcd}!Reset@{Reset}}}\hypertarget{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca3b3de96221abcb1c3d3ef1f78bb9264a}{}\label{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca3b3de96221abcb1c3d3ef1f78bb9264a} 
+Reset&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Four\+Bit\+Mode@{Four\+Bit\+Mode}!\+\_\+lcd@{\+\_\+lcd}}\index{\+\_\+lcd@{\+\_\+lcd}!Four\+Bit\+Mode@{Four\+Bit\+Mode}}}\hypertarget{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca110bfb8eb206eb5256d5e82e299df73d}{}\label{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca110bfb8eb206eb5256d5e82e299df73d} 
+Four\+Bit\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Two\+Line\+Mode@{Two\+Line\+Mode}!\+\_\+lcd@{\+\_\+lcd}}\index{\+\_\+lcd@{\+\_\+lcd}!Two\+Line\+Mode@{Two\+Line\+Mode}}}\hypertarget{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca93b3fc2b92ce6b332d401abfb699be7e}{}\label{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca93b3fc2b92ce6b332d401abfb699be7e} 
+Two\+Line\+Mode&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Clr@{Clr}!\+\_\+lcd@{\+\_\+lcd}}\index{\+\_\+lcd@{\+\_\+lcd}!Clr@{Clr}}}\hypertarget{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca82ccf463d69663da5ccb3cbf20f3a7d6}{}\label{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca82ccf463d69663da5ccb3cbf20f3a7d6} 
+Clr&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Display\+On@{Display\+On}!\+\_\+lcd@{\+\_\+lcd}}\index{\+\_\+lcd@{\+\_\+lcd}!Display\+On@{Display\+On}}}\hypertarget{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca2d47da9dda986ed8b8b236f4cd1de30b}{}\label{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5ca2d47da9dda986ed8b8b236f4cd1de30b} 
+Display\+On&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Set\+Display\+Address@{Set\+Display\+Address}!\+\_\+lcd@{\+\_\+lcd}}\index{\+\_\+lcd@{\+\_\+lcd}!Set\+Display\+Address@{Set\+Display\+Address}}}\hypertarget{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5cae30487a6b61d39b93aeb113c8682c892}{}\label{namespace__lcd_a1e6379f737c7a8316c1f747bbe272a5cae30487a6b61d39b93aeb113c8682c892} 
+Set\+Display\+Address&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3}{}\label{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3} 
+\index{\+\_\+lcd@{\+\_\+lcd}!Command\+\_\+\+Data@{Command\+\_\+\+Data}}
+\index{Command\+\_\+\+Data@{Command\+\_\+\+Data}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{Command\+\_\+\+Data}{Command\_Data}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3}{\+\_\+lcd\+::\+Command\+\_\+\+Data}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Command@{Command}!\+\_\+lcd@{\+\_\+lcd}}\index{\+\_\+lcd@{\+\_\+lcd}!Command@{Command}}}\hypertarget{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3ad12d5ab1f7869bcedb4765e9ab842899}{}\label{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3ad12d5ab1f7869bcedb4765e9ab842899} 
+Command&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Data@{Data}!\+\_\+lcd@{\+\_\+lcd}}\index{\+\_\+lcd@{\+\_\+lcd}!Data@{Data}}}\hypertarget{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3a56b1d3a17b45a9d1398078bf65e59dc9}{}\label{namespace__lcd_a9f7614e7fea5ffaebb00ea80e12f3dd3a56b1d3a17b45a9d1398078bf65e59dc9} 
+Data&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace__lcd_abcab50fa1305ce523c7bc2ecfc10dd4b}{}\label{namespace__lcd_abcab50fa1305ce523c7bc2ecfc10dd4b} 
+\index{\+\_\+lcd@{\+\_\+lcd}!\+\_\+lcd\+\_\+send\+\_\+nibble@{\+\_\+lcd\+\_\+send\+\_\+nibble}}
+\index{\+\_\+lcd\+\_\+send\+\_\+nibble@{\+\_\+lcd\+\_\+send\+\_\+nibble}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{\+\_\+lcd\+\_\+send\+\_\+nibble()}{\_lcd\_send\_nibble()}}
+{\footnotesize\ttfamily template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT , enum \+\_\+lcd\+::\+Command\+\_\+\+Data Command\+\_\+\+Or\+\_\+\+Data$>$ \\
+static void \+\_\+lcd\+::\+\_\+lcd\+\_\+send\+\_\+nibble (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{data\+\_\+4\+\_\+bit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\hypertarget{namespace__lcd_ac9078fbd15fff6154396f468df3801a9}{}\label{namespace__lcd_ac9078fbd15fff6154396f468df3801a9} 
+\index{\+\_\+lcd@{\+\_\+lcd}!\+\_\+lcd\+\_\+send\+\_\+nibbles@{\+\_\+lcd\+\_\+send\+\_\+nibbles}}
+\index{\+\_\+lcd\+\_\+send\+\_\+nibbles@{\+\_\+lcd\+\_\+send\+\_\+nibbles}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{\+\_\+lcd\+\_\+send\+\_\+nibbles()}{\_lcd\_send\_nibbles()}}
+{\footnotesize\ttfamily template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT , enum \+\_\+lcd\+::\+Command\+\_\+\+Data Command\+\_\+\+Or\+\_\+\+Data$>$ \\
+static void \+\_\+lcd\+::\+\_\+lcd\+\_\+send\+\_\+nibbles (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{to\+\_\+lcd }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\hypertarget{namespace__lcd_ac6da9e91093b96ef074c72665e6dc649}{}\label{namespace__lcd_ac6da9e91093b96ef074c72665e6dc649} 
+\index{\+\_\+lcd@{\+\_\+lcd}!\+\_\+reg\+\_\+select\+\_\+bit@{\+\_\+reg\+\_\+select\+\_\+bit}}
+\index{\+\_\+reg\+\_\+select\+\_\+bit@{\+\_\+reg\+\_\+select\+\_\+bit}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{\+\_\+reg\+\_\+select\+\_\+bit()}{\_reg\_select\_bit()}}
+{\footnotesize\ttfamily template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT $>$ \\
+constexpr uint8\+\_\+t \+\_\+lcd\+::\+\_\+reg\+\_\+select\+\_\+bit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\hypertarget{namespace__lcd_adb3976e2d3fb582565fe36a693df65d1}{}\label{namespace__lcd_adb3976e2d3fb582565fe36a693df65d1} 
+\index{\+\_\+lcd@{\+\_\+lcd}!lcd\+\_\+io\+\_\+init@{lcd\+\_\+io\+\_\+init}}
+\index{lcd\+\_\+io\+\_\+init@{lcd\+\_\+io\+\_\+init}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{lcd\+\_\+io\+\_\+init()}{lcd\_io\_init()}}
+{\footnotesize\ttfamily template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT $>$ \\
+static void \+\_\+lcd\+::lcd\+\_\+io\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\hypertarget{namespace__lcd_a19b7494e20f4704c3272876e70acf095}{}\label{namespace__lcd_a19b7494e20f4704c3272876e70acf095} 
+\index{\+\_\+lcd@{\+\_\+lcd}!lcd\+\_\+send\+\_\+command\+\_\+nibbles@{lcd\+\_\+send\+\_\+command\+\_\+nibbles}}
+\index{lcd\+\_\+send\+\_\+command\+\_\+nibbles@{lcd\+\_\+send\+\_\+command\+\_\+nibbles}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{lcd\+\_\+send\+\_\+command\+\_\+nibbles()}{lcd\_send\_command\_nibbles()}}
+{\footnotesize\ttfamily template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT $>$ \\
+static void \+\_\+lcd\+::lcd\+\_\+send\+\_\+command\+\_\+nibbles (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{to\+\_\+lcd }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\hypertarget{namespace__lcd_aee51ff72fcb02d50a39e33820a950a45}{}\label{namespace__lcd_aee51ff72fcb02d50a39e33820a950a45} 
+\index{\+\_\+lcd@{\+\_\+lcd}!lcd\+\_\+send\+\_\+data\+\_\+nibbles@{lcd\+\_\+send\+\_\+data\+\_\+nibbles}}
+\index{lcd\+\_\+send\+\_\+data\+\_\+nibbles@{lcd\+\_\+send\+\_\+data\+\_\+nibbles}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{lcd\+\_\+send\+\_\+data\+\_\+nibbles()}{lcd\_send\_data\_nibbles()}}
+{\footnotesize\ttfamily template$<$typename L\+C\+D\+\_\+\+D7 , typename L\+C\+D\+\_\+\+D6 , typename L\+C\+D\+\_\+\+D5 , typename L\+C\+D\+\_\+\+D4 , typename L\+C\+D\+\_\+\+E\+N\+A\+B\+LE , typename L\+C\+D\+\_\+\+R\+E\+G\+\_\+\+S\+E\+L\+E\+CT $>$ \\
+static void \+\_\+lcd\+::lcd\+\_\+send\+\_\+data\+\_\+nibbles (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{to\+\_\+lcd }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespace__lcd_a190af2ac38800a5d174d5ff7194542bf}{}\label{namespace__lcd_a190af2ac38800a5d174d5ff7194542bf} 
+\index{\+\_\+lcd@{\+\_\+lcd}!default\+\_\+reg\+\_\+select\+\_\+bit@{default\+\_\+reg\+\_\+select\+\_\+bit}}
+\index{default\+\_\+reg\+\_\+select\+\_\+bit@{default\+\_\+reg\+\_\+select\+\_\+bit}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{default\+\_\+reg\+\_\+select\+\_\+bit}{default\_reg\_select\_bit}}
+{\footnotesize\ttfamily const uint8\+\_\+t \+\_\+lcd\+::default\+\_\+reg\+\_\+select\+\_\+bit = 4\hspace{0.3cm}{\ttfamily [static]}}
+
+\hypertarget{namespace__lcd_a7b5c01ba44bccac5ddabf03bb93f96a2}{}\label{namespace__lcd_a7b5c01ba44bccac5ddabf03bb93f96a2} 
+\index{\+\_\+lcd@{\+\_\+lcd}!enable\+\_\+bit@{enable\+\_\+bit}}
+\index{enable\+\_\+bit@{enable\+\_\+bit}!\+\_\+lcd@{\+\_\+lcd}}
+\subsubsection{\texorpdfstring{enable\+\_\+bit}{enable\_bit}}
+{\footnotesize\ttfamily const uint8\+\_\+t \+\_\+lcd\+::enable\+\_\+bit = 5\hspace{0.3cm}{\ttfamily [static]}}
+

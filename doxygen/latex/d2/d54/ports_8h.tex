@@ -1,0 +1,449 @@
+\hypertarget{ports_8h}{}\section{src/ports.h File Reference}
+\label{ports_8h}\index{src/ports.\+h@{src/ports.\+h}}
+
+
+Avr Atmegas access and control pins through registers. The registers are 8 bit wide and up to 8 pins are therefore controlled with every register.  
+
+
+{\ttfamily \#include $<$avr/sfr\+\_\+defs.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structports_1_1__Io}{ports\+::\+\_\+\+Io$<$ p, b, io $>$}
+\begin{DoxyCompactList}\small\item\em This class implements the cast operations from uint8\+\_\+t and the typesafe enums\+: Data\+Direction and Pull\+Up. \end{DoxyCompactList}\item 
+struct \hyperlink{structports_1_1Pin}{ports\+::\+Pin$<$ p, b $>$}
+\begin{DoxyCompactList}\small\item\em Every pin of the IC is defined using the template arguments {\ttfamily enum \+\_\+\+Port p} and {\ttfamily uint8\+\_\+t b} using {\ttfamily typedef}s of this class. \end{DoxyCompactList}\item 
+struct \hyperlink{structports_1_1__Io}{ports\+::\+\_\+\+Io$<$ p, b, io $>$}
+\begin{DoxyCompactList}\small\item\em This class implements the cast operations from uint8\+\_\+t and the typesafe enums\+: Data\+Direction and Pull\+Up. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceports}{ports}
+\begin{DoxyCompactList}\small\item\em ports related code is in this namespace. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{ports_8h_abfd901c7c85a480e1b71026576619e99}{}\label{ports_8h_abfd901c7c85a480e1b71026576619e99} 
+\#define {\bfseries A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS}~ports
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{ports_8h_a4fb91a99ef17011fa174413d9e7e42da}{}\label{ports_8h_a4fb91a99ef17011fa174413d9e7e42da} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::B, -\/1 $>$ {\bfseries P\+I\+N\+\_\+\+U\+N\+U\+S\+ED}
+\item 
+\hypertarget{ports_8h_acb71c966645308f65f2c0390db55757b}{}\label{ports_8h_acb71c966645308f65f2c0390db55757b} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::D, 0 $>$ {\bfseries P\+I\+N\+\_\+0}
+\item 
+\hypertarget{ports_8h_a1572726c1783e4b62093f0e8ae303035}{}\label{ports_8h_a1572726c1783e4b62093f0e8ae303035} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::D, 1 $>$ {\bfseries P\+I\+N\+\_\+1}
+\item 
+\hypertarget{ports_8h_a5cdb22010ee3359a2d16819bdfeb138c}{}\label{ports_8h_a5cdb22010ee3359a2d16819bdfeb138c} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::D, 2 $>$ {\bfseries P\+I\+N\+\_\+2}
+\item 
+\hypertarget{ports_8h_a2b1582b72b036057dd7b8163c2563256}{}\label{ports_8h_a2b1582b72b036057dd7b8163c2563256} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::D, 3 $>$ {\bfseries P\+I\+N\+\_\+3}
+\item 
+\hypertarget{ports_8h_ae30658b7e4af36db5f94beb5b21dc055}{}\label{ports_8h_ae30658b7e4af36db5f94beb5b21dc055} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::D, 4 $>$ {\bfseries P\+I\+N\+\_\+4}
+\item 
+\hypertarget{ports_8h_ad61c6fc9adbd47cc9c5f607271df59a4}{}\label{ports_8h_ad61c6fc9adbd47cc9c5f607271df59a4} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::D, 5 $>$ {\bfseries P\+I\+N\+\_\+5}
+\item 
+\hypertarget{ports_8h_a38619e24b5ca72258e5645af545c2674}{}\label{ports_8h_a38619e24b5ca72258e5645af545c2674} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::D, 6 $>$ {\bfseries P\+I\+N\+\_\+6}
+\item 
+\hypertarget{ports_8h_a9dae21d39fb2979ef59e853988f3e6b8}{}\label{ports_8h_a9dae21d39fb2979ef59e853988f3e6b8} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::D, 7 $>$ {\bfseries P\+I\+N\+\_\+7}
+\item 
+\hypertarget{ports_8h_ac260920a9167ebe1abb3d2f21638c615}{}\label{ports_8h_ac260920a9167ebe1abb3d2f21638c615} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::B, 0 $>$ {\bfseries P\+I\+N\+\_\+8}
+\item 
+\hypertarget{ports_8h_a9273762c92955ec7c4051b8bca19569b}{}\label{ports_8h_a9273762c92955ec7c4051b8bca19569b} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::B, 1 $>$ {\bfseries P\+I\+N\+\_\+9}
+\item 
+\hypertarget{ports_8h_a7a6229aeb00e502b02a6c6326d917ac3}{}\label{ports_8h_a7a6229aeb00e502b02a6c6326d917ac3} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::B, 2 $>$ {\bfseries P\+I\+N\+\_\+10}
+\item 
+\hypertarget{ports_8h_ad5bfe84914165c782ed4c03ce7ee2579}{}\label{ports_8h_ad5bfe84914165c782ed4c03ce7ee2579} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::B, 3 $>$ {\bfseries P\+I\+N\+\_\+11}
+\item 
+\hypertarget{ports_8h_a88b8bea7d60dcf89242e9ede8bd95e98}{}\label{ports_8h_a88b8bea7d60dcf89242e9ede8bd95e98} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::B, 4 $>$ {\bfseries P\+I\+N\+\_\+12}
+\item 
+\hypertarget{ports_8h_ae80fc693f2f6e7a9b547ef70d3bd84fa}{}\label{ports_8h_ae80fc693f2f6e7a9b547ef70d3bd84fa} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::B, 5 $>$ {\bfseries P\+I\+N\+\_\+13}
+\item 
+\hypertarget{ports_8h_a639c0d15396d4d18296b0133bf49bddc}{}\label{ports_8h_a639c0d15396d4d18296b0133bf49bddc} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::C, 0 $>$ {\bfseries P\+I\+N\+\_\+14}
+\item 
+\hypertarget{ports_8h_aa7092239921f8473e1c9695990e88cdf}{}\label{ports_8h_aa7092239921f8473e1c9695990e88cdf} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::C, 1 $>$ {\bfseries P\+I\+N\+\_\+15}
+\item 
+\hypertarget{ports_8h_ad7ce4124d9e194ccc4f8ae9455ce3be1}{}\label{ports_8h_ad7ce4124d9e194ccc4f8ae9455ce3be1} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::C, 2 $>$ {\bfseries P\+I\+N\+\_\+16}
+\item 
+\hypertarget{ports_8h_a99f53ff0802c932a8fcaf472d1ddca33}{}\label{ports_8h_a99f53ff0802c932a8fcaf472d1ddca33} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::C, 3 $>$ {\bfseries P\+I\+N\+\_\+17}
+\item 
+\hypertarget{ports_8h_ad91aaab896ebfa99cadafda6f2176877}{}\label{ports_8h_ad91aaab896ebfa99cadafda6f2176877} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::C, 4 $>$ {\bfseries P\+I\+N\+\_\+18}
+\item 
+\hypertarget{ports_8h_a24b8ea296452eeb1d9226f93eb6e89a2}{}\label{ports_8h_a24b8ea296452eeb1d9226f93eb6e89a2} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::C, 5 $>$ {\bfseries P\+I\+N\+\_\+19}
+\item 
+\hypertarget{ports_8h_aa73772b869b3054686171550ec36729b}{}\label{ports_8h_aa73772b869b3054686171550ec36729b} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::B, 6 $>$ {\bfseries P\+I\+N\+\_\+20}
+\item 
+\hypertarget{ports_8h_a5667e231c0e18bfe3729fea43923d18e}{}\label{ports_8h_a5667e231c0e18bfe3729fea43923d18e} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::B, 7 $>$ {\bfseries P\+I\+N\+\_\+21}
+\item 
+\hypertarget{ports_8h_a233c6d855fc9e99a0b8feec46d914460}{}\label{ports_8h_a233c6d855fc9e99a0b8feec46d914460} 
+typedef struct ports \+::Pin$<$ ports \+::\+\_\+\+Port\+::C, 6 $>$ {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+1}
+\item 
+\hypertarget{ports_8h_a9dbce27e1c09f1c7a1920d405d11c099}{}\label{ports_8h_a9dbce27e1c09f1c7a1920d405d11c099} 
+typedef P\+I\+N\+\_\+0 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+2}
+\item 
+\hypertarget{ports_8h_ae57caea4840c864f6ab25bf48e38b844}{}\label{ports_8h_ae57caea4840c864f6ab25bf48e38b844} 
+typedef P\+I\+N\+\_\+1 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+3}
+\item 
+\hypertarget{ports_8h_a82adcea1ee4a6e3c2b468330246a7f16}{}\label{ports_8h_a82adcea1ee4a6e3c2b468330246a7f16} 
+typedef P\+I\+N\+\_\+2 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+4}
+\item 
+\hypertarget{ports_8h_aca60b3c94401df4d6c8ac441da85cb0d}{}\label{ports_8h_aca60b3c94401df4d6c8ac441da85cb0d} 
+typedef P\+I\+N\+\_\+3 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+5}
+\item 
+\hypertarget{ports_8h_a7b9bec264193e1c386cf154ece9a9b8b}{}\label{ports_8h_a7b9bec264193e1c386cf154ece9a9b8b} 
+typedef P\+I\+N\+\_\+4 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+6}
+\item 
+\hypertarget{ports_8h_a2135bf82ed7335efb5167ce823dd64d2}{}\label{ports_8h_a2135bf82ed7335efb5167ce823dd64d2} 
+typedef P\+I\+N\+\_\+20 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+9}
+\item 
+\hypertarget{ports_8h_a357d1e6c7af98ea420b23788c984a0c1}{}\label{ports_8h_a357d1e6c7af98ea420b23788c984a0c1} 
+typedef P\+I\+N\+\_\+21 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+10}
+\item 
+\hypertarget{ports_8h_ac3a017749e2c2a8c2c7483403b6b8ef1}{}\label{ports_8h_ac3a017749e2c2a8c2c7483403b6b8ef1} 
+typedef P\+I\+N\+\_\+5 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+11}
+\item 
+\hypertarget{ports_8h_aedc64272586fa4c37d526f8fcc4c02b6}{}\label{ports_8h_aedc64272586fa4c37d526f8fcc4c02b6} 
+typedef P\+I\+N\+\_\+6 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+12}
+\item 
+\hypertarget{ports_8h_ae94018fe81a9ea372d96dde4c53c51ff}{}\label{ports_8h_ae94018fe81a9ea372d96dde4c53c51ff} 
+typedef P\+I\+N\+\_\+7 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+13}
+\item 
+\hypertarget{ports_8h_a6480ac0c5af60de59d5ac2f73b19d105}{}\label{ports_8h_a6480ac0c5af60de59d5ac2f73b19d105} 
+typedef P\+I\+N\+\_\+8 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+14}
+\item 
+\hypertarget{ports_8h_a096cfe87237c222dd4b7e0b18ec5dc72}{}\label{ports_8h_a096cfe87237c222dd4b7e0b18ec5dc72} 
+typedef P\+I\+N\+\_\+9 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+15}
+\item 
+\hypertarget{ports_8h_a25d3b20be5758c5b3ddd79bc36124de5}{}\label{ports_8h_a25d3b20be5758c5b3ddd79bc36124de5} 
+typedef P\+I\+N\+\_\+10 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+16}
+\item 
+\hypertarget{ports_8h_ab134c6fcb5c7862ad6e94843a70bbbdc}{}\label{ports_8h_ab134c6fcb5c7862ad6e94843a70bbbdc} 
+typedef P\+I\+N\+\_\+11 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+17}
+\item 
+\hypertarget{ports_8h_a1eb161c59ac0678c76af8e07500c4e1a}{}\label{ports_8h_a1eb161c59ac0678c76af8e07500c4e1a} 
+typedef P\+I\+N\+\_\+12 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+18}
+\item 
+\hypertarget{ports_8h_a451f5c1e4dd99b29c9d545782587a0ae}{}\label{ports_8h_a451f5c1e4dd99b29c9d545782587a0ae} 
+typedef P\+I\+N\+\_\+13 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+19}
+\item 
+\hypertarget{ports_8h_a8342067522a90e612608f3347a72171c}{}\label{ports_8h_a8342067522a90e612608f3347a72171c} 
+typedef P\+I\+N\+\_\+14 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+23}
+\item 
+\hypertarget{ports_8h_ab7a73ec85bccdd937ca5b7689d1f8e3f}{}\label{ports_8h_ab7a73ec85bccdd937ca5b7689d1f8e3f} 
+typedef P\+I\+N\+\_\+15 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+24}
+\item 
+\hypertarget{ports_8h_aa407b78728e5431ebeab07da8617daa6}{}\label{ports_8h_aa407b78728e5431ebeab07da8617daa6} 
+typedef P\+I\+N\+\_\+16 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+25}
+\item 
+\hypertarget{ports_8h_adb9ffc030cb1edd29307e42c6c1cb9b3}{}\label{ports_8h_adb9ffc030cb1edd29307e42c6c1cb9b3} 
+typedef P\+I\+N\+\_\+17 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+26}
+\item 
+\hypertarget{ports_8h_a2c0b7e76a333e5dea2bdfc1798b36740}{}\label{ports_8h_a2c0b7e76a333e5dea2bdfc1798b36740} 
+typedef P\+I\+N\+\_\+18 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+27}
+\item 
+\hypertarget{ports_8h_a3583461b4a893be6946a58f3329ff18e}{}\label{ports_8h_a3583461b4a893be6946a58f3329ff18e} 
+typedef P\+I\+N\+\_\+19 {\bfseries P\+I\+N\+\_\+\+D\+I\+P\+\_\+28}
+\item 
+\hypertarget{ports_8h_a3109af49234cfc36ea632fc76f09558c}{}\label{ports_8h_a3109af49234cfc36ea632fc76f09558c} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+2 {\bfseries P\+I\+N\+\_\+\+R\+XD}
+\item 
+\hypertarget{ports_8h_a9a9035af75b0b46a2da2ff6eb7c0a248}{}\label{ports_8h_a9a9035af75b0b46a2da2ff6eb7c0a248} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+3 {\bfseries P\+I\+N\+\_\+\+T\+XD}
+\item 
+\hypertarget{ports_8h_ac230f2121cf2b1759402e828fa17682e}{}\label{ports_8h_ac230f2121cf2b1759402e828fa17682e} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+6 {\bfseries P\+I\+N\+\_\+\+X\+CK}
+\item 
+\hypertarget{ports_8h_aeb7382aee13af3a6264d44e79c836390}{}\label{ports_8h_aeb7382aee13af3a6264d44e79c836390} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+9 {\bfseries P\+I\+N\+\_\+\+X\+T\+A\+L1}
+\item 
+\hypertarget{ports_8h_a20dc841e25e0b176dd12ea3dc0cac420}{}\label{ports_8h_a20dc841e25e0b176dd12ea3dc0cac420} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+10 {\bfseries P\+I\+N\+\_\+\+X\+T\+A\+L2}
+\item 
+\hypertarget{ports_8h_a81d40ec046cb09e8bcdbfdeda9ec659b}{}\label{ports_8h_a81d40ec046cb09e8bcdbfdeda9ec659b} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+9 {\bfseries P\+I\+N\+\_\+\+T\+O\+S\+C1}
+\item 
+\hypertarget{ports_8h_a4c09e4da8d7389d824a13c27568a210d}{}\label{ports_8h_a4c09e4da8d7389d824a13c27568a210d} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+10 {\bfseries P\+I\+N\+\_\+\+T\+O\+S\+C2}
+\item 
+\hypertarget{ports_8h_af2cc36386883cc288026a7fdbc28fb96}{}\label{ports_8h_af2cc36386883cc288026a7fdbc28fb96} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+14 {\bfseries P\+I\+N\+\_\+\+C\+L\+K0}
+\item 
+\hypertarget{ports_8h_a66245ac87da4b2189d05e75b2a6923d7}{}\label{ports_8h_a66245ac87da4b2189d05e75b2a6923d7} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+17 {\bfseries P\+I\+N\+\_\+\+M\+O\+SI}
+\item 
+\hypertarget{ports_8h_a2eeb9c6d34ee8a8d8078bae332c75ffc}{}\label{ports_8h_a2eeb9c6d34ee8a8d8078bae332c75ffc} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+18 {\bfseries P\+I\+N\+\_\+\+M\+I\+SO}
+\item 
+\hypertarget{ports_8h_a749139e10206724850ec072825e73d5c}{}\label{ports_8h_a749139e10206724850ec072825e73d5c} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+16 {\bfseries P\+I\+N\+\_\+\+SS}
+\item 
+\hypertarget{ports_8h_ac5857081bb44b6d29ddb64d6792ee9a0}{}\label{ports_8h_ac5857081bb44b6d29ddb64d6792ee9a0} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+19 {\bfseries P\+I\+N\+\_\+\+S\+CK}
+\item 
+\hypertarget{ports_8h_aeba9a9ef9ea8a57a8bf0edfb7cc0f036}{}\label{ports_8h_aeba9a9ef9ea8a57a8bf0edfb7cc0f036} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+28 {\bfseries P\+I\+N\+\_\+\+S\+CL}
+\item 
+\hypertarget{ports_8h_a2c0979d053b10a3eae7c60eae74e2b7b}{}\label{ports_8h_a2c0979d053b10a3eae7c60eae74e2b7b} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+27 {\bfseries P\+I\+N\+\_\+\+S\+DA}
+\item 
+\hypertarget{ports_8h_a0f681c3646ca8d07591e45df7b46870e}{}\label{ports_8h_a0f681c3646ca8d07591e45df7b46870e} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+6 {\bfseries P\+I\+N\+\_\+\+T0}
+\item 
+\hypertarget{ports_8h_ad95267f8a0a0823aa0abff1a28841d29}{}\label{ports_8h_ad95267f8a0a0823aa0abff1a28841d29} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+11 {\bfseries P\+I\+N\+\_\+\+O\+C0B}
+\item 
+\hypertarget{ports_8h_a62750ae479213912d85193248af9b702}{}\label{ports_8h_a62750ae479213912d85193248af9b702} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+12 {\bfseries P\+I\+N\+\_\+\+O\+C0A}
+\item 
+\hypertarget{ports_8h_a66bfc0d619a63480b44805173e09d6d7}{}\label{ports_8h_a66bfc0d619a63480b44805173e09d6d7} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+11 {\bfseries P\+I\+N\+\_\+\+T1}
+\item 
+\hypertarget{ports_8h_a5f7d8e56082a63ea8dfd2af9cdc58110}{}\label{ports_8h_a5f7d8e56082a63ea8dfd2af9cdc58110} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+15 {\bfseries P\+I\+N\+\_\+\+O\+C1A}
+\item 
+\hypertarget{ports_8h_aa86d8c27f6ccaccb402f786507432917}{}\label{ports_8h_aa86d8c27f6ccaccb402f786507432917} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+16 {\bfseries P\+I\+N\+\_\+\+O\+C1B}
+\item 
+\hypertarget{ports_8h_a2974c68d60f60678fb705d60c72c7650}{}\label{ports_8h_a2974c68d60f60678fb705d60c72c7650} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+14 {\bfseries P\+I\+N\+\_\+\+I\+C\+P1}
+\item 
+\hypertarget{ports_8h_aea76be80f43d7131893cb4d3efa334b0}{}\label{ports_8h_aea76be80f43d7131893cb4d3efa334b0} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+17 {\bfseries P\+I\+N\+\_\+\+O\+C2A}
+\item 
+\hypertarget{ports_8h_a5ffec7807905ab3009d7772cc05d7ca9}{}\label{ports_8h_a5ffec7807905ab3009d7772cc05d7ca9} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+5 {\bfseries P\+I\+N\+\_\+\+O\+C2B}
+\item 
+\hypertarget{ports_8h_a491676fcc34e508cbce1ab5ffd5a8e39}{}\label{ports_8h_a491676fcc34e508cbce1ab5ffd5a8e39} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+23 {\bfseries P\+I\+N\+\_\+\+A\+D\+C0}
+\item 
+\hypertarget{ports_8h_ac3387776a87ba0343ba1dcb9b6864fa0}{}\label{ports_8h_ac3387776a87ba0343ba1dcb9b6864fa0} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+24 {\bfseries P\+I\+N\+\_\+\+A\+D\+C1}
+\item 
+\hypertarget{ports_8h_aac6fe579df56460b12e961a4b5cc381f}{}\label{ports_8h_aac6fe579df56460b12e961a4b5cc381f} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+25 {\bfseries P\+I\+N\+\_\+\+A\+D\+C2}
+\item 
+\hypertarget{ports_8h_a053a13c1656bb8fe1f27049852ba67b2}{}\label{ports_8h_a053a13c1656bb8fe1f27049852ba67b2} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+26 {\bfseries P\+I\+N\+\_\+\+A\+D\+C3}
+\item 
+\hypertarget{ports_8h_a272b831fa76c107e5625f107e0171761}{}\label{ports_8h_a272b831fa76c107e5625f107e0171761} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+27 {\bfseries P\+I\+N\+\_\+\+A\+D\+C4}
+\item 
+\hypertarget{ports_8h_ac61fa500c762656f144b28415bed9d4d}{}\label{ports_8h_ac61fa500c762656f144b28415bed9d4d} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+28 {\bfseries P\+I\+N\+\_\+\+A\+D\+C5}
+\item 
+\hypertarget{ports_8h_a68572e0af81c58e47bfdb621b75fc629}{}\label{ports_8h_a68572e0af81c58e47bfdb621b75fc629} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+12 {\bfseries P\+I\+N\+\_\+\+A\+I\+N0}
+\item 
+\hypertarget{ports_8h_af50c15d1493b34a8d421a7e0eeaeb53f}{}\label{ports_8h_af50c15d1493b34a8d421a7e0eeaeb53f} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+13 {\bfseries P\+I\+N\+\_\+\+A\+I\+N1}
+\item 
+\hypertarget{ports_8h_a15cf7c61108640b6a82618b67cf11f5d}{}\label{ports_8h_a15cf7c61108640b6a82618b67cf11f5d} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+4 {\bfseries P\+I\+N\+\_\+\+I\+N\+T0}
+\item 
+\hypertarget{ports_8h_abfed1e6aa204b8a5506006a31c021ed2}{}\label{ports_8h_abfed1e6aa204b8a5506006a31c021ed2} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+5 {\bfseries P\+I\+N\+\_\+\+I\+N\+T1}
+\item 
+\hypertarget{ports_8h_a79e8237391ec0ae8bebeabc057a06c87}{}\label{ports_8h_a79e8237391ec0ae8bebeabc057a06c87} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+14 {\bfseries P\+I\+N\+\_\+\+B0}
+\item 
+\hypertarget{ports_8h_a48c0be8162bd5b516cf7d53306f69d67}{}\label{ports_8h_a48c0be8162bd5b516cf7d53306f69d67} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+15 {\bfseries P\+I\+N\+\_\+\+B1}
+\item 
+\hypertarget{ports_8h_a6c735c37667398d44f76cb96dab65202}{}\label{ports_8h_a6c735c37667398d44f76cb96dab65202} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+16 {\bfseries P\+I\+N\+\_\+\+B2}
+\item 
+\hypertarget{ports_8h_ad3d6d5c738fed1f046773963907515b6}{}\label{ports_8h_ad3d6d5c738fed1f046773963907515b6} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+17 {\bfseries P\+I\+N\+\_\+\+B3}
+\item 
+\hypertarget{ports_8h_a16a4beccebb161801cf5fe6c25aeeee6}{}\label{ports_8h_a16a4beccebb161801cf5fe6c25aeeee6} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+18 {\bfseries P\+I\+N\+\_\+\+B4}
+\item 
+\hypertarget{ports_8h_ab59ee8e27159b8167cb7eca885f6f171}{}\label{ports_8h_ab59ee8e27159b8167cb7eca885f6f171} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+19 {\bfseries P\+I\+N\+\_\+\+B5}
+\item 
+\hypertarget{ports_8h_a84262dbf4ab6e8a03556cbc97bee6adf}{}\label{ports_8h_a84262dbf4ab6e8a03556cbc97bee6adf} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+9 {\bfseries P\+I\+N\+\_\+\+B6}
+\item 
+\hypertarget{ports_8h_a4949eb2f64f8aa7571d329c511a5704f}{}\label{ports_8h_a4949eb2f64f8aa7571d329c511a5704f} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+10 {\bfseries P\+I\+N\+\_\+\+B7}
+\item 
+\hypertarget{ports_8h_a7f47e041cad11ce09f7379210ea6c9dc}{}\label{ports_8h_a7f47e041cad11ce09f7379210ea6c9dc} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+23 {\bfseries P\+I\+N\+\_\+\+C0}
+\item 
+\hypertarget{ports_8h_a7a33a85d72b0026905ebbf1aa6799fdf}{}\label{ports_8h_a7a33a85d72b0026905ebbf1aa6799fdf} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+24 {\bfseries P\+I\+N\+\_\+\+C1}
+\item 
+\hypertarget{ports_8h_aeca86aeb7739af0f096fa8919b76c595}{}\label{ports_8h_aeca86aeb7739af0f096fa8919b76c595} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+25 {\bfseries P\+I\+N\+\_\+\+C2}
+\item 
+\hypertarget{ports_8h_ad0eb9206ce332301ed77e66c640b5944}{}\label{ports_8h_ad0eb9206ce332301ed77e66c640b5944} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+26 {\bfseries P\+I\+N\+\_\+\+C3}
+\item 
+\hypertarget{ports_8h_a0fbb514f2634fab8a3120a2df65c88e9}{}\label{ports_8h_a0fbb514f2634fab8a3120a2df65c88e9} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+27 {\bfseries P\+I\+N\+\_\+\+C4}
+\item 
+\hypertarget{ports_8h_a426be80a0ebd00a749eb910deb9cb446}{}\label{ports_8h_a426be80a0ebd00a749eb910deb9cb446} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+28 {\bfseries P\+I\+N\+\_\+\+C5}
+\item 
+\hypertarget{ports_8h_afea82f9dc8899821c71925fb0097f247}{}\label{ports_8h_afea82f9dc8899821c71925fb0097f247} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+1 {\bfseries P\+I\+N\+\_\+\+C6}
+\item 
+\hypertarget{ports_8h_ab7165cb9fe5bf42de3e7ce3da524b746}{}\label{ports_8h_ab7165cb9fe5bf42de3e7ce3da524b746} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+2 {\bfseries P\+I\+N\+\_\+\+D0}
+\item 
+\hypertarget{ports_8h_a26b096cbfa46612a95c59ac646633e03}{}\label{ports_8h_a26b096cbfa46612a95c59ac646633e03} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+3 {\bfseries P\+I\+N\+\_\+\+D1}
+\item 
+\hypertarget{ports_8h_a3c02cfdd08a770c21a0b6b14669b5d4b}{}\label{ports_8h_a3c02cfdd08a770c21a0b6b14669b5d4b} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+4 {\bfseries P\+I\+N\+\_\+\+D2}
+\item 
+\hypertarget{ports_8h_a4e5dd05e29419fce29bce394bb9fe1a7}{}\label{ports_8h_a4e5dd05e29419fce29bce394bb9fe1a7} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+5 {\bfseries P\+I\+N\+\_\+\+D3}
+\item 
+\hypertarget{ports_8h_a8db7b01f9e46eaa1faf06037caad0f17}{}\label{ports_8h_a8db7b01f9e46eaa1faf06037caad0f17} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+6 {\bfseries P\+I\+N\+\_\+\+D4}
+\item 
+\hypertarget{ports_8h_a851f0f89c59e5c9fa1b3ee0aa270ea27}{}\label{ports_8h_a851f0f89c59e5c9fa1b3ee0aa270ea27} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+11 {\bfseries P\+I\+N\+\_\+\+D5}
+\item 
+\hypertarget{ports_8h_a8189f7496e80fc813cac993aff711343}{}\label{ports_8h_a8189f7496e80fc813cac993aff711343} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+12 {\bfseries P\+I\+N\+\_\+\+D6}
+\item 
+\hypertarget{ports_8h_a2aba7a80a341b441039611efbf742349}{}\label{ports_8h_a2aba7a80a341b441039611efbf742349} 
+typedef P\+I\+N\+\_\+\+D\+I\+P\+\_\+13 {\bfseries P\+I\+N\+\_\+\+D7}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespaceports_a9949317f344930bd6ad1097e80c97b67}{ports\+::\+\_\+\+Port} \{ \newline
+{\bfseries B}, 
+\newline
+{\bfseries C}, 
+\newline
+{\bfseries D}
+ \}\begin{DoxyCompactList}\small\item\em Used in pin {\ttfamily typedef}s to specify the port of a pin. \end{DoxyCompactList}
+\item 
+\hypertarget{namespaceports_aca1f1af9f1af73e71c6954b7dfb1bfa1}{}\label{namespaceports_aca1f1af9f1af73e71c6954b7dfb1bfa1} 
+enum \hyperlink{namespaceports_aca1f1af9f1af73e71c6954b7dfb1bfa1}{ports\+::\+I\+O\+Reg} \{ \newline
+{\bfseries D\+D\+Rx}, 
+\newline
+{\bfseries P\+O\+R\+Tx}, 
+\newline
+{\bfseries P\+I\+Nx}
+ \}\begin{DoxyCompactList}\small\item\em Used as template argument to specify on which register some function should be applied to. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespaceports_a46987e78fa447129742fadda5eccafb4}{ports\+::\+Data\+Direction} \{ \newline
+{\bfseries Read} = 0, 
+\newline
+{\bfseries Write} = 1, 
+\newline
+{\bfseries Input} = Read, 
+\newline
+{\bfseries Output} = Write, 
+\newline
+{\bfseries In} = Read, 
+\newline
+{\bfseries Out} = Write
+ \}\begin{DoxyCompactList}\small\item\em Type safe enum for Data\+Direction. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespaceports_a49bf0ccedb4cfed89a328574e53bec07}{ports\+::\+Pull\+Up} \{ \newline
+{\bfseries Off} = 0, 
+\newline
+{\bfseries On} = 1, 
+\newline
+{\bfseries HighZ} = Off
+ \}\begin{DoxyCompactList}\small\item\em Type safe enum for the internal Pull Up resistor. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$enum Data\+Direction Dd, class Io $>$ }\\uint8\+\_\+t \hyperlink{namespaceports_aa339a9d178cb414c4cf243450d5887d2}{ports\+::\+\_\+set\+\_\+or\+\_\+get} (uint8\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Redirects to \hyperlink{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}{\+\_\+set\+\_\+or\+\_\+get\+\_\+f()} with the correct register. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum Data\+Direction Dd, class R $>$ }\\uint8\+\_\+t \hyperlink{namespaceports_a75686ee2e9a291c0095dec6d73e4af8d}{ports\+::\+\_\+set\+\_\+or\+\_\+get\+\_\+f} (R \&reg, uint8\+\_\+t bit, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Performs the bit \char`\"{}magic\char`\"{} to read a specifc bit from a register or write only one bit to a register. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum Data\+Direction Dd, class D7 , uint8\+\_\+t B7, class D6 , uint8\+\_\+t B6, class D5 , uint8\+\_\+t B5, class D4 , uint8\+\_\+t B4, class D3 , uint8\+\_\+t B3, class D2 , uint8\+\_\+t B2, class D1 , uint8\+\_\+t B1, class D0 , uint8\+\_\+t B0, typename R , typename V $>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_a541ed8a2807f6d65c80cdf90cd7106eb}{ports\+::\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs} (R \&rB, R \&rC, R \&rD, const V \&val)
+\begin{DoxyCompactList}\small\item\em If Dd is Data\+Direction\+::\+Write takes a bit value from {\ttfamily val} and writes this bit to {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD}. If {\ttfamily Dd} is Data\+Direction\+::\+Read reads a bit value from {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD} and returns the value in the {\ttfamily uint8\+\_\+t} return value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum Data\+Direction Dd, enum I\+O\+Reg Reg, class D7 , uint8\+\_\+t B7, class D6 , uint8\+\_\+t B6, class D5 , uint8\+\_\+t B5, class D4 , uint8\+\_\+t B4, class D3 , uint8\+\_\+t B3, class D2 , uint8\+\_\+t B2, class D1 , uint8\+\_\+t B1, class D0 , uint8\+\_\+t B0, typename V $>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_a9cb9b3646fb9795dfbe079336dfc6fbb}{ports\+::\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits} (const V \&val)
+\begin{DoxyCompactList}\small\item\em Redirects to \hyperlink{namespaceports_a541ed8a2807f6d65c80cdf90cd7106eb}{\+\_\+set\+\_\+or\+\_\+get\+\_\+8\+\_\+bits\+\_\+regs()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B0 = -\/1, typename R  = int8\+\_\+t, typename V  = int8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{ports\+::set\+\_\+8\+\_\+bits} (R \&rB, R \&rC, R \&rD, const V \&val)
+\begin{DoxyCompactList}\small\item\em Takes a bit value from {\ttfamily val} and writes this bit to {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B0 = -\/1, typename R  = uint8\+\_\+t$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{ports\+::get\+\_\+8\+\_\+bits} (R \&rB, R \&rC, R \&rD)
+\begin{DoxyCompactList}\small\item\em Reads a bit value from {\ttfamily rB}, {\ttfamily rC} or {\ttfamily rD} and returns the value in the {\ttfamily uint8\+\_\+t} return value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_a7034c689dd509dc9c11ba8be46a26fd0}{ports\+::set\+\_\+8\+\_\+byte} (R \&rB, R \&rC, R \&rD, const V \&val)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{set\+\_\+8\+\_\+bits()}, to which this function redirects, with {\ttfamily B7 = 7} .. {\ttfamily B0 = 0}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename R  = uint8\+\_\+t$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_ae7d1ffc9ed6454ca61b006ffe43e4e6e}{ports\+::get\+\_\+8\+\_\+byte} (R \&rB, R \&rC, R \&rD)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{get\+\_\+8\+\_\+bits()}, to which this function redirects, with {\ttfamily B7 = 7} .. {\ttfamily B0 = 0}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports \+::\+I\+O\+Reg I\+O\+Reg, class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B0 = -\/1, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_ac9262ca010e65ff684986eef2900942f}{ports\+::set\+\_\+8\+\_\+bits} (const V \&val)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{set\+\_\+8\+\_\+bits()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports \+::\+I\+O\+Reg I\+O\+Reg, class D7 , uint8\+\_\+t B7, class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B6 = -\/1, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B5 = -\/1, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B4 = -\/1, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B3 = -\/1, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B2 = -\/1, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B1 = -\/1, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, int8\+\_\+t B0 = -\/1$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_a2a0a17506421aaa10b7c087124a09b72}{ports\+::get\+\_\+8\+\_\+bits} ()
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_a9a1959ec95780c00a964b174a27b2a37}{get\+\_\+8\+\_\+bits()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports \+::\+I\+O\+Reg I\+O\+Reg, class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED$>$ }\\static uint8\+\_\+t \hyperlink{namespaceports_abcf67102d107c0aaad21fbb9f15563ae}{ports\+::get\+\_\+8\+\_\+byte} ()
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_ae7d1ffc9ed6454ca61b006ffe43e4e6e}{get\+\_\+8\+\_\+byte()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports \+::\+I\+O\+Reg I\+O\+Reg, class D7 , class D6  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D5  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D4  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D3  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D2  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D1  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, class D0  = P\+I\+N\+\_\+\+U\+N\+U\+S\+ED, typename V  = uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_a61265646961334c58df6d4ed66e290d0}{ports\+::set\+\_\+8\+\_\+byte} (const V \&val)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_a7034c689dd509dc9c11ba8be46a26fd0}{set\+\_\+8\+\_\+byte()}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$enum ports \+::\+I\+O\+Reg I\+O\+Reg, class D3 , class D2 , class D1 , class D0 , uint8\+\_\+t offset = 0, typename V  = const uint8\+\_\+t$>$ }\\static void \hyperlink{namespaceports_af6d35bb70c3973212025200a2af3ac5c}{ports\+::set\+\_\+4\+\_\+nibble} (const V \&val)
+\begin{DoxyCompactList}\small\item\em See \hyperlink{namespaceports_aac15fb87d8fede3f2bf8d764ab42965f}{set\+\_\+8\+\_\+bits()}. This function is optimized for situations where you want to set 4 pin values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Avr Atmegas access and control pins through registers. The registers are 8 bit wide and up to 8 pins are therefore controlled with every register. 
+
+
+\begin{DoxyItemize}
+\item The D\+DR registers controls the data directions.
+\item The P\+O\+RT registers the output or the pull up resistors.
+\item The P\+IN registers toggle the output or are used to read values from pins.
+\end{DoxyItemize}
+
+Note that after including this file the macro A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS is set.
+
+All pin selections in this library are done using {\ttfamily typedef}s. See below for an example.
+
+The pin layout is compatible to arduino / arduino lite.
+
+Prefix names in the following graph with {\ttfamily P\+I\+N\+\_\+} to get provided {\ttfamily typedef}s. Example\+: {\ttfamily B5} becomes {\ttfamily P\+I\+N\+\_\+\+B5}, {\ttfamily 8} becomes {\ttfamily P\+I\+N\+\_\+8}
+
+
+\begin{DoxyCode}
+                                 ┏━u━┓
+                     C6    DIP\_1 ┃   ┃ DIP\_28   19   C5   ADC5   SCL
+RXD              0   D0    DIP\_2 ┃   ┃ DIP\_27   18   C4   ADC4   SDA
+TXD              1   D1    DIP\_3 ┃   ┃ DIP\_26   17   C3   ADC3
+        INT0     2   D2    DIP\_4 ┃   ┃ DIP\_25   16   C2   ADC2
+OC2B    INT1     3   D3    DIP\_5 ┃   ┃ DIP\_24   15   C1   ADC1
+XCK     T0       4   D4    DIP\_6 ┃   ┃ DIP\_23   14   C0   ADC0
+                             VCC ┃   ┃ GND
+                             GND ┃   ┃ AREF
+XTAL1   TOSC1   20   B6    DIP\_9 ┃   ┃ AVCC
+XTAL2   TOSC2   21   B7   DIP\_10 ┃   ┃ DIP\_19   13   B5   SCK
+T1      OC0B     5   D5   DIP\_11 ┃   ┃ DIP\_18   12   B4   MISO
+AIN0    OC0A     6   D6   DIP\_12 ┃   ┃ DIP\_17   11   B3   MOSI   OC2A
+AIN1             7   D7   DIP\_13 ┃   ┃ DIP\_16   10   B2   SS     OC1B
+ICP1    CLK0     8   B0   DIP\_14 ┃   ┃ DIP\_15    9   B1          OC1A
+                                 ┗━━━┛
+\end{DoxyCode}
+ 

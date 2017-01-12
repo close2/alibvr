@@ -1,0 +1,118 @@
+\hypertarget{adc_8h}{}\section{src/adc.h File Reference}
+\label{adc_8h}\index{src/adc.\+h@{src/adc.\+h}}
+
+
+This subsystem simplifies performing analog to digital conversions.  
+
+
+{\ttfamily \#include $<$avr/sfr\+\_\+defs.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$avr/sleep.\+h$>$}\newline
+{\ttfamily \#include $<$util/atomic.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ports.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}irqs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}type\+\_\+traits.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}internal/default\+\_\+f\+\_\+cpu.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structadc_1_1Input_1_1Temperature}{adc\+::\+Input\+::\+Temperature}
+\begin{DoxyCompactList}\small\item\em "The measured voltage has a linear relationship to the temperature \mbox{[}...\mbox{]}. The voltage sensitivity is approximately 1 m\+V/°C and the accuracy of the temperature measurement is +/-\/ 10°C." (Atmega docs) \end{DoxyCompactList}\item 
+struct \hyperlink{structadc_1_1Input_1_1V1__1}{adc\+::\+Input\+::\+V1\+\_\+1}
+\begin{DoxyCompactList}\small\item\em The internal 1.\+1V bandgap reference voltage. \end{DoxyCompactList}\item 
+struct \hyperlink{structadc_1_1Input_1_1Gnd}{adc\+::\+Input\+::\+Gnd}
+\begin{DoxyCompactList}\small\item\em Ground. \end{DoxyCompactList}\item 
+struct \hyperlink{structadc_1_1Input_1_1Unset}{adc\+::\+Input\+::\+Unset}
+\begin{DoxyCompactList}\small\item\em Use \hyperlink{structadc_1_1Input_1_1Unset}{Unset} during initialization if you intend to use different inputs. Using \hyperlink{structadc_1_1Input_1_1Unset}{Unset} doesn\textquotesingle{}t prevent you from using different inputs, but maybe makes your intentations clearer. \end{DoxyCompactList}\item 
+class \hyperlink{classadc_1_1Adc}{adc\+::\+Adc$<$ Default\+Ref, Default\+Input, Default\+Mode, Task, Default\+Global\+Irq $>$}
+\begin{DoxyCompactList}\small\item\em Static functions for initialization, adc controls and irqs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceadc}{adc}
+\begin{DoxyCompactList}\small\item\em A\+DC related code is in this namespace. \end{DoxyCompactList}\item 
+ \hyperlink{namespaceadc_1_1Input}{adc\+::\+Input}
+\begin{DoxyCompactList}\small\item\em In addition to the A\+D\+C-\/pins the adc subsystem can also use an internal temperature sensor, an internal 1.\+1V reference voltage and ground as input for a conversion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{adc_8h_af2af65121230174368ab8ddd3b61bfb6}{}\label{adc_8h_af2af65121230174368ab8ddd3b61bfb6} 
+\#define {\bfseries R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+I\+R\+QS}~\char`\"{}internal/register\+\_\+irqs.\+h\char`\"{}
+\item 
+\hypertarget{adc_8h_a96cccade4f8658ff425b2e8ece6b4a15}{}\label{adc_8h_a96cccade4f8658ff425b2e8ece6b4a15} 
+\#define {\bfseries A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+A\+DC}~adc
+\item 
+\hypertarget{adc_8h_a48bbc5d81c35f10e2e90b702d40d5aa2}{}\label{adc_8h_a48bbc5d81c35f10e2e90b702d40d5aa2} 
+\#define {\bfseries R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+A\+DC}~\char`\"{}internal/register\+\_\+adc.\+h\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae}{}\label{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae} 
+typedef void($\ast$ \hyperlink{namespaceadc_a0e6e6773a0ed848acb0887f1ed3c76ae}{adc\+::task}) (const uint16\+\_\+t \&)
+\begin{DoxyCompactList}\small\item\em The signature of a {\ttfamily Task} which may be passed as template argument. See the {\ttfamily Task} template argument for {\ttfamily \hyperlink{classadc_1_1Adc}{Adc}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespaceadc_a8094fa55ea1a7729bb35c230163c0f8f}{adc\+::\+Mode} \{ \newline
+{\bfseries Single\+Conversion} = 0x\+FF, 
+\newline
+{\bfseries Free\+Running} = 0b000, 
+\newline
+{\bfseries Trigger\+Analog\+Comp} = 0b001, 
+\newline
+{\bfseries Trigger\+P\+C\+Int0} = 0b010, 
+\newline
+{\bfseries Trigger\+Timer0\+CompA} = 0b011, 
+\newline
+{\bfseries Trigger\+Timer0\+OvF} = 0b100, 
+\newline
+{\bfseries Trigger\+Timer1\+CompB} = 0b101, 
+\newline
+{\bfseries Trigger\+Timer1\+OvF} = 0b110, 
+\newline
+{\bfseries Trigger\+Timer1\+Capt} = 0b111
+ \}\begin{DoxyCompactList}\small\item\em An A\+D-\/conversion is either started manually or by specifying a trigger. \end{DoxyCompactList}
+\item 
+\hypertarget{namespaceadc_adcbc814e47ddcec8104b574b02228d97}{}\label{namespaceadc_adcbc814e47ddcec8104b574b02228d97} 
+enum {\bfseries Ref} \{ \newline
+{\bfseries A\+Ref} = 0b00, 
+\newline
+{\bfseries A\+Vcc} = 0b01, 
+\newline
+{\bfseries V1\+\_\+1} = 0b11
+ \}
+\item 
+enum \hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bb}{adc\+::\+Global\+Irq} \{ \newline
+\hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bba06b9281e396db002010bde1de57262eb}{adc\+::\+Global\+Irq\+::\+Auto}, 
+\newline
+\hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bbace5a9f99f26d20a3bb29810a8716ae11}{adc\+::\+Global\+Irq\+::\+Turn\+On}, 
+\newline
+\hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bbaf0635e226d94e6a8339e6f237c2b6f1b}{adc\+::\+Global\+Irq\+::\+Turn\+Off}, 
+\newline
+\hyperlink{namespaceadc_a92c3b192926a98ab7106f26c73bf85bba4bac8cdf0a968472b519b3b295d0d48b}{adc\+::\+Global\+Irq\+::\+No\+Change}
+ \}\begin{DoxyCompactList}\small\item\em This enum is passed to the {\ttfamily init()} function and controls if global irqs should be turned on with {\ttfamily sei()}. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction$>$ }\\void \hyperlink{namespaceadc_ab569dff590b3bb745fb012aa29ec5723}{adc\+::\+\_\+do\+\_\+adc} ()
+\begin{DoxyCompactList}\small\item\em Starts a conversion while going to sleep. Then busywaits for the conversion to finish. The busywait is only necessary because other irqs might wake the cpu during a conversion. \end{DoxyCompactList}\item 
+\hypertarget{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{}\label{namespaceadc_a4228912d1c32eafc1987a8adb80f4984} 
+void \hyperlink{namespaceadc_a4228912d1c32eafc1987a8adb80f4984}{adc\+::busy\+\_\+wait\+\_\+adc\+\_\+finished} ()
+\begin{DoxyCompactList}\small\item\em Loops until the current conversion has finished. \end{DoxyCompactList}\item 
+\hypertarget{namespaceadc_a0f2e8fa37ba3e91fc9e7a58e3543eaaa}{}\label{namespaceadc_a0f2e8fa37ba3e91fc9e7a58e3543eaaa} 
+void {\bfseries adc\+::irq\+\_\+handler\+\_\+for\+\_\+adc\+\_\+must\+\_\+be\+\_\+registered\+\_\+for\+\_\+noise\+\_\+reduction} ()
+\item 
+{\footnotesize template$<$$>$ }\\void \hyperlink{namespaceadc_a6e0b185b550424440d92bc2b129f6128}{adc\+::\+\_\+do\+\_\+adc$<$ 0 $>$} ()
+\begin{DoxyCompactList}\small\item\em Simply starts a conversion and then waits for the conversion to finish. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This subsystem simplifies performing analog to digital conversions. 
+
+The adc subsystem is abstracted through the {\ttfamily Adc} class.
+
+Default settings (input, reference voltage and mode) may be set as template arguments of the {\ttfamily Adc} class.
+
+Calling the static method {\ttfamily init()} will set the subsystem. The {\ttfamily init()} method also provides template arguments, making it possible to override the default settings. Note that the order of those template arguments differ! 

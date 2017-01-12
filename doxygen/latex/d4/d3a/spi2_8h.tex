@@ -1,0 +1,93 @@
+\hypertarget{spi2_8h}{}\section{src/spi2.h File Reference}
+\label{spi2_8h}\index{src/spi2.\+h@{src/spi2.\+h}}
+{\ttfamily \#include \char`\"{}macros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}buffer.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$avr/sleep.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}internal/adapter.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}clock\+\_\+select.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}transmission.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}type\+\_\+traits.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class__spi_1_1NoSS}{\+\_\+spi\+::\+No\+SS}
+\item 
+class \hyperlink{class__spi_1_1DoNothing}{\+\_\+spi\+::\+Do\+Nothing}
+\item 
+class \hyperlink{classSpiSync}{Spi\+Sync$<$ Clock\+Select, Mode, \+\_\+\+S\+S, Data\+Order, Data\+Mode $>$}
+\item 
+class \hyperlink{classSpiAsync}{Spi\+Async$<$ Clock\+Select, Mode, tx\+\_\+buffer\+\_\+size, rx\+\_\+buffer\+\_\+size, Irq\+Task, default\+\_\+char, \+\_\+\+S\+S, Data\+Order, Data\+Mode $>$}
+\item 
+class \hyperlink{class__spi_1_1DataProviderTask}{\+\_\+spi\+::\+Data\+Provider\+Task}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace__spi}{\+\_\+spi}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{spi2_8h_ab705a68c1420c2be77c168f3035c99ca}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI}~\char`\"{}internal/register\+\_\+spi.\+h\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408}{\+\_\+spi\+::\+Mode} \{ \newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{\+\_\+spi\+::\+Mode\+::\+Master}, 
+\newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{\+\_\+spi\+::\+Mode\+::\+Slave}, 
+\newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{\+\_\+spi\+::\+Mode\+::\+Master}, 
+\newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{\+\_\+spi\+::\+Mode\+::\+Slave}
+ \}
+\item 
+enum \hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670}{\+\_\+spi\+::\+Data\+Order} \{ \newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{\+\_\+spi\+::\+Data\+Order\+::\+L\+SB}, 
+\newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{\+\_\+spi\+::\+Data\+Order\+::\+M\+SB}, 
+\newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{\+\_\+spi\+::\+Data\+Order\+::\+L\+SB}, 
+\newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{\+\_\+spi\+::\+Data\+Order\+::\+M\+SB}
+ \}
+\item 
+enum \hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147}{\+\_\+spi\+::\+Data\+Mode} \{ \newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{\+\_\+spi\+::\+Data\+Mode\+::\+Mode0}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{\+\_\+spi\+::\+Data\+Mode\+::\+Mode1}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{\+\_\+spi\+::\+Data\+Mode\+::\+Mode2}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{\+\_\+spi\+::\+Data\+Mode\+::\+Mode3}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{\+\_\+spi\+::\+Data\+Mode\+::\+Mode0}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{\+\_\+spi\+::\+Data\+Mode\+::\+Mode1}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{\+\_\+spi\+::\+Data\+Mode\+::\+Mode2}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{\+\_\+spi\+::\+Data\+Mode\+::\+Mode3}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$Clock\+Select CS, Mode M, Data\+Order DO, Data\+Mode DM, int8\+\_\+t use\+Irqs = 0$>$ }\\static void \hyperlink{namespace__spi_a9d124f8fde004a9e441e849e2555bd31}{\+\_\+spi\+::\+\_\+init} ()
+\item 
+void \hyperlink{namespace__spi_aa9590ef47ecdda8d22a2f094065b799f}{\+\_\+spi\+::usage\+Example1} ()
+\item 
+void \hyperlink{namespace__spi_abce92b4ae6ee23a31f8f43454c1e1f0e}{\+\_\+spi\+::usage\+Example2} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{spi2_8h_ab705a68c1420c2be77c168f3035c99ca}{}\label{spi2_8h_ab705a68c1420c2be77c168f3035c99ca} 
+\index{spi2.\+h@{spi2.\+h}!R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI}}
+\index{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI}!spi2.\+h@{spi2.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI}{REGISTER\_SPI}}
+{\footnotesize\ttfamily \#define R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+PI~\char`\"{}internal/register\+\_\+spi.\+h\char`\"{}}
+

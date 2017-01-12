@@ -1,0 +1,57 @@
+\hypertarget{serial__modbus_8h}{}\section{src/serial\+\_\+modbus.h File Reference}
+\label{serial__modbus_8h}\index{src/serial\+\_\+modbus.\+h@{src/serial\+\_\+modbus.\+h}}
+{\ttfamily \#include \char`\"{}modbus.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}uart.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSerialModbus}{Serial\+Modbus$<$ address\+Id, Modbus\+Data\+List, baud, stop\+\_\+bits, parity\+\_\+bit, data\+\_\+bits, baud\+\_\+tol $>$}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespace__serial__modbus}{\+\_\+serial\+\_\+modbus}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{serial__modbus_8h_aec7d77219447e09fc61826e01861fc7d}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+M\+O\+D\+B\+US}~\char`\"{}internal/register\+\_\+serial\+\_\+modbus.\+h\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace__serial__modbus_a5b967b79f82bb6863cae05015a79b4a3}{\+\_\+serial\+\_\+modbus\+::\+Ctrl\+Char} \{ \newline
+\hyperlink{namespace__serial__modbus_a5b967b79f82bb6863cae05015a79b4a3a7da1eac79d11437436ff33ccf3302001}{\+\_\+serial\+\_\+modbus\+::\+Start} = \textquotesingle{}\+:\textquotesingle{}, 
+\newline
+\hyperlink{namespace__serial__modbus_a5b967b79f82bb6863cae05015a79b4a3a08adce699bd0380a36a2d42bd3d1d528}{\+\_\+serial\+\_\+modbus\+::\+End1} = 0x0D, 
+\newline
+\hyperlink{namespace__serial__modbus_a5b967b79f82bb6863cae05015a79b4a3a3cc6a853513464b0bce1dd22df8b32ed}{\+\_\+serial\+\_\+modbus\+::\+End2} = 0x0A
+ \}
+\item 
+enum \hyperlink{namespace__serial__modbus_ab3c10a855665a020824d760dbfa5d19e}{\+\_\+serial\+\_\+modbus\+::\+State} \{ \newline
+\hyperlink{namespace__serial__modbus_ab3c10a855665a020824d760dbfa5d19eaea59e9109888f82f2aef22039cc66608}{\+\_\+serial\+\_\+modbus\+::\+Receiving\+\_\+\+Waiting\+\_\+\+For\+\_\+\+Start} = 0x00, 
+\newline
+\hyperlink{namespace__serial__modbus_ab3c10a855665a020824d760dbfa5d19ea20c78457d43d4cc8c9a891830a8f2f28}{\+\_\+serial\+\_\+modbus\+::\+Receiving\+\_\+\+Address\+\_\+\+Id} = 0x01, 
+\newline
+\hyperlink{namespace__serial__modbus_ab3c10a855665a020824d760dbfa5d19eaee1c70ef3520c51137f44315e4f57065}{\+\_\+serial\+\_\+modbus\+::\+Receiving\+\_\+\+Data} = 0x02, 
+\newline
+\hyperlink{namespace__serial__modbus_ab3c10a855665a020824d760dbfa5d19ea26bc35fcef2c92e6b01372cd6961ef77}{\+\_\+serial\+\_\+modbus\+::\+Sending\+\_\+\+Start} = 0x10, 
+\newline
+\hyperlink{namespace__serial__modbus_ab3c10a855665a020824d760dbfa5d19eab14e58952e262904b79e6cd05feee1f8}{\+\_\+serial\+\_\+modbus\+::\+Sending\+\_\+\+Data} = 0x11, 
+\newline
+\hyperlink{namespace__serial__modbus_ab3c10a855665a020824d760dbfa5d19eac87effd06485375de9741f5a4b49ef38}{\+\_\+serial\+\_\+modbus\+::\+Sending\+\_\+\+End1} = 0x12, 
+\newline
+\hyperlink{namespace__serial__modbus_ab3c10a855665a020824d760dbfa5d19ea5cd5d88dabacc809fd9c6f14cad86979}{\+\_\+serial\+\_\+modbus\+::\+Sending\+\_\+\+End2} = 0x13, 
+\newline
+\hyperlink{namespace__serial__modbus_ab3c10a855665a020824d760dbfa5d19ea2b53d386d60039531eb07a8b484212f4}{\+\_\+serial\+\_\+modbus\+::\+Sending\+\_\+\+Done} = 0x14
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{serial__modbus_8h_aec7d77219447e09fc61826e01861fc7d}{}\label{serial__modbus_8h_aec7d77219447e09fc61826e01861fc7d} 
+\index{serial\+\_\+modbus.\+h@{serial\+\_\+modbus.\+h}!R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+M\+O\+D\+B\+US@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+M\+O\+D\+B\+US}}
+\index{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+M\+O\+D\+B\+US@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+M\+O\+D\+B\+US}!serial\+\_\+modbus.\+h@{serial\+\_\+modbus.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+M\+O\+D\+B\+US}{REGISTER\_SERIAL\_MODBUS}}
+{\footnotesize\ttfamily \#define R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+M\+O\+D\+B\+US~\char`\"{}internal/register\+\_\+serial\+\_\+modbus.\+h\char`\"{}}
+

@@ -2,7 +2,7 @@
 \label{namespaceports}\index{ports@{ports}}
 
 
-Avr Atmegas access and control pins through registers. The registers are 8 bit wide and up to 8 pins are therefore controlled with every register.  
+ports related code is in this namespace.  
 
 
 \subsection*{Classes}
@@ -86,45 +86,9 @@ enum \hyperlink{namespaceports_a49bf0ccedb4cfed89a328574e53bec07}{Pull\+Up} \{ \
 
 
 \subsection{Detailed Description}
-Avr Atmegas access and control pins through registers. The registers are 8 bit wide and up to 8 pins are therefore controlled with every register. 
+ports related code is in this namespace. 
 
-
-\begin{DoxyItemize}
-\item The D\+DR registers controls the data directions.
-\item The P\+O\+RT registers the output or the pull up resistors.
-\item The P\+IN registers toggle the output or are used to read values from pins.
-\end{DoxyItemize}
-
-By default ports related classes, enums,... are defined inside the {\ttfamily ports} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX.
-
-Note that after including this file the macro A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS is set.
-
-All pin selections in this library are done using {\ttfamily typedef}s. See below for an example.
-
-The pin layout is compatible to arduino / arduino lite.
-
-Prefix names in the following graph with {\ttfamily P\+I\+N\+\_\+} to get provided {\ttfamily typedef}s. Example\+: {\ttfamily B5} becomes {\ttfamily P\+I\+N\+\_\+\+B5}, {\ttfamily 8} becomes {\ttfamily P\+I\+N\+\_\+8}
-
-
-\begin{DoxyCode}
-                                 ┏━u━┓
-                     C6    DIP\_1 ┃   ┃ DIP\_28   19   C5   ADC5   SCL
-RXD              0   D0    DIP\_2 ┃   ┃ DIP\_27   18   C4   ADC4   SDA
-TXD              1   D1    DIP\_3 ┃   ┃ DIP\_26   17   C3   ADC3
-        INT0     2   D2    DIP\_4 ┃   ┃ DIP\_25   16   C2   ADC2
-OC2B    INT1     3   D3    DIP\_5 ┃   ┃ DIP\_24   15   C1   ADC1
-XCK     T0       4   D4    DIP\_6 ┃   ┃ DIP\_23   14   C0   ADC0
-                             VCC ┃   ┃ GND
-                             GND ┃   ┃ AREF
-XTAL1   TOSC1   20   B6    DIP\_9 ┃   ┃ AVCC
-XTAL2   TOSC2   21   B7   DIP\_10 ┃   ┃ DIP\_19   13   B5   SCK
-T1      OC0B     5   D5   DIP\_11 ┃   ┃ DIP\_18   12   B4   MISO
-AIN0    OC0A     6   D6   DIP\_12 ┃   ┃ DIP\_17   11   B3   MOSI   OC2A
-AIN1             7   D7   DIP\_13 ┃   ┃ DIP\_16   10   B2   SS     OC1B
-ICP1    CLK0     8   B0   DIP\_14 ┃   ┃ DIP\_15    9   B1          OC1A
-                                 ┗━━━┛
-\end{DoxyCode}
- 
+By default ports related classes, enums,... are defined inside the {\ttfamily ports} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+O\+R\+TS or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. 
 
 \subsection{Enumeration Type Documentation}
 \hypertarget{namespaceports_a9949317f344930bd6ad1097e80c97b67}{}\label{namespaceports_a9949317f344930bd6ad1097e80c97b67} 

@@ -1,0 +1,111 @@
+\hypertarget{namespace__uart}{}\section{\+\_\+uart Namespace Reference}
+\label{namespace__uart}\index{\+\_\+uart@{\+\_\+uart}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class__uart_1_1DoNothing}{Do\+Nothing}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace__uart_a16fe308815ad69599c2bd38839d2a15b}{Parity} \{ \newline
+\hyperlink{namespace__uart_a16fe308815ad69599c2bd38839d2a15badb87fa1750d9fa6ef5cbf65c458e2fcc}{No} = 0, 
+\newline
+\hyperlink{namespace__uart_a16fe308815ad69599c2bd38839d2a15ba5ac120a618926612c85f8cc536c4bade}{Odd} = (2 $<$$<$ U\+P\+M00), 
+\newline
+\hyperlink{namespace__uart_a16fe308815ad69599c2bd38839d2a15ba7af2d85ba5627507566d6bf052cc23f8}{Even} = (3 $<$$<$ U\+P\+M00)
+ \}
+\item 
+enum \hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4}{Character\+Size} \{ \newline
+\hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4ad0e5fdc14db088f34ae0511f3c24511f}{Data\+Bits5} = 0, 
+\newline
+\hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4ab02d0c0307f5776a637e683612ed0951}{Data\+Bits6} = (1 $<$$<$ U\+C\+S\+Z00), 
+\newline
+\hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4a3a8859990166e4b9ebd957596184af96}{Data\+Bits7} = (2 $<$$<$ U\+C\+S\+Z00), 
+\newline
+\hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4a25c3003045d5ccd2888e70a0d86966aa}{Data\+Bits8} = (3 $<$$<$ U\+C\+S\+Z00)
+ \}
+\item 
+enum \hyperlink{namespace__uart_a72885456b9704c3d7d1656d112a4077f}{Stop\+Bits} \{ \newline
+\hyperlink{namespace__uart_a72885456b9704c3d7d1656d112a4077fa5dff65c0d465d5ca6ce8625cdf1a2bed}{Stop\+Bits1} = 0, 
+\newline
+\hyperlink{namespace__uart_a72885456b9704c3d7d1656d112a4077fa7b11b05c6f148f5f42c6caf9049ecb2c}{Stop\+Bits2} = (1 $<$$<$ U\+S\+B\+S0)
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint32\+\_\+t \hyperlink{namespace__uart_adc722494a8735d82dccb72158d1a4165}{Cpu} = 1000000
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4}{}\label{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4} 
+\index{\+\_\+uart@{\+\_\+uart}!Character\+Size@{Character\+Size}}
+\index{Character\+Size@{Character\+Size}!\+\_\+uart@{\+\_\+uart}}
+\subsubsection{\texorpdfstring{Character\+Size}{CharacterSize}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4}{\+\_\+uart\+::\+Character\+Size}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Data\+Bits5@{Data\+Bits5}!\+\_\+uart@{\+\_\+uart}}\index{\+\_\+uart@{\+\_\+uart}!Data\+Bits5@{Data\+Bits5}}}\hypertarget{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4ad0e5fdc14db088f34ae0511f3c24511f}{}\label{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4ad0e5fdc14db088f34ae0511f3c24511f} 
+Data\+Bits5&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Data\+Bits6@{Data\+Bits6}!\+\_\+uart@{\+\_\+uart}}\index{\+\_\+uart@{\+\_\+uart}!Data\+Bits6@{Data\+Bits6}}}\hypertarget{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4ab02d0c0307f5776a637e683612ed0951}{}\label{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4ab02d0c0307f5776a637e683612ed0951} 
+Data\+Bits6&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Data\+Bits7@{Data\+Bits7}!\+\_\+uart@{\+\_\+uart}}\index{\+\_\+uart@{\+\_\+uart}!Data\+Bits7@{Data\+Bits7}}}\hypertarget{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4a3a8859990166e4b9ebd957596184af96}{}\label{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4a3a8859990166e4b9ebd957596184af96} 
+Data\+Bits7&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Data\+Bits8@{Data\+Bits8}!\+\_\+uart@{\+\_\+uart}}\index{\+\_\+uart@{\+\_\+uart}!Data\+Bits8@{Data\+Bits8}}}\hypertarget{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4a25c3003045d5ccd2888e70a0d86966aa}{}\label{namespace__uart_a6bcb12dc8982ef9737777dbfdbcce1e4a25c3003045d5ccd2888e70a0d86966aa} 
+Data\+Bits8&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__uart_a16fe308815ad69599c2bd38839d2a15b}{}\label{namespace__uart_a16fe308815ad69599c2bd38839d2a15b} 
+\index{\+\_\+uart@{\+\_\+uart}!Parity@{Parity}}
+\index{Parity@{Parity}!\+\_\+uart@{\+\_\+uart}}
+\subsubsection{\texorpdfstring{Parity}{Parity}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__uart_a16fe308815ad69599c2bd38839d2a15b}{\+\_\+uart\+::\+Parity}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{No@{No}!\+\_\+uart@{\+\_\+uart}}\index{\+\_\+uart@{\+\_\+uart}!No@{No}}}\hypertarget{namespace__uart_a16fe308815ad69599c2bd38839d2a15badb87fa1750d9fa6ef5cbf65c458e2fcc}{}\label{namespace__uart_a16fe308815ad69599c2bd38839d2a15badb87fa1750d9fa6ef5cbf65c458e2fcc} 
+No&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Odd@{Odd}!\+\_\+uart@{\+\_\+uart}}\index{\+\_\+uart@{\+\_\+uart}!Odd@{Odd}}}\hypertarget{namespace__uart_a16fe308815ad69599c2bd38839d2a15ba5ac120a618926612c85f8cc536c4bade}{}\label{namespace__uart_a16fe308815ad69599c2bd38839d2a15ba5ac120a618926612c85f8cc536c4bade} 
+Odd&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Even@{Even}!\+\_\+uart@{\+\_\+uart}}\index{\+\_\+uart@{\+\_\+uart}!Even@{Even}}}\hypertarget{namespace__uart_a16fe308815ad69599c2bd38839d2a15ba7af2d85ba5627507566d6bf052cc23f8}{}\label{namespace__uart_a16fe308815ad69599c2bd38839d2a15ba7af2d85ba5627507566d6bf052cc23f8} 
+Even&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__uart_a72885456b9704c3d7d1656d112a4077f}{}\label{namespace__uart_a72885456b9704c3d7d1656d112a4077f} 
+\index{\+\_\+uart@{\+\_\+uart}!Stop\+Bits@{Stop\+Bits}}
+\index{Stop\+Bits@{Stop\+Bits}!\+\_\+uart@{\+\_\+uart}}
+\subsubsection{\texorpdfstring{Stop\+Bits}{StopBits}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__uart_a72885456b9704c3d7d1656d112a4077f}{\+\_\+uart\+::\+Stop\+Bits}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Stop\+Bits1@{Stop\+Bits1}!\+\_\+uart@{\+\_\+uart}}\index{\+\_\+uart@{\+\_\+uart}!Stop\+Bits1@{Stop\+Bits1}}}\hypertarget{namespace__uart_a72885456b9704c3d7d1656d112a4077fa5dff65c0d465d5ca6ce8625cdf1a2bed}{}\label{namespace__uart_a72885456b9704c3d7d1656d112a4077fa5dff65c0d465d5ca6ce8625cdf1a2bed} 
+Stop\+Bits1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Stop\+Bits2@{Stop\+Bits2}!\+\_\+uart@{\+\_\+uart}}\index{\+\_\+uart@{\+\_\+uart}!Stop\+Bits2@{Stop\+Bits2}}}\hypertarget{namespace__uart_a72885456b9704c3d7d1656d112a4077fa7b11b05c6f148f5f42c6caf9049ecb2c}{}\label{namespace__uart_a72885456b9704c3d7d1656d112a4077fa7b11b05c6f148f5f42c6caf9049ecb2c} 
+Stop\+Bits2&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespace__uart_adc722494a8735d82dccb72158d1a4165}{}\label{namespace__uart_adc722494a8735d82dccb72158d1a4165} 
+\index{\+\_\+uart@{\+\_\+uart}!Cpu@{Cpu}}
+\index{Cpu@{Cpu}!\+\_\+uart@{\+\_\+uart}}
+\subsubsection{\texorpdfstring{Cpu}{Cpu}}
+{\footnotesize\ttfamily const uint32\+\_\+t \+\_\+uart\+::\+Cpu = 1000000}
+

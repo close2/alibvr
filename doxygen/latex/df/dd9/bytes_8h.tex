@@ -1,0 +1,66 @@
+\hypertarget{bytes_8h}{}\section{src/bytes.h File Reference}
+\label{bytes_8h}\index{src/bytes.\+h@{src/bytes.\+h}}
+
+
+This file contains {\ttfamily typedef}s which make it easier to access specific bytes of multi-\/byte values.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structbits16__hilo__s}{bits16\+\_\+hilo\+\_\+s}
+\item 
+struct \hyperlink{structbits16__lohi__s}{bits16\+\_\+lohi\+\_\+s}
+\item 
+union \hyperlink{unionbits16__s}{bits16\+\_\+s}
+\item 
+struct \hyperlink{structbits32__hilo__s}{bits32\+\_\+hilo\+\_\+s}
+\item 
+struct \hyperlink{structbits32__lohi__s}{bits32\+\_\+lohi\+\_\+s}
+\item 
+union \hyperlink{unionbits32__t}{bits32\+\_\+t}
+\item 
+struct \hyperlink{structbits64__hilo__s}{bits64\+\_\+hilo\+\_\+s}
+\item 
+struct \hyperlink{structbits64__lohi__s}{bits64\+\_\+lohi\+\_\+s}
+\item 
+union \hyperlink{unionbits64__s}{bits64\+\_\+s}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{bytes_8h_a7e976dc5280430f43dba10e475401af0}{}\label{bytes_8h_a7e976dc5280430f43dba10e475401af0} 
+typedef struct \hyperlink{structbits16__hilo__s}{bits16\+\_\+hilo\+\_\+s} {\bfseries bits16\+\_\+hilo\+\_\+t}
+\item 
+\hypertarget{bytes_8h_ad153d6e2efc344e412c1b33460032f59}{}\label{bytes_8h_ad153d6e2efc344e412c1b33460032f59} 
+typedef struct \hyperlink{structbits16__lohi__s}{bits16\+\_\+lohi\+\_\+s} {\bfseries bits16\+\_\+lohi\+\_\+t}
+\item 
+\hypertarget{bytes_8h_a49e7070b9f6de9822418c52552694eda}{}\label{bytes_8h_a49e7070b9f6de9822418c52552694eda} 
+typedef union \hyperlink{unionbits16__s}{bits16\+\_\+s} {\bfseries bits16\+\_\+t}
+\item 
+\hypertarget{bytes_8h_a2d8eda87be7967bee7bf552185e29143}{}\label{bytes_8h_a2d8eda87be7967bee7bf552185e29143} 
+typedef struct \hyperlink{structbits32__hilo__s}{bits32\+\_\+hilo\+\_\+s} {\bfseries bits32\+\_\+hilo\+\_\+t}
+\item 
+\hypertarget{bytes_8h_a56b29dc6c77c161494a820a84427636d}{}\label{bytes_8h_a56b29dc6c77c161494a820a84427636d} 
+typedef struct \hyperlink{structbits32__lohi__s}{bits32\+\_\+lohi\+\_\+s} {\bfseries bits32\+\_\+lohi\+\_\+t}
+\item 
+\hypertarget{bytes_8h_aa574e49c7d402d65cf69c88da22d3043}{}\label{bytes_8h_aa574e49c7d402d65cf69c88da22d3043} 
+typedef union \hyperlink{unionbits32__t}{bits32\+\_\+t} {\bfseries bits32\+\_\+t}
+\item 
+\hypertarget{bytes_8h_ae27d5e02c985d34631fe66280af2c884}{}\label{bytes_8h_ae27d5e02c985d34631fe66280af2c884} 
+typedef struct \hyperlink{structbits64__hilo__s}{bits64\+\_\+hilo\+\_\+s} {\bfseries bits64\+\_\+hilo\+\_\+t}
+\item 
+\hypertarget{bytes_8h_a73005b33b134651e787d9bb958878ab3}{}\label{bytes_8h_a73005b33b134651e787d9bb958878ab3} 
+typedef struct \hyperlink{structbits64__lohi__s}{bits64\+\_\+lohi\+\_\+s} {\bfseries bits64\+\_\+lohi\+\_\+t}
+\item 
+\hypertarget{bytes_8h_af634813c1d65002ed7d906c0be78c629}{}\label{bytes_8h_af634813c1d65002ed7d906c0be78c629} 
+typedef union \hyperlink{unionbits64__s}{bits64\+\_\+s} {\bfseries bits64\+\_\+t}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains {\ttfamily typedef}s which make it easier to access specific bytes of multi-\/byte values. 
+
+An {\ttfamily uint16\+\_\+t} for instance may be cast to {\ttfamily union \hyperlink{unionbits16__s}{bits16\+\_\+s}} which makes it possible to access to less significant byte with\+: {\ttfamily v.\+avr.\+lo}.
+
+All {\ttfamily union} {\ttfamily typedef}s provide an {\ttfamily avr} member, with {\ttfamily lo} and {\ttfamily hi} members. {\ttfamily avr} / gcc is little-\/endian! 

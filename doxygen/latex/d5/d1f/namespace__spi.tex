@@ -1,0 +1,363 @@
+\hypertarget{namespace__spi}{}\section{\+\_\+spi Namespace Reference}
+\label{namespace__spi}\index{\+\_\+spi@{\+\_\+spi}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class__spi_1_1DataProviderTask}{Data\+Provider\+Task}
+\item 
+class \hyperlink{class__spi_1_1DoNothing}{Do\+Nothing}
+\item 
+class \hyperlink{class__spi_1_1NoSS}{No\+SS}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{ports_8h_a7a6229aeb00e502b02a6c6326d917ac3}{P\+I\+N\+\_\+10} \hyperlink{namespace__spi_a434315d1279c8f510156c8a5fc878ac7}{P\+I\+\_\+\+SS}
+\item 
+typedef \+\_\+clock\+\_\+select\+::\+Clock\+Select \hyperlink{namespace__spi_af65fa4a6f5d6ab0ac870066fdf89cccb}{Clock\+Select}
+\item 
+typedef \hyperlink{namespace__transmission_a49a33659d7c6abcf7f0180cd7e34fa0e}{\+\_\+transmission\+::\+Data\+Direction} \hyperlink{namespace__spi_ac38499e87a8df9fd49f1becb09f847d2}{Data\+Direction}
+\item 
+typedef \hyperlink{namespace__transmission_aea6508744dac6029815eb3aac4affda8}{\+\_\+transmission\+::\+Error\+Check} \hyperlink{namespace__spi_aa004e3fbc2eb239fc900cb843aad51a2}{Error\+Check}
+\item 
+typedef \hyperlink{namespace__transmission_a43fedd4787676a3bbd1a35dbfa138f06}{\+\_\+transmission\+::\+To\+Buffer} \hyperlink{namespace__spi_aa6a43ffb968de9f9a86b6f1208fc6a12}{To\+Buffer}
+\item 
+typedef \hyperlink{class__transmission_1_1ClearErrors}{\+\_\+transmission\+::\+Clear\+Errors} \hyperlink{namespace__spi_a7f84bc62e06fdda021c42411ad8eee2a}{Clear\+Errors}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408}{Mode} \{ \newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{Mode\+::\+Master}, 
+\newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{Mode\+::\+Slave}, 
+\newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{Mode\+::\+Master}, 
+\newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{Mode\+::\+Slave}
+ \}
+\item 
+enum \hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670}{Data\+Order} \{ \newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{Data\+Order\+::\+L\+SB}, 
+\newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{Data\+Order\+::\+M\+SB}, 
+\newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{Data\+Order\+::\+L\+SB}, 
+\newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{Data\+Order\+::\+M\+SB}
+ \}
+\item 
+enum \hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147}{Data\+Mode} \{ \newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{Data\+Mode\+::\+Mode0}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{Data\+Mode\+::\+Mode1}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{Data\+Mode\+::\+Mode2}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{Data\+Mode\+::\+Mode3}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{Data\+Mode\+::\+Mode0}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{Data\+Mode\+::\+Mode1}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{Data\+Mode\+::\+Mode2}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{Data\+Mode\+::\+Mode3}
+ \}
+\item 
+enum \hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408}{Mode} \{ \newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{Mode\+::\+Master}, 
+\newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{Mode\+::\+Slave}, 
+\newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{Mode\+::\+Master}, 
+\newline
+\hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{Mode\+::\+Slave}
+ \}
+\item 
+enum \hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670}{Data\+Order} \{ \newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{Data\+Order\+::\+L\+SB}, 
+\newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{Data\+Order\+::\+M\+SB}, 
+\newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{Data\+Order\+::\+L\+SB}, 
+\newline
+\hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{Data\+Order\+::\+M\+SB}
+ \}
+\item 
+enum \hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147}{Data\+Mode} \{ \newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{Data\+Mode\+::\+Mode0}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{Data\+Mode\+::\+Mode1}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{Data\+Mode\+::\+Mode2}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{Data\+Mode\+::\+Mode3}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{Data\+Mode\+::\+Mode0}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{Data\+Mode\+::\+Mode1}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{Data\+Mode\+::\+Mode2}, 
+\newline
+\hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{Data\+Mode\+::\+Mode3}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$Mode M, Data\+Order DO, Data\+Mode DM, int8\+\_\+t use\+Irqs = 0, Clock\+Select CS = Clock\+Select\+::\+Clock2$>$ }\\static void \hyperlink{namespace__spi_a9d124f8fde004a9e441e849e2555bd31}{\+\_\+init} ()
+\item 
+void \hyperlink{namespace__spi_aa9590ef47ecdda8d22a2f094065b799f}{usage\+Example1} ()
+\item 
+void \hyperlink{namespace__spi_abce92b4ae6ee23a31f8f43454c1e1f0e}{usage\+Example2} ()
+\item 
+{\footnotesize template$<$Clock\+Select CS, Mode M, Data\+Order DO, Data\+Mode DM, int8\+\_\+t use\+Irqs = 0$>$ }\\static void \hyperlink{namespace__spi_a9d124f8fde004a9e441e849e2555bd31}{\+\_\+init} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespace__spi_a7f84bc62e06fdda021c42411ad8eee2a}{}\label{namespace__spi_a7f84bc62e06fdda021c42411ad8eee2a} 
+\index{\+\_\+spi@{\+\_\+spi}!Clear\+Errors@{Clear\+Errors}}
+\index{Clear\+Errors@{Clear\+Errors}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Clear\+Errors}{ClearErrors}}
+{\footnotesize\ttfamily typedef \hyperlink{class__transmission_1_1ClearErrors}{\+\_\+transmission\+::\+Clear\+Errors} \hyperlink{namespace__spi_a7f84bc62e06fdda021c42411ad8eee2a}{\+\_\+spi\+::\+Clear\+Errors}}
+
+\hypertarget{namespace__spi_af65fa4a6f5d6ab0ac870066fdf89cccb}{}\label{namespace__spi_af65fa4a6f5d6ab0ac870066fdf89cccb} 
+\index{\+\_\+spi@{\+\_\+spi}!Clock\+Select@{Clock\+Select}}
+\index{Clock\+Select@{Clock\+Select}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Clock\+Select}{ClockSelect}}
+{\footnotesize\ttfamily typedef \+\_\+clock\+\_\+select\+::\+Clock\+Select \hyperlink{namespace__spi_af65fa4a6f5d6ab0ac870066fdf89cccb}{\+\_\+spi\+::\+Clock\+Select}}
+
+\hypertarget{namespace__spi_ac38499e87a8df9fd49f1becb09f847d2}{}\label{namespace__spi_ac38499e87a8df9fd49f1becb09f847d2} 
+\index{\+\_\+spi@{\+\_\+spi}!Data\+Direction@{Data\+Direction}}
+\index{Data\+Direction@{Data\+Direction}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Data\+Direction}{DataDirection}}
+{\footnotesize\ttfamily typedef \hyperlink{namespace__transmission_a49a33659d7c6abcf7f0180cd7e34fa0e}{\+\_\+transmission\+::\+Data\+Direction} \hyperlink{namespace__transmission_a49a33659d7c6abcf7f0180cd7e34fa0e}{\+\_\+spi\+::\+Data\+Direction}}
+
+\hypertarget{namespace__spi_aa004e3fbc2eb239fc900cb843aad51a2}{}\label{namespace__spi_aa004e3fbc2eb239fc900cb843aad51a2} 
+\index{\+\_\+spi@{\+\_\+spi}!Error\+Check@{Error\+Check}}
+\index{Error\+Check@{Error\+Check}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Error\+Check}{ErrorCheck}}
+{\footnotesize\ttfamily typedef \hyperlink{namespace__transmission_aea6508744dac6029815eb3aac4affda8}{\+\_\+transmission\+::\+Error\+Check} \hyperlink{namespace__transmission_aea6508744dac6029815eb3aac4affda8}{\+\_\+spi\+::\+Error\+Check}}
+
+\hypertarget{namespace__spi_a434315d1279c8f510156c8a5fc878ac7}{}\label{namespace__spi_a434315d1279c8f510156c8a5fc878ac7} 
+\index{\+\_\+spi@{\+\_\+spi}!P\+I\+\_\+\+SS@{P\+I\+\_\+\+SS}}
+\index{P\+I\+\_\+\+SS@{P\+I\+\_\+\+SS}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{P\+I\+\_\+\+SS}{PI\_SS}}
+{\footnotesize\ttfamily typedef \hyperlink{ports_8h_a7a6229aeb00e502b02a6c6326d917ac3}{P\+I\+N\+\_\+10} \hyperlink{namespace__spi_a434315d1279c8f510156c8a5fc878ac7}{\+\_\+spi\+::\+P\+I\+\_\+\+SS}}
+
+\hypertarget{namespace__spi_aa6a43ffb968de9f9a86b6f1208fc6a12}{}\label{namespace__spi_aa6a43ffb968de9f9a86b6f1208fc6a12} 
+\index{\+\_\+spi@{\+\_\+spi}!To\+Buffer@{To\+Buffer}}
+\index{To\+Buffer@{To\+Buffer}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{To\+Buffer}{ToBuffer}}
+{\footnotesize\ttfamily typedef \hyperlink{namespace__transmission_a43fedd4787676a3bbd1a35dbfa138f06}{\+\_\+transmission\+::\+To\+Buffer} \hyperlink{namespace__transmission_a43fedd4787676a3bbd1a35dbfa138f06}{\+\_\+spi\+::\+To\+Buffer}}
+
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147} 
+\index{\+\_\+spi@{\+\_\+spi}!Data\+Mode@{Data\+Mode}}
+\index{Data\+Mode@{Data\+Mode}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Data\+Mode}{DataMode}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147}{\+\_\+spi\+::\+Data\+Mode}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode0@{Mode0}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode0@{Mode0}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5} 
+Mode0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode1@{Mode1}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode1@{Mode1}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c} 
+Mode1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode2@{Mode2}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode2@{Mode2}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7} 
+Mode2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode3@{Mode3}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode3@{Mode3}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1} 
+Mode3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode0@{Mode0}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode0@{Mode0}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5} 
+Mode0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode1@{Mode1}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode1@{Mode1}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c} 
+Mode1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode2@{Mode2}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode2@{Mode2}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7} 
+Mode2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode3@{Mode3}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode3@{Mode3}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1} 
+Mode3&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147} 
+\index{\+\_\+spi@{\+\_\+spi}!Data\+Mode@{Data\+Mode}}
+\index{Data\+Mode@{Data\+Mode}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Data\+Mode}{DataMode}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__spi_a5c653e646f3aaf1f111a058763cf9147}{\+\_\+spi\+::\+Data\+Mode}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode0@{Mode0}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode0@{Mode0}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5} 
+Mode0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode1@{Mode1}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode1@{Mode1}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c} 
+Mode1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode2@{Mode2}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode2@{Mode2}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7} 
+Mode2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode3@{Mode3}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode3@{Mode3}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1} 
+Mode3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode0@{Mode0}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode0@{Mode0}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a315436bae0e85636381fc939db06aee5} 
+Mode0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode1@{Mode1}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode1@{Mode1}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a7a2ea225a084605104f8c39b3ae9657c} 
+Mode1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode2@{Mode2}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode2@{Mode2}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147a04c542f260d16590ec60c594f67a30e7} 
+Mode2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mode3@{Mode3}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Mode3@{Mode3}}}\hypertarget{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1}{}\label{namespace__spi_a5c653e646f3aaf1f111a058763cf9147ab68fa4884da8d22e83f37b4f209295f1} 
+Mode3&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670} 
+\index{\+\_\+spi@{\+\_\+spi}!Data\+Order@{Data\+Order}}
+\index{Data\+Order@{Data\+Order}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Data\+Order}{DataOrder}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670}{\+\_\+spi\+::\+Data\+Order}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+SB@{L\+SB}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!L\+SB@{L\+SB}}}\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215} 
+L\+SB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+SB@{M\+SB}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!M\+SB@{M\+SB}}}\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314} 
+M\+SB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+SB@{L\+SB}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!L\+SB@{L\+SB}}}\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215} 
+L\+SB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+SB@{M\+SB}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!M\+SB@{M\+SB}}}\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314} 
+M\+SB&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670} 
+\index{\+\_\+spi@{\+\_\+spi}!Data\+Order@{Data\+Order}}
+\index{Data\+Order@{Data\+Order}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Data\+Order}{DataOrder}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__spi_a1aba455711fcf180314f49e3e8080670}{\+\_\+spi\+::\+Data\+Order}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+SB@{L\+SB}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!L\+SB@{L\+SB}}}\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215} 
+L\+SB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+SB@{M\+SB}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!M\+SB@{M\+SB}}}\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314} 
+M\+SB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+SB@{L\+SB}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!L\+SB@{L\+SB}}}\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670a6ea6688cc99719eb4624eef718719215} 
+L\+SB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+SB@{M\+SB}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!M\+SB@{M\+SB}}}\hypertarget{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314}{}\label{namespace__spi_a1aba455711fcf180314f49e3e8080670ae86b28b55eaf8feb03e24730be892314} 
+M\+SB&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408} 
+\index{\+\_\+spi@{\+\_\+spi}!Mode@{Mode}}
+\index{Mode@{Mode}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Mode}{Mode}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408}{\+\_\+spi\+::\+Mode}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master@{Master}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Master@{Master}}}\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c} 
+Master&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Slave@{Slave}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Slave@{Slave}}}\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1} 
+Slave&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master@{Master}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Master@{Master}}}\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c} 
+Master&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Slave@{Slave}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Slave@{Slave}}}\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1} 
+Slave&\\
+\hline
+
+\end{DoxyEnumFields}
+\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408} 
+\index{\+\_\+spi@{\+\_\+spi}!Mode@{Mode}}
+\index{Mode@{Mode}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{Mode}{Mode}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enum \hyperlink{namespace__spi_a4547307ff67d22d5cad9ada8d4858408}{\+\_\+spi\+::\+Mode}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master@{Master}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Master@{Master}}}\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c} 
+Master&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Slave@{Slave}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Slave@{Slave}}}\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1} 
+Slave&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Master@{Master}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Master@{Master}}}\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408af03bde11d261f185cbacfa32c1c6538c} 
+Master&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Slave@{Slave}!\+\_\+spi@{\+\_\+spi}}\index{\+\_\+spi@{\+\_\+spi}!Slave@{Slave}}}\hypertarget{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1}{}\label{namespace__spi_a4547307ff67d22d5cad9ada8d4858408afe25c0ad752c03ce2361025c235b63e1} 
+Slave&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace__spi_a9d124f8fde004a9e441e849e2555bd31}{}\label{namespace__spi_a9d124f8fde004a9e441e849e2555bd31} 
+\index{\+\_\+spi@{\+\_\+spi}!\+\_\+init@{\+\_\+init}}
+\index{\+\_\+init@{\+\_\+init}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{\+\_\+init()}{\_init()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$Clock\+Select CS, Mode M, Data\+Order DO, Data\+Mode DM, int8\+\_\+t use\+Irqs = 0$>$ \\
+static void \+\_\+spi\+::\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\hypertarget{namespace__spi_a9d124f8fde004a9e441e849e2555bd31}{}\label{namespace__spi_a9d124f8fde004a9e441e849e2555bd31} 
+\index{\+\_\+spi@{\+\_\+spi}!\+\_\+init@{\+\_\+init}}
+\index{\+\_\+init@{\+\_\+init}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{\+\_\+init()}{\_init()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$Mode M, Data\+Order DO, Data\+Mode DM, int8\+\_\+t use\+Irqs = 0, Clock\+Select CS = Clock\+Select\+::\+Clock2$>$ \\
+static void \+\_\+spi\+::\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\hypertarget{namespace__spi_aa9590ef47ecdda8d22a2f094065b799f}{}\label{namespace__spi_aa9590ef47ecdda8d22a2f094065b799f} 
+\index{\+\_\+spi@{\+\_\+spi}!usage\+Example1@{usage\+Example1}}
+\index{usage\+Example1@{usage\+Example1}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{usage\+Example1()}{usageExample1()}}
+{\footnotesize\ttfamily void \+\_\+spi\+::usage\+Example1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\hypertarget{namespace__spi_abce92b4ae6ee23a31f8f43454c1e1f0e}{}\label{namespace__spi_abce92b4ae6ee23a31f8f43454c1e1f0e} 
+\index{\+\_\+spi@{\+\_\+spi}!usage\+Example2@{usage\+Example2}}
+\index{usage\+Example2@{usage\+Example2}!\+\_\+spi@{\+\_\+spi}}
+\subsubsection{\texorpdfstring{usage\+Example2()}{usageExample2()}}
+{\footnotesize\ttfamily void \+\_\+spi\+::usage\+Example2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+

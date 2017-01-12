@@ -2,7 +2,7 @@
 \label{namespacetasks}\index{tasks@{tasks}}
 
 
-This file provides an elegant way to register tasks and execute them in your main loop.  
+Task subsystem related code is (usually) in this namespace.  
 
 
 \subsection*{Classes}
@@ -36,40 +36,7 @@ uint8\+\_\+t \hyperlink{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c}{\+\_\+
 
 
 \subsection{Detailed Description}
-This file provides an elegant way to register tasks and execute them in your main loop. 
-
-There is no central place where tasks have to be listed.
-
-The tasks subsystem may be consideres as a very rudimentary O\+S-\/replacement.
-
-A\+V\+Rs commonly have to perform multiple tasks.
-
-Simply write a task and register it. It is even possible to register tasks in header files.
-
-A task is simply a function which accepts one argument\+: the current system clock.
-
-E\+X\+E\+C\+\_\+\+T\+A\+S\+KS (see below) will always call tasks (functions) which return void.
-
-Those void tasks should only be used for tasks which are executed after an irq event. (Think of those tasks as the second half of an irq handler.) This is important if you want the tasks subsystem to put the avr to sleep.
-
-If a tasks returns a number, the number is considers to be time units. The task is then ignored until this many time units have passed since the last {\itshape start} of the task.
-
-This means if you want your task/function to execute every second and your function is long and takes 200ms you should return ms\+\_\+to\+\_\+units$<$1000$>$() and not ms\+\_\+to\+\_\+units$<$800$>$()!
-
-
-\begin{DoxyCode}
-uint32\_t toggleLed(uint32\_t) \{
-  Led::toggle();
-  \textcolor{keywordflow}{return} clock::ms\_to\_units<1000>();
-\}
-\textcolor{preprocessor}{#define NEW\_TASK TASK(toggleLed)}
-\textcolor{preprocessor}{#include REGISTER\_TASK}
-\end{DoxyCode}
-
-
-The mechanism how tasks are stored is an adapted version from\+: \href{http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609}{\tt http\+://stackoverflow.\+com/questions/18701798/building-\/and-\/accessing-\/a-\/list-\/of-\/types-\/at-\/compile-\/time/18704609\#18704609}
-
-A tasks which always returns 0 will never be ignored by E\+X\+E\+C\+\_\+\+T\+A\+S\+KS and called every time. (Similar to void tasks.) It will also prevent the tasks subsystem to put the avr to sleep.
+Task subsystem related code is (usually) in this namespace. 
 
 By default class related classes, enums,... are defined inside the {\ttfamily tasks} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+T\+A\+S\+KS or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. 
 
@@ -228,7 +195,7 @@ Determines the smallest usable type necessary for system clock values when exeut
 
 This function is never implemented or executed.
 
-If the task\+List is empty return the smallest type possible\+: uint8\+\_\+t \hypertarget{namespacetasks_ac1dcc4748bce4b593356740b7a26343c}{}\label{namespacetasks_ac1dcc4748bce4b593356740b7a26343c} 
+This is the version for an empty task list and \char`\"{}returns\char`\"{}" the smallest possible type\+: uint8\+\_\+t. \hypertarget{namespacetasks_ac1dcc4748bce4b593356740b7a26343c}{}\label{namespacetasks_ac1dcc4748bce4b593356740b7a26343c} 
 \index{tasks@{tasks}!\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}}
 \index{\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}!tasks@{tasks}}
 \subsubsection{\texorpdfstring{\+\_\+time\+\_\+t\+\_\+builder()}{\_time\_t\_builder()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -241,7 +208,9 @@ Determines the smallest usable type necessary for system clock values when exeut
 
 This function is never implemented or executed.
 
-If the task-\/list is not empty determine which of the 2 tasks has the bigger type for {\ttfamily clock} and use this as return value.
+This is the version when the task list is not empty.
+
+The return types of the task and the recursively called \+\_\+time\+\_\+t\+\_\+builder return type are compared and the bigger of the 2 is used as return type.
 
 \begin{DoxySeeAlso}{See also}
 \hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type} which turns an argument type to a return type which is used with decltype.
