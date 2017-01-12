@@ -28,8 +28,16 @@ namespace std {
   template <>
   class numeric_limits<uint32_t> {
   public:
-    static uint32_t is_signed() { return false; }
-    static uint32_t digits() { return 32; }
+    static uint8_t is_signed() { return false; }
+    static uint8_t digits() { return 32; }
     static uint32_t max() { return 0xFFFFFFFF; }
+  };
+  
+  template <>
+  class numeric_limits<uint64_t> {
+  public:
+    static uint8_t is_signed() { return false; }
+    static uint8_t digits() { return 64; }
+    static uint64_t max() { return 0xFFFFFFFFFFFFFFFF; }
   };
 }
