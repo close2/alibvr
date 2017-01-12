@@ -1,6 +1,8 @@
 #pragma once
 
 /**
+ * @file
+ * 
  * @brief This file contains `typedef`s which make it easier to access
  * specific bytes of multi-byte values.
  * 

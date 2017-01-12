@@ -3,17 +3,10 @@
 #include <avr/sfr_defs.h>
 #include <avr/io.h>
 
-#ifndef ALIBVR_NAMESPACE_PORTS
-#  ifdef ALIBVR_NAMESPACE_PREFIX
-#    define ALIBVR_NAMESPACE_PORTS ALIBVR_NAMESPACE_PREFIX ## ports
-#  else
-#    define ALIBVR_NAMESPACE_PORTS ports
-#  endif
-#endif
-
-
 
 /**
+ * @file
+ * 
  * @brief Avr Atmegas access and control pins through registers.
  *        The registers are 8 bit wide and up to 8 pins are therefore
  *        controlled with every register.
@@ -22,11 +15,6 @@
  * * The PORT registers the output or the pull up resistors.  
  * * The PIN registers toggle the output or are used to read
  *   values from pins.
- * 
- * By default ports related classes, enums,... are defined
- * inside the `ports` namespace.  If this creates a name clash with your
- * code you may modify the namespace name by setting
- * ALIBVR_NAMESPACE_PORTS or ALIBVR_NAMESPACE_PREFIX.
  * 
  * Note that after including this file the macro ALIBVR_NAMESPACE_PORTS
  * is set.
@@ -63,6 +51,22 @@
  **/
 
 
+#ifndef ALIBVR_NAMESPACE_PORTS
+#  ifdef ALIBVR_NAMESPACE_PREFIX
+#    define ALIBVR_NAMESPACE_PORTS ALIBVR_NAMESPACE_PREFIX ## ports
+#  else
+#    define ALIBVR_NAMESPACE_PORTS ports
+#  endif
+#endif
+
+/**
+ * @brief ports related code is in this namespace.
+ * 
+ * By default ports related classes, enums,... are defined
+ * inside the `ports` namespace.  If this creates a name clash with your
+ * code you may modify the namespace name by setting
+ * ALIBVR_NAMESPACE_PORTS or ALIBVR_NAMESPACE_PREFIX.
+ **/
 namespace ALIBVR_NAMESPACE_PORTS {
   
   /**

@@ -1,5 +1,13 @@
 #pragma once
 
+/**
+ * @file
+ * 
+ * @brief Implementation of std::numeric_limits.
+ * 
+ * The behaviour is (should be) identical to the standard C++ library.
+ **/
+
 namespace std {
   template <typename T>
   class numeric_limits {

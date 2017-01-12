@@ -10,27 +10,11 @@
 #include "limits.h"
 #include "internal/clock_prescale.h"
 
-#ifndef ALIBVR_NAMESPACE_CLOCK
-#  ifdef ALIBVR_NAMESPACE_PREFIX
-#    define ALIBVR_NAMESPACE_CLOCK ALIBVR_NAMESPACE_PREFIX ## clock
-#  else
-#    define ALIBVR_NAMESPACE_CLOCK clock
-#  endif
-#endif
-
-#pragma push_macro("F_CPU")
-#ifndef F_CPU
-#  include "internal/default_f_cpu.h"
-#endif
-
 
 /**
- * @brief This file uses `Timer0` to provide a system clock.
+ * @file
  * 
- * By default class related classes, enums,... are defined
- * inside the `clock` namespace.  If this creates a name clash with your
- * code you may modify the namespace name by setting
- * ALIBVR_NAMESPACE_CLOCK or ALIBVR_NAMESPACE_PREFIX.
+ * @brief This file uses `Timer0` to provide a system clock.
  * 
  * The system clock is derived from the IO-clock and must be converted
  * to seconds.
@@ -70,6 +54,30 @@
  * The clock is incremented inside the `Timer0` overflow irq handler.
  * To activate the registered irq handler add `#include REGISTER_IRQS`
  * after your `main` section.
+ **/
+
+
+#ifndef ALIBVR_NAMESPACE_CLOCK
+#  ifdef ALIBVR_NAMESPACE_PREFIX
+#    define ALIBVR_NAMESPACE_CLOCK ALIBVR_NAMESPACE_PREFIX ## clock
+#  else
+#    define ALIBVR_NAMESPACE_CLOCK clock
+#  endif
+#endif
+
+#pragma push_macro("F_CPU")
+#ifndef F_CPU
+#  include "internal/default_f_cpu.h"
+#endif
+
+
+/**
+ * @brief System clock related code is in this namespace.
+ * 
+ * By default class related classes, enums,... are defined
+ * inside the `clock` namespace.  If this creates a name clash with your
+ * code you may modify the namespace name by setting
+ * ALIBVR_NAMESPACE_CLOCK or ALIBVR_NAMESPACE_PREFIX.
  **/
 namespace ALIBVR_NAMESPACE_CLOCK {
   

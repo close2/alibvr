@@ -10,6 +10,24 @@
 #include "type_traits.h"
 
 
+/**
+ * @file
+ * 
+ * @brief This subsystem simplifies performing analog to digital
+ * conversions.
+ * 
+ * The adc subsystem is abstracted through the `Adc` class.
+ * 
+ * Default settings (input, reference voltage and mode) may be set as
+ * template arguments of the `Adc` class.
+ * 
+ * Calling the static method `init()` will set the subsystem.  The
+ * `init()` method also provides template arguments, making it possible to
+ * override the default settings.  Note that the order of those template
+ * arguments differ!
+ **/
+
+
 #ifndef ALIBVR_NAMESPACE_ADC
 #  ifdef ALIBVR_NAMESPACE_PREFIX
 #    define ALIBVR_NAMESPACE_ADC ALIBVR_NAMESPACE_PREFIX ## adc
@@ -24,12 +42,13 @@
 #endif
 
 /**
+ * @brief ADC related code is in this namespace.
+ * 
  * By default adc related classes, enums,... are defined
  * inside the `adc` namespace.  If this creates a name clash with your
  * code you may modify the namespace name by setting
  * ALIBVR_NAMESPACE_ADC or ALIBVR_NAMESPACE_PREFIX.
  **/
-
 namespace ALIBVR_NAMESPACE_ADC {
   
   /**

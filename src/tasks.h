@@ -6,30 +6,8 @@
 
 
 /**
- * @brief This macro is redefined when the REGISTER_TASK file
- * is included.
+ * @file
  * 
- * It is a define to a type.  Whenever a new task is added
- * this macro is redefined to "point" to a new template list
- * type.
- **/
-#define TASK_LIST _task_list::TaskListEmpty
-
-/**
- * @brief This header file should be included to register a new task.
- **/
-#define REGISTER_TASK "internal/register_task.h"
-
-#ifndef ALIBVR_NAMESPACE_TASKS
-#  ifdef ALIBVR_NAMESPACE_PREFIX
-#    define ALIBVR_NAMESPACE_TASKS ALIBVR_NAMESPACE_PREFIX ## tasks
-#  else
-#    define ALIBVR_NAMESPACE_TASKS tasks
-#  endif
-#endif
-
-
-/**
  * @brief This file provides an elegant way to register tasks and execute
  * them in your main loop.
  * 
@@ -72,13 +50,40 @@
  * A tasks which always returns 0 will never be ignored by EXEC_TASKS
  * and called every time.  (Similar to void tasks.)  It will also
  * prevent the tasks subsystem to put the avr to sleep.
+ **/
 
+/**
+ * @brief This macro is redefined when the REGISTER_TASK file
+ * is included.
+ * 
+ * It is a define to a type.  Whenever a new task is added
+ * this macro is redefined to "point" to a new template list
+ * type.
+ **/
+#define TASK_LIST _task_list::TaskListEmpty
+
+/**
+ * @brief This header file should be included to register a new task.
+ **/
+#define REGISTER_TASK "internal/register_task.h"
+
+#ifndef ALIBVR_NAMESPACE_TASKS
+#  ifdef ALIBVR_NAMESPACE_PREFIX
+#    define ALIBVR_NAMESPACE_TASKS ALIBVR_NAMESPACE_PREFIX ## tasks
+#  else
+#    define ALIBVR_NAMESPACE_TASKS tasks
+#  endif
+#endif
+
+
+/**
+ * @brief Task subsystem related code is (usually) in this namespace.
+ * 
  * By default class related classes, enums,... are defined
  * inside the `tasks` namespace.  If this creates a name clash with your
  * code you may modify the namespace name by setting
  * ALIBVR_NAMESPACE_TASKS or ALIBVR_NAMESPACE_PREFIX.
  **/
-  
 namespace ALIBVR_NAMESPACE_TASKS {
   
   /**
@@ -209,15 +214,19 @@ namespace ALIBVR_NAMESPACE_TASKS {
    * This function is never implemented or executed.
    * ¤
    * 
-   * If the taskList is empty return the smallest type possible: uint8_t
+   * This is the version for an empty task list and "returns"" the
+   * smallest possible type: uint8_t.
    **/
   uint8_t _time_t_builder(const _task_list::TaskList<>&);
   
   /**
 +++TIME_T_BUILDER_DOC[^,   * ]+++
    * 
-   * If the task-list is not empty determine which of the 2 tasks has
-   * the bigger type for `clock` and use this as return value.
+   * This is the version when the task list is not empty.
+   *
+   * The return types of the task and the recursively called
+   * _time_t_builder return type are compared and the bigger of the
+   * 2 is used as return type.
    * 
    * @see _argType which turns an argument type to a return type which
    * is used with decltype.
