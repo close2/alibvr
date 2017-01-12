@@ -23,15 +23,13 @@ struct \hyperlink{structtasks_1_1TaskWrapper}{tasks\+::\+Task\+Wrapper$<$ T, T2,
 \item 
 \#define \hyperlink{tasks_8h_ac12d05d9b0e0e9a2967a97a252254794}{T\+A\+S\+K\+\_\+\+L\+I\+ST}~\+\_\+task\+\_\+list\+::\+Task\+List\+Empty
 \begin{DoxyCompactList}\small\item\em This macro is redefined when the R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK file is included. \end{DoxyCompactList}\item 
-\hypertarget{tasks_8h_a366f04ee386220b2559ebfe91ab576dd}{}\label{tasks_8h_a366f04ee386220b2559ebfe91ab576dd} 
 \#define \hyperlink{tasks_8h_a366f04ee386220b2559ebfe91ab576dd}{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK}~\char`\"{}internal/register\+\_\+task.\+h\char`\"{}
 \begin{DoxyCompactList}\small\item\em This header file should be included to register a new task. \end{DoxyCompactList}\item 
 \hypertarget{tasks_8h_a44da7805b0080d37eea5c34130b95739}{}\label{tasks_8h_a44da7805b0080d37eea5c34130b95739} 
 \#define {\bfseries A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+T\+A\+S\+KS}~tasks
 \item 
-\hypertarget{tasks_8h_aae9c73dc58295c67350db73034a2be33}{}\label{tasks_8h_aae9c73dc58295c67350db73034a2be33} 
-\#define {\bfseries E\+X\+E\+C\+\_\+\+T\+A\+S\+KS}()~A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+T\+A\+S\+K\+S\+::exec\+Tasks(\hyperlink{tasks_8h_ac12d05d9b0e0e9a2967a97a252254794}{T\+A\+S\+K\+\_\+\+L\+I\+ST}())
-\item 
+\#define \hyperlink{tasks_8h_aae9c73dc58295c67350db73034a2be33}{E\+X\+E\+C\+\_\+\+T\+A\+S\+KS}()~A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+T\+A\+S\+K\+S\+::exec\+Tasks(\hyperlink{tasks_8h_ac12d05d9b0e0e9a2967a97a252254794}{T\+A\+S\+K\+\_\+\+L\+I\+ST}())
+\begin{DoxyCompactList}\small\item\em Calls exec\+Tasks with the T\+A\+S\+K\+\_\+\+L\+I\+ST as argument. \end{DoxyCompactList}\item 
 \#define \hyperlink{tasks_8h_aeb6b674ade86e11dfb2277cc77930804}{T\+A\+SK}(task)
 \begin{DoxyCompactList}\small\item\em Wraps a function/task with Task\+Wrapper. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
@@ -91,12 +89,48 @@ uint32\_t toggleLed(uint32\_t) \{
 \end{DoxyCode}
 
 
-The mechanism how tasks are stored is an adapted version from\+: \href{http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609}{\tt http\+://stackoverflow.\+com/questions/18701798/building-\/and-\/accessing-\/a-\/list-\/of-\/types-\/at-\/compile-\/time/18704609\#18704609}
+The mechanism how tasks are stored is an adapted version from\+: \href{http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609}{\tt stackoverlow}
 
 A tasks which always returns 0 will never be ignored by E\+X\+E\+C\+\_\+\+T\+A\+S\+KS and called every time. (Similar to void tasks.) It will also prevent the tasks subsystem to put the avr to sleep. 
 
 \subsection{Macro Definition Documentation}
-\hypertarget{tasks_8h_aeb6b674ade86e11dfb2277cc77930804}{}\label{tasks_8h_aeb6b674ade86e11dfb2277cc77930804} 
+\hypertarget{tasks_8h_aae9c73dc58295c67350db73034a2be33}{}\label{tasks_8h_aae9c73dc58295c67350db73034a2be33} 
+\index{tasks.\+h@{tasks.\+h}!E\+X\+E\+C\+\_\+\+T\+A\+S\+KS@{E\+X\+E\+C\+\_\+\+T\+A\+S\+KS}}
+\index{E\+X\+E\+C\+\_\+\+T\+A\+S\+KS@{E\+X\+E\+C\+\_\+\+T\+A\+S\+KS}!tasks.\+h@{tasks.\+h}}
+\subsubsection{\texorpdfstring{E\+X\+E\+C\+\_\+\+T\+A\+S\+KS}{EXEC\_TASKS}}
+{\footnotesize\ttfamily \#define E\+X\+E\+C\+\_\+\+T\+A\+S\+KS(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+T\+A\+S\+K\+S\+::exec\+Tasks(\hyperlink{tasks_8h_ac12d05d9b0e0e9a2967a97a252254794}{T\+A\+S\+K\+\_\+\+L\+I\+ST}())}
+
+
+
+Calls exec\+Tasks with the T\+A\+S\+K\+\_\+\+L\+I\+ST as argument. 
+
+Note that it is not possible to implement this as function, because T\+A\+S\+K\+\_\+\+L\+I\+ST will be redefined. A function implementation would use the first value of T\+A\+S\+K\+\_\+\+L\+I\+ST, which is the empty list.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespacetasks_a6590d6a524b4aedb5d0dfef5e1b61bc1}{tasks\+::exec\+Tasks} 
+\end{DoxySeeAlso}
+\hypertarget{tasks_8h_a366f04ee386220b2559ebfe91ab576dd}{}\label{tasks_8h_a366f04ee386220b2559ebfe91ab576dd} 
+\index{tasks.\+h@{tasks.\+h}!R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK}}
+\index{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK@{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK}!tasks.\+h@{tasks.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK}{REGISTER\_TASK}}
+{\footnotesize\ttfamily \#define R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK~\char`\"{}internal/register\+\_\+task.\+h\char`\"{}}
+
+
+
+This header file should be included to register a new task. 
+
+Every time this file is included T\+A\+S\+K\+\_\+\+L\+I\+ST is redefined and a new task (Task\+Wrapper) which must be defined as N\+E\+W\+\_\+\+T\+A\+SK is added to the list.
+
+
+\begin{DoxyCode}
+uint32\_t toggleLed(uint32\_t) \{
+  Led::toggle();
+  \textcolor{keywordflow}{return} clock::ms\_to\_units<1000>();
+\}
+\textcolor{preprocessor}{#define NEW\_TASK TASK(toggleLed)}
+\textcolor{preprocessor}{#include REGISTER\_TASK}
+\end{DoxyCode}
+ \hypertarget{tasks_8h_aeb6b674ade86e11dfb2277cc77930804}{}\label{tasks_8h_aeb6b674ade86e11dfb2277cc77930804} 
 \index{tasks.\+h@{tasks.\+h}!T\+A\+SK@{T\+A\+SK}}
 \index{T\+A\+SK@{T\+A\+SK}!tasks.\+h@{tasks.\+h}}
 \subsubsection{\texorpdfstring{T\+A\+SK}{TASK}}
@@ -134,4 +168,17 @@ The macro simply extracts the return type and the argument type and passes them 
 
 This macro is redefined when the R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK file is included. 
 
-It is a define to a type. Whenever a new task is added this macro is redefined to \char`\"{}point\char`\"{} to a new template list type. 
+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+T\+A\+SK is used like a typedef. Whenever a new task is added this macro is redefined to \char`\"{}point\char`\"{} to a new variadic template list type.
+
+The mechanism how tasks are stored is an adapted version from\+: \href{http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609}{\tt stackoverlow}
+
+
+\begin{DoxyCode}
+uint32\_t toggleLed(uint32\_t) \{
+  Led::toggle();
+  \textcolor{keywordflow}{return} clock::ms\_to\_units<1000>();
+\}
+\textcolor{preprocessor}{#define NEW\_TASK TASK(toggleLed)}
+\textcolor{preprocessor}{#include REGISTER\_TASK}
+\end{DoxyCode}
+ 

@@ -98,15 +98,14 @@ Macros</h2></td></tr>
 <tr class="memitem:ac12d05d9b0e0e9a2967a97a252254794"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#ac12d05d9b0e0e9a2967a97a252254794">TASK_LIST</a>&#160;&#160;&#160;_task_list::TaskListEmpty</td></tr>
 <tr class="memdesc:ac12d05d9b0e0e9a2967a97a252254794"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro is redefined when the REGISTER_TASK file is included.  <a href="#ac12d05d9b0e0e9a2967a97a252254794">More...</a><br /></td></tr>
 <tr class="separator:ac12d05d9b0e0e9a2967a97a252254794"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a366f04ee386220b2559ebfe91ab576dd"><td class="memItemLeft" align="right" valign="top"><a id="a366f04ee386220b2559ebfe91ab576dd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#a366f04ee386220b2559ebfe91ab576dd">REGISTER_TASK</a>&#160;&#160;&#160;&quot;internal/register_task.h&quot;</td></tr>
-<tr class="memdesc:a366f04ee386220b2559ebfe91ab576dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This header file should be included to register a new task. <br /></td></tr>
+<tr class="memitem:a366f04ee386220b2559ebfe91ab576dd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#a366f04ee386220b2559ebfe91ab576dd">REGISTER_TASK</a>&#160;&#160;&#160;&quot;internal/register_task.h&quot;</td></tr>
+<tr class="memdesc:a366f04ee386220b2559ebfe91ab576dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This header file should be included to register a new task.  <a href="#a366f04ee386220b2559ebfe91ab576dd">More...</a><br /></td></tr>
 <tr class="separator:a366f04ee386220b2559ebfe91ab576dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44da7805b0080d37eea5c34130b95739"><td class="memItemLeft" align="right" valign="top"><a id="a44da7805b0080d37eea5c34130b95739"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ALIBVR_NAMESPACE_TASKS</b>&#160;&#160;&#160;tasks</td></tr>
 <tr class="separator:a44da7805b0080d37eea5c34130b95739"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae9c73dc58295c67350db73034a2be33"><td class="memItemLeft" align="right" valign="top"><a id="aae9c73dc58295c67350db73034a2be33"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>EXEC_TASKS</b>()&#160;&#160;&#160;ALIBVR_NAMESPACE_TASKS::execTasks(<a class="el" href="../../d9/dc0/tasks_8h.html#ac12d05d9b0e0e9a2967a97a252254794">TASK_LIST</a>())</td></tr>
+<tr class="memitem:aae9c73dc58295c67350db73034a2be33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#aae9c73dc58295c67350db73034a2be33">EXEC_TASKS</a>()&#160;&#160;&#160;ALIBVR_NAMESPACE_TASKS::execTasks(<a class="el" href="../../d9/dc0/tasks_8h.html#ac12d05d9b0e0e9a2967a97a252254794">TASK_LIST</a>())</td></tr>
+<tr class="memdesc:aae9c73dc58295c67350db73034a2be33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls execTasks with the TASK_LIST as argument.  <a href="#aae9c73dc58295c67350db73034a2be33">More...</a><br /></td></tr>
 <tr class="separator:aae9c73dc58295c67350db73034a2be33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb6b674ade86e11dfb2277cc77930804"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#aeb6b674ade86e11dfb2277cc77930804">TASK</a>(task)</td></tr>
 <tr class="memdesc:aeb6b674ade86e11dfb2277cc77930804"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps a function/task with TaskWrapper.  <a href="#aeb6b674ade86e11dfb2277cc77930804">More...</a><br /></td></tr>
@@ -165,9 +164,47 @@ Functions</h2></td></tr>
 <p>Those void tasks should only be used for tasks which are executed after an irq event. (Think of those tasks as the second half of an irq handler.) This is important if you want the tasks subsystem to put the avr to sleep.</p>
 <p>If a tasks returns a number, the number is considers to be time units. The task is then ignored until this many time units have passed since the last <em>start</em> of the task.</p>
 <p>This means if you want your task/function to execute every second and your function is long and takes 200ms you should return <a class="el" href="../../d9/d1f/namespaceclock.html#a2e5ca91b796d0c96b8094ba1441daedc" title="Convert ms to &quot;units&quot;. ">ms_to_units&lt;1000&gt;()</a> and not <a class="el" href="../../d9/d1f/namespaceclock.html#a2e5ca91b796d0c96b8094ba1441daedc" title="Convert ms to &quot;units&quot;. ">ms_to_units&lt;800&gt;()</a>!</p>
-<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK TASK(toggleLed)</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --><p>The mechanism how tasks are stored is an adapted version from: <a href="http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609">http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609</a></p>
+<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK TASK(toggleLed)</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --><p>The mechanism how tasks are stored is an adapted version from: <a href="http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609">stackoverlow</a></p>
 <p>A tasks which always returns 0 will never be ignored by EXEC_TASKS and called every time. (Similar to void tasks.) It will also prevent the tasks subsystem to put the avr to sleep. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="aae9c73dc58295c67350db73034a2be33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae9c73dc58295c67350db73034a2be33">&sect;&nbsp;</a></span>EXEC_TASKS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXEC_TASKS</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>&#160;&#160;&#160;ALIBVR_NAMESPACE_TASKS::execTasks(<a class="el" href="../../d9/dc0/tasks_8h.html#ac12d05d9b0e0e9a2967a97a252254794">TASK_LIST</a>())</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calls execTasks with the TASK_LIST as argument. </p>
+<p>Note that it is not possible to implement this as function, because TASK_LIST will be redefined. A function implementation would use the first value of TASK_LIST, which is the empty list.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../de/d04/namespacetasks.html#a6590d6a524b4aedb5d0dfef5e1b61bc1" title="The entry function for executing all tasks of a variable template list. ">tasks::execTasks</a> </dd></dl>
+
+</div>
+</div>
+<a id="a366f04ee386220b2559ebfe91ab576dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a366f04ee386220b2559ebfe91ab576dd">&sect;&nbsp;</a></span>REGISTER_TASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REGISTER_TASK&#160;&#160;&#160;&quot;internal/register_task.h&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This header file should be included to register a new task. </p>
+<p>Every time this file is included TASK_LIST is redefined and a new task (TaskWrapper) which must be defined as NEW_TASK is added to the list.</p>
+<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK TASK(toggleLed)</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --> 
+</div>
+</div>
 <a id="aeb6b674ade86e11dfb2277cc77930804"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb6b674ade86e11dfb2277cc77930804">&sect;&nbsp;</a></span>TASK</h2>
 
@@ -211,8 +248,9 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This macro is redefined when the REGISTER_TASK file is included. </p>
-<p>It is a define to a type. Whenever a new task is added this macro is redefined to "point" to a new template list type. </p>
-
+<p>REGISTER_TASK is used like a typedef. Whenever a new task is added this macro is redefined to "point" to a new variadic template list type.</p>
+<p>The mechanism how tasks are stored is an adapted version from: <a href="http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609">stackoverlow</a></p>
+<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK TASK(toggleLed)</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
