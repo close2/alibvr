@@ -1,14 +1,44 @@
-\hypertarget{structtasks_1_1TaskWrapper}{}\section{tasks\+:\+:Task\+Wrapper$<$ T, F, EF $>$ Struct Template Reference}
-\label{structtasks_1_1TaskWrapper}\index{tasks\+::\+Task\+Wrapper$<$ T, F, E\+F $>$@{tasks\+::\+Task\+Wrapper$<$ T, F, E\+F $>$}}
+\hypertarget{structtasks_1_1TaskWrapper}{}\section{tasks\+:\+:Task\+Wrapper$<$ T, T2, F $>$ Struct Template Reference}
+\label{structtasks_1_1TaskWrapper}\index{tasks\+::\+Task\+Wrapper$<$ T, T2, F $>$@{tasks\+::\+Task\+Wrapper$<$ T, T2, F $>$}}
+
+
+A minimalistic wrapper for tasks.  
+
+
+
+
+{\ttfamily \#include $<$tasks.\+h$>$}
+
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{structtasks_1_1TaskWrapper_a3346409533115d46abbfe8bcb3143111}{}\label{structtasks_1_1TaskWrapper_a3346409533115d46abbfe8bcb3143111} 
-static uint8\+\_\+t {\bfseries is\+\_\+enabled} ()
-\item 
-\hypertarget{structtasks_1_1TaskWrapper_aebf6ca353163af6f0386ba63c6a67307}{}\label{structtasks_1_1TaskWrapper_aebf6ca353163af6f0386ba63c6a67307} 
-static T {\bfseries run} (T clock)
+\hypertarget{structtasks_1_1TaskWrapper_a5c8d691a2819950cfbe7ec400c85f845}{}\label{structtasks_1_1TaskWrapper_a5c8d691a2819950cfbe7ec400c85f845} 
+static T {\bfseries run} (T2 clock)
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T, typename T2, T($\ast$)(\+T2) F$>$\newline
+struct tasks\+::\+Task\+Wrapper$<$ T, T2, F $>$}
+
+A minimalistic wrapper for tasks. 
+
+For variadic template lists functions would only be possible, if they all had the same type. This simple wrapper \char`\"{}converts\char`\"{} tasks/functions to classes.
+
+\href{http://stackoverflow.com/questions/40387760/functions-as-template-arguments}{\tt Stackoverflow question about functions as tasks}
+
+\begin{DoxySeeAlso}{See also}
+T\+A\+SK for a macro which automatically determines the types.
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The return type of the task. \\
+\hline
+{\em T2} & The argument type of the task (i.\+e. the system clock) \\
+\hline
+{\em F} & The task/function. \\
+\hline
+\end{DoxyTemplParams}
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

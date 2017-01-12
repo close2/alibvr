@@ -1,0 +1,273 @@
+\hypertarget{namespacetasks}{}\section{tasks Namespace Reference}
+\label{namespacetasks}\index{tasks@{tasks}}
+
+
+This file provides an elegant way to register tasks and execute them in your main loop.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structtasks_1_1TaskWrapper}{Task\+Wrapper}
+\begin{DoxyCompactList}\small\item\em A minimalistic wrapper for tasks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T1 $>$ }\\T1 \hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type} (T1($\ast$)(T1))
+\begin{DoxyCompactList}\small\item\em A small helper function, which extracts the {\itshape argument} type from the function provided as template argument making it available for decltype. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T1 $>$ }\\T1 \hyperlink{namespacetasks_a7950bab5a2847e4ea072b489e93855cb}{\+\_\+arg\+Type} (void($\ast$)(T1))
+\begin{DoxyCompactList}\small\item\em A small helper function, which extracts the {\itshape argument} type from the function provided as template argument making it available for decltype. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename C $>$ }\\static C \hyperlink{namespacetasks_acc347173bd59f335faea1d7f1fcae0eb}{\+\_\+exec1\+Task} (C clock, C, void $\ast$)
+\begin{DoxyCompactList}\small\item\em Execute the task given as template argument. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename C , typename Not\+Void $>$ }\\static C \hyperlink{namespacetasks_ab00f443870b6da2320bc20560d04fd6a}{\+\_\+exec1\+Task} (C clock, C previous, const Not\+Void $\ast$)
+\begin{DoxyCompactList}\small\item\em Execute the task given as template argument. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename C $>$ }\\static C \hyperlink{namespacetasks_af00e6efc55bc4106e367bdda832a5f3a}{\+\_\+exec\+Tasks} (C, C, \+\_\+task\+\_\+list\+::\+Task\+List$<$$>$)
+\begin{DoxyCompactList}\small\item\em Executes all tasks given as a variadic template argument list. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename C , typename T , typename ... Tasks$>$ }\\static C \hyperlink{namespacetasks_ad7c663940ffdccb226f739f2a09073fb}{\+\_\+exec\+Tasks} (C clock, C previous, \+\_\+task\+\_\+list\+::\+Task\+List$<$ T, Tasks... $>$)
+\begin{DoxyCompactList}\small\item\em Executes all tasks given as a variadic template argument list. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename C , typename Task\+List $>$ }\\static C \hyperlink{namespacetasks_ad5788497b8af34e86345218dde07a443}{\+\_\+exec\+Tasks} ()
+\begin{DoxyCompactList}\small\item\em Executes all tasks given as a variadic template argument list. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c}{\+\_\+time\+\_\+t\+\_\+builder} (const \+\_\+task\+\_\+list\+::\+Task\+List$<$$>$ \&)
+\begin{DoxyCompactList}\small\item\em Determines the smallest usable type necessary for system clock values when exeuting tasks. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Task , typename... Tasks$>$ }\\auto \hyperlink{namespacetasks_ac1dcc4748bce4b593356740b7a26343c}{\+\_\+time\+\_\+t\+\_\+builder} (const \+\_\+task\+\_\+list\+::\+Task\+List$<$ Task, Tasks... $>$ \&) -\/$>$ decltype(type\+\_\+comparisons\+::bigger\+\_\+type(decltype(\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type}(Task\+::run))(), decltype(\+\_\+time\+\_\+t\+\_\+builder(\+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$()))()))
+\begin{DoxyCompactList}\small\item\em Determines the smallest usable type necessary for system clock values when exeuting tasks. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Tasks$>$ }\\static decltype(\hyperlink{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c}{\+\_\+time\+\_\+t\+\_\+builder}$<$ Tasks... $>$(\+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$())) \hyperlink{namespacetasks_a6590d6a524b4aedb5d0dfef5e1b61bc1}{exec\+Tasks} (const \+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$ \&task\+List)
+\begin{DoxyCompactList}\small\item\em The entry function for executing all tasks of a variable template list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file provides an elegant way to register tasks and execute them in your main loop. 
+
+There is no central place where tasks have to be listed.
+
+The tasks subsystem may be consideres as a very rudimentary O\+S-\/replacement.
+
+A\+V\+Rs commonly have to perform multiple tasks.
+
+Simply write a task and register it. It is even possible to register tasks in header files.
+
+A task is simply a function which accepts one argument\+: the current system clock.
+
+E\+X\+E\+C\+\_\+\+T\+A\+S\+KS (see below) will always call tasks (functions) which return void.
+
+Those void tasks should only be used for tasks which are executed after an irq event. (Think of those tasks as the second half of an irq handler.) This is important if you want the tasks subsystem to put the avr to sleep.
+
+If a tasks returns a number, the number is considers to be time units. The task is then ignored until this many time units have passed since the last {\itshape start} of the task.
+
+This means if you want your task/function to execute every second and your function is long and takes 200ms you should return ms\+\_\+to\+\_\+units$<$1000$>$() and not ms\+\_\+to\+\_\+units$<$800$>$()!
+
+
+\begin{DoxyCode}
+uint32\_t toggleLed(uint32\_t) \{
+  Led::toggle();
+  \textcolor{keywordflow}{return} clock::ms\_to\_units<1000>();
+\}
+\textcolor{preprocessor}{#define NEW\_TASK TASK(toggleLed)}
+\textcolor{preprocessor}{#include REGISTER\_TASK}
+\end{DoxyCode}
+
+
+The mechanism how tasks are stored is an adapted version from\+: \href{http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609}{\tt http\+://stackoverflow.\+com/questions/18701798/building-\/and-\/accessing-\/a-\/list-\/of-\/types-\/at-\/compile-\/time/18704609\#18704609}
+
+A tasks which always returns 0 will never be ignored by E\+X\+E\+C\+\_\+\+T\+A\+S\+KS and called every time. (Similar to void tasks.) It will also prevent the tasks subsystem to put the avr to sleep.
+
+By default class related classes, enums,... are defined inside the {\ttfamily tasks} namespace. If this creates a name clash with your code you may modify the namespace name by setting A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+T\+A\+S\+KS or A\+L\+I\+B\+V\+R\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+\_\+\+P\+R\+E\+F\+IX. 
+
+\subsection{Function Documentation}
+\hypertarget{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{}\label{namespacetasks_ac4a797a86584958bef0b67616a38c8ae} 
+\index{tasks@{tasks}!\+\_\+arg\+Type@{\+\_\+arg\+Type}}
+\index{\+\_\+arg\+Type@{\+\_\+arg\+Type}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{\+\_\+arg\+Type()}{\_argType()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T1 $>$ \\
+T1 tasks\+::\+\_\+arg\+Type (\begin{DoxyParamCaption}\item[{T1($\ast$)(T1)}]{ }\end{DoxyParamCaption})}
+
+
+
+A small helper function, which extracts the {\itshape argument} type from the function provided as template argument making it available for decltype. 
+
+For this version, both the argument and return type of the provided function must be the same. \hypertarget{namespacetasks_a7950bab5a2847e4ea072b489e93855cb}{}\label{namespacetasks_a7950bab5a2847e4ea072b489e93855cb} 
+\index{tasks@{tasks}!\+\_\+arg\+Type@{\+\_\+arg\+Type}}
+\index{\+\_\+arg\+Type@{\+\_\+arg\+Type}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{\+\_\+arg\+Type()}{\_argType()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T1 $>$ \\
+T1 tasks\+::\+\_\+arg\+Type (\begin{DoxyParamCaption}\item[{void($\ast$)(T1)}]{ }\end{DoxyParamCaption})}
+
+
+
+A small helper function, which extracts the {\itshape argument} type from the function provided as template argument making it available for decltype. 
+
+For this version, the return type of the provided function must be void. \hypertarget{namespacetasks_acc347173bd59f335faea1d7f1fcae0eb}{}\label{namespacetasks_acc347173bd59f335faea1d7f1fcae0eb} 
+\index{tasks@{tasks}!\+\_\+exec1\+Task@{\+\_\+exec1\+Task}}
+\index{\+\_\+exec1\+Task@{\+\_\+exec1\+Task}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{\+\_\+exec1\+Task()}{\_exec1Task()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , typename C $>$ \\
+static C tasks\+::\+\_\+exec1\+Task (\begin{DoxyParamCaption}\item[{C}]{clock,  }\item[{C}]{,  }\item[{void $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Execute the task given as template argument. 
+
+This is the version for tasks which return void.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The task which should be executed. \\
+\hline
+{\em C} & The type of the clock value (uint8\+\_\+t, uint16\+\_\+t,...) \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em clock} & This clock value is passed to {\ttfamily T\+::run} \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacetasks_ab00f443870b6da2320bc20560d04fd6a}{}\label{namespacetasks_ab00f443870b6da2320bc20560d04fd6a} 
+\index{tasks@{tasks}!\+\_\+exec1\+Task@{\+\_\+exec1\+Task}}
+\index{\+\_\+exec1\+Task@{\+\_\+exec1\+Task}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{\+\_\+exec1\+Task()}{\_exec1Task()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , typename C , typename Not\+Void $>$ \\
+static C tasks\+::\+\_\+exec1\+Task (\begin{DoxyParamCaption}\item[{C}]{clock,  }\item[{C}]{previous,  }\item[{const Not\+Void $\ast$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Execute the task given as template argument. 
+
+This is the version for tasks which return time units. If not enough time has expired the task is simply ignored and this function does nothing.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The task which should be executed. \\
+\hline
+{\em C} & The type of the clock value (uint8\+\_\+t, uint16\+\_\+t,...) \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em clock} & This clock value is passed to {\ttfamily T\+::run} \\
+\hline
+{\em previous} & This value is used when calling {\ttfamily \hyperlink{namespaceclock_a107ad02a77763be28bf63d43c566cf75}{clock\+::clock\+\_\+reached}} to find out if this task should be called or ignored. \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacetasks_af00e6efc55bc4106e367bdda832a5f3a}{}\label{namespacetasks_af00e6efc55bc4106e367bdda832a5f3a} 
+\index{tasks@{tasks}!\+\_\+exec\+Tasks@{\+\_\+exec\+Tasks}}
+\index{\+\_\+exec\+Tasks@{\+\_\+exec\+Tasks}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{\+\_\+exec\+Tasks()}{\_execTasks()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+static C tasks\+::\+\_\+exec\+Tasks (\begin{DoxyParamCaption}\item[{C}]{,  }\item[{C}]{,  }\item[{\+\_\+task\+\_\+list\+::\+Task\+List$<$$>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Executes all tasks given as a variadic template argument list. 
+
+This is the end function, which is called when the task list is empty.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & The type of the system clock values. \\
+\hline
+\end{DoxyTemplParams}
+\hypertarget{namespacetasks_ad7c663940ffdccb226f739f2a09073fb}{}\label{namespacetasks_ad7c663940ffdccb226f739f2a09073fb} 
+\index{tasks@{tasks}!\+\_\+exec\+Tasks@{\+\_\+exec\+Tasks}}
+\index{\+\_\+exec\+Tasks@{\+\_\+exec\+Tasks}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{\+\_\+exec\+Tasks()}{\_execTasks()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename C , typename T , typename ... Tasks$>$ \\
+static C tasks\+::\+\_\+exec\+Tasks (\begin{DoxyParamCaption}\item[{C}]{clock,  }\item[{C}]{previous,  }\item[{\+\_\+task\+\_\+list\+::\+Task\+List$<$ T, Tasks... $>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Executes all tasks given as a variadic template argument list. 
+
+Tasks which return a number are ignored if not enough time has passed. \begin{DoxySeeAlso}{See also}
+\hyperlink{namespacetasks_acc347173bd59f335faea1d7f1fcae0eb}{\+\_\+exec1\+Task}. The first task of the variadic template list is executed and this function is recursively called with the remaining list.
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & The type of the system clock values. \\
+\hline
+{\em T} & The current task, which will be executed \\
+\hline
+{\em Tasks} & The remaining task list. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em clock} & The current system clock. \\
+\hline
+{\em previous} & The system clock value, when \+\_\+exec\+Tasks has been previously called. This value is used when calling {\ttfamily \hyperlink{namespaceclock_a107ad02a77763be28bf63d43c566cf75}{clock\+::clock\+\_\+reached}} \\
+\hline
+\end{DoxyParams}
+\hypertarget{namespacetasks_ad5788497b8af34e86345218dde07a443}{}\label{namespacetasks_ad5788497b8af34e86345218dde07a443} 
+\index{tasks@{tasks}!\+\_\+exec\+Tasks@{\+\_\+exec\+Tasks}}
+\index{\+\_\+exec\+Tasks@{\+\_\+exec\+Tasks}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{\+\_\+exec\+Tasks()}{\_execTasks()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename C , typename Task\+List $>$ \\
+static C tasks\+::\+\_\+exec\+Tasks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Executes all tasks given as a variadic template argument list. 
+
+This function remembers when it was called previously and passes this value to the \+\_\+exec\+Tasks function to which it delegates actually executing the tasks.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & The type of the system clock values. \\
+\hline
+{\em Task\+List} & The variadic task template list. \\
+\hline
+\end{DoxyTemplParams}
+\hypertarget{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c}{}\label{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c} 
+\index{tasks@{tasks}!\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}}
+\index{\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{\+\_\+time\+\_\+t\+\_\+builder()}{\_time\_t\_builder()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily uint8\+\_\+t tasks\+::\+\_\+time\+\_\+t\+\_\+builder (\begin{DoxyParamCaption}\item[{const \+\_\+task\+\_\+list\+::\+Task\+List$<$$>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+Determines the smallest usable type necessary for system clock values when exeuting tasks. 
+
+This function is never implemented or executed.
+
+If the task\+List is empty return the smallest type possible\+: uint8\+\_\+t \hypertarget{namespacetasks_ac1dcc4748bce4b593356740b7a26343c}{}\label{namespacetasks_ac1dcc4748bce4b593356740b7a26343c} 
+\index{tasks@{tasks}!\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}}
+\index{\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{\+\_\+time\+\_\+t\+\_\+builder()}{\_time\_t\_builder()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Task , typename... Tasks$>$ \\
+auto tasks\+::\+\_\+time\+\_\+t\+\_\+builder (\begin{DoxyParamCaption}\item[{const \+\_\+task\+\_\+list\+::\+Task\+List$<$ Task, Tasks... $>$ \&}]{ }\end{DoxyParamCaption}) -\/$>$  decltype(type\+\_\+comparisons\+::bigger\+\_\+type(decltype(\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type}(Task\+::run))(), decltype(\+\_\+time\+\_\+t\+\_\+builder(\+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$()))()))}
+
+
+
+Determines the smallest usable type necessary for system clock values when exeuting tasks. 
+
+This function is never implemented or executed.
+
+If the task-\/list is not empty determine which of the 2 tasks has the bigger type for {\ttfamily clock} and use this as return value.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type} which turns an argument type to a return type which is used with decltype.
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Task} & The current (first) task of the tasklist. \\
+\hline
+{\em Tasks} & The remaining tasks of the variadic task template list. \\
+\hline
+\end{DoxyTemplParams}
+\hypertarget{namespacetasks_a6590d6a524b4aedb5d0dfef5e1b61bc1}{}\label{namespacetasks_a6590d6a524b4aedb5d0dfef5e1b61bc1} 
+\index{tasks@{tasks}!exec\+Tasks@{exec\+Tasks}}
+\index{exec\+Tasks@{exec\+Tasks}!tasks@{tasks}}
+\subsubsection{\texorpdfstring{exec\+Tasks()}{execTasks()}}
+{\footnotesize\ttfamily template$<$typename... Tasks$>$ \\
+static decltype(\hyperlink{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c}{\+\_\+time\+\_\+t\+\_\+builder}$<$Tasks...$>$(\+\_\+task\+\_\+list\+::\+Task\+List$<$Tasks...$>$())) tasks\+::exec\+Tasks (\begin{DoxyParamCaption}\item[{const \+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$ \&}]{task\+List }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+The entry function for executing all tasks of a variable template list. 
+
+This function determines the optimal type for the system clock values and delegates executing the tasks to \+\_\+exec\+Tasks.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Tasks} & The variadic template list containing the tasks which should be executed. \\
+\hline
+\end{DoxyTemplParams}
