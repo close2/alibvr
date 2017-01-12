@@ -45,7 +45,7 @@
  * ```
  * 
  * The mechanism how tasks are stored is an adapted version from:
- * http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609
+ * [stackoverlow](http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609)
  * 
  * A tasks which always returns 0 will never be ignored by EXEC_TASKS
  * and called every time.  (Similar to void tasks.)  It will also
@@ -56,14 +56,30 @@
  * @brief This macro is redefined when the REGISTER_TASK file
  * is included.
  * 
- * It is a define to a type.  Whenever a new task is added
- * this macro is redefined to "point" to a new template list
+ * REGISTER_TASK is used like a typedef.  Whenever a new task is added
+ * this macro is redefined to "point" to a new variadic template list
  * type.
+ * 
+ * The mechanism how tasks are stored is an adapted version from:
+ * [stackoverlow](http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609)
+ * 
+ * 
+ * ```
++++ONE_SEC_TASK[^, * ]+++
+ * ```
  **/
 #define TASK_LIST _task_list::TaskListEmpty
 
 /**
  * @brief This header file should be included to register a new task.
+ * 
+ * Every time this file is included TASK_LIST is redefined and a new
+ * task (TaskWrapper) which must be defined as NEW_TASK is added to the
+ * list.
+ * 
+ * ```
++++ONE_SEC_TASK[^, * ]+++
+ * ```
  **/
 #define REGISTER_TASK "internal/register_task.h"
 
@@ -281,6 +297,15 @@ namespace ALIBVR_NAMESPACE_TASKS {
   };
 }
 
+/**
+ * @brief Calls execTasks with the TASK_LIST as argument.
+ * 
+ * Note that it is not possible to implement this as function, because
+ * TASK_LIST will be redefined.  A function implementation would use
+ * the first value of TASK_LIST, which is the empty list.
+ * 
+ * @see tasks::execTasks
+ **/
 #define EXEC_TASKS() ALIBVR_NAMESPACE_TASKS::execTasks(TASK_LIST())
 
 /**

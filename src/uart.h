@@ -53,7 +53,7 @@ namespace _uart {
 
   class DoNothing {
   public:
-    static void rx(const uint8_t c) {
+    static void rx(const uint8_t) {
     }
     static uint8_t tx_pop() {
       return 0;
@@ -64,7 +64,7 @@ namespace _uart {
     }
     
     // allow a task to continue sending without having a typedef of Uart
-    static void tx_starter(void (*f)()) {
+    static void tx_starter(void (*)()) {
     }
     
     static void tx_done() {
