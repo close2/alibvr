@@ -28,6 +28,7 @@
 
 #pragma push_macro("TASK_NAME")
 #pragma push_macro("TASK")
+#pragma push_macro("NEW_TASK_CLASS")
 
 // Include the generated task_names
 // Every time this file is included TASK_NAME is set to another value.
@@ -49,9 +50,13 @@
     decltype(task(0)), \
     decltype(ALIBVR_NAMESPACE_TASKS::_argType(task)), \
     task>
+    
+#ifndef NEW_TASK_CLASS
+#  define NEW_TASK_CLASS TASK(NEW_TASK)
+#endif
 
 namespace _tasks {
-  typedef typename _task_list::concat<TASK_LIST, TASK(NEW_TASK)>::task TASK_NAME;
+  typedef typename _task_list::concat<TASK_LIST, NEW_TASK_CLASS>::task TASK_NAME;
 }
 
 #pragma push_macro("TL")
@@ -68,6 +73,7 @@ namespace _tasks {
 
 #undef NEW_TASK
 
+#pragma push_macro("NEW_TASK_CLASS")
 #pragma pop_macro("TASK")
 #pragma pop_macro("TASK_NAME")
 
