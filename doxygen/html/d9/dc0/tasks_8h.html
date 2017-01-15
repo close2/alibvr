@@ -76,6 +76,7 @@ $(function() {
 <p>This file provides an elegant way to register tasks and execute them in your main loop.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;internal/task_list.h&quot;</code><br />
+<code>#include &quot;internal/task_wrapper.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d7/d6e/clock_8h_source.html">clock.h</a>&quot;</code><br />
 <code>#include &quot;type_comparisons.h&quot;</code><br />
 </div>
@@ -83,8 +84,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d3f/structtasks_1_1TaskWrapper.html">tasks::TaskWrapper&lt; T, T2, F &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A minimalistic wrapper for tasks.  <a href="../../dd/d3f/structtasks_1_1TaskWrapper.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d19/structtasks_1_1__time__t__builder.html">tasks::_time_t_builder&lt;... &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="../../d8/d19/structtasks_1_1__time__t__builder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d0b/structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4.html">tasks::_time_t_builder&lt; List&lt; Task &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="../../dd/d0b/structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d99/structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4.html">tasks::_time_t_builder&lt; List&lt; Task, Tasks... &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="../../da/d99/structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -95,21 +102,15 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ac12d05d9b0e0e9a2967a97a252254794"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#ac12d05d9b0e0e9a2967a97a252254794">TASK_LIST</a>&#160;&#160;&#160;_task_list::TaskListEmpty</td></tr>
-<tr class="memdesc:ac12d05d9b0e0e9a2967a97a252254794"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro is redefined when the REGISTER_TASK file is included.  <a href="#ac12d05d9b0e0e9a2967a97a252254794">More...</a><br /></td></tr>
-<tr class="separator:ac12d05d9b0e0e9a2967a97a252254794"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a366f04ee386220b2559ebfe91ab576dd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#a366f04ee386220b2559ebfe91ab576dd">REGISTER_TASK</a>&#160;&#160;&#160;&quot;internal/register_task.h&quot;</td></tr>
 <tr class="memdesc:a366f04ee386220b2559ebfe91ab576dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This header file should be included to register a new task.  <a href="#a366f04ee386220b2559ebfe91ab576dd">More...</a><br /></td></tr>
 <tr class="separator:a366f04ee386220b2559ebfe91ab576dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44da7805b0080d37eea5c34130b95739"><td class="memItemLeft" align="right" valign="top"><a id="a44da7805b0080d37eea5c34130b95739"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ALIBVR_NAMESPACE_TASKS</b>&#160;&#160;&#160;tasks</td></tr>
 <tr class="separator:a44da7805b0080d37eea5c34130b95739"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae9c73dc58295c67350db73034a2be33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#aae9c73dc58295c67350db73034a2be33">EXEC_TASKS</a>()&#160;&#160;&#160;ALIBVR_NAMESPACE_TASKS::execTasks(<a class="el" href="../../d9/dc0/tasks_8h.html#ac12d05d9b0e0e9a2967a97a252254794">TASK_LIST</a>())</td></tr>
+<tr class="memitem:aae9c73dc58295c67350db73034a2be33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#aae9c73dc58295c67350db73034a2be33">EXEC_TASKS</a>()&#160;&#160;&#160;ALIBVR_NAMESPACE_TASKS::execTasks(TASK_LIST())</td></tr>
 <tr class="memdesc:aae9c73dc58295c67350db73034a2be33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls execTasks with the TASK_LIST as argument.  <a href="#aae9c73dc58295c67350db73034a2be33">More...</a><br /></td></tr>
 <tr class="separator:aae9c73dc58295c67350db73034a2be33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb6b674ade86e11dfb2277cc77930804"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/tasks_8h.html#aeb6b674ade86e11dfb2277cc77930804">TASK</a>(task)</td></tr>
-<tr class="memdesc:aeb6b674ade86e11dfb2277cc77930804"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps a function/task with TaskWrapper.  <a href="#aeb6b674ade86e11dfb2277cc77930804">More...</a><br /></td></tr>
-<tr class="separator:aeb6b674ade86e11dfb2277cc77930804"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -141,17 +142,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ad5788497b8af34e86345218dde07a443"><td class="memTemplItemLeft" align="right" valign="top">static C&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#ad5788497b8af34e86345218dde07a443">tasks::_execTasks</a> ()</td></tr>
 <tr class="memdesc:ad5788497b8af34e86345218dde07a443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all tasks given as a variadic template argument list.  <a href="../../de/d04/namespacetasks.html#ad5788497b8af34e86345218dde07a443">More...</a><br /></td></tr>
 <tr class="separator:ad5788497b8af34e86345218dde07a443"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9469b8fb917e0f3ec0168293ac046a4c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#a9469b8fb917e0f3ec0168293ac046a4c">tasks::_time_t_builder</a> (const _task_list::TaskList&lt;&gt; &amp;)</td></tr>
-<tr class="memdesc:a9469b8fb917e0f3ec0168293ac046a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="../../de/d04/namespacetasks.html#a9469b8fb917e0f3ec0168293ac046a4c">More...</a><br /></td></tr>
-<tr class="separator:a9469b8fb917e0f3ec0168293ac046a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1dcc4748bce4b593356740b7a26343c"><td class="memTemplParams" colspan="2">template&lt;typename Task , typename... Tasks&gt; </td></tr>
-<tr class="memitem:ac1dcc4748bce4b593356740b7a26343c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#ac1dcc4748bce4b593356740b7a26343c">tasks::_time_t_builder</a> (const _task_list::TaskList&lt; Task, Tasks... &gt; &amp;) -&gt; decltype(type_comparisons::bigger_type(decltype(_argType(Task::run))(), decltype(_time_t_builder(_task_list::TaskList&lt; Tasks... &gt;()))()))</td></tr>
-<tr class="memdesc:ac1dcc4748bce4b593356740b7a26343c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="../../de/d04/namespacetasks.html#ac1dcc4748bce4b593356740b7a26343c">More...</a><br /></td></tr>
-<tr class="separator:ac1dcc4748bce4b593356740b7a26343c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6590d6a524b4aedb5d0dfef5e1b61bc1"><td class="memTemplParams" colspan="2">template&lt;typename... Tasks&gt; </td></tr>
-<tr class="memitem:a6590d6a524b4aedb5d0dfef5e1b61bc1"><td class="memTemplItemLeft" align="right" valign="top">static decltype(_time_t_builder&lt; Tasks... &gt;(_task_list::TaskList&lt; Tasks... &gt;()))&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#a6590d6a524b4aedb5d0dfef5e1b61bc1">tasks::execTasks</a> (const _task_list::TaskList&lt; Tasks... &gt; &amp;taskList)</td></tr>
-<tr class="memdesc:a6590d6a524b4aedb5d0dfef5e1b61bc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The entry function for executing all tasks of a variable template list.  <a href="../../de/d04/namespacetasks.html#a6590d6a524b4aedb5d0dfef5e1b61bc1">More...</a><br /></td></tr>
-<tr class="separator:a6590d6a524b4aedb5d0dfef5e1b61bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c8debd51ffb3475e31ee7aa3c924eba"><td class="memTemplParams" colspan="2">template&lt;typename TaskList &gt; </td></tr>
+<tr class="memitem:a5c8debd51ffb3475e31ee7aa3c924eba"><td class="memTemplItemLeft" align="right" valign="top">static _time_t_builder&lt; TaskList &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#a5c8debd51ffb3475e31ee7aa3c924eba">tasks::execTasks</a> (TaskList)</td></tr>
+<tr class="memdesc:a5c8debd51ffb3475e31ee7aa3c924eba"><td class="mdescLeft">&#160;</td><td class="mdescRight">The entry function for executing all tasks of a variable template list.  <a href="../../de/d04/namespacetasks.html#a5c8debd51ffb3475e31ee7aa3c924eba">More...</a><br /></td></tr>
+<tr class="separator:a5c8debd51ffb3475e31ee7aa3c924eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file provides an elegant way to register tasks and execute them in your main loop. </p>
@@ -164,7 +158,7 @@ Functions</h2></td></tr>
 <p>Those void tasks should only be used for tasks which are executed after an irq event. (Think of those tasks as the second half of an irq handler.) This is important if you want the tasks subsystem to put the avr to sleep.</p>
 <p>If a tasks returns a number, the number is considers to be time units. The task is then ignored until this many time units have passed since the last <em>start</em> of the task.</p>
 <p>This means if you want your task/function to execute every second and your function is long and takes 200ms you should return <a class="el" href="../../d9/d1f/namespaceclock.html#a2e5ca91b796d0c96b8094ba1441daedc" title="Convert ms to &quot;units&quot;. ">ms_to_units&lt;1000&gt;()</a> and not <a class="el" href="../../d9/d1f/namespaceclock.html#a2e5ca91b796d0c96b8094ba1441daedc" title="Convert ms to &quot;units&quot;. ">ms_to_units&lt;800&gt;()</a>!</p>
-<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK TASK(toggleLed)</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --><p>The mechanism how tasks are stored is an adapted version from: <a href="http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609">stackoverlow</a></p>
+<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK toggleLed</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --><p>The mechanism how tasks are stored is an adapted version from: <a href="http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609">stackoverlow</a></p>
 <p>A tasks which always returns 0 will never be ignored by EXEC_TASKS and called every time. (Similar to void tasks.) It will also prevent the tasks subsystem to put the avr to sleep. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="aae9c73dc58295c67350db73034a2be33"></a>
@@ -177,14 +171,14 @@ Functions</h2></td></tr>
           <td class="memname">#define EXEC_TASKS</td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>&#160;&#160;&#160;ALIBVR_NAMESPACE_TASKS::execTasks(<a class="el" href="../../d9/dc0/tasks_8h.html#ac12d05d9b0e0e9a2967a97a252254794">TASK_LIST</a>())</td>
+          <td>&#160;&#160;&#160;ALIBVR_NAMESPACE_TASKS::execTasks(TASK_LIST())</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Calls execTasks with the TASK_LIST as argument. </p>
 <p>Note that it is not possible to implement this as function, because TASK_LIST will be redefined. A function implementation would use the first value of TASK_LIST, which is the empty list.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../de/d04/namespacetasks.html#a6590d6a524b4aedb5d0dfef5e1b61bc1" title="The entry function for executing all tasks of a variable template list. ">tasks::execTasks</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../de/d04/namespacetasks.html#a5c8debd51ffb3475e31ee7aa3c924eba" title="The entry function for executing all tasks of a variable template list. ">tasks::execTasks</a> </dd></dl>
 
 </div>
 </div>
@@ -202,55 +196,7 @@ Functions</h2></td></tr>
 
 <p>This header file should be included to register a new task. </p>
 <p>Every time this file is included TASK_LIST is redefined and a new task (TaskWrapper) which must be defined as NEW_TASK is added to the list.</p>
-<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK TASK(toggleLed)</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --> 
-</div>
-</div>
-<a id="aeb6b674ade86e11dfb2277cc77930804"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb6b674ade86e11dfb2277cc77930804">&sect;&nbsp;</a></span>TASK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define TASK</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">task</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">ALIBVR_NAMESPACE_TASKS::TaskWrapper&lt; \</div><div class="line">    decltype(<a class="code" href="../../de/d26/namespaceadc.html#a0e6e6773a0ed848acb0887f1ed3c76ae">task</a>(0)), \</div><div class="line">    decltype(<a class="code" href="../../de/d04/namespacetasks.html#a7950bab5a2847e4ea072b489e93855cb">ALIBVR_NAMESPACE_TASKS::_argType</a>(<a class="code" href="../../de/d26/namespaceadc.html#a0e6e6773a0ed848acb0887f1ed3c76ae">task</a>)), \</div><div class="line">    task&gt;</div><div class="ttc" id="namespaceadc_html_a0e6e6773a0ed848acb0887f1ed3c76ae"><div class="ttname"><a href="../../de/d26/namespaceadc.html#a0e6e6773a0ed848acb0887f1ed3c76ae">adc::task</a></div><div class="ttdeci">void(* task)(const uint16_t &amp;)</div><div class="ttdoc">The signature of a Task which may be passed as template argument. See the Task template argument for ...</div><div class="ttdef"><b>Definition:</b> adc.h:197</div></div>
-<div class="ttc" id="namespacetasks_html_a7950bab5a2847e4ea072b489e93855cb"><div class="ttname"><a href="../../de/d04/namespacetasks.html#a7950bab5a2847e4ea072b489e93855cb">tasks::_argType</a></div><div class="ttdeci">T1 _argType(void(*)(T1))</div><div class="ttdoc">A small helper function, which extracts the argument type from the function provided as template argu...</div></div>
-</div><!-- fragment -->
-<p>Wraps a function/task with TaskWrapper. </p>
-<dl class="section see"><dt>See also</dt><dd>TaskWrapper for an explaination why this is necessary.</dd></dl>
-<p>The macro simply extracts the return type and the argument type and passes them to TaskWrapper.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">task</td><td>The function/task which should be wrapped. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ac12d05d9b0e0e9a2967a97a252254794"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac12d05d9b0e0e9a2967a97a252254794">&sect;&nbsp;</a></span>TASK_LIST</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define TASK_LIST&#160;&#160;&#160;_task_list::TaskListEmpty</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This macro is redefined when the REGISTER_TASK file is included. </p>
-<p>REGISTER_TASK is used like a typedef. Whenever a new task is added this macro is redefined to "point" to a new variadic template list type.</p>
-<p>The mechanism how tasks are stored is an adapted version from: <a href="http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609">stackoverlow</a></p>
-<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK TASK(toggleLed)</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --> 
+<div class="fragment"><div class="line">uint32_t toggleLed(uint32_t) {</div><div class="line">  Led::toggle();</div><div class="line">  <span class="keywordflow">return</span> clock::ms_to_units&lt;1000&gt;();</div><div class="line">}</div><div class="line"><span class="preprocessor">#define NEW_TASK toggleLed</span></div><div class="line"><span class="preprocessor">#include REGISTER_TASK</span></div></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

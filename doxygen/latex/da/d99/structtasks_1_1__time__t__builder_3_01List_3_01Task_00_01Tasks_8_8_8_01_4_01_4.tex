@@ -1,0 +1,52 @@
+\hypertarget{structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4}{}\section{tasks\+:\+:\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task, Tasks... $>$ $>$ Struct Template Reference}
+\label{structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4}\index{tasks\+::\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task, Tasks... $>$ $>$@{tasks\+::\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task, Tasks... $>$ $>$}}
+
+
+Determines the smallest usable type necessary for system clock values when exeuting tasks.  
+
+
+
+
+{\ttfamily \#include $<$tasks.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4_a4dffd6c85b0d44f416d2338f192b8e8c}{}\label{structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4_a4dffd6c85b0d44f416d2338f192b8e8c} 
+typedef \hyperlink{structtasks_1_1__time__t__builder}{\+\_\+time\+\_\+t\+\_\+builder}$<$ List$<$ Tasks... $>$ $>$\+::type {\bfseries type\+\_\+parent}
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4_a9ee8ecfc686a82fa8ad9bee39364bb2a}{}\label{structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4_a9ee8ecfc686a82fa8ad9bee39364bb2a} 
+decltype(type\+\_\+comparisons\+::bigger\+\_\+type(decltype(\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type}(Task\+::run))(), type\+\_\+parent())) typedef {\bfseries type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$template$<$ typename ... $>$ class List, typename Task, typename ... Tasks$>$\newline
+struct tasks\+::\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task, Tasks... $>$ $>$}
+
+Determines the smallest usable type necessary for system clock values when exeuting tasks. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type} which turns an argument type to a return type which is used with decltype.
+\end{DoxySeeAlso}
+This is the version when the task list has more than one task.
+
+The return types of the task and the recursively called \hyperlink{structtasks_1_1__time__t__builder}{\+\_\+time\+\_\+t\+\_\+builder} calculated type are compared and the bigger of the 2 is used as type.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em List} & A task-\/list with more than one Task. \\
+\hline
+{\em Task} & The current (first) task of the tasklist. \\
+\hline
+{\em Tasks} & The remaining tasks of the variadic task template list. \\
+\hline
+\end{DoxyTemplParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{tasks_8h}{tasks.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,42 @@
+\hypertarget{structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4}{}\section{tasks\+:\+:\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task $>$ $>$ Struct Template Reference}
+\label{structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4}\index{tasks\+::\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task $>$ $>$@{tasks\+::\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task $>$ $>$}}
+
+
+Determines the smallest usable type necessary for system clock values when exeuting tasks.  
+
+
+
+
+{\ttfamily \#include $<$tasks.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4_a44b42b3031919ebd3391baef9614527d}{}\label{structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4_a44b42b3031919ebd3391baef9614527d} 
+decltype(\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type}(Task\+::run)) typedef {\bfseries type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$template$<$ typename ... $>$ class List, typename Task$>$\newline
+struct tasks\+::\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task $>$ $>$}
+
+Determines the smallest usable type necessary for system clock values when exeuting tasks. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type} which turns an argument type to a return type which is used with decltype.
+\end{DoxySeeAlso}
+This is the version for the task list with only one remaining task. This might even be the Task\+List\+End\+Marker, in which case uint8\+\_\+t is returned.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em List} & A task-\/list with only one remaining Task. \\
+\hline
+{\em Task} & The last remaining task of the variadic template List. \\
+\hline
+\end{DoxyTemplParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{tasks_8h}{tasks.\+h}\end{DoxyCompactItemize}

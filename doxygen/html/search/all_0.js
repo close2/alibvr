@@ -15,5 +15,7 @@ var searchData=
   ['_5fset_5for_5fget_5f8_5fbits',['_set_or_get_8_bits',['../d4/d49/namespaceports.html#a9cb9b3646fb9795dfbe079336dfc6fbb',1,'ports']]],
   ['_5fset_5for_5fget_5f8_5fbits_5fregs',['_set_or_get_8_bits_regs',['../d4/d49/namespaceports.html#a541ed8a2807f6d65c80cdf90cd7106eb',1,'ports']]],
   ['_5fset_5for_5fget_5ff',['_set_or_get_f',['../d4/d49/namespaceports.html#a75686ee2e9a291c0095dec6d73e4af8d',1,'ports']]],
-  ['_5ftime_5ft_5fbuilder',['_time_t_builder',['../de/d04/namespacetasks.html#a9469b8fb917e0f3ec0168293ac046a4c',1,'tasks::_time_t_builder(const _task_list::TaskList&lt;&gt; &amp;)'],['../de/d04/namespacetasks.html#ac1dcc4748bce4b593356740b7a26343c',1,'tasks::_time_t_builder(const _task_list::TaskList&lt; Task, Tasks... &gt; &amp;) -&gt; decltype(type_comparisons::bigger_type(decltype(_argType(Task::run))(), decltype(_time_t_builder(_task_list::TaskList&lt; Tasks... &gt;()))()))']]]
+  ['_5ftime_5ft_5fbuilder',['_time_t_builder',['../d8/d19/structtasks_1_1__time__t__builder.html',1,'tasks']]],
+  ['_5ftime_5ft_5fbuilder_3c_20list_3c_20task_20_3e_20_3e',['_time_t_builder&lt; List&lt; Task &gt; &gt;',['../dd/d0b/structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4.html',1,'tasks']]],
+  ['_5ftime_5ft_5fbuilder_3c_20list_3c_20task_2c_20tasks_2e_2e_2e_20_3e_20_3e',['_time_t_builder&lt; List&lt; Task, Tasks... &gt; &gt;',['../da/d99/structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4.html',1,'tasks']]]
 ];

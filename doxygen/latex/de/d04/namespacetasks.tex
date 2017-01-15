@@ -8,8 +8,12 @@ Task subsystem related code is (usually) in this namespace.
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structtasks_1_1TaskWrapper}{Task\+Wrapper}
-\begin{DoxyCompactList}\small\item\em A minimalistic wrapper for tasks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \hyperlink{structtasks_1_1__time__t__builder}{\+\_\+time\+\_\+t\+\_\+builder}
+\begin{DoxyCompactList}\small\item\em Determines the smallest usable type necessary for system clock values when exeuting tasks. \end{DoxyCompactList}\item 
+struct \hyperlink{structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4}{\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task $>$ $>$}
+\begin{DoxyCompactList}\small\item\em Determines the smallest usable type necessary for system clock values when exeuting tasks. \end{DoxyCompactList}\item 
+struct \hyperlink{structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4}{\+\_\+time\+\_\+t\+\_\+builder$<$ List$<$ Task, Tasks... $>$ $>$}
+\begin{DoxyCompactList}\small\item\em Determines the smallest usable type necessary for system clock values when exeuting tasks. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -27,11 +31,7 @@ struct \hyperlink{structtasks_1_1TaskWrapper}{Task\+Wrapper}
 \begin{DoxyCompactList}\small\item\em Executes all tasks given as a variadic template argument list. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename C , typename Task\+List $>$ }\\static C \hyperlink{namespacetasks_ad5788497b8af34e86345218dde07a443}{\+\_\+exec\+Tasks} ()
 \begin{DoxyCompactList}\small\item\em Executes all tasks given as a variadic template argument list. \end{DoxyCompactList}\item 
-uint8\+\_\+t \hyperlink{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c}{\+\_\+time\+\_\+t\+\_\+builder} (const \+\_\+task\+\_\+list\+::\+Task\+List$<$$>$ \&)
-\begin{DoxyCompactList}\small\item\em Determines the smallest usable type necessary for system clock values when exeuting tasks. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Task , typename... Tasks$>$ }\\auto \hyperlink{namespacetasks_ac1dcc4748bce4b593356740b7a26343c}{\+\_\+time\+\_\+t\+\_\+builder} (const \+\_\+task\+\_\+list\+::\+Task\+List$<$ Task, Tasks... $>$ \&) -\/$>$ decltype(type\+\_\+comparisons\+::bigger\+\_\+type(decltype(\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type}(Task\+::run))(), decltype(\+\_\+time\+\_\+t\+\_\+builder(\+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$()))()))
-\begin{DoxyCompactList}\small\item\em Determines the smallest usable type necessary for system clock values when exeuting tasks. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename... Tasks$>$ }\\static decltype(\hyperlink{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c}{\+\_\+time\+\_\+t\+\_\+builder}$<$ Tasks... $>$(\+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$())) \hyperlink{namespacetasks_a6590d6a524b4aedb5d0dfef5e1b61bc1}{exec\+Tasks} (const \+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$ \&task\+List)
+{\footnotesize template$<$typename Task\+List $>$ }\\static \hyperlink{structtasks_1_1__time__t__builder}{\+\_\+time\+\_\+t\+\_\+builder}$<$ Task\+List $>$\+::type \hyperlink{namespacetasks_a5c8debd51ffb3475e31ee7aa3c924eba}{exec\+Tasks} (Task\+List)
 \begin{DoxyCompactList}\small\item\em The entry function for executing all tasks of a variable template list. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -183,51 +183,12 @@ This function remembers when it was called previously and passes this value to t
 {\em Task\+List} & The variadic task template list. \\
 \hline
 \end{DoxyTemplParams}
-\hypertarget{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c}{}\label{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c} 
-\index{tasks@{tasks}!\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}}
-\index{\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}!tasks@{tasks}}
-\subsubsection{\texorpdfstring{\+\_\+time\+\_\+t\+\_\+builder()}{\_time\_t\_builder()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily uint8\+\_\+t tasks\+::\+\_\+time\+\_\+t\+\_\+builder (\begin{DoxyParamCaption}\item[{const \+\_\+task\+\_\+list\+::\+Task\+List$<$$>$ \&}]{ }\end{DoxyParamCaption})}
-
-
-
-Determines the smallest usable type necessary for system clock values when exeuting tasks. 
-
-This function is never implemented or executed.
-
-This is the version for an empty task list and \char`\"{}returns\char`\"{}" the smallest possible type\+: uint8\+\_\+t. \hypertarget{namespacetasks_ac1dcc4748bce4b593356740b7a26343c}{}\label{namespacetasks_ac1dcc4748bce4b593356740b7a26343c} 
-\index{tasks@{tasks}!\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}}
-\index{\+\_\+time\+\_\+t\+\_\+builder@{\+\_\+time\+\_\+t\+\_\+builder}!tasks@{tasks}}
-\subsubsection{\texorpdfstring{\+\_\+time\+\_\+t\+\_\+builder()}{\_time\_t\_builder()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename Task , typename... Tasks$>$ \\
-auto tasks\+::\+\_\+time\+\_\+t\+\_\+builder (\begin{DoxyParamCaption}\item[{const \+\_\+task\+\_\+list\+::\+Task\+List$<$ Task, Tasks... $>$ \&}]{ }\end{DoxyParamCaption}) -\/$>$  decltype(type\+\_\+comparisons\+::bigger\+\_\+type(decltype(\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type}(Task\+::run))(), decltype(\+\_\+time\+\_\+t\+\_\+builder(\+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$()))()))}
-
-
-
-Determines the smallest usable type necessary for system clock values when exeuting tasks. 
-
-This function is never implemented or executed.
-
-This is the version when the task list is not empty.
-
-The return types of the task and the recursively called \+\_\+time\+\_\+t\+\_\+builder return type are compared and the bigger of the 2 is used as return type.
-
-\begin{DoxySeeAlso}{See also}
-\hyperlink{namespacetasks_ac4a797a86584958bef0b67616a38c8ae}{\+\_\+arg\+Type} which turns an argument type to a return type which is used with decltype.
-\end{DoxySeeAlso}
-
-\begin{DoxyTemplParams}{Template Parameters}
-{\em Task} & The current (first) task of the tasklist. \\
-\hline
-{\em Tasks} & The remaining tasks of the variadic task template list. \\
-\hline
-\end{DoxyTemplParams}
-\hypertarget{namespacetasks_a6590d6a524b4aedb5d0dfef5e1b61bc1}{}\label{namespacetasks_a6590d6a524b4aedb5d0dfef5e1b61bc1} 
+\hypertarget{namespacetasks_a5c8debd51ffb3475e31ee7aa3c924eba}{}\label{namespacetasks_a5c8debd51ffb3475e31ee7aa3c924eba} 
 \index{tasks@{tasks}!exec\+Tasks@{exec\+Tasks}}
 \index{exec\+Tasks@{exec\+Tasks}!tasks@{tasks}}
 \subsubsection{\texorpdfstring{exec\+Tasks()}{execTasks()}}
-{\footnotesize\ttfamily template$<$typename... Tasks$>$ \\
-static decltype(\hyperlink{namespacetasks_a9469b8fb917e0f3ec0168293ac046a4c}{\+\_\+time\+\_\+t\+\_\+builder}$<$Tasks...$>$(\+\_\+task\+\_\+list\+::\+Task\+List$<$Tasks...$>$())) tasks\+::exec\+Tasks (\begin{DoxyParamCaption}\item[{const \+\_\+task\+\_\+list\+::\+Task\+List$<$ Tasks... $>$ \&}]{task\+List }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily template$<$typename Task\+List $>$ \\
+static \hyperlink{structtasks_1_1__time__t__builder}{\+\_\+time\+\_\+t\+\_\+builder}$<$Task\+List$>$\+::type tasks\+::exec\+Tasks (\begin{DoxyParamCaption}\item[{Task\+List}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
@@ -237,6 +198,6 @@ This function determines the optimal type for the system clock values and delega
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Tasks} & The variadic template list containing the tasks which should be executed. \\
+{\em Task\+List} & The variadic template list containing the tasks which should be executed. \\
 \hline
 \end{DoxyTemplParams}

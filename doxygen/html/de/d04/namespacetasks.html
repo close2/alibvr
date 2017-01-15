@@ -72,8 +72,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d3f/structtasks_1_1TaskWrapper.html">TaskWrapper</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A minimalistic wrapper for tasks.  <a href="../../dd/d3f/structtasks_1_1TaskWrapper.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d19/structtasks_1_1__time__t__builder.html">_time_t_builder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="../../d8/d19/structtasks_1_1__time__t__builder.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d0b/structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4.html">_time_t_builder&lt; List&lt; Task &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="../../dd/d0b/structtasks_1_1__time__t__builder_3_01List_3_01Task_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d99/structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4.html">_time_t_builder&lt; List&lt; Task, Tasks... &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="../../da/d99/structtasks_1_1__time__t__builder_3_01List_3_01Task_00_01Tasks_8_8_8_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -106,17 +112,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ad5788497b8af34e86345218dde07a443"><td class="memTemplItemLeft" align="right" valign="top">static C&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#ad5788497b8af34e86345218dde07a443">_execTasks</a> ()</td></tr>
 <tr class="memdesc:ad5788497b8af34e86345218dde07a443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes all tasks given as a variadic template argument list.  <a href="#ad5788497b8af34e86345218dde07a443">More...</a><br /></td></tr>
 <tr class="separator:ad5788497b8af34e86345218dde07a443"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9469b8fb917e0f3ec0168293ac046a4c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#a9469b8fb917e0f3ec0168293ac046a4c">_time_t_builder</a> (const _task_list::TaskList&lt;&gt; &amp;)</td></tr>
-<tr class="memdesc:a9469b8fb917e0f3ec0168293ac046a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="#a9469b8fb917e0f3ec0168293ac046a4c">More...</a><br /></td></tr>
-<tr class="separator:a9469b8fb917e0f3ec0168293ac046a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1dcc4748bce4b593356740b7a26343c"><td class="memTemplParams" colspan="2">template&lt;typename Task , typename... Tasks&gt; </td></tr>
-<tr class="memitem:ac1dcc4748bce4b593356740b7a26343c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#ac1dcc4748bce4b593356740b7a26343c">_time_t_builder</a> (const _task_list::TaskList&lt; Task, Tasks... &gt; &amp;) -&gt; decltype(type_comparisons::bigger_type(decltype(<a class="el" href="../../de/d04/namespacetasks.html#ac4a797a86584958bef0b67616a38c8ae">_argType</a>(Task::run))(), decltype(_time_t_builder(_task_list::TaskList&lt; Tasks... &gt;()))()))</td></tr>
-<tr class="memdesc:ac1dcc4748bce4b593356740b7a26343c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the smallest usable type necessary for system clock values when exeuting tasks.  <a href="#ac1dcc4748bce4b593356740b7a26343c">More...</a><br /></td></tr>
-<tr class="separator:ac1dcc4748bce4b593356740b7a26343c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6590d6a524b4aedb5d0dfef5e1b61bc1"><td class="memTemplParams" colspan="2">template&lt;typename... Tasks&gt; </td></tr>
-<tr class="memitem:a6590d6a524b4aedb5d0dfef5e1b61bc1"><td class="memTemplItemLeft" align="right" valign="top">static decltype(<a class="el" href="../../de/d04/namespacetasks.html#a9469b8fb917e0f3ec0168293ac046a4c">_time_t_builder</a>&lt; Tasks... &gt;(_task_list::TaskList&lt; Tasks... &gt;()))&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#a6590d6a524b4aedb5d0dfef5e1b61bc1">execTasks</a> (const _task_list::TaskList&lt; Tasks... &gt; &amp;taskList)</td></tr>
-<tr class="memdesc:a6590d6a524b4aedb5d0dfef5e1b61bc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The entry function for executing all tasks of a variable template list.  <a href="#a6590d6a524b4aedb5d0dfef5e1b61bc1">More...</a><br /></td></tr>
-<tr class="separator:a6590d6a524b4aedb5d0dfef5e1b61bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c8debd51ffb3475e31ee7aa3c924eba"><td class="memTemplParams" colspan="2">template&lt;typename TaskList &gt; </td></tr>
+<tr class="memitem:a5c8debd51ffb3475e31ee7aa3c924eba"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="../../d8/d19/structtasks_1_1__time__t__builder.html">_time_t_builder</a>&lt; TaskList &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../de/d04/namespacetasks.html#a5c8debd51ffb3475e31ee7aa3c924eba">execTasks</a> (TaskList)</td></tr>
+<tr class="memdesc:a5c8debd51ffb3475e31ee7aa3c924eba"><td class="mdescLeft">&#160;</td><td class="mdescRight">The entry function for executing all tasks of a variable template list.  <a href="#a5c8debd51ffb3475e31ee7aa3c924eba">More...</a><br /></td></tr>
+<tr class="separator:a5c8debd51ffb3475e31ee7aa3c924eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Task subsystem related code is (usually) in this namespace. </p>
@@ -441,77 +440,22 @@ template&lt;typename C , typename TaskList &gt; </div>
 
 </div>
 </div>
-<a id="a9469b8fb917e0f3ec0168293ac046a4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9469b8fb917e0f3ec0168293ac046a4c">&sect;&nbsp;</a></span>_time_t_builder() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t tasks::_time_t_builder </td>
-          <td>(</td>
-          <td class="paramtype">const _task_list::TaskList&lt;&gt; &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Determines the smallest usable type necessary for system clock values when exeuting tasks. </p>
-<p>This function is never implemented or executed.</p>
-<p>This is the version for an empty task list and "returns"" the smallest possible type: uint8_t. </p>
-
-</div>
-</div>
-<a id="ac1dcc4748bce4b593356740b7a26343c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1dcc4748bce4b593356740b7a26343c">&sect;&nbsp;</a></span>_time_t_builder() <span class="overload">[2/2]</span></h2>
+<a id="a5c8debd51ffb3475e31ee7aa3c924eba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c8debd51ffb3475e31ee7aa3c924eba">&sect;&nbsp;</a></span>execTasks()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Task , typename... Tasks&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">auto tasks::_time_t_builder </td>
-          <td>(</td>
-          <td class="paramtype">const _task_list::TaskList&lt; Task, Tasks... &gt; &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> -&gt;  decltype(type_comparisons::bigger_type(decltype(<a class="el" href="../../de/d04/namespacetasks.html#ac4a797a86584958bef0b67616a38c8ae">_argType</a>(Task::run))(), decltype(_time_t_builder(_task_list::TaskList&lt; Tasks... &gt;()))()))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Determines the smallest usable type necessary for system clock values when exeuting tasks. </p>
-<p>This function is never implemented or executed.</p>
-<p>This is the version when the task list is not empty.</p>
-<p>The return types of the task and the recursively called _time_t_builder return type are compared and the bigger of the 2 is used as return type.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../de/d04/namespacetasks.html#ac4a797a86584958bef0b67616a38c8ae" title="A small helper function, which extracts the argument type from the function provided as template argu...">_argType</a> which turns an argument type to a return type which is used with decltype.</dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Task</td><td>The current (first) task of the tasklist. </td></tr>
-    <tr><td class="paramname">Tasks</td><td>The remaining tasks of the variadic task template list. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a6590d6a524b4aedb5d0dfef5e1b61bc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6590d6a524b4aedb5d0dfef5e1b61bc1">&sect;&nbsp;</a></span>execTasks()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Tasks&gt; </div>
+template&lt;typename TaskList &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static decltype(<a class="el" href="../../de/d04/namespacetasks.html#a9469b8fb917e0f3ec0168293ac046a4c">_time_t_builder</a>&lt;Tasks...&gt;(_task_list::TaskList&lt;Tasks...&gt;())) tasks::execTasks </td>
+          <td class="memname">static <a class="el" href="../../d8/d19/structtasks_1_1__time__t__builder.html">_time_t_builder</a>&lt;TaskList&gt;::type tasks::execTasks </td>
           <td>(</td>
-          <td class="paramtype">const _task_list::TaskList&lt; Tasks... &gt; &amp;&#160;</td>
-          <td class="paramname"><em>taskList</em></td><td>)</td>
+          <td class="paramtype">TaskList&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -526,7 +470,7 @@ template&lt;typename... Tasks&gt; </div>
 <p>This function determines the optimal type for the system clock values and delegates executing the tasks to _execTasks.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Tasks</td><td>The variadic template list containing the tasks which should be executed. </td></tr>
+    <tr><td class="paramname">TaskList</td><td>The variadic template list containing the tasks which should be executed. </td></tr>
   </table>
   </dd>
 </dl>

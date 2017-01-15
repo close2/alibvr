@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['task',['TASK',['../d9/dc0/tasks_8h.html#aeb6b674ade86e11dfb2277cc77930804',1,'TASK():&#160;tasks.h'],['../de/d26/namespaceadc.html#a0e6e6773a0ed848acb0887f1ed3c76ae',1,'adc::task()']]],
-  ['task_5flist',['TASK_LIST',['../d9/dc0/tasks_8h.html#ac12d05d9b0e0e9a2967a97a252254794',1,'tasks.h']]],
+  ['task',['task',['../de/d26/namespaceadc.html#a0e6e6773a0ed848acb0887f1ed3c76ae',1,'adc']]],
   ['tasks',['tasks',['../de/d04/namespacetasks.html',1,'']]],
   ['tasks_2eh',['tasks.h',['../d9/dc0/tasks_8h.html',1,'']]],
-  ['taskwrapper',['TaskWrapper',['../dd/d3f/structtasks_1_1TaskWrapper.html',1,'tasks']]],
   ['temperature',['Temperature',['../dd/d64/structadc_1_1Input_1_1Temperature.html',1,'adc::Input']]],
   ['test_5fio_2eh',['test_io.h',['../d2/d0a/test__io_8h.html',1,'']]],
   ['time_5fto_5funits',['time_to_units',['../d9/d1f/namespaceclock.html#ac6b5f264784ea96fd8629fec0c0f7131',1,'clock::time_to_units()'],['../d9/d1f/namespaceclock.html#a46fd6e3a91d0b307eeea0500d03d12fb',1,'clock::time_to_units(const T &amp;n)']]],

@@ -34,7 +34,7 @@ static uint16\+\_\+t \hyperlink{classadc_1_1Adc_a4b6ffdcd526be74e01f39329a5f25d2
 \begin{DoxyCompactList}\small\item\em Waits for current conversions to finish, then performs an 8bit conversion and returns the result. \end{DoxyCompactList}\item 
 {\footnotesize template$<$uint8\+\_\+t goto\+\_\+sleep\+\_\+for\+\_\+noise\+\_\+reduction = 0$>$ }\\static uint16\+\_\+t \hyperlink{classadc_1_1Adc_a3d9614e14e56b6f7209040710ef6f022}{adc\+\_\+10bit} ()
 \begin{DoxyCompactList}\small\item\em Waits for current conversions to finish, then performs an 10bit conversion and returns the result. \end{DoxyCompactList}\item 
-static void \hyperlink{classadc_1_1Adc_a77d477385a502139b26c2f0ca83c2482}{handle} (const enum \+\_\+irqs\+::\+Irq i)
+static void \hyperlink{classadc_1_1Adc_a66fe99e252da5f9239501ae81cfdf5e5}{handle} (const enum \+\_\+irqs\+::\+Irq)
 \begin{DoxyCompactList}\small\item\em This is the irq handler which will be registered through {\ttfamily \#include R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+A\+DC}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -127,12 +127,12 @@ Returns the result of a previous conversion.
 
 Use this function after having performed an 8bit conversion.
 
-There is only one result buffer for both 8bit conversions and 10bit conversions. Calling this function after a 10bit conversion will not round the 10bit result but return an incorrect value! \hypertarget{classadc_1_1Adc_a77d477385a502139b26c2f0ca83c2482}{}\label{classadc_1_1Adc_a77d477385a502139b26c2f0ca83c2482} 
+There is only one result buffer for both 8bit conversions and 10bit conversions. Calling this function after a 10bit conversion will not round the 10bit result but return an incorrect value! \hypertarget{classadc_1_1Adc_a66fe99e252da5f9239501ae81cfdf5e5}{}\label{classadc_1_1Adc_a66fe99e252da5f9239501ae81cfdf5e5} 
 \index{adc\+::\+Adc@{adc\+::\+Adc}!handle@{handle}}
 \index{handle@{handle}!adc\+::\+Adc@{adc\+::\+Adc}}
 \subsubsection{\texorpdfstring{handle()}{handle()}}
 {\footnotesize\ttfamily template$<$Ref Default\+Ref = Ref\+::\+A\+Vcc, typename Default\+Input  = Input\+::\+Unset, Mode Default\+Mode = Mode\+::\+Single\+Conversion, task Task = nullptr, Global\+Irq Default\+Global\+Irq = Global\+Irq\+::\+Auto$>$ \\
-static void \hyperlink{classadc_1_1Adc}{adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task, Default\+Global\+Irq $>$\+::handle (\begin{DoxyParamCaption}\item[{const enum \+\_\+irqs\+::\+Irq}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+static void \hyperlink{classadc_1_1Adc}{adc\+::\+Adc}$<$ Default\+Ref, Default\+Input, Default\+Mode, Task, Default\+Global\+Irq $>$\+::handle (\begin{DoxyParamCaption}\item[{const enum \+\_\+irqs\+::\+Irq}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
