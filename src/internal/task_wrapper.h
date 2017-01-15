@@ -24,4 +24,26 @@ namespace _tasks {
     }
   };
   
+  template <uint8_t(*F)(uint8_t)>
+  TaskWrapper<uint8_t, uint8_t, F> wrap();
+  template <void(*F)(uint8_t)>
+  TaskWrapper<void, uint8_t, F> wrap();
+  
+  template <uint16_t(*F)(uint16_t)>
+  TaskWrapper<uint16_t, uint16_t, F> wrap();
+  template <void(*F)(uint16_t)>
+  TaskWrapper<void, uint16_t, F> wrap();
+  
+  template <uint32_t(*F)(uint32_t)>
+  TaskWrapper<uint32_t, uint32_t, F> wrap();
+  template <void(*F)(uint32_t)>
+  TaskWrapper<void, uint32_t, F> wrap();
+  
+  template <uint64_t(*F)(uint64_t)>
+  TaskWrapper<void, uint64_t, F> wrap();
+  template <uint64_t(*F)(uint64_t)>
+  TaskWrapper<void, uint64_t, F> wrap();
+  
+  template <class T>
+  T wrap();
 }
