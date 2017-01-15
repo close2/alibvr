@@ -1,3 +1,6 @@
+#ifndef FLAG_TO_SILENCE_COMPILER_WARNING // no guards!
+// do not define this flag!
+
 #include "macros.h"
 
 #include "macro_counter.h"
@@ -577,3 +580,5 @@ namespace _irqs {
 #pragma pop_macro("IRQ_TASKLIST_NAME")
 #pragma pop_macro("IRQ_TASK_F")
 #pragma pop_macro("REMINDER_NAME")
+
+#endif

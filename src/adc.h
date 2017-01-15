@@ -484,7 +484,7 @@ namespace ALIBVR_NAMESPACE_ADC {
      * 
      * Probably only useful internally.
      **/
-    static inline void handle(const enum _irqs::Irq i) {
+    static inline void handle(const enum _irqs::Irq) {
 #     pragma GCC diagnostic push
 #     pragma GCC diagnostic ignored "-Waddress"
       const uint8_t is_do_nothing_task = nullptr == Task;
