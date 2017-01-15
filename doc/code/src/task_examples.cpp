@@ -24,7 +24,7 @@ uint32_t toggleLed(uint32_t) {
   Led::toggle();
   return clock::ms_to_units<1000>();
 }
-#define NEW_TASK TASK(toggleLed)
+#define NEW_TASK toggleLed
 #include REGISTER_TASK
 /*¤*/
 
@@ -33,7 +33,7 @@ uint16_t toggleLed1(uint16_t) {
   Led1::toggle();
   return clock::ms_to_units<300>();
 }
-#define NEW_TASK TASK(toggleLed1)
+#define NEW_TASK toggleLed1
 #include REGISTER_TASK
 
 // «SIMPLE_TASK»
@@ -41,7 +41,7 @@ uint8_t toggleLed2(uint8_t) {
   Led2::toggle();
   return clock::us_to_units<700>();
 }
-#define NEW_TASK TASK(toggleLed2)
+#define NEW_TASK toggleLed2
 #include REGISTER_TASK
 /*¤*/
 
@@ -53,7 +53,7 @@ void toggleLedButton(uint32_t) {
     button_pressed = 0;
   }
 }
-#define NEW_TASK TASK(toggleLedButton)
+#define NEW_TASK toggleLedButton
 #include REGISTER_TASK
 
 int main(void) {

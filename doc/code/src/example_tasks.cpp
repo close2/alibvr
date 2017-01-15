@@ -18,7 +18,7 @@ uint16_t toggleLed1(uint16_t) {
   Led1::toggle();
   return clock::ms_to_units<300>();
 }
-#define NEW_TASK TASK(toggleLed1)
+#define NEW_TASK toggleLed1
 #include REGISTER_TASK
 
 // Instead of fetching the current input from a pin,
@@ -29,7 +29,7 @@ void toggleLedButton(uint32_t) {
     LedButton::toggle();
   }
 }
-#define NEW_TASK TASK(toggleLedButton)
+#define NEW_TASK toggleLedButton
 #include REGISTER_TASK
 
 int main(void) {

@@ -24,7 +24,7 @@ inline uint16_t blinkLed(uint16_t) {
   }
   return ms_to_units<200>();
 }
-#define NEW_TASK TASK(blinkLed)
+#define NEW_TASK blinkLed
 #include REGISTER_TASK
 
 int main() {

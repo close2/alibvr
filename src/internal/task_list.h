@@ -4,7 +4,9 @@
 
 // mostly copied from: http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609
 namespace _task_list {
-  struct TaskListEndMarker;
+  struct TaskListEndMarker {
+    uint8_t run(uint8_t);
+  };
 
   template <typename ...> struct concat;
 

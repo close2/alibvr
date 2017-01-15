@@ -12,7 +12,7 @@ uint8_t toggleLed2(uint8_t) {
   Led2::toggle();
   return clock::us_to_units<700>();
 }
-#define NEW_TASK TASK(toggleLed2)
+#define NEW_TASK toggleLed2
 #include REGISTER_TASK
 ```
 
@@ -59,7 +59,7 @@ uint32_t toggleLed(uint32_t) {
   Led::toggle();
   return clock::ms_to_units<1000>();
 }
-#define NEW_TASK TASK(toggleLed)
+#define NEW_TASK toggleLed
 #include REGISTER_TASK
 ```
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "internal/task_list.h"
+#include "internal/task_wrapper.h"
 #include "clock.h"
 #include "type_comparisons.h"
 
@@ -52,23 +53,6 @@
  * prevent the tasks subsystem to put the avr to sleep.
  **/
 
-/**
- * @brief This macro is redefined when the REGISTER_TASK file
- * is included.
- * 
- * REGISTER_TASK is used like a typedef.  Whenever a new task is added
- * this macro is redefined to "point" to a new variadic template list
- * type.
- * 
- * The mechanism how tasks are stored is an adapted version from:
- * [stackoverlow](http://stackoverflow.com/questions/18701798/building-and-accessing-a-list-of-types-at-compile-time/18704609#18704609)
- * 
- * 
- * ```
-+++ONE_SEC_TASK[^, * ]+++
- * ```
- **/
-#define TASK_LIST _task_list::TaskListEmpty
 
 /**
  * @brief This header file should be included to register a new task.
@@ -227,35 +211,48 @@ namespace ALIBVR_NAMESPACE_TASKS {
    * @brief Determines the smallest usable type necessary for system
    * clock values when exeuting tasks.
    * 
-   * This function is never implemented or executed.
+   * @see _argType which turns an argument type to a return type which
+   * is used with decltype.
    * ¤
-   * 
-   * This is the version for an empty task list and "returns"" the
-   * smallest possible type: uint8_t.
    **/
-  uint8_t _time_t_builder(const _task_list::TaskList<>&);
+  template <typename ...> struct _time_t_builder;
   
   /**
 +++TIME_T_BUILDER_DOC[^,   * ]+++
    * 
-   * This is the version when the task list is not empty.
+   * This is the version for the task list with only one remaining
+   * task.  This might even be the TaskListEndMarker, in which case
+   * uint8_t is returned.
+   * 
+   * @tparam List A task-list with only one remaining Task.
+   * @tparam Task The last remaining task of the variadic template List.
+   **/
+  template <template <typename ...> class List, typename Task>
+  struct _time_t_builder<List<Task>> {
+    typedef decltype(_argType(Task::run)) type;
+  };
+  
+  /**
++++TIME_T_BUILDER_DOC[^,   * ]+++
+   * 
+   * This is the version when the task list has more than one task.
    *
    * The return types of the task and the recursively called
-   * _time_t_builder return type are compared and the bigger of the
-   * 2 is used as return type.
+   * _time_t_builder calculated type are compared and the bigger of the
+   * 2 is used as type.
    * 
-   * @see _argType which turns an argument type to a return type which
-   * is used with decltype.
-   * 
+   * @tparam List A task-list with more than one Task.
    * @tparam Task The current (first) task of the tasklist.
    * @tparam Tasks The remaining tasks of the variadic task template
    * list.
    **/
-  template<typename Task, typename... Tasks>
-  auto _time_t_builder(const _task_list::TaskList<Task, Tasks...>&)
-    -> decltype(type_comparisons::bigger_type(
+  template <template <typename ...> class List, typename Task, typename ...Tasks>
+  struct _time_t_builder<List<Task, Tasks...>> {
+    typedef typename _time_t_builder<List<Tasks...>>::type type_parent;
+    typedef decltype(type_comparisons::bigger_type(
                   decltype(_argType(Task::run))(),
-                  decltype(_time_t_builder(_task_list::TaskList<Tasks...>()))()));
+                  type_parent())) type;
+  };
   
   /**
    * @brief The entry function for executing all tasks of a variable
@@ -264,37 +261,15 @@ namespace ALIBVR_NAMESPACE_TASKS {
    * This function determines the optimal type for the system clock
    * values and delegates executing the tasks to _execTasks.
    * 
-   * @tparam Tasks The variadic template list containing the tasks
+   * @tparam TaskList The variadic template list containing the tasks
    * which should be executed.
    **/
-  template <typename... Tasks>
-  static inline decltype(_time_t_builder<Tasks...>(_task_list::TaskList<Tasks...>()))
-  execTasks(const _task_list::TaskList<Tasks...>& taskList) {
-    typedef decltype(_time_t_builder<Tasks...>(taskList)) time_t;
-    return _execTasks<time_t, _task_list::TaskList<Tasks...>>();
+  template <typename TaskList>
+  static inline typename _time_t_builder<TaskList>::type
+  execTasks(TaskList) {
+    typedef typename _time_t_builder<TaskList>::type time_t;
+    return _execTasks<time_t, TaskList>();
   }
-  
-  /**
-   * @brief A minimalistic wrapper for tasks
-   * 
-   * For variadic template lists functions would only be possible, if
-   * they all had the same type.  This simple wrapper "converts"
-   * tasks/functions to classes.
-   * 
-   * [Stackoverflow question about functions as tasks](http://stackoverflow.com/questions/40387760/functions-as-template-arguments)
-   * 
-   * @see TASK for a macro which automatically determines the types.
-   * 
-   * @tparam T The return type of the task.
-   * @tparam T2 The argument type of the task (i.e. the system clock)
-   * @tparam F The task/function.
-   **/
-  template <typename T, typename T2, T(*F)(T2)>
-  struct TaskWrapper {
-    static inline T run(T2 clock) {
-      return F(clock);
-    }
-  };
 }
 
 /**
@@ -307,19 +282,3 @@ namespace ALIBVR_NAMESPACE_TASKS {
  * @see tasks::execTasks
  **/
 #define EXEC_TASKS() ALIBVR_NAMESPACE_TASKS::execTasks(TASK_LIST())
-
-/**
- * @brief Wraps a function/task with TaskWrapper.
- * 
- * @see TaskWrapper for an explaination why this is necessary.
- * 
- * The macro simply extracts the return type and the argument type and
- * passes them to TaskWrapper.
- * 
- * @param task The function/task which should be wrapped.
- **/
-#define TASK(task) \
-  ALIBVR_NAMESPACE_TASKS::TaskWrapper< \
-    decltype(task(0)), \
-    decltype(ALIBVR_NAMESPACE_TASKS::_argType(task)), \
-    task>
