@@ -265,11 +265,26 @@ namespace ALIBVR_NAMESPACE_TASKS {
    * which should be executed.
    **/
   template <typename TaskList>
-  static inline typename _time_t_builder<TaskList>::type
-  execTasks(TaskList) {
+  static inline typename _time_t_builder<TaskList>::type execTasks(TaskList) {
     typedef typename _time_t_builder<TaskList>::type time_t;
     return _execTasks<time_t, TaskList>();
   }
+  
+  /*
+   * TODO Try to provide the following functionality for the tasks subsystem.
+   *     
+    // if all tasks are done
+    // power down
+    // go to sleep without race conditions...
+    cli();
+    if (isAllTasksStopped()) {
+      sleep_enable();
+      sei();
+      sleep_cpu();
+      sleep_disable();
+    }
+    sei();
+   */
 }
 
 /**
