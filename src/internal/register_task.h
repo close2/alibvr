@@ -82,9 +82,9 @@ namespace _tasks {
 
 #pragma push_macro("TL")
 
-// include the generated task_list
-// every time this file is included TASK_LIST and TL are set to another value.
-#include "task_lists.h"
+// Include the generated task_list.
+// Every time this file is included TASK_LIST and TL are set to another value.
+#include "task_list_defines.h"
 
 namespace _tasks {
   typedef TASK_NAME TL;
