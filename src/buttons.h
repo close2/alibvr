@@ -15,6 +15,9 @@
 #  endif
 #endif
 
+using namespace ALIBVR_NAMESPACE_PORTS;
+using namespace ALIBVR_NAMESPACE_CLOCK;
+
 namespace ALIBVR_NAMESPACE_BUTTONS {
   
   const uint8_t default_ms_per_round = 5;
@@ -42,18 +45,18 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
   
   template <typename Pin>
   static inline decltype(PCMSK0)& _pcmsk() {
-    if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::B) {
+    if (Pin::port == Port::B) {
       return PCMSK0;
     }
-    if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::C) {
+    if (Pin::port == Port::C) {
       return PCMSK1;
     }
-    if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::D) {
+    if (Pin::port == Port::D) {
       return PCMSK2;
     }
-    static_assert(Pin::port == ALIBVR_NAMESPACE_PORTS::Port::B ||
-                  Pin::port == ALIBVR_NAMESPACE_PORTS::Port::C ||
-                  Pin::port == ALIBVR_NAMESPACE_PORTS::Port::D,
+    static_assert(Pin::port == Port::B ||
+                  Pin::port == Port::C ||
+                  Pin::port == Port::D,
                   "Port invalid for retrieval of PCMSK*");
     // should never reach this
     return PCMSK0;
@@ -88,30 +91,24 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
     };
     
     template <typename Button>
-    static inline decltype(PCMSK0)& _pcmsk() {
-      typedef typename Button::Pin Pin;
-      return _pcmsk<Pin>();
-    }
-    
-    template <typename Button>
-    static inline void init_button(uint8_t& pcifr, uint8_t& pcmsk0, uint8_t& pcmsk1, uint8_t& pcmsk2) {
+    static inline void _init_button(uint8_t& pcifr, uint8_t& pcmsk0, uint8_t& pcmsk1, uint8_t& pcmsk2) {
       typedef typename Button::Pin Pin;
       if (Button::InitIo == InitIo::HighZ) {
-        Pin::setToInput(ALIBVR_NAMESPACE_PORTS::PullUp::HighZ);
+        Pin::setToInput(PullUp::HighZ);
       } else if (Button::InitIo == InitIo::PullUp) {
-        Pin::setToInput(ALIBVR_NAMESPACE_PORTS::PullUp::On);
+        Pin::setToInput(PullUp::On);
       }
-      if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::B) {
+      if (Pin::port == Port::B) {
         pcifr |= _BV(PCIF0); // enable irq for logic change on port B
       }
-      if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::C) {
+      if (Pin::port == Port::C) {
         pcifr |= _BV(PCIF1); // enable irq for logic change on port C
       }
-      if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::D) {
+      if (Pin::port == Port::D) {
         pcifr |= _BV(PCIF2); // enable irq for logic change on port D
       }
       // enable Button bit in pin change mask for port B
-      ALIBVR_NAMESPACE_PORTS::set_8_bits<Pin, 0>(pcmsk0, pcmsk1, pcmsk2, 0xFF);
+      set_8_bits<Pin, 0>(pcmsk0, pcmsk1, pcmsk2, 0xFF);
     }
     
     // every button has its own state (uint8_t)
@@ -126,13 +123,13 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
     }
     
     template <class I, typename Button>
-    static inline void handle() {
+    static inline void _handle() {
       typedef typename Button::Pin Pin;
-      if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::B && I::irq != _irqs::IRQ_PCINT0) return;
-      if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::C && I::irq != _irqs::IRQ_PCINT1) return;
-      if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::D && I::irq != _irqs::IRQ_PCINT2) return;
+      if (Pin::port == Port::B && I::irq != _irqs::IRQ_PCINT0) return;
+      if (Pin::port == Port::C && I::irq != _irqs::IRQ_PCINT1) return;
+      if (Pin::port == Port::D && I::irq != _irqs::IRQ_PCINT2) return;
       
-      auto& pcmsk = _pcmsk<Button>();
+      auto& pcmsk = _pcmsk<Button::Pin>();
       if (!(pcmsk & Pin::bit)) return;  // irq for this bit is disabled
   
       const uint8_t p = Pin::PORT;
@@ -151,7 +148,7 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
     }
     
     template <typename Button>
-    static inline void update_state() {
+    static inline void _update_state() {
       typedef typename Button::Pin Pin;
   
       uint8_t& state = _get_state<Button>();
@@ -160,15 +157,15 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
       state += 2; // keep bit0 untouched!
       
       if ((state / 2) == block_rounds) {
-        auto& pcmsk = _pcmsk<Button>();
+        auto& pcmsk = _pcmsk<Button::Pin>();
         pcmsk |= _BV(Pin::bit);
         
         // call handle, just in case if button really has changed already 
-        if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::B) handle<_irqs::IRQ_PCINT0, Button>();
+        if (Pin::port == Port::B) _handle<_irqs::IRQ_PCINT0, Button>();
         
-        if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::C) handle<_irqs::IRQ_PCINT1, Button>();
+        if (Pin::port == Port::C) _handle<_irqs::IRQ_PCINT1, Button>();
         
-        if (Pin::port == ALIBVR_NAMESPACE_PORTS::Port::D) handle<_irqs::IRQ_PCINT1, Button>();
+        if (Pin::port == Port::D) _handle<_irqs::IRQ_PCINT1, Button>();
       }
       if (state == (uint8_t) State::LongPressed) Button::state_changed(State::LongPressed);
       if (state == (uint8_t) State::LongReleased) Button::state_changed(State::LongReleased);
@@ -183,7 +180,7 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
       uint8_t pcmsk2 = 0;
       
       // go through all Button|s and set corresponding bits in PCIFC and PCMSK
-      pass{(init_button<ButtonList>(pcifr, pcmsk0, pcmsk1, pcmsk2), 1)...};
+      pass{(_init_button<ButtonList>(pcifr, pcmsk0, pcmsk1, pcmsk2), 1)...};
       
       // PCIFR (Pin Change Interrupt Flag Register)
       if (pcifr) PCIFR |= pcifr;
@@ -199,19 +196,15 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
     // this handle function handles (possibly) 3 irqs PCINT0, PCINT1 and PCINT2
     template <class I>
     static inline void handle(I) {
-      pass{(handle<I, ButtonList>(), 1)...};
+      pass{(_handle<I, ButtonList>(), 1)...};
     }
     
     template<typename T>
     static inline T run(T) {
       // go through all Buttons, and ++ if pressed, and / or
       // allow irq handling again.
-      pass{(update_state<ButtonList>(), 1)...};
-      return ALIBVR_NAMESPACE_CLOCK::ms_to_units<ms_per_round>();
-    }
-    
-    static uint8_t is_enabled() {
-      return 1;
+      pass{(_update_state<ButtonList>(), 1)...};
+      return ms_to_units<ms_per_round>();
     }
   };
   
@@ -237,14 +230,6 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
       template<typename ...Args> pass(Args...) {}
     };
     
-    /*
-    template <ALIBVR_NAMESPACE_PORTS::Port PortRow, uint8_t BitRow, ALIBVR_NAMESPACE_PORTS::Port PortColumn, uint8_t BitColumn>
-    static inline uint8_t& _get_state() {
-      static uint8_t state = (uint8_t) State::Released;
-      return state;
-    }
-    */
-    
     // every button has its own state (uint8_t)
     // bit 0 is used for button down or up state
     // all other bits are counters.
@@ -252,14 +237,13 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
     //   0b01010000 is button up
     template <typename PinRow, typename PinColumn>
     static inline uint8_t& get_state() {
-     // return _get_state<PinRow::port, PinRow::bit, PinColumn::port, PinColumn::bit>();
       static uint8_t state = (uint8_t) State::Released;
       return state;
     }
   
     // go through all Pins, and ++ if pressed
     template <typename Row, typename Column>
-    static inline void update_state(const uint8_t& row, uint8_t& _column) {
+    static inline void _update_state(uint8_t row, uint8_t& _column) { // _column will be modified!
       const uint8_t column = _column;
       _column++;
       uint8_t& state = get_state<Row, Column>();
@@ -285,9 +269,6 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
         return;
       }
       
-      PIN_8::DDR = 1;
-      PIN_8::PORT = pin_now;
-      
       State new_state = (!pin_now) ? State::Released : State::Pressed;
       
       state = (uint8_t) new_state;
@@ -295,26 +276,26 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
     }
    
     template <typename Row, typename ...Columns>
-    static inline void update_states_row(uint8_t& _row) {
+    static inline void _update_states_row(uint8_t& _row) {
       const uint8_t row = _row;
       _row++;
       
       uint8_t column = 0;
       
-      Row::DDR = 1;
+      Row::DDR = DataDirection::Output;
       _NOP();
-      pass{(update_state<Row, Columns>(row, column), 1)...};
-      Row::DDR = 0;
+      pass{(_update_state<Row, Columns>(row, column), 1)...};
+      Row::DDR = DataDirection::Input;
     }
     
     template <typename Column>
     static inline void set_ddr_column() {
-      Column::setToInput(ALIBVR_NAMESPACE_PORTS::PullUp::On);
+      Column::setToInput(PullUp::On);
     }
     
     template <typename Row>
     static inline void set_ddr_row() {
-      Row::setToInput(ALIBVR_NAMESPACE_PORTS::PullUp::HighZ);
+      Row::setToInput(PullUp::HighZ);
     }
     
     template <typename ...Rows, typename ...Columns>
@@ -329,7 +310,7 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
     template<typename ...Rows, typename ...Columns>
     static inline void _run(PinList<Rows...>, PinList<Columns...>) {
       uint8_t row = 0;
-      pass{(update_states_row<Rows, Columns>(row), 1)...};
+      pass{(_update_states_row<Rows, Columns>(row), 1)...};
     }
     
   public:
@@ -341,11 +322,7 @@ namespace ALIBVR_NAMESPACE_BUTTONS {
     template<typename T>
     static inline T run(T) {
       _run(RowList(), ColumnList());
-      return ALIBVR_NAMESPACE_CLOCK::ms_to_units<ms_per_round>();
-    }
-    
-    static uint8_t is_enabled() {
-      return 1;
+      return ms_to_units<ms_per_round>();
     }
   };
   
