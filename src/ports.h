@@ -74,7 +74,7 @@ namespace ALIBVR_NAMESPACE_PORTS {
    * 
    * Probably only useful internally.
    **/
-  enum class _Port {
+  enum class Port {
     B,
     C,
     D
@@ -127,17 +127,17 @@ namespace ALIBVR_NAMESPACE_PORTS {
   };
   
   // forward declaration
-  template <enum _Port p, uint8_t b, enum IOReg io>
+  template <enum Port p, uint8_t b, enum IOReg io>
   struct _Io;
   
   /**
    * @brief Every pin of the IC is defined using the template arguments
-   * `enum _Port p` and `uint8_t b` using `typedef`s of this class.
+   * `enum Port p` and `uint8_t b` using `typedef`s of this class.
    * 
-   * The port (enum _Port) and the bit (inside the control registers) is
+   * The port (enum Port) and the bit (inside the control registers) is
    * provided through static variables.
    * 
-   * Example: `if (aPinTypedef::port == _Port::B) ...`
+   * Example: `if (aPinTypedef::port == Port::B) ...`
    * 
    * In addition reading or setting the value of a pin is simplified
    * through #DDR #PORT and #PIN which have cast converters from uint8_t.
@@ -158,13 +158,13 @@ namespace ALIBVR_NAMESPACE_PORTS {
    * change the output!  You would need to switch to input first
    * (`DDR = DataDirection::Input;`).
    **/
-  template <enum _Port p, int8_t b>
+  template <enum Port p, int8_t b>
   struct Pin {
     
-    /// @brief The port name (enum _Port) of this pin.
+    /// @brief The port name (enum Port) of this pin.
     /// 
     /// Simply exposes the template argument.
-    static const enum _Port port = p;
+    static const enum Port port = p;
     
     /// @brief The bit position (0-7) inside the DDRx, PORTx or PINx
     /// register.
@@ -263,38 +263,38 @@ namespace ALIBVR_NAMESPACE_PORTS {
   // When using optimizations these definitions aren't even necessary.
   // In debug mode (i.e. with no optimizations) gcc will however complain
   // if we don't add them here.
-  template <enum _Port p, int8_t b> typename Pin<p, b>::_DDR  Pin<p, b>::DDR;
-  template <enum _Port p, int8_t b> typename Pin<p, b>::_PORT Pin<p, b>::PORT;
-  template <enum _Port p, int8_t b> typename Pin<p, b>::_PIN  Pin<p, b>::PIN;
+  template <enum Port p, int8_t b> typename Pin<p, b>::_DDR  Pin<p, b>::DDR;
+  template <enum Port p, int8_t b> typename Pin<p, b>::_PORT Pin<p, b>::PORT;
+  template <enum Port p, int8_t b> typename Pin<p, b>::_PIN  Pin<p, b>::PIN;
 }
 
 
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, -1> PIN_UNUSED;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::B, -1> PIN_UNUSED;
 
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 0 > PIN_0 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 1 > PIN_1 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 2 > PIN_2 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 3 > PIN_3 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 4 > PIN_4 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 5 > PIN_5 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 6 > PIN_6 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::D, 7 > PIN_7 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 0 > PIN_8 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 1 > PIN_9 ;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 2 > PIN_10;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 3 > PIN_11;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 4 > PIN_12;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 5 > PIN_13;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 0 > PIN_14;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 1 > PIN_15;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 2 > PIN_16;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 3 > PIN_17;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 4 > PIN_18;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 5 > PIN_19;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 6 > PIN_20;
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::B, 7 > PIN_21;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::D, 0 > PIN_0 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::D, 1 > PIN_1 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::D, 2 > PIN_2 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::D, 3 > PIN_3 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::D, 4 > PIN_4 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::D, 5 > PIN_5 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::D, 6 > PIN_6 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::D, 7 > PIN_7 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::B, 0 > PIN_8 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::B, 1 > PIN_9 ;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::B, 2 > PIN_10;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::B, 3 > PIN_11;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::B, 4 > PIN_12;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::B, 5 > PIN_13;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::C, 0 > PIN_14;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::C, 1 > PIN_15;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::C, 2 > PIN_16;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::C, 3 > PIN_17;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::C, 4 > PIN_18;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::C, 5 > PIN_19;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::B, 6 > PIN_20;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::B, 7 > PIN_21;
 
-typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::_Port::C, 6 > PIN_DIP_1;
+typedef struct ALIBVR_NAMESPACE_PORTS::Pin<ALIBVR_NAMESPACE_PORTS::Port::C, 6 > PIN_DIP_1;
 typedef PIN_0  PIN_DIP_2 ;
 typedef PIN_1  PIN_DIP_3 ;
 typedef PIN_2  PIN_DIP_4 ;
@@ -415,11 +415,11 @@ namespace ALIBVR_NAMESPACE_PORTS {
    * 
    * All functions redirect to the internal _set_or_get() function.
    */
-  template <enum _Port p, uint8_t b, enum IOReg io>
+  template <enum Port p, uint8_t b, enum IOReg io>
   struct _Io {
     typedef _Io<p, b, io> _Io_t_;
     
-    static const enum _Port port = p;
+    static const enum Port port = p;
     static const uint8_t bit = b;
     static const enum IOReg io_reg = io;
     
@@ -482,7 +482,7 @@ namespace ALIBVR_NAMESPACE_PORTS {
    * @tparam Io must have 3 static members: `io_reg`, `port` and `bit`.
    * The class Pin `typedef`s are intended for this.
    * 
-   * If for instance Io::io_reg == DDRx and Io::port == _Port::B
+   * If for instance Io::io_reg == DDRx and Io::port == Port::B
    * _set_or_get_f() is called with `DDRB`.
    * 
    * Probably only useful internally.
@@ -496,31 +496,31 @@ namespace ALIBVR_NAMESPACE_PORTS {
     switch(Io::io_reg) {
       case IOReg::DDRx:
         switch(Io::port) {
-          case _Port::B:
+          case Port::B:
             return _set_or_get_f<Dd>(DDRB, Io::bit, val);
-          case _Port::C:
+          case Port::C:
             return _set_or_get_f<Dd>(DDRC, Io::bit, val);
-          case _Port::D:
+          case Port::D:
             return _set_or_get_f<Dd>(DDRD, Io::bit, val);
         }
         break;
       case IOReg::PORTx:
         switch(Io::port) {
-          case _Port::B:
+          case Port::B:
             return _set_or_get_f<Dd>(PORTB, Io::bit, val);
-          case _Port::C:
+          case Port::C:
             return _set_or_get_f<Dd>(PORTC, Io::bit, val);
-          case _Port::D:
+          case Port::D:
             return _set_or_get_f<Dd>(PORTD, Io::bit, val);
         }
         break;
       case IOReg::PINx:
         switch(Io::port) {
-          case _Port::B:
+          case Port::B:
             return _set_or_get_f<Dd>(PINB, Io::bit, val);
-          case _Port::C:
+          case Port::C:
             return _set_or_get_f<Dd>(PINC, Io::bit, val);
-          case _Port::D:
+          case Port::D:
             return _set_or_get_f<Dd>(PIND, Io::bit, val);
         }
         break;
@@ -566,14 +566,14 @@ namespace ALIBVR_NAMESPACE_PORTS {
       uint8_t maskC = 0;
       uint8_t maskD = 0;
       
-      const uint8_t d0isB = D0::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d0isC = D0::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
-      const uint8_t d1isB = D1::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d1isC = D1::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
-      const uint8_t d2isB = D2::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d2isC = D2::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
-      const uint8_t d3isB = D3::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d3isC = D3::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
-      const uint8_t d4isB = D4::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d4isC = D4::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
-      const uint8_t d5isB = D5::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d5isC = D5::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
-      const uint8_t d6isB = D6::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d6isC = D6::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
-      const uint8_t d7isB = D7::port == ALIBVR_NAMESPACE_PORTS::_Port::B; const uint8_t d7isC = D7::port == ALIBVR_NAMESPACE_PORTS::_Port::C;
+      const uint8_t d0isB = D0::port == ALIBVR_NAMESPACE_PORTS::Port::B; const uint8_t d0isC = D0::port == ALIBVR_NAMESPACE_PORTS::Port::C;
+      const uint8_t d1isB = D1::port == ALIBVR_NAMESPACE_PORTS::Port::B; const uint8_t d1isC = D1::port == ALIBVR_NAMESPACE_PORTS::Port::C;
+      const uint8_t d2isB = D2::port == ALIBVR_NAMESPACE_PORTS::Port::B; const uint8_t d2isC = D2::port == ALIBVR_NAMESPACE_PORTS::Port::C;
+      const uint8_t d3isB = D3::port == ALIBVR_NAMESPACE_PORTS::Port::B; const uint8_t d3isC = D3::port == ALIBVR_NAMESPACE_PORTS::Port::C;
+      const uint8_t d4isB = D4::port == ALIBVR_NAMESPACE_PORTS::Port::B; const uint8_t d4isC = D4::port == ALIBVR_NAMESPACE_PORTS::Port::C;
+      const uint8_t d5isB = D5::port == ALIBVR_NAMESPACE_PORTS::Port::B; const uint8_t d5isC = D5::port == ALIBVR_NAMESPACE_PORTS::Port::C;
+      const uint8_t d6isB = D6::port == ALIBVR_NAMESPACE_PORTS::Port::B; const uint8_t d6isC = D6::port == ALIBVR_NAMESPACE_PORTS::Port::C;
+      const uint8_t d7isB = D7::port == ALIBVR_NAMESPACE_PORTS::Port::B; const uint8_t d7isC = D7::port == ALIBVR_NAMESPACE_PORTS::Port::C;
 
       uint8_t& v0 = d0isB ? vB : (d0isC ? vC : vD);
       uint8_t& v1 = d1isB ? vB : (d1isC ? vC : vD);
@@ -725,7 +725,7 @@ namespace ALIBVR_NAMESPACE_PORTS {
    * Example: assume `D7 == PIN_B3` and `B7 == 1` and `val == 0b00000010`
    * 
    * then:  
-   * `PIN_B3::port` is `_Port::B`  
+   * `PIN_B3::port` is `Port::B`  
    * `PIN_B3::bit` is 3.
    * 
    * Uses `val & _BV(1)`, which is 1 and assigns it to @p rB at position 3.

@@ -75,7 +75,7 @@ namespace _irqs {
   inline static void execIrqTasks(_task_list::TaskList<T, Tasks...>) {
     if (T::irq == I) {
       T::handle(I);
-      execIrqTasks<1, I>(_task_list::TaskList<Tasks...>());
+      execIrqTasks<(uint8_t)1, I>(_task_list::TaskList<Tasks...>());
     } else {
       execIrqTasks<Handled, I>(_task_list::TaskList<Tasks...>());
     }

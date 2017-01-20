@@ -133,7 +133,7 @@ namespace ALIBVR_NAMESPACE_ADC {
      * docs for more information.
      **/
     struct Temperature {
-      static const enum ALIBVR_NAMESPACE_PORTS::_Port port = ALIBVR_NAMESPACE_PORTS::_Port::C;
+      static const enum ALIBVR_NAMESPACE_PORTS::Port port = ALIBVR_NAMESPACE_PORTS::Port::C;
       static const uint8_t bit = 8;
     };
   
@@ -147,7 +147,7 @@ namespace ALIBVR_NAMESPACE_ADC {
      * 
      **/
     struct V1_1 {
-      static const enum ALIBVR_NAMESPACE_PORTS::_Port port = ALIBVR_NAMESPACE_PORTS::_Port::C;
+      static const enum ALIBVR_NAMESPACE_PORTS::Port port = ALIBVR_NAMESPACE_PORTS::Port::C;
       static const uint8_t bit = 14;
     };
     
@@ -155,7 +155,7 @@ namespace ALIBVR_NAMESPACE_ADC {
      * @brief Ground.
      **/
     struct Gnd {
-      static const enum ALIBVR_NAMESPACE_PORTS::_Port port = ALIBVR_NAMESPACE_PORTS::_Port::C;
+      static const enum ALIBVR_NAMESPACE_PORTS::Port port = ALIBVR_NAMESPACE_PORTS::Port::C;
       static const uint8_t bit = 15;
     };
     
@@ -169,7 +169,7 @@ namespace ALIBVR_NAMESPACE_ADC {
      * it might help to understand your code more easily.
      **/
     struct Unset {
-      static const enum ALIBVR_NAMESPACE_PORTS::_Port port;
+      static const enum ALIBVR_NAMESPACE_PORTS::Port port;
       static const uint8_t bit;
     };
   }
@@ -299,7 +299,7 @@ namespace ALIBVR_NAMESPACE_ADC {
               Mode M       = DefaultMode,
               GlobalIrq GI = DefaultGlobalIrq>
     static void init() {
-      static_assert(I::port == ALIBVR_NAMESPACE_PORTS::_Port::C &&
+      static_assert(I::port == ALIBVR_NAMESPACE_PORTS::Port::C &&
                                (I::bit == 0 ||
                                 I::bit == 1 ||
                                 I::bit == 2 ||
@@ -311,7 +311,7 @@ namespace ALIBVR_NAMESPACE_ADC {
                                 I::bit == Input::Gnd::bit),  // Gnd
                     "Only ADC0-ADC5, Input::Temperature, Input::V1_1 and Input::Gnd are acceptable inputs");
       
-      static_assert(I::port != ALIBVR_NAMESPACE_PORTS::_Port::C || I::bit != Input::Temperature::bit ||
+      static_assert(I::port != ALIBVR_NAMESPACE_PORTS::Port::C || I::bit != Input::Temperature::bit ||
                     R == Ref::V1_1,
                     "If input is temperature only V1_1 gives meaningful results.");
       
